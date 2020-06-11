@@ -1,0 +1,13 @@
+@import './../../variable';
+
+.wrapper{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.sideBar{
+  width:30px;
+  height:100vh;
+  background-color: $dark-color;
+}
