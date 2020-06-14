@@ -7,7 +7,6 @@ const App= () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.nav}>
-        
         <Nav />
       </div>
       <div className={styles.main}>
