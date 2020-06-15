@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
 
-const Header = ({
+const AssignmentsList = ({
   title,
   }) => {
   return (
@@ -11,4 +11,4 @@ const Header = ({
   );
 }
 
-export default Header;
+export default AssignmentsList;
