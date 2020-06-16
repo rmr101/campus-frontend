@@ -16,6 +16,8 @@ class Lists extends React.Component{
           return <TeacherLists onClick={this.props.onClick} />;
         case "course":
           return <CourseLists onClick={this.props.onClick} />;
+        default:
+          return null;
       }
     }
   render(){
