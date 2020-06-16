@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "./Header.module.scss";
 
-const Header = () => {
+const Header = ({
+  title,
+  onClick
+  }) => {
   return (
-    <div className={styles.wrapper}>
-      <h2 className={styles.title}>Information</h2>
-    </div>
+    <a className={styles.wrapper} href="#" onClick = {onClick}>
+      <h2 className={styles.title}>{title}</h2>
+    </a>
   );
 }
 
