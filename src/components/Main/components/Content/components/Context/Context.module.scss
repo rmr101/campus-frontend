@@ -1,15 +1,11 @@
 @import './../../../../../../variable';
 
 .wrapper{
-    //应该也要孩子来撑大的
+  //   //应该也要孩子来撑大的
+  width: 100%;
   display: flex;
-  padding: 50px;
   // 应该也要复用的,可以放到全局
-  border-bottom: solid 2px $border-color;
-}
-.titleBlock{
-  width: 400px;
-  padding-right: 30px;
+  // border-bottom: solid 2px $border-color;
 }
 .functionBlock{
    width: 100%;

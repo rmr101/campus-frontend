@@ -1,18 +1,22 @@
 import React from "react";
 import styles from "./Context.module.scss";
+import ListsGroup from './components/ListsGroup';
+import Detail from './components/Detail';
 
-const Context = () => {
+const Context = (props) => {
+
   return (
-      <div className={styles.wrapper}>
-        <div className={styles.titleBlock}>
-          {/*目前我把他写死了，应该属于一个component */}
-          <h3>Publish</h3>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae, magnam?</p>
-        </div>
-        <div className={styles.functionBlock}>
-          {/*目前我把他写死了，应该属于一个component */}
-        </div>
+    <div className={styles.wrapper}>
+      <Detail {...props} />
+      <div className={styles.functionBlock}>
+        {props.type === "ListsGroup" || "Lists" ? (
+          <ListsGroup {...props} />
+        ) : (
+          //以后要放别的functional component
+          null
+        )}
       </div>
+    </div>
   );
 }
 
