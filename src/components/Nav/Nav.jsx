@@ -16,7 +16,11 @@ class Nav extends React.Component {
           navSidebar: [
             { type: "ListsGroup", title: "Enrollment ", listType: "course" },
             { type: "ListsGroup", title: "Assignment", listType: "course" },
-
+            { type: "ListsGroup", title: "Payment", listType: "Payment" },
+            { type: "ListsGroup", title: "Course market", listType: "course" },
+            { type: "ListsGroup", title: "User info", listType: "info" },
+            { type: "ListsGroup", title: "Help", listType: "Help" },
+            { type: "ListsGroup", title: "Setting", listType: "Setting" }
           ],
         },
       ],
