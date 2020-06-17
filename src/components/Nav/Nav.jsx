@@ -1,6 +1,6 @@
 import React from "react";
 import NavHeader from "./components/NavHeader";
-import NavSidebar from "./components/NavSideBar";
+import NavItem from "./components/NavItem";
 import styles from "./Nav.module.scss";
 
 
@@ -63,8 +63,8 @@ class Nav extends React.Component {
     const history = this.state.history;
 
     let renderArray = history[history.length - 1].navSidebar.map((obj) => (
-      <NavSidebar
-        key={ "navSidebar" + Math.random()}
+      <NavItem
+        key={"navItem" + Math.random()}
         {...obj}
         onClick={this.handleAddNavHeader}
       />
