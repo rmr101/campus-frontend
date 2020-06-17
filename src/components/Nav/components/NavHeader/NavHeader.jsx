@@ -6,9 +6,9 @@ const NavHeader = ({
   onClick
   }) => {
   return (
-    <a className={styles.wrapper} href="#" onClick = {onClick}>
+    <div className={styles.wrapper} href="#" onClick = {onClick}>
       <h2 className={styles.title}>{title}</h2>
-    </a>
+    </div>
   );
 }
 

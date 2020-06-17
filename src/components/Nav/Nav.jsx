@@ -12,11 +12,11 @@ class Nav extends React.Component {
       history: [
         {
           navHeadingID: 1, 
-          title: "Dashboard",
+          title: "Postion for Logo",
           navSidebar: [
             { type: "ListsGroup", title: "Enrollment ", listType: "course" },
             { type: "ListsGroup", title: "Assignment", listType: "course" },
-            { type: "ListsGroup", title: "Assignment", listType: "course" }
+
           ],
         },
       ],

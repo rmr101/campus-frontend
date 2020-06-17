@@ -1,10 +1,10 @@
 @import './NavSideBar-variable';
 
 .wrapper{
-  margin-left: 10px;
+  padding-left: 40px;
   display: flex;
   align-items: center;
-  height:100px;
+  height:40px;
   background-color: $light-dark-color;
   text-decoration: none;
   cursor: pointer;
