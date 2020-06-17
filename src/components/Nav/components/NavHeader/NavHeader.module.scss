@@ -1,0 +1,19 @@
+@import './../../../../variable';
+
+.wrapper{
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    height:40px;
+    background-color: $light-dark-color;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  
+  .title{
+    display: block;
+    margin: 0;
+    padding:0;
+    color: $white-color;
+  }
