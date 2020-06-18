@@ -36,14 +36,12 @@ const TeacherGroup = ({onClick}) => {
     <div className={styles.wrapper}>
       <a
         className={styles.teacher}
-        href="#"
         onClick={(e) => onClick(e, { ...templateOne })}
       >
         {teacherGroup[0]}
       </a>
       <a
         className={styles.teacher}
-        href="#"
         onClick={(e) => onClick(e, { ...templateTwo })}
       >
         {teacherGroup[1]}
