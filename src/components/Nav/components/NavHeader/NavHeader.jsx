@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./NavHeader.module.scss";
 
+
 const NavHeader = ({
   title,
   onClick

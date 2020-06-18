@@ -1,19 +1,25 @@
 @import './NavSideBar-variable';
 
 .wrapper{
-  padding-left: 40px;
+  height: 100%;
   display: flex;
-  align-items: center;
-  height:40px;
-  background-color: $light-dark-color;
+}
+.sideWrapper{
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   cursor: pointer;
+  height: 100%;
 }
-
-
-.title{
-  display: block;
-  margin: 0;
-  padding:0;
-  color: $white-color;
+.sideWrapperNotCollapse{
+  width: 100%;
+}
+.filler{
+  flex:1;
+}
+.canvas{
+  display: none;
+}
+.canvasActive{
+  flex:1;
 }
