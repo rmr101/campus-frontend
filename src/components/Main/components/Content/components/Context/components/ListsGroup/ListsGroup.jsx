@@ -33,6 +33,7 @@ class ListsGroup extends React.Component{
     <div className={styles.wrapper}>
       {this.renderComponent()}
     </div>
+    
   );
 }
 }
