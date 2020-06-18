@@ -3,6 +3,11 @@
 .wrapper{
   width: 100%;
 }
+.header{
+  width: 100%;
+  position:sticky;
+  top: 0;
+}
 
 .content{
   padding: 0 50px;

@@ -14,13 +14,13 @@ class Nav extends React.Component {
           navHeadingID: 1, 
           title: "Postion for Logo",
           navSidebar: [
-            { type: "ListsGroup", title: "Enrollment ", listType: "course" },
-            { type: "ListsGroup", title: "Assignment", listType: "course" },
-            { type: "ListsGroup", title: "Payment", listType: "Payment" },
-            { type: "ListsGroup", title: "Course market", listType: "course" },
-            { type: "ListsGroup", title: "User info", listType: "info" },
-            { type: "ListsGroup", title: "Help", listType: "Help" },
-            { type: "ListsGroup", title: "Setting", listType: "Setting" }
+            { type: "ListsGroup",},
+            { type: "ListsGroup",},
+            { type: "ListsGroup",},
+            { type: "ListsGroup",},
+            { type: "ListsGroup",},
+            { type: "ListsGroup",},
+            { type: "ListsGroup",},
           ],
         },
       ],
@@ -59,25 +59,15 @@ class Nav extends React.Component {
     return renderArray;
   }
 
-  renderNavSidebar() {
-    const history = this.state.history;
-
-    let renderArray = history[history.length - 1].navSidebar.map((obj) => (
-      <NavSidebar
-        key={ "navSidebar" + Math.random()}
-        {...obj}
-        onClick={this.handleAddNavHeader}
-      />
-    ));
-
-    return renderArray;
-  }
+ 
 
   render() {
     return (
       <div className={styles.wrapper}>
         <div className={styles.header}>{this.renderNavHeader()}</div>
-        <div className={styles.Sidebar}>{this.renderNavSidebar()}</div>
+        <div className={styles.sideBar}>
+          <NavSidebar/>
+          </div>
       </div>
     );
   }
