@@ -19,17 +19,6 @@ class Lists extends React.Component{
     });
   };
 
-  render() {
-    return (
-      <div>
-        <div className={styles.btn} onClick={this.togglePop}>
-          <button>New User?</button>
-        </div>
-        {this.state.seen ? <Popup toggle={this.togglePop} /> : null}
-      </div>
-    );
-  }
-
   renderComponent(){
       switch (this.props.listType) {
         case "student":
@@ -37,7 +26,7 @@ class Lists extends React.Component{
           <StudentLists onClick={this.props.onClick} />  
           <div>
         <div className={styles.btn} onClick={this.togglePop}>
-          <button>New User?</button>
+          <button>Try it</button>
         </div>
         {this.state.seen ? <Popup toggle={this.togglePop} /> : null}
       </div></div>);

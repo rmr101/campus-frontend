@@ -1,8 +1,8 @@
 
   .modal {
   position: fixed;
-  width: 800px;
-  height: 200px;
+  width: 1000px;
+  height: 600px;
   top: 0;
   left: 0;
   right: 0;
@@ -17,13 +17,7 @@
   }
   
   .content {
-    background-color: white;
-    top: 20%;
-    left: 30%;
-    width: 40%;
-    padding: 20px;
-    border-radius: 5px;
-    border: 2px solid black;
+  
   }
   
   .close {
