@@ -9,7 +9,7 @@ const Content = (props) => {
     //暫時用這展示 CourseDetail，之後可以再整合進框架裡
     <div className={styles.wrapper}>
       <Context {...props} />
-      <CourseDetail {...props}/>
+      {/* <CourseDetail {...props}/> */}
     </div>
   );
 }
