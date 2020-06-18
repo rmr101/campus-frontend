@@ -16,9 +16,14 @@ class Main extends React.Component {
           headingID: 1,
           title: "Dashboard",
           content: [
-            { type: "Article", range: "Full"},
             { type: "Context", range: "Half", title: "Information" },
             { type: "Popup", range: "Half", title: "Change Name" },
+            {
+              type: "Lists",
+              range: "Half",
+              title: "Student",
+              listType: "student",
+            },
             {
               type: "ListsGroup",
               range: "Half",

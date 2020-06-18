@@ -10,6 +10,7 @@ class Lists extends React.Component{
   }
 
   renderComponent(){
+    console.log(this.props);
       switch (this.props.listType) {
         case "student":
           return (

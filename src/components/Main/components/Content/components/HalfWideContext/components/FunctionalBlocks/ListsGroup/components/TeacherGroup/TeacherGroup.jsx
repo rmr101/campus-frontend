@@ -9,11 +9,25 @@ const teacherGroup= [
 //现在 故意设计成loop的
 let templateOne = {
   title: teacherGroup[0],
-  content: [{ type: "ListsGroup", title: "Teacher ID", listType: "teacher" }],
+  content: [
+    {
+      type: "ListsGroup",
+      range: "Half",
+      title: "Teacher ID",
+      listType: "teacher",
+    },
+  ],
 };
 let templateTwo = {
   title: teacherGroup[1],
-  content: [{ type: "ListsGroup", title: "Teacher ID", listType: "teacher" }],
+  content: [
+    {
+      type: "ListsGroup",
+      range: "Half",
+      title: "Teacher ID",
+      listType: "teacher",
+    },
+  ],
 };
 
 

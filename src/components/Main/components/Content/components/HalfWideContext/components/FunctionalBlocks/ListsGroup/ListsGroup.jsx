@@ -11,7 +11,6 @@ class ListsGroup extends React.Component{
     super(props);
   }
   renderComponent(){
-    if (this.props.type === "ListsGroup") {
       switch (this.props.listType) {
         case "student":
           return <StudentGroup {...this.props}/>;
@@ -21,7 +20,7 @@ class ListsGroup extends React.Component{
           return <CourseGroup {...this.props} />;
         default:
           return null;
-      }} 
+      }
     }
   render(){
     console.log(this.props);

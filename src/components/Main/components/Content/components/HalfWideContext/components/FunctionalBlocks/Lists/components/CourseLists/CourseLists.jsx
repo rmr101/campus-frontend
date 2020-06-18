@@ -11,23 +11,23 @@ const courseLists = [
 
 let templateOne = {
   title: courseLists[0],
-  content: [{ type: "Context", title: "Course 1001" }],
+  content: [{ type: "Context", range: "Full", title: "Course 1001" }],
 };
 let templateTwo = {
   title: courseLists[1],
-  content: [{ type: "Context", title: "Course 1002" }],
+  content: [{ type: "Context", range: "Full", title: "Course 1002" }],
 };
 let templateThree = {
   title: courseLists[2],
-  content: [{ type: "Context", title: "Course 1003" }],
+  content: [{ type: "Context", range: "Full", title: "Course 1003" }],
 };
 let templateFour = {
   title: courseLists[3],
-  content: [{ type: "Context", title: "Course 1004" }],
+  content: [{ type: "Context", range: "Full", title: "Course 1004" }],
 };
 let templateFive = {
   title: courseLists[4],
-  content: [{ type: "Context", title: "Course 1005" }],
+  content: [{ type: "Context", range: "Full", title: "Course 1005" }],
 };
 
 

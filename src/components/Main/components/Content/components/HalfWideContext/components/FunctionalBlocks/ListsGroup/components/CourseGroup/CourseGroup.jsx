@@ -10,19 +10,27 @@ const courseGroup = [
 
 let templateOne = {
   title: courseGroup[0],
-  content: [{ type: "Lists", title: "Course ID", listType: "course" }],
+  content: [
+    { type: "Lists", range: "Half", title: "Course ID", listType: "course" },
+  ],
 };
 let templateTwo = {
   title: courseGroup[1],
-  content: [{ type: "Lists", title: "Course ID", listType: "course" }],
+  content: [
+    { type: "Lists", range: "Half", title: "Course ID", listType: "course" },
+  ],
 };
 let templateThree = {
   title: courseGroup[2],
-  content: [{ type: "Lists", title: "Course ID", listType: "course" }],
+  content: [
+    { type: "Lists", range: "Half", title: "Course ID", listType: "course" },
+  ],
 };
 let templateFour = {
   title: courseGroup[3],
-  content: [{ type: "Lists", title: "Course ID", listType: "course" }],
+  content: [
+    { type: "Lists", range: "Half", title: "Course ID", listType: "course" },
+  ],
 };
 
 const CourseGroup = ({onClick}) => {
