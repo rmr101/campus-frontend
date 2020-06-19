@@ -18,8 +18,10 @@
   flex:1;
 }
 .canvas{
+  
   display: none;
 }
 .canvasActive{
+  background-color: $light-dark-color;
   flex:1;
 }

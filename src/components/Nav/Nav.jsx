@@ -21,7 +21,7 @@ class Nav extends React.Component {
             { type: "ListsGroup",},
             { type: "ListsGroup",},
             { type: "ListsGroup",},
-          ],
+          ]
         },
       ],
     };
