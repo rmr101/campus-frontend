@@ -20,7 +20,7 @@ export const StudentRenderMap = {
            { title: "Others", id: 1 },
          ],
          Help: [
-           { title: "Frequency ask questions", id: 0 },
+           { title: "Top FAQs", id: 0 },
            { title: "Contact us", id: 1 },
          ],
          Setting: [{ title: "Configuration", id: 0 }],

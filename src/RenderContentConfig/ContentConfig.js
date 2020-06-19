@@ -110,17 +110,29 @@ export const UserInfoContent = [
 export const HelpContent = [
   [
     {
-      type: "Context",
-      range: "Half",
-      title: "Information about Help",
+      type: "Popup",
+      range: "Help",
+      title: "When can I change my enrolment in RMR 101 SChool?",
+      context: "You can make changes: \n during the enrolment period for the first and second semester \n during the re-enrolment period which starts on the second Monday of October each year \n  after the release of official unit results to check your unit choices are still valid.", 
     },
-    { type: "Popup", range: "Half", title: "Detail" },
+    { 
+      type: "Popup",
+      range: "Help", 
+      title: "How can I get around campus safely at night?", 
+      context: "I don't know." 
+    },
+    { 
+      type: "Context",
+      range: "Help", 
+      title: "Title", 
+      context: "Context" 
+    },
   ],
   [
     {
       type: "Context",
       range: "Half",
-      title: "Information about  Enrolled Course 1002",
+      title: "Information about  Enrolled Course",
     },
     { type: "Popup", range: "Half", title: "Detail" },
   ],
