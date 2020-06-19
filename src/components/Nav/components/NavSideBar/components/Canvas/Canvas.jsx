@@ -1,29 +1,22 @@
 import React from 'react';
 import styles from './Canvas.module.scss';
+import {StudentRenderMap} from './../../../../../../RenderNavConfig/RenderListForNavItem/NavListsConfig';
 
 
-const generateKey = (pre) => {
-  return `${pre}_${new Date().getTime()}`;
-};
-
-const renderMap = {
-  Dashboard: ["Nothing to be render here"],
-  Enrollment: ["Course 1001", "Course 1002", "Course 1003"],
-  Assignment: ["Assignment 1001", "Assignment 1002", "Assignment 1003"],
-  Payment: ["Invoice", "Unpaid course"],
-  CourseMarket: ["Nothing to be render here"],
-  UserInfo: ["Profile", "Others"],
-  Help: ["Frequent Q&A", "Contact Us"],
-  Setting: ["Configuration"],
-};
-
-
-const renderCanvas = (current) => (
-  renderMap[current].map((title) => <a className={styles.links} key={ generateKey(current) }>{title}</a>)
-  )
-
-const Canvas= ({current}) => (
+const Canvas= ({current,onClick}) => {
+const renderCanvas = (current) =>
+  //目前先用student
+  StudentRenderMap[current].map((obj) => (
+    <a
+      onClick={(e) => onClick(e, obj.title, obj.id , current)}
+      className={styles.links}
+      key={current +"id" + Math.random()}
+    >
+      {obj.title}
+    </a>
+  ));
+  return(
   <div className={styles.wrapper}>
     {renderCanvas(current)}
-  </div>);
+</div>)};
 export default Canvas;

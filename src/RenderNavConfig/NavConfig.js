@@ -1,4 +1,4 @@
-//import
+// import icon from library
 import {
   faShoppingCart,
   faCreditCard,
@@ -10,7 +10,7 @@ import {
   faColumns,
 } from "@fortawesome/free-solid-svg-icons";
 
-//icon list
+//icon list corresponding to each navItem.
 export const renderList = {
   Dashboard:  faColumns,
   Enrollment: faBook,
@@ -22,7 +22,7 @@ export const renderList = {
   Setting: faCog,
 };
 
-
+// ID here is important for the secondary list in <Canvas/> component. 
 // config for each role
 export const studentConfig = [
          { icon: renderList.Dashboard, title: "Dashboard", id: "Dashboard" },
