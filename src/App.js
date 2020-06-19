@@ -85,7 +85,7 @@ class App extends React.Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.nav}>
-          <Nav onClick={this.handleClickNav} />
+          <Nav role={this.state.role} onClick={this.handleClickNav} />
         </div>
         <div className={styles.main}>
           <Main

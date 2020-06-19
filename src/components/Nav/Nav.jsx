@@ -12,7 +12,7 @@ class Nav extends React.Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.header}>
-          <NavHeader title={"RMR 101 School"} />
+          <NavHeader title={this.props.role + " version" } />
         </div>
         <div className={styles.sideBar}>
           <NavSidebar {...this.props} />

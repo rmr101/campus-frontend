@@ -66,5 +66,40 @@ export const studentConfig = [
          },
        ];
 
-// export const TeacherConfig = [];
+export const TeacherConfig = [
+         { icon: renderList.Dashboard, title: "Dashboard", id: "Dashboard" },
+         {
+           icon: renderList.Enrollment,
+           title: "Teaching",
+           id: "TeachingCourse",
+         },
+         {
+           icon: renderList.Assignment,
+           title: "Marking",
+           id: "MarkSystem",
+         },
+         {
+           icon: renderList.CourseMarket,
+           title: "Course market",
+           id: "CourseMarket",
+         },
+         {
+           icon: renderList.UserInfo,
+           title: "User information",
+           id: "UserInfo",
+         },
+         {
+           filler: true,
+         },
+         {
+           icon: renderList.Help,
+           title: "Help",
+           id: "Help",
+         },
+         {
+           icon: renderList.Setting,
+           title: "Setting",
+           id: "Setting",
+         },
+       ];
 // export const AdminConfig = [];
