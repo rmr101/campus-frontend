@@ -3,93 +3,32 @@ import styles from "./Main.module.scss";
 import Header from "./components/Header";
 import Content from "./components/Content";
 
-
 class Main extends React.Component {
   constructor(props) {
     super(props);
 
-    //之后再Lifting
-    this.state = {
-      //这是参考react的逻辑的
-      history: [
-        {
-          headingID: 1,
-          title: "Dashboard",
-          content: [
-            { type: "Context", range: "Half", title: "Information" },
-            { type: "Popup", range: "Half", title: "Change Name" },
-            {
-              type: "Lists",
-              range: "Half",
-              title: "Student",
-              listType: "student",
-            },
-            {
-              type: "ListsGroup",
-              range: "Half",
-              title: "Student",
-              listType: "student",
-            },
-            {
-              type: "ListsGroup",
-              range: "Half",
-              title: "Teacher",
-              listType: "teacher",
-            },
-            {
-              type: "ListsGroup",
-              range: "Half",
-              title: "Course",
-              listType: "course",
-            },
-          ],
-        },
-      ],
-    };
-    this.handleClickHeader = this.handleClickHeader.bind(this);
-    this.handleAddHeader = this.handleAddHeader.bind(this);
-  }
-
-  handleClickHeader(event,headingID) {
-    event.preventDefault();
-    const history = this.state.history;
-    this.setState(
-      { history: history.slice(0,headingID)}
-    );
-  }
-  handleAddHeader(event, obj) {
-    event.preventDefault();
-    let history = this.state.history;
-    let id = history.length + 1;
-    let newHistory = [...history,{
-      headingID: id,
-      ...obj
-    }];
-    console.log(newHistory);
-    this.setState(
-      { history: newHistory}
-      );
   }
   renderHeader() {
-    let renderArray = this.state.history.map((obj) => (
+    let renderArray = this.props.history.map((obj) => (
       <Header
-        key={"header_id" + obj.headingID}
+        key={"header_id" + Math.random()}
         title={obj.title}
-        onClick={(e) => this.handleClickHeader(e, obj.headingID)}
+        onClick={(e) => this.props.handleClickHeader(e, obj.headingID)}
       />
     ));
     return renderArray;
   }
 
   renderComponent() {
-    const history = this.state.history;
-
+    const history = this.props.history;
+    const lastHistory = history[history.length - 1];
+    const contentArray = lastHistory.content;
     //update to the newest component
-    let renderArray = history[history.length - 1].content.map((obj) => (
+    let renderArray = contentArray.map((obj) => (
       <Content
-        key={ "content_id" + Math.random()}
+        key={"content_id" + Math.random()}
         {...obj}
-        onClick={this.handleAddHeader}
+        onClick={this.props.handleAddHeader}
       />
     ));
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./NavSideBar.module.scss";
 import NavItems from "./components/NavItems";
-import {studentConfig} from './components/RenderConfig/Config';
+import {studentConfig} from './../../../../RenderNavConfig/NavConfig';
 import Canvas from './components/Canvas';
 
 class NavSideBar extends React.Component {
@@ -10,7 +10,6 @@ class NavSideBar extends React.Component {
     this.handleClick = this.handleClick.bind(this); 
     this.state= {
       canvasOn:false,
-      canvasItem:[],
       current:"Dashboard",
     }
   }
@@ -28,10 +27,11 @@ class NavSideBar extends React.Component {
         <NavItems
           active={this.state.current === obj.id}
           collapse={this.state.canvasOn}
-          key={"id" + obj.title}
+          key={"id" + Math.random()}
           icon={obj.icon}
           title={obj.title}
           id={obj.id}
+
           onClick={this.handleClick}
         />
       );
@@ -48,16 +48,15 @@ class NavSideBar extends React.Component {
     if (name === this.state.current) {
       this.setState({
         canvasOn: !this.state.canvasOn,
-        canvasItem: [],
       });
     }else if(name !== this.state.current){
       //这个method 好像不太好，因为吃performance，之后要想想怎么处理这个问题
       this.setState({
         canvasOn: false,
-        canvasItem: [],
+
       },()=>this.setState({
           canvasOn: true,
-          canvasItem: [],
+
         }))
     }
   }
@@ -66,7 +65,9 @@ class NavSideBar extends React.Component {
     this.clickToDisplayCanvas(name);
     this.changeCurrent(name);
   }
+
   render(){
+    console.log("NavSideBard got rendered");
     return (
       <div className={styles.wrapper}>
         <div
@@ -79,7 +80,12 @@ class NavSideBar extends React.Component {
         <div
           className={this.state.canvasOn ? styles.canvasActive : styles.canvas}
         >
-          {this.state.canvasOn ? <Canvas current={this.state.current}/> :null}
+          {this.state.canvasOn ? (
+            <Canvas
+              onClick={this.props.onClick}
+              current={this.state.current}
+            />
+          ) : null}
         </div>
       </div>
     );

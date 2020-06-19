@@ -23,21 +23,18 @@ const TeacherLists = ({onClick}) => {
     <div className={styles.wrapper}>
       <a
         className={styles.teacher}
-        href="#"
         onClick={(e) => onClick(e, { ...templateOne })}
       >
         {teacherLists[0]}
       </a>
       <a
         className={styles.teacher}
-        href="#"
         onClick={(e) => onClick(e, { ...templateTwo })}
       >
         {teacherLists[1]}
       </a>
       <a
         className={styles.teacher}
-        href="#"
         onClick={(e) => onClick(e, { ...templateThree })}
       >
         {teacherLists[2]}

@@ -37,35 +37,30 @@ const CourseLists = ({onClick}) => {
     <div className={styles.wrapper}>
       <a
         className={styles.course}
-        href="#"
         onClick={(e) => onClick(e, { ...templateOne })}
       >
         {courseLists[0]}
       </a>
       <a
         className={styles.course}
-        href="#"
         onClick={(e) => onClick(e, { ...templateTwo })}
       >
         {courseLists[1]}
       </a>
       <a
         className={styles.course}
-        href="#"
         onClick={(e) => onClick(e, { ...templateThree })}
       >
         {courseLists[2]}
       </a>
       <a
         className={styles.course}
-        href="#"
         onClick={(e) => onClick(e, { ...templateFour })}
       >
         {courseLists[3]}
       </a>
       <a
         className={styles.course}
-        href="#"
         onClick={(e) => onClick(e, { ...templateFive })}
       >
         {courseLists[4]}
