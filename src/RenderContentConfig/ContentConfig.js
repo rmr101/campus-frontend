@@ -4,6 +4,9 @@
 // --> Assignments 1002
 // --> Assignments 1003
 
+
+//currently mimicking the database, contents are stored here. later this will needed to be deleted
+
 export const DashboardContent = [
   [
     { type: "Context", range: "Half", title: "Information" },
@@ -147,6 +150,68 @@ export const ConfigurationContent = [
     { type: "Popup", range: "Half", title: "Detail" },
   ]
 ];
+export const TeachersContent = [
+  [
+    {
+      type: "Context",
+      range: "Half",
+      title: "Information about Configuration",
+    },
+    { type: "Popup", range: "Half", title: "Detail" },
+  ],
+];
+export const StudentsContent = [
+  [
+    {
+      type: "Context",
+      range: "Half",
+      title: "Information about Configuration",
+    },
+    { type: "Popup", range: "Half", title: "Detail" },
+  ],
+];
+export const ClassroomContent = [
+  [
+    {
+      type: "Context",
+      range: "Half",
+      title: "Information about Configuration",
+    },
+    { type: "Popup", range: "Half", title: "Detail" },
+  ],
+];
+export const CoursesContent = [
+  [
+    {
+      type: "Context",
+      range: "Half",
+      title: "Information about Configuration",
+    },
+    { type: "Popup", range: "Half", title: "Detail" },
+  ],
+];
+export const TeachingCourseContent = [
+  [
+    {
+      type: "Context",
+      range: "Half",
+      title: "Information about Configuration",
+    },
+    { type: "Popup", range: "Half", title: "Detail" },
+  ],
+];
+export const MarkSystemContent = [
+  [
+    {
+      type: "Context",
+      range: "Half",
+      title: "Information about Configuration",
+    },
+    { type: "Popup", range: "Half", title: "Detail" },
+  ],
+];
+
+
 export const NoContent = [
   [
     {

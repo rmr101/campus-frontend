@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./NavSideBar.module.scss";
 import NavItems from "./components/NavItems";
-import {studentConfig} from './../../../../RenderNavConfig/NavConfig';
+import * as NavRenderConfig from './../../../../RenderNavConfig/NavConfig';
 import Canvas from './components/Canvas';
+
+
 
 class NavSideBar extends React.Component {
   constructor(props){
@@ -13,31 +15,36 @@ class NavSideBar extends React.Component {
       current:"Dashboard",
     }
   }
-  renderNavItem() {
-  let renderArray =[];
-  studentConfig.forEach(obj => {
-    if (obj.filler) {
-        renderArray.push(
-          //id 以后可以改
-          <div className={styles.filler}></div>
-        );
-    } else {
-      renderArray.push(
-        //id 以后可以改
-        <NavItems
-          active={this.state.current === obj.id}
-          collapse={this.state.canvasOn}
-          key={"id" + Math.random()}
-          icon={obj.icon}
-          title={obj.title}
-          id={obj.id}
+  readConfig(ConfigArray){
+    return ConfigArray.map((obj) => {
+      if (obj.filler) {
+          return <div className={styles.filler}></div>
+      } else { 
+        return(
+          <NavItems
+            active={this.state.current === obj.id}
+            collapse={this.state.canvasOn}
+            key={"id" + Math.random()}
+            icon={obj.icon}
+            title={obj.title}
+            id={obj.id}
+            onClick={this.handleClick}
+          />)
+      }
+    });
+  }
 
-          onClick={this.handleClick}
-        />
-      );
+  renderNavItem() {
+    switch (this.props.role) {
+      case "student":
+        return this.readConfig(NavRenderConfig.StudentConfig);
+      case "teacher":
+        return this.readConfig(NavRenderConfig.TeacherConfig);
+      case "admin":
+        return this.readConfig(NavRenderConfig.AdminConfig);
+      default:
+        return null;
     }
-  })
-  return renderArray;
 } 
   changeCurrent(name){
     this.setState({
@@ -84,6 +91,7 @@ class NavSideBar extends React.Component {
             <Canvas
               onClick={this.props.onClick}
               current={this.state.current}
+              role = {this.props.role}
             />
           ) : null}
         </div>
