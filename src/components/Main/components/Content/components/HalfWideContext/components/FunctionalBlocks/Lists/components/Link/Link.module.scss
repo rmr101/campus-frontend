@@ -1,0 +1,12 @@
+@import './../../../../../../../content-variable';
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  a{
+    text-decoration: none;
+    color: $theme-color;
+    font-size: 1.5em;
+  }
+}
+

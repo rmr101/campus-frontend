@@ -21,5 +21,9 @@ h3,h1,h2{
 color: $dark-color;
 }
 p{
+    margin: 0;
 color:$light-dark-color;
+}
+a{
+  cursor: pointer;
 }

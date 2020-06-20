@@ -1,33 +1,32 @@
 import React from "react";
 import styles from "./Lists.module.scss";
-import StudentLists from "./components/StudentLists";
-import TeacherLists from './components/TeacherLists';
-import CourseLists from './components/CourseLists';
+import Link from './components/Link';
+import { LinksRepo } from "./../../../../../../../../../RenderContentConfig/LinksConfig";
 
 class Lists extends React.Component{
   constructor(props){
     super(props);
   }
 
-  renderComponent(){
-    console.log(this.props);
-      switch (this.props.listType) {
-        case "student":
-          return (
-          <StudentLists onClick={this.props.onClick} />  
-          );
-        case "teacher":
-          return <TeacherLists onClick={this.props.onClick} />;
-        case "course":
-          return <CourseLists onClick={this.props.onClick} />;
-        default:
-          return null;
-      }
-    }
+  renderLink(){
+    let linksArray = [];
+    this.props.linkIDArray.forEach((linkID) => {
+      let [{name,content}] = LinksRepo.filter((links) => links.LinkId === linkID);
+      linksArray.push(
+        <Link
+          key={"Link_ID" + Math.random()}
+          name={name}
+          content={content}
+          onClick = {this.props.onClick}
+        />
+      );
+    });
+    return linksArray; 
+  }
   render(){
   return (
     <div className={styles.wrapper}>
-      {this.renderComponent()}
+      {this.renderLink()}
     </div>)
 };
 }

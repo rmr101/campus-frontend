@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./HalfWideContext.module.scss";
-import ListsGroup from './components/FunctionalBlocks/ListsGroup';
-import Detail from './components/Detail';
+import DetailBlock from "./components/DetailBlock";
 import Lists from "./components/FunctionalBlocks/Lists";
 import PopUpWindow from "./components/FunctionalBlocks/PopUpWindow";
+import HalfContext from './components/FunctionalBlocks/HalfContext';
 
 
 const HalfWideContext = (props) => {
@@ -11,10 +11,10 @@ const HalfWideContext = (props) => {
     switch (blockName) {
       case "Lists":
         return <Lists {...props} />;
-      case "ListsGroup":
-        return <ListsGroup {...props} />;
       case "Popup":
         return <PopUpWindow {...props} />;
+      case "Context":
+        return <HalfContext {...props} />;
       default:
         return null;
     }
@@ -22,7 +22,7 @@ const HalfWideContext = (props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.heading}>
-        <Detail {...props} />
+        <DetailBlock {...props} />
       </div>
       <div className={styles.functionBlock}>
         {renderFunctionalBlock(props.type)}

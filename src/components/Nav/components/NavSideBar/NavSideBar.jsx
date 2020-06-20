@@ -18,13 +18,13 @@ class NavSideBar extends React.Component {
   readConfig(ConfigArray){
     return ConfigArray.map((obj) => {
       if (obj.filler) {
-          return <div className={styles.filler}></div>
+          return <div key={"Filler"} className={styles.filler}></div>
       } else { 
         return(
           <NavItems
             active={this.state.current === obj.id}
             collapse={this.state.canvasOn}
-            key={"id" + Math.random()}
+            key={"NavItem_id" + Math.random()}
             icon={obj.icon}
             title={obj.title}
             id={obj.id}
