@@ -35,15 +35,17 @@ class App extends React.Component {
       { history: history.slice(0,headingID)}
     );
   }
-  handleAddHeader(event, obj) {
+
+  handleAddHeader(event,name,contentArray) {
     event.preventDefault();
     let history = this.state.history;
     let id = history.length + 1;
-    let newHistory = [...history,{
+    let newHistory = [...history, {
       headingID: id,
-      ...obj
+      title:name,
+      content:contentArray,
     }];
-    console.log(newHistory);
+
     this.setState(
       { history: newHistory}
       );
@@ -75,10 +77,7 @@ class App extends React.Component {
     }
     this.setState({
       current: currentNavItem,
-    },() => {this.handleAddHeader(e, {
-               title: HeaderTitle,
-               content: contentArray,
-             });});
+    },() => this.handleAddHeader(e,HeaderTitle,contentArray));
   }
 
   render() {
