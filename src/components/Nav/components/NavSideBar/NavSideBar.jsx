@@ -6,6 +6,7 @@ import Canvas from './components/Canvas';
 
 
 
+
 class NavSideBar extends React.Component {
   constructor(props){
     super(props);
@@ -74,7 +75,6 @@ class NavSideBar extends React.Component {
   }
 
   render(){
-    console.log("NavSideBard got rendered");
     return (
       <div className={styles.wrapper}>
         <div

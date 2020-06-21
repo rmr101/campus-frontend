@@ -3,7 +3,9 @@
 .wrapper{
   display: flex;
   text-decoration: none;
+  cursor: pointer;
 }
+
 .active{
   color: $dark-color;
    background-color: $light-dark-color;

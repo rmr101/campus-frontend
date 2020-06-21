@@ -21,7 +21,7 @@ const HalfWideContext = (props) => {
   };
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading}>
+      <div className={styles.headingBlock}>
         <DetailBlock {...props} />
       </div>
       <div className={styles.functionBlock}>

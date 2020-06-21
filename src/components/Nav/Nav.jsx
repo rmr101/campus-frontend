@@ -2,6 +2,7 @@ import React from "react";
 import NavHeader from "./components/NavHeader";
 import NavSidebar from "./components/NavSideBar";
 import styles from "./Nav.module.scss";
+import NavAvatar from './components/NavAvatar';
 
 
 class Nav extends React.Component {
@@ -12,8 +13,9 @@ class Nav extends React.Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.header}>
-          <NavHeader title={this.props.role + " version" } />
+          <NavHeader title={this.props.role + " version"} />
         </div>
+        <NavAvatar />
         <div className={styles.sideBar}>
           <NavSidebar {...this.props} />
         </div>
