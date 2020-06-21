@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./SelectAvatar.module.scss";
-import { faUserTie, faUserGraduate,faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUserTie, faUserGraduate,faUser,faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SelectAvatar =({icon,onClick,color,background})=>{
@@ -17,7 +17,7 @@ const SelectAvatar =({icon,onClick,color,background})=>{
 
 
     return (
-      <div className={`${styles.wrapper} ${styles.wrapperLight}`}>
+      <div className={`${styles.wrapper}`}>
         <div className={`${styles.avatarSelection} ${styles.row}`}>
           <p className={styles.name}>Avatar </p>
           <div className={styles.selectionRow}>
@@ -33,6 +33,12 @@ const SelectAvatar =({icon,onClick,color,background})=>{
             >
               <FontAwesomeIcon icon={faUserGraduate} />
             </div>
+            <div
+              className={styles.display}
+              onClick={() => changeIcon(faUserSecret)}
+            >
+              <FontAwesomeIcon icon={faUserSecret} />
+            </div>
           </div>
         </div>
         <div className={`${styles.avatarColorSelection} ${styles.row}`}>
@@ -45,8 +51,8 @@ const SelectAvatar =({icon,onClick,color,background})=>{
               <FontAwesomeIcon icon={faUser} />
             </div>
             <div
-              className={`${styles.display} ${styles.black}`}
-              onClick={() => changeColor(styles.black)}
+              className={`${styles.display} ${styles.green}`}
+              onClick={() => changeColor(styles.green)}
             >
               <FontAwesomeIcon icon={faUser} />
             </div>

@@ -24,15 +24,7 @@
   padding: 0 5px;
   justify-content: center;
   align-items: center;}
-.avatarSelection{
-  
-}
-.avatarColorSelection{
 
-}
-.backgoundColorSelection{
-
-}
 .selectionRow{
   flex: 2;
   display: flex;
@@ -62,7 +54,7 @@
 }
 
 .brown{color: $Avatar-Brown;}
-.black{color: $Avatar-Black;}
+.green{color: $Avatar-Green;}
 .red{color:$Avatar-Red;}
 .grey{ color: $Avatar-Grey;}
 .blue{color:$Avatar-Blue;}

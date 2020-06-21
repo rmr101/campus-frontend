@@ -11,7 +11,7 @@ class NavAvatar extends React.Component {
     this.state = {
       selectionPanelShow: false,
       icon: faUserTie,
-      color: avatarStyles.black,
+      color: avatarStyles.green,
       background: avatarStyles.light,
     };
     this.toggleSelectionPanel = this.toggleSelectionPanel.bind(this);
