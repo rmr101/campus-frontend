@@ -7,8 +7,9 @@
   // 应该也要复用的,可以放到全局
   // border-bottom: solid 2px $border-color;
 }
-.heading{
-
+.headingBlock{
+  width: 30%;
+  min-width: 200px;
 }
 .functionBlock{
     flex: 1;
