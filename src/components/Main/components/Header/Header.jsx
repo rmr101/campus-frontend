@@ -7,9 +7,9 @@ const Header = ({
   }) => {
     console.log(styles);
   return (
-    <a className={styles.wrapper} href="#" onClick = {onClick}>
+    <div className={styles.wrapper} onClick = {onClick}>
       <h2 className={styles.title}>{title}</h2>
-    </a>
+    </div>
   );
 }
 

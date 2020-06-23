@@ -11,13 +11,13 @@ const Canvas= ({current,onClick,role}) => {
   
 const renderRoleSelection = (array) =>{
   return array.map((obj) => (
-    <a
+    <div
       onClick={(e) => onClick(e, obj.title, obj.id, current)}
       className={styles.links}
       key={current + "id" + Math.random()}
     >
       {obj.title}
-    </a>
+    </div>
   ));
 }
 
