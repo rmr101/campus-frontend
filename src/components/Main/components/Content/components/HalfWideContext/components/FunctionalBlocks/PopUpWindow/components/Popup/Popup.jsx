@@ -5,6 +5,7 @@ import styles from "./Popup.module.scss";
 class Popup extends React.Component {
   constructor(props){
     super(props);
+    this.state = {};
   }
 
   render() {
