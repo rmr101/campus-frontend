@@ -14,13 +14,13 @@ class LoginForm extends React.Component{
                   <h3 className={styles.title}>login</h3>
                   <div className={styles.control}>
                     <label >UserID</label>
-                    <input type="text" placeholder="Enter UserID"/>
+                    <input type="text" placeholder="Enter UserID" maxLength={30} required/>
                   </div>
                   <div className={styles.control}>
                     <label className={styles.label}>Password</label>
-                    <input className={styles.input} type="text" placeholder="Enter Password"/>
+                    <input className={styles.input} type="password" placeholder="Enter Password" maxLength={30} required/>
                   </div>
-                  <button className={styles.button} onClick={this.props.toggle}>Submit</button>
+                  <button className={styles.button} type="submit" onClick={this.props.toggle}>Submit</button>
                 </form>
             </div>
             <div className={styles.mask}></div>
