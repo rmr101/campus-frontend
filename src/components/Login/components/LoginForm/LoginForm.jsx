@@ -20,7 +20,7 @@ class LoginForm extends React.Component{
                     <label className={styles.label}>Password</label>
                     <input className={styles.input} type="password" placeholder="Enter Password" maxLength={30} required/>
                   </div>
-                  <button className={styles.button} type="submit" onClick={this.props.toggle}>Submit</button>
+                  <button className={styles.button} type="submit" onClick={this.props.toggle}>Log in</button>
                 </form>
             </div>
             <div className={styles.mask}></div>

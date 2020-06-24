@@ -4,7 +4,7 @@ import Nav from './components/Nav';
 import Main from "./components/Main";
 import Login from './components/Login';
 import * as ContentArray from "./RenderContentConfig/ContentConfig";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 
 //Dashboard content ID 0,
