@@ -10,6 +10,9 @@ class Login extends React.Component {
     this.togglePop = this.togglePop.bind(this);
   }
   togglePop() {
+    //set logged in to true
+    this.props.onClick();
+
     this.setState({
       seen: !this.state.seen,
     });
@@ -17,7 +20,9 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        {this.state.seen ? <LoginForm toggle={this.togglePop} /> : null}
+        {this.state.seen ? (
+          <LoginForm toggle={this.togglePop} />
+        ) : null}
       </div>
     );
   }

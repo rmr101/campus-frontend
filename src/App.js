@@ -4,6 +4,8 @@ import Nav from './components/Nav';
 import Main from "./components/Main";
 import Login from './components/Login';
 import * as ContentArray from "./RenderContentConfig/ContentConfig";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+
 
 //Dashboard content ID 0,
 //role: student 
@@ -14,6 +16,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       role: "admin",
+      login:false,
       current: "Dashboard",
       history: [
         {
@@ -27,6 +30,8 @@ class App extends React.Component {
     this.handleClickNav = this.handleClickNav.bind(this);
     this.handleClickHeader = this.handleClickHeader.bind(this);
     this.handleAddHeader = this.handleAddHeader.bind(this); 
+    
+    this.setLoginStatue = this.setLoginStatue.bind(this);
   }
 
   handleClickHeader(event,headingID) {
@@ -80,26 +85,40 @@ class App extends React.Component {
       current: currentNavItem,
     },() => this.handleAddHeader(e,HeaderTitle,contentArray));
   }
+  setLoginStatue(){
+    //之后可以logout
+    console.log("logged in");
+    this.setState({ login: true });
+  }
 
   render() {
     return (
       <div className={styles.wrapper}>
-        <div>
-          <Login />
-        </div>
-        <div className={styles.nav}>
-          <Nav role={this.state.role} onClick={this.handleClickNav} />
-        </div>
-        <div className={styles.main}>
-          <Main
-            history = {this.state.history}
-            title={this.state.title}
-            role={this.state.role}
-            current={this.state.current}
-            handleClickHeader={this.handleClickHeader}
-            handleAddHeader={this.handleAddHeader}
-          />
-        </div>
+        <Router>
+            {!this.state.login ? <Route path="/login">
+              <Login onClick={this.setLoginStatue} />
+            </Route>:<Redirect to="/" />
+            }
+            {this.state.login ? (
+              <Route path = "/" exact>
+                <div className={styles.nav}>
+                  <Nav role={this.state.role} onClick={this.handleClickNav} />
+                </div>
+                <div className={styles.main}>
+                  <Main
+                    history={this.state.history}
+                    title={this.state.title}
+                    role={this.state.role}
+                    current={this.state.current}
+                    handleClickHeader={this.handleClickHeader}
+                    handleAddHeader={this.handleAddHeader}
+                  />
+                </div>
+              </Route>
+            ) : (
+              <Redirect to="/login" />
+            )}
+        </Router>
       </div>
     );
   }
