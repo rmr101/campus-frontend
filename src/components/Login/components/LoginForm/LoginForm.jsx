@@ -10,7 +10,7 @@ class LoginForm extends React.Component{
         return (
           <div>
             <div className={styles.modal}>
-                <form className={styles.form}>
+                <form className={styles.form} onSubmit={this.props.onSubmit}>
                   <h3 className={styles.title}>login</h3>
                   <div className={styles.control}>
                     <label >UserID</label>

@@ -8,6 +8,15 @@
   width: 100%;
   position:sticky;
   top: 0;
+
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+  height:40px;
+  background-color: $white-color;
+  border-bottom: solid 1px $border-color;
+  box-shadow: 0px 3px 20px -10px $border-color;
+  text-decoration: none;
 }
 
 .content{
