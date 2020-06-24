@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './App.module.scss';
 import Nav from './components/Nav';
 import Main from "./components/Main";
+import Login from './components/Login';
 import * as ContentArray from "./RenderContentConfig/ContentConfig";
 
 //Dashboard content ID 0,
@@ -83,6 +84,9 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
+        <div>
+          <Login />
+        </div>
         <div className={styles.nav}>
           <Nav role={this.state.role} onClick={this.handleClickNav} />
         </div>

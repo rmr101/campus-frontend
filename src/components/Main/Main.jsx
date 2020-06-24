@@ -6,6 +6,7 @@ import Content from "./components/Content";
 class Main extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
 
   }
   renderHeader() {

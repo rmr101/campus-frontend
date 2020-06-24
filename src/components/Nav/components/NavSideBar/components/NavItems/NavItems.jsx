@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NavItems = ({title,icon,collapse,onClick,active,id}) => {
   return (
-    <a
+    <div
       className={`${styles.wrapper} ${active ? styles.active : styles.inActive}`}
       onClick={e => onClick(e,id)}
     >
@@ -14,7 +14,7 @@ const NavItems = ({title,icon,collapse,onClick,active,id}) => {
       <div className={collapse ? styles.hide : styles.title}>
         <h3>{title}</h3>
       </div>
-    </a>
+    </div>
   );
 }
 export default NavItems;
