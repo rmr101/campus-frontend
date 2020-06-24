@@ -17,6 +17,7 @@ class Main extends React.Component {
         onClick={(e) => this.props.handleClickHeader(e, obj.headingID)}
       />
     ));
+    console.log(renderArray);
     return renderArray;
   }
 
