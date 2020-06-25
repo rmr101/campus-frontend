@@ -1,0 +1,50 @@
+@import './../../../../../../../../../variable';
+
+$delete-color:#e7305b;
+$update-color:#ffcb74;
+$create-color:#9bdeac;
+
+//TODO: 之后要去掉,因为这就是一个button而已
+.wrapper{
+  display: flex;
+  width: 400px;
+}
+
+.btn {
+    display: block;
+    text-align: center;
+    outline: none;
+    font-size: 1.1em;
+    background-color: $white-color;
+    border:none;
+    padding: 10px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.2);
+  }
+  
+.deleteBtn{
+  border:solid 1px $delete-color;
+  color: $delete-color;
+  &:hover{
+    color:white;
+    background-color: $delete-color;
+  }
+}
+.createBtn{
+  border: solid 1px $create-color;
+  color: $create-color;
+  &:hover{
+    color:white;
+    background-color: $create-color;
+  }
+}
+.updateBtn{
+  border: solid 1px $update-color;
+  color: $update-color;
+  &:hover{
+    color:white;
+    background-color: $update-color;
+  }
+}
+

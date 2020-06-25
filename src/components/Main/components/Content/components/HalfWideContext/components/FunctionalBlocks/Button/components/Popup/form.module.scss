@@ -1,19 +1,3 @@
-.modal {
-    position: fixed;
-    width: 300px;
-    height: 330px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    border-radius: 10px;
-    background: #fff;
-    overflow: hidden;
-    z-index: 9999;
-    box-shadow: inset 0 0 1px 0 #000;
-    }
-
 .title{
       text-align: center;
       margin: 0 0 20px;
@@ -63,19 +47,4 @@ padding: 10 px;
 margin-top:10px;
 height:0%;
 width:100%;
-}
-
-.mask {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(#bdc3c7,#34495e);
-      opacity: 1;
-      z-index: 9998;
-    }
-
-label {
-  padding-bottom: 5px;
 }
