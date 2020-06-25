@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Popup.module.scss";
 import Update from "./Update";
 import Create from "./Create";
+import Delete from "./Delete";
 
 class Popup extends React.Component {
   constructor(props){
@@ -10,11 +11,13 @@ class Popup extends React.Component {
   }
   renderPopupWindow(type){
     console.log(type);
-    switch(type){
+    switch (type) {
       case "UPDATE":
-       return <Update onClick={this.props.toggle} />;
+        return <Update onClick={this.props.toggle} />;
       case "CREATE":
-      return <Create onClick={this.props.toggle} />;
+        return <Create onClick={this.props.toggle} />;
+      case "DELETE":
+        return <Delete onClick={this.props.toggle} />;
       default:
         return null;
     }
