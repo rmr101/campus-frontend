@@ -9,17 +9,20 @@ class Create extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
+      userName: "",
+      email: "",
       respDto:{},
     };
-    this.onTyping = this.onTyping.bind(this);
+    this.onUserNameTyping = this.onUserNameTyping.bind(this);
+    this.onEmailTyping = this.onEmailTyping.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   
   //目前是，如果拿不回来你们的窗口不会关。所以要强行关掉
   async sendDto(){
     const newStudent = {
-      name:this.state.value,
+      userName:this.state.userName,
+      email:this.state.email,
     }
     const studentDTO = JSON.stringify(newStudent);
 
@@ -47,10 +50,17 @@ class Create extends React.Component {
     // this is to resemble sending JSON to the server
 
   }
-  onTyping(event){
-    console.log(event.target.value);
+  onUserNameTyping(event){
+    console.log(event.target.userName);
     this.setState({
-      value: event.target.value,
+      userName: event.target.value,
+    });
+  }
+
+  onEmailTyping(event){
+    console.log(event.target.email);
+    this.setState({
+      email: event.target.value,
     });
   }
 
@@ -64,7 +74,15 @@ class Create extends React.Component {
             type="text"
             placeholder="Enter Name"
             maxLength={30}
-            onChange={this.onTyping}
+            onChange={this.onUserNameTyping}
+            required
+          />
+          <label>Email:</label>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            maxLength={30}
+            onChange={this.onEmailTyping}
             required
           />
         </div>
