@@ -22,4 +22,9 @@ export const LinksRepo = [
            name: "List Id 2",
            content: [{ type: "Context", range: "Full" }],
          },
+         {
+          LinkId: 3,
+          name: "Student page",
+          content: [{ type: "student", range: "Full" }],
+        },
        ];
