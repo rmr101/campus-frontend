@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./NavSideBar.module.scss";
 import NavItems from "./components/NavItems";
-import * as NavRenderConfig from './../../../../RenderNavConfig/NavConfig';
+import * as NavItemsRenderMapper from './NavItemsRenderMapper';
 import Canvas from './components/Canvas';
 
 
@@ -38,11 +38,11 @@ class NavSideBar extends React.Component {
   renderNavItem() {
     switch (this.props.role) {
       case "student":
-        return this.readConfig(NavRenderConfig.StudentConfig);
+        return this.readConfig(NavItemsRenderMapper.StudentConfig);
       case "teacher":
-        return this.readConfig(NavRenderConfig.TeacherConfig);
+        return this.readConfig(NavItemsRenderMapper.TeacherConfig);
       case "admin":
-        return this.readConfig(NavRenderConfig.AdminConfig);
+        return this.readConfig(NavItemsRenderMapper.AdminConfig);
       default:
         return null;
     }

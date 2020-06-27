@@ -9,9 +9,9 @@ class Login extends React.Component {
     };
     this.togglePop = this.togglePop.bind(this);
   }
-  togglePop() {
+  togglePop(role) {
     //set logged in to true
-    this.props.onClick();
+    this.props.onClick(role);
     
     this.setState({
       seen: !this.state.seen,

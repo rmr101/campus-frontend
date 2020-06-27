@@ -3,7 +3,7 @@ import styles from './App.module.scss';
 import Nav from './components/Nav';
 import Main from "./components/Main";
 import Login from './components/Login';
-import * as ContentArray from "./RenderContentConfig/ContentConfig";
+import * as ContentArray from "./components/RenderMapper/ContentMapper";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 
@@ -85,10 +85,13 @@ class App extends React.Component {
       current: currentNavItem,
     },() => this.handleAddHeader(e,HeaderTitle,contentArray));
   }
-  setLoginStatue(){
+  setLoginStatue(role){
     //之后可以logout
     console.log("logged in");
-    this.setState({ login: true });
+    console.log(role);
+    this.setState({ 
+      role:role,
+      login: true });
   }
 
   render() {

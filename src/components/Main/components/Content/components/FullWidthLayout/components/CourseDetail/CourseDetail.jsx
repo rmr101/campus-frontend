@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./CourseDetail.module.scss";
 
+//this is so far a hard codeded version
 const CourseDetail = ({title,type}) => {
   console.log(type);
   return (
