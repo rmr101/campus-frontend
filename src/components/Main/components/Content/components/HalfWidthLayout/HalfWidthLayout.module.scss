@@ -7,11 +7,24 @@
   // 应该也要复用的,可以放到全局
   // border-bottom: solid 2px $border-color;
 }
-.headingBlock{
+.detailWrapper{
+  width: 350px;
+  padding-right: 30px;
+  h3{
+    margin-bottom: 5px;
+  }
+}
+.contextWrapper{
+  padding: 20px;
+  p {
+    color: $dark-color;
+  }
+}
+.heading{
   width: 30%;
   min-width: 200px;
 }
-.functionBlock{
+.functionalComponent{
     flex: 1;
 
    background-color: $white-color;

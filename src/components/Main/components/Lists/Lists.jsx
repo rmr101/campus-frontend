@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Lists.module.scss";
 import Link from './components/Link';
-import { LinksRepo } from "./../../../../../../../../../RenderContentConfig/LinksConfig";
+import { LinksRepo } from "./LinksRenderMapper";
 
 class Lists extends React.Component{
   constructor(props){

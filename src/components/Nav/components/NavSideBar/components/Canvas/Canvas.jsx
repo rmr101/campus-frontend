@@ -1,9 +1,6 @@
 import React from 'react';
 import styles from './Canvas.module.scss';
-import * as renderMap from './../../../../../../RenderNavConfig/RenderListForNavItem/NavListsConfig';
-
-
-
+import * as renderMap from './NavCanvasListsMapper';
 
 
 const Canvas= ({current,onClick,role}) => {
@@ -36,8 +33,10 @@ const renderCanvas = (current) =>{
   }
 
 
-  return(
-  <div className={styles.wrapper}>
-    {renderCanvas(current)}
-  </div>)};
+  return (
+    <div className={styles.wrapper}>
+      {renderCanvas(current)}
+
+    </div>
+  );};
 export default Canvas;

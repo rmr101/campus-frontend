@@ -1,5 +1,6 @@
-//Key here corresponding to NavItem ID.
+// Key here corresponding to NavItem ID.
 // value here is the component ID for that NavItem ID.
+// later will be replace by back end api
 export const StudentRenderMap = {
   Dashboard: [{ title: "Nothing to be render here", id: 0 }],
   Enrollment: [

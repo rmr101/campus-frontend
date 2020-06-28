@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./Content.module.scss";
-import HalfWideContext from "./components/HalfWideContext";
-import FullWideContext from './components/FullWideContext';
+import HalfWidthLayout from "./components/HalfWidthLayout";
+import FullWidthLayout from './components/FullWidthLayout';
 
 const Content = (props) => { 
   const renderComponent=(props)=>{
     switch (props.range) {
       case "Full":
-        return <FullWideContext {...props} />;
+        return <FullWidthLayout {...props} />;
       case "Half":
-        return <HalfWideContext {...props} />;
+        return <HalfWidthLayout {...props} />;
       default:
         return null;
     }
