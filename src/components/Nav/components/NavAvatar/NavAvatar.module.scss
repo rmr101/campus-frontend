@@ -10,6 +10,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:hover{
+    border: solid 3px $theme-color;
+  }
 }
 .avatar{
   font-size: 12em;

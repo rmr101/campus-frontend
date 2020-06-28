@@ -69,9 +69,17 @@ class NavSideBar extends React.Component {
     }
   }
   handleClick(event,name){
-    event.preventDefault();
-    this.clickToDisplayCanvas(name);
-    this.changeCurrent(name);
+    switch(name){
+      case "Dashboard":
+        this.changeCurrent(name);
+        this.props.handleClickDashboard(event);
+        this.setState({canvasOn:false});
+        break;  
+      default :
+        event.preventDefault();
+        this.clickToDisplayCanvas(name);
+        this.changeCurrent(name);
+    }
   }
 
   render(){

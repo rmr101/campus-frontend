@@ -1,0 +1,13 @@
+@import './../../../../NavSideBar-variable';
+
+.links{
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: 500;
+  margin: 2px 5px;
+  color: $white-color;
+  text-decoration: none;
+  &:hover{
+    color:$theme-color;
+  }
+}

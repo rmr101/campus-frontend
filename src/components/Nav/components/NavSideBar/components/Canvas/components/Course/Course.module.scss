@@ -1,15 +1,9 @@
-@import './../../NavSideBar-variable';
+@import './../../../../NavSideBar-variable';
 
 .wrapper{
   display: flex;
   text-decoration: none;
   cursor: pointer;
-  &:hover{
-    color:$theme-color;
-    h3{
-    color:$theme-color;
-  }
-  }
 }
 
 .active{
@@ -17,7 +11,6 @@
    background-color: $light-dark-color;
 }
 .inActive{
-  
   color: $light-dark-color;
 }
 
@@ -30,12 +23,12 @@
   align-items: center;
  
 }
-.title{  
+.title{
   height:40px;
   display: flex;
   align-items: center;
   h3{
-    color: $white-color;
+  color: $white-color;
   }
 }
 .hide{
