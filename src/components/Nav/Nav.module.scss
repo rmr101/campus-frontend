@@ -13,3 +13,13 @@
 .sideBar{
   flex: 1;
 }
+.footer{
+  border-top: 2px solid $light-dark-color;
+  height:40px;
+  display: flex;
+  justify-content: center;
+  h3{
+    font-size: 20px;
+    color: $white-color;
+  }
+}

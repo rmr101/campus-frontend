@@ -91,10 +91,11 @@ class NavSideBar extends React.Component {
             <Canvas
               onClick={this.props.onClick}
               current={this.state.current}
-              role = {this.props.role}
+              role={this.props.role}
             />
           ) : null}
         </div>
+   
       </div>
     );
   }

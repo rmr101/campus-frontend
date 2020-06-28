@@ -1,13 +1,11 @@
 import React from "react";
 import styles from "./NavHeader.module.scss";
+import NavLogo from "./../NavLogo";
 
-
-const NavHeader = ({
-  title,
-  }) => {
+const NavHeader = () => {
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>{title}</h2>
+      <NavLogo />
     </div>
   );
 }
