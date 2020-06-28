@@ -4,6 +4,7 @@ import Nav from './components/Nav';
 import Main from "./components/Main";
 import Login from './components/Login';
 import * as ContentArray from "./components/RenderMapper/ContentMapper";
+import { UserInfoContent } from "./components/RenderMapper/UserInfoContent/UserInfoContentMaper";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 
@@ -43,18 +44,23 @@ class App extends React.Component {
   }
 
   handleAddHeader(event,name,contentArray) {
+    
     event.preventDefault();
-    let history = this.state.history;
-    let id = history.length + 1;
-    let newHistory = [...history, {
-      headingID: id,
-      title:name,
-      content:contentArray,
-    }];
 
-    this.setState(
-      { history: newHistory}
-      );
+    let history = this.state.history;
+    if (name !== history[history.length-1].title) {
+      let id = history.length + 1;
+      let newHistory = [
+        ...history,
+        {
+          headingID: id,
+          title: name,
+          content: contentArray,
+        },
+      ];
+
+      this.setState({ history: newHistory });
+    }
   }
   handleClickNav(e, HeaderTitle, id, currentNavItem) {
     let contentArray;
@@ -70,7 +76,8 @@ class App extends React.Component {
         contentArray = ContentArray.EnrollmentsContent[id];
         break;
       case "UserInfo":
-        contentArray = ContentArray.UserInfoContent[id];
+        //TODO: Frank 改这里。
+        contentArray = UserInfoContent;
         break;
       case "Help":
         contentArray = ContentArray.HelpContent[id];

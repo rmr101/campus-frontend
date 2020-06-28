@@ -40,7 +40,7 @@ export const StudentConfig = [
          { icon: renderList.Dashboard, title: "Dashboard", id: "Dashboard" },
          {
            icon: renderList.Enrollment,
-           title: "Enrollment",
+           title: "My Course",
            id: "Enrollment",
          },
          {
@@ -60,7 +60,7 @@ export const StudentConfig = [
          },
          {
            icon: renderList.UserInfo,
-           title: "User information",
+           title: "Profile",
            id:"UserInfo",
          },
          {
@@ -97,7 +97,7 @@ export const TeacherConfig = [
          },
          {
            icon: renderList.UserInfo,
-           title: "User information",
+           title: "Profile",
            id: "UserInfo",
          },
          {
@@ -139,7 +139,7 @@ export const AdminConfig = [
          },
          {
            icon: renderList.UserInfo,
-           title: "User information",
+           title: "Profile",
            id: "UserInfo",
          },
          {

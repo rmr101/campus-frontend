@@ -27,13 +27,15 @@ const renderCanvas = (current) =>{
     case "CourseMarket":
       return <CourseMarket onClick={onClick} />;
     case "Courses":
-      return <Course onClick={onClick}/>;
+      return <Course onClick={onClick} />;
     // case "Help" :
     //   return <Help/>
     // case "Setting" :
     //   return <Setting/>
     // case "Payment" :
     //   return <Payment/>
+    default:
+      return null;
   }
 }
   return (
