@@ -17,7 +17,7 @@ class Nav extends React.Component {
         <div className={styles.header}>
           <NavHeader />
         </div>
-        <NavAvatar />
+          <NavAvatar />
         <div className={styles.sideBar}>
           <NavSidebar {...this.props} />
         </div>

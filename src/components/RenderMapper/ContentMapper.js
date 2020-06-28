@@ -280,6 +280,14 @@ title: "Information about Configuration",
 { type: "Popup", range: "Half", title: "Detail" },
 ],
 ];
+export const DisplayFullContent = [
+  [
+    {
+      type: "Context",
+      range: "Full",
+    },
+  ],
+];
 
 
 export const NoContent = [

@@ -60,7 +60,7 @@ class App extends React.Component {
     let contentArray;
     // mapping for content to be display
     switch (currentNavItem) {
-      case "Dashboard" :
+      case "Dashboard":
         contentArray = ContentArray.DashboardContent[0];
         break;
       case "Assignment":
@@ -77,6 +77,10 @@ class App extends React.Component {
         break;
       case "Setting":
         contentArray = ContentArray.ConfigurationContent[id];
+        break;
+      case "DisplayFull":
+        console.log(HeaderTitle, id);
+        contentArray = ContentArray.DisplayFullContent[0];
         break;
       default:
         contentArray = ContentArray.NoContent[0];
@@ -98,29 +102,36 @@ class App extends React.Component {
     return (
       <div className={styles.wrapper}>
         <Router>
-            {!this.state.login ? <Route path="/login">
+          {!this.state.login ? (
+            <Route path="/login">
               <Login onClick={this.setLoginStatue} />
-            </Route>:<Redirect to="/" />
-            }
-            {this.state.login ? (
-              <Route path = "/" exact>
-                <div className={styles.nav}>
-                  <Nav role={this.state.role} onClick={this.handleClickNav} />
-                </div>
-                <div className={styles.main}>
-                  <Main
-                    history={this.state.history}
-                    title={this.state.title}
-                    role={this.state.role}
-                    current={this.state.current}
-                    handleClickHeader={this.handleClickHeader}
-                    handleAddHeader={this.handleAddHeader}
-                  />
-                </div>
-              </Route>
-            ) : (
-              <Redirect to="/login" />
-            )}
+            </Route>
+          ) : (
+            <Redirect to="/" />
+          )}
+          {this.state.login ? (
+            <Route path="/" exact>
+              <div className={styles.nav}>
+                <Nav
+                  role={this.state.role}
+                  onClick={this.handleClickNav}
+                  handleClickDashboard={(e)=>this.handleClickHeader(e,1)}
+                />
+              </div>
+              <div className={styles.main}>
+                <Main
+                  history={this.state.history}
+                  title={this.state.title}
+                  role={this.state.role}
+                  current={this.state.current}
+                  handleClickHeader={this.handleClickHeader}
+                  handleAddHeader={this.handleAddHeader}
+                />
+              </div>
+            </Route>
+          ) : (
+            <Redirect to="/login" />
+          )}
         </Router>
       </div>
     );

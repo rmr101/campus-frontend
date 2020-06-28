@@ -5,7 +5,7 @@ import CanvasLoading from '../CanvasLoading';
 
 
 
-class CourseMarket extends React.Component {
+class Course extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,4 +40,4 @@ class CourseMarket extends React.Component {
   }
 };
 
-export default CourseMarket;
+export default Course;
