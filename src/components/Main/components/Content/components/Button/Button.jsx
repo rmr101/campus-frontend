@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Button.module.scss';
-import Popup from './components/Popup';
+import Popup from './../Popup';
 
 class Button extends React.Component {
   constructor(props) {
