@@ -4,7 +4,7 @@ import NavSidebar from "./components/NavSideBar";
 import styles from "./Nav.module.scss";
 import NavAvatar from './components/NavAvatar';
 
-
+const NavFooter = ({role}) => <h3> {role + " version"}</h3>;
 class Nav extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ class Nav extends React.Component {
           <NavSidebar {...this.props} />
         </div>
         <div className={styles.footer}>
-          <h3> {this.props.role + " version"}</h3>
+          <NavFooter role={this.props.role}/>
         </div>
       </div>
     );
