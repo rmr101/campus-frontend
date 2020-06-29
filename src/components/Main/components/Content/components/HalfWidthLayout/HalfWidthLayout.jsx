@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./HalfWidthLayout.module.scss";
 import Lists from "../../../Lists";
 import Button from "../Button";
-
+import StudentAssignment from './../StudentAssignment';
 
 
 const Detail = ({ title, description }) => {
@@ -39,6 +39,8 @@ const HalfWidthLayout = (props) => {
         );
       case "Context":
         return <HalfContext {...props} />;
+      case "StudentAssignment":
+        return <StudentAssignment {...props} />;
       default:
         return null;
     }

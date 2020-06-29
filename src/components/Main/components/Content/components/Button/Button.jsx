@@ -17,7 +17,11 @@ class Button extends React.Component {
   }
 
   buttonType(type){
-    switch(type){
+    switch (type) {
+      case "UPLOAD":
+        return styles.uploadBtn;
+      case "CONFIRM":
+        return styles.confirmBtn;
       case "DELETE":
         return styles.deleteBtn;
       case "UPDATE":
@@ -29,47 +33,70 @@ class Button extends React.Component {
     }
   }
   renderButton(type){
-     switch(type){
-      case "DELETE":
-        return (
-          <React.Fragment>
-        <button
-          className={`${styles.btn} + ${this.buttonType("DELETE")}`}
-          onClick={this.togglePop}
-        >
-          Delete
-        </button>
-        {this.state.seen ? (
-          <Popup type={"DELETE"} toggle={this.togglePop} />
-        ) : null}
-        </React.Fragment>
-        );
-      case "UPDATE":
-        return <React.Fragment>
-        <button
-          className={`${styles.btn} + ${this.buttonType("UPDATE")}`}
-          onClick={this.togglePop}
-        >
-          Update
-        </button>
-        {this.state.seen ? (
-          <Popup type={"UPDATE"} toggle={this.togglePop} />
-        ) : null}
-        </React.Fragment>
-      case "CREATE":
-        return <React.Fragment>
-        <button
-          className={`${styles.btn} + ${this.buttonType("CREATE")}`}
-          onClick={this.togglePop}
-        >
-          Create
-        </button>
-        {this.state.seen ? (
-          <Popup type={"CREATE"} toggle={this.togglePop} />
-        ) : null}</React.Fragment>
-      default:
-        return null;
-    }
+     switch (type) {
+       case "DELETE":
+         return (
+           <React.Fragment>
+             <button
+               className={`${styles.btn} + ${this.buttonType("DELETE")}`}
+               onClick={this.togglePop}
+             >
+               Delete
+             </button>
+             {this.state.seen ? (
+               <Popup type={"DELETE"} toggle={this.togglePop} />
+             ) : null}
+           </React.Fragment>
+         );
+       case "UPDATE":
+         return (
+           <React.Fragment>
+             <button
+               className={`${styles.btn} + ${this.buttonType("UPDATE")}`}
+               onClick={this.togglePop}
+             >
+               Update
+             </button>
+             {this.state.seen ? (
+               <Popup type={"UPDATE"} toggle={this.togglePop} />
+             ) : null}
+           </React.Fragment>
+         );
+       case "CREATE":
+         return (
+           <React.Fragment>
+             <button
+               className={`${styles.btn} + ${this.buttonType("CREATE")}`}
+               onClick={this.togglePop}
+             >
+               Create
+             </button>
+             {this.state.seen ? (
+               <Popup type={"CREATE"} toggle={this.togglePop} />
+             ) : null}
+           </React.Fragment>
+         );
+       case "UPLOAD":
+         return (
+           <React.Fragment>
+             <input
+               type="file"
+               className={`${styles.btn} + ${this.buttonType("UPLOAD")}`}
+               onChange={this.props.onChange}
+             />
+             {this.props.loaded ? (
+               <button
+                 className={`${styles.btn} + ${this.buttonType("CONFIRM")}`}
+                 onClick={(e) => this.props.handleConfirm(e)}
+               >
+                 Confirm
+               </button>
+             ) : null}
+           </React.Fragment>
+         );
+       default:
+         return null;
+     }
   }
   render() {
     return (

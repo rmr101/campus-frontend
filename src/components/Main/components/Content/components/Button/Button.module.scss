@@ -3,6 +3,9 @@
 $delete-color:#e7305b;
 $update-color:#ffcb74;
 $create-color:#9bdeac;
+$upload-color:#b9ac92;
+$confirm-color:#7aa5d2;
+$hover-color:#fff;
 
 //TODO: 之后要去掉,因为这就是一个button而已
 .wrapper{
@@ -27,7 +30,7 @@ $create-color:#9bdeac;
   border:solid 1px $delete-color;
   color: $delete-color;
   &:hover{
-    color:white;
+    color:$hover-color;
     background-color: $delete-color;
   }
 }
@@ -35,7 +38,7 @@ $create-color:#9bdeac;
   border: solid 1px $create-color;
   color: $create-color;
   &:hover{
-    color:white;
+      color:$hover-color;
     background-color: $create-color;
   }
 }
@@ -43,8 +46,24 @@ $create-color:#9bdeac;
   border: solid 1px $update-color;
   color: $update-color;
   &:hover{
-    color:white;
+     color:$hover-color;
     background-color: $update-color;
+  }
+}
+.uploadBtn{
+  border: solid 1px $upload-color;
+  color: $upload-color;
+  &:hover{
+    color:$hover-color;
+    background-color: $upload-color;
+  }
+}
+.confirmBtn{
+  border: solid 1px $confirm-color;
+  color: $confirm-color;
+  &:hover{
+    color:$hover-color;
+    background-color: $confirm-color;
   }
 }
 
