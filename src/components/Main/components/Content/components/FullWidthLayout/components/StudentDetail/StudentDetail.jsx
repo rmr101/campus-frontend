@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./StudentDetail.module.scss";
 import axios from "axios";
+import Button from "./../../../Button";
 
 class StudentDetail extends React.Component {
   constructor(props) {
@@ -10,11 +11,37 @@ class StudentDetail extends React.Component {
     };
   }
 
-  componentDidMount() {
-    axios.get(`http://localhost:8080/students`).then((res) => {
-      this.setState({ persons: res.data.studentList });
-    });
+  async postStudent(){
+    await axios.post(
+      "http://localhost:8080/users/students",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    this.GetRequest();
   }
+
+
+  GetRequest = () =>{
+    axios.get(`http://localhost:8080/students`).then((res) => {
+    this.setState({ persons: res.data.studentList});
+  });}
+
+  
+
+
+  // componentDidMount() {
+  //   axios.get(`http://localhost:8080/students`).then((res) => {
+  //     this.setState({ persons: res.data.studentList});
+  //   });
+  // }
+   
+  // componentWillUnmount() {
+  //   this.timer = null;
+  // }
+
 
   render() {
     return (
@@ -23,9 +50,10 @@ class StudentDetail extends React.Component {
           <tr>
             <th>No.</th>
             <th>StudentID</th>
-            <th>Name</th>
-            <th></th>
-            <th></th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>        </th>
+            <th><Button type={"CREATE"} /></th>
           </tr>
         </thead>
         <tbody>
@@ -34,13 +62,17 @@ class StudentDetail extends React.Component {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{person.uuid}</td>
-                <td>{person.name}</td>
+                <td>{person.firstName}</td>
+                <td>{person.lastName}</td>
                 <td>
-                  {/* <span onClick={this.updatePost.bind(this,post._id)} ></span> */}
-                  <button>update</button>
+                  <React.Fragment>
+                    <Button type={"UPDATE"} />
+                  </React.Fragment>
                 </td>
                 <td>
-                  <button>delete</button>
+                  <React.Fragment>
+                    <Button type={"DELETE"} />
+                  </React.Fragment>
                 </td>
               </tr>
             );
