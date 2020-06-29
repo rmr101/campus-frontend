@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './Button.module.scss';
 import Popup from './../Popup';
 
+
+//TODO: 这个肯定要 重构的，PopUp 也要解耦。
 class Button extends React.Component {
   constructor(props) {
     super(props);
@@ -79,12 +81,21 @@ class Button extends React.Component {
        case "UPLOAD":
          return (
            <React.Fragment>
+             {/* hide this input  */}
              <input
+               id="UPLOAD"
+               className={styles.uploadInput}
                type="file"
-               className={`${styles.btn} + ${this.buttonType("UPLOAD")}`}
                onChange={this.props.onChange}
              />
-             {this.props.loaded ? (
+             <label htmlFor="UPLOAD" className={styles.uploadLabel}>
+               <div className={`${styles.btn} + ${this.buttonType("UPLOAD")}`}>
+                 {this.props.loaded ? this.props.fileName : "Upload"}
+               </div>
+             </label>
+             {this.props.loaded &&
+             !this.props.wrongType &&
+             !this.props.overSize ? (
                <button
                  className={`${styles.btn} + ${this.buttonType("CONFIRM")}`}
                  onClick={(e) => this.props.handleConfirm(e)}
@@ -92,6 +103,18 @@ class Button extends React.Component {
                  Confirm
                </button>
              ) : null}
+             {/* TODO: finish this warnning window */}
+             <div className={styles.floatWarning}>
+               {this.props.wrongType ? (
+                 <div>only support .pdf file. Please upload again</div>
+               ) : null}
+               {this.props.overSize ? (
+                 <div>
+                   your file is oversize, only support file size less than 25
+                   MB.
+                 </div>
+               ) : null}
+             </div>
            </React.Fragment>
          );
        default:

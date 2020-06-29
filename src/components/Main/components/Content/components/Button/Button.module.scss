@@ -18,6 +18,7 @@ $hover-color:#fff;
     text-align: center;
     outline: none;
     font-size: 1.1em;
+    font-weight: 700;
     background-color: $white-color;
     border:none;
     padding: 10px 30px;
@@ -65,5 +66,11 @@ $hover-color:#fff;
     color:$hover-color;
     background-color: $confirm-color;
   }
+}
+.uploadInput{
+  display: none;
+}
+.uploadLabel{
+  padding:0;
 }
 
