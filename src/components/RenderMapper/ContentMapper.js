@@ -8,29 +8,24 @@
 //currently mimicking the database, contents are stored here. later this will needed to be deleted
 
 export const DashboardContent = [
-  [
-    { type: "Context", range: "Half", title: "Information" },
-    { type: "Popup", range: "Half", title: "Change Name" },
-    {
-      type: "Lists",
-      range: "Half",
-      title: "List 1",
-      linkIDArray: [0, 1],
-    },
-    {
-      type: "Lists",
-      range: "Half",
-      title: "List 2",
-      linkIDArray: [0],
-    },
-    {
-      type: "Lists",
-      range: "Half",
-      title: "student",
-      linkIDArray: [3],
-    },
-  ],
-];
+         [
+           { type: "StudentAssignment", range: "Half", title: "Upload" },
+           { type: "Context", range: "Half", title: "Information" },
+           { type: "Popup", range: "Half", title: "Change Name" },
+           {
+             type: "Lists",
+             range: "Half",
+             title: "List 1",
+             linkIDArray: [0, 1],
+           },
+           {
+             type: "Lists",
+             range: "Half",
+             title: "List 2",
+             linkIDArray: [0],
+           },
+         ],
+       ];
 
 export const AssignmentsContent = [
 [

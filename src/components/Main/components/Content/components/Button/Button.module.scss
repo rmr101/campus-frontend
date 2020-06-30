@@ -3,6 +3,9 @@
 $delete-color:#e7305b;
 $update-color:#ffcb74;
 $create-color:#9bdeac;
+$upload-color:#b9ac92;
+$confirm-color:#7aa5d2;
+$hover-color:#fff;
 
 //TODO: 之后要去掉,因为这就是一个button而已
 .wrapper{
@@ -15,6 +18,7 @@ $create-color:#9bdeac;
     text-align: center;
     outline: none;
     font-size: 1.1em;
+    font-weight: 700;
     background-color: $white-color;
     border:none;
     padding: 10px 30px;
@@ -27,7 +31,7 @@ $create-color:#9bdeac;
   border:solid 1px $delete-color;
   color: $delete-color;
   &:hover{
-    color:white;
+    color:$hover-color;
     background-color: $delete-color;
   }
 }
@@ -35,7 +39,7 @@ $create-color:#9bdeac;
   border: solid 1px $create-color;
   color: $create-color;
   &:hover{
-    color:white;
+      color:$hover-color;
     background-color: $create-color;
   }
 }
@@ -43,8 +47,56 @@ $create-color:#9bdeac;
   border: solid 1px $update-color;
   color: $update-color;
   &:hover{
-    color:white;
+     color:$hover-color;
     background-color: $update-color;
   }
 }
-
+.uploadBtn{
+  border: solid 1px $upload-color;
+  color: $upload-color;
+  &:hover{
+    color:$hover-color;
+    background-color: $upload-color;
+  }
+}
+.confirmBtn{
+  border: solid 1px $confirm-color;
+  color: $confirm-color;
+  &:hover{
+    color:$hover-color;
+    background-color: $confirm-color;
+  }
+}
+.uploadInput{
+  display: none;
+}
+.uploadLabel{
+  padding:0;
+}
+.uploadContainer{
+  position: relative;
+}
+.floatWarning{
+ 
+  width: 400px;
+  position: absolute;
+  
+  div{
+    margin-top: 5px;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: 600;
+  }
+  //TODO: 可以复用的style
+  .warningText{
+    background-color: $hover-color;
+    color: $delete-color;
+    border: 1px solid $delete-color;
+  }
+  .successText{
+    width: 200px;
+    color: $hover-color;
+    background-color: $create-color;
+  }
+}
