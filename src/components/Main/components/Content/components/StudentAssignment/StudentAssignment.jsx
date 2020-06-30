@@ -1,10 +1,19 @@
 import React from 'react';
 import Button from '../Button';
 import S3 from "react-aws-s3";
-import {
-  SecretAccessKey,
-  AccessKeyID,
-} from "./JackyAWSKey";
+
+// import the AWS S3 key
+let SecretAccessKey, AccessKeyID;
+try {
+    const AWSKey = require("./JackyAWSKey");
+    console.log(AWSKey);
+    SecretAccessKey = AWSKey.SecretAccessKey;
+    AccessKeyID = AWSKey.AccessKeyID;
+}catch(err){
+  console.log("You need the IAM key to access to AWS S3, ask jacky for that ^.^;")
+  SecretAccessKey = "";
+  AccessKeyID= "";
+}
 
 const config = {
   bucketName: "campus-file-system",
