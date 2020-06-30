@@ -1,47 +1,51 @@
 import React from "react";
 import styles from "./StudentDetail.module.scss";
 import axios from "axios";
-import Button from "./../../../Button";
+import Crud from "../../../Crud";
+// import Button from "../../.././Button";
+
 
 class StudentDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      persons: [],
+      items: [],
     };
   }
 
-  async postStudent(){
-    await axios.post(
-      "http://localhost:8080/users/students",
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    this.GetRequest();
+  componentDidMount() {
+    axios.get(`http://localhost:8080/students`).then((res) => {
+      this.setState({ items: res.data.studentList});
+    });
   }
 
+  addItemToState = (item) => {
+    this.setState(prevState => ({
+      items: [...prevState.items, item]
+    }))
+  }
 
-  GetRequest = () =>{
-    axios.get(`http://localhost:8080/students`).then((res) => {
-    this.setState({ persons: res.data.studentList});
-  });}
-
+  updateState = (item) => {
+    const itemIndex = this.state.items.findIndex(data => data.id === item.id)
+    const newArray = [
+    // destructure all items from beginning to the indexed item
+      ...this.state.items.slice(0, itemIndex),
+    // add the updated item to the array
+      item,
+    // add the rest of the items to the array from the index after the replaced item
+      ...this.state.items.slice(itemIndex + 1)
+    ]
+    this.setState({ items: newArray })
+    console.log({ items: newArray });
+  }
   
 
+  deleteItemFromState = (id) => {
+    const updatedItems = this.state.items.filter(item => item.id !== id)
+    this.setState({ items: updatedItems })
+  }
 
-  // componentDidMount() {
-  //   axios.get(`http://localhost:8080/students`).then((res) => {
-  //     this.setState({ persons: res.data.studentList});
-  //   });
-  // }
    
-  // componentWillUnmount() {
-  //   this.timer = null;
-  // }
-
 
   render() {
     return (
@@ -52,26 +56,26 @@ class StudentDetail extends React.Component {
             <th>StudentID</th>
             <th>FirstName</th>
             <th>LastName</th>
-            <th>        </th>
-            <th><Button type={"CREATE"} /></th>
+            <th>action</th>
+            {/* <th><Button type={"CREATE"} /></th> */}
           </tr>
         </thead>
         <tbody>
-          {this.state.persons.map(function (person, index) {
+          {this.state.items.map(function (item, index) {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{person.uuid}</td>
-                <td>{person.firstName}</td>
-                <td>{person.lastName}</td>
+                <td>{item.uuid}</td>
+                <td>{item.firstName}</td>
+                <td>{item.lastName}</td>
                 <td>
                   <React.Fragment>
-                    <Button type={"UPDATE"} />
+                    <Crud buttonLabel="Edit" item={item} updateState={this.props.updateState} />
                   </React.Fragment>
                 </td>
                 <td>
                   <React.Fragment>
-                    <Button type={"DELETE"} />
+                  <Crud buttonLabel="Delete" item={item.uuid} />
                   </React.Fragment>
                 </td>
               </tr>
