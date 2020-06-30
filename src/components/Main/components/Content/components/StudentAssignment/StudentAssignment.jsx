@@ -57,9 +57,9 @@ class StudentAssignment extends React.Component {
     this.setState({
       loaded: true,
       success: false,
-      fileName: e.target.files ? e.target.files[0].name : "",
-      fileSize: e.target.files ? e.target.files[0].size : 0,
-      fileType: e.target.files ? e.target.files[0].type : "application/pdf",
+      fileName: e.target.files[0] ? e.target.files[0].name : "",
+      fileSize: e.target.files[0] ? e.target.files[0].size : 0,
+      fileType: e.target.files[0] ? e.target.files[0].type : "application/pdf",
       file: e.target.files[0],
     });
   }
