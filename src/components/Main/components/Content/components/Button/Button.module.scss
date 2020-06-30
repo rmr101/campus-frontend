@@ -73,4 +73,30 @@ $hover-color:#fff;
 .uploadLabel{
   padding:0;
 }
-
+.uploadContainer{
+  position: relative;
+}
+.floatWarning{
+ 
+  width: 400px;
+  position: absolute;
+  
+  div{
+    margin-top: 5px;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: 600;
+  }
+  //TODO: 可以复用的style
+  .warningText{
+    background-color: $hover-color;
+    color: $delete-color;
+    border: 1px solid $delete-color;
+  }
+  .successText{
+    width: 200px;
+    color: $hover-color;
+    background-color: $create-color;
+  }
+}
