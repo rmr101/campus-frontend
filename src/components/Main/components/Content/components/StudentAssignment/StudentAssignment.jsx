@@ -53,13 +53,14 @@ class StudentAssignment extends React.Component {
     this.handleConfirm = this.handleConfirm.bind(this);
   }
   handleChange(e) {
-    console.log(e.target.files[0]);
+    console.log(e.target.files.length);
+    e.target.files.length === 0? console.log("file is not included") : 
     this.setState({
       loaded: true,
       success: false,
-      fileName: e.target.files ? e.target.files[0].name : "",
-      fileSize: e.target.files ? e.target.files[0].size : 0,
-      fileType: e.target.files ? e.target.files[0].type : "application/pdf",
+      fileName: e.target.files[0] ? e.target.files[0].name : "",
+      fileSize: e.target.files[0] ? e.target.files[0].size : 0,
+      fileType: e.target.files[0] ? e.target.files[0].type : "application/pdf",
       file: e.target.files[0],
     });
   }
