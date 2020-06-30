@@ -1,7 +1,7 @@
 .modal {
     position: fixed;
     width: 300px;
-    height: 330px;
+    height: 280px;
     top: 0;
     left: 0;
     right: 0;
@@ -21,6 +21,10 @@
 
 .form{
   padding:30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .control{
