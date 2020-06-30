@@ -31,12 +31,15 @@ class CourseMarket extends React.Component {
 
 
   render() {
-    return (this.state.loading ? <CanvasLoading /> : 
-       <RenderLink
+    return this.state.loading ? (
+      <CanvasLoading />
+    ) : (
+      <RenderLink
         onClick={this.props.onClick}
         RenderArray={this.state.subjectList}
-   />
-  );
+        CurrentNavItem={"SubjectCourse"}
+      />
+    );
   }
 };
 

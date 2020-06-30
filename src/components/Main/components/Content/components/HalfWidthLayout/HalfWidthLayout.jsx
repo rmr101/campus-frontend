@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./HalfWidthLayout.module.scss";
-import Lists from "../../../Lists";
 import Button from "../Button";
 import StudentAssignment from './../StudentAssignment';
 
@@ -26,8 +25,9 @@ const HalfContext = (props) => {
 const HalfWidthLayout = (props) => {
   const renderBlock = (blockName) => {
     switch (blockName) {
-      case "Lists":
-        return <Lists {...props} />;
+      // TODO: Depreciated usage
+      // case "Lists":
+      //   return <Lists {...props} />;
       case "Popup":
         //目前放着这，但以后可以单独拿出来用
         return (
