@@ -53,7 +53,8 @@ class StudentAssignment extends React.Component {
     this.handleConfirm = this.handleConfirm.bind(this);
   }
   handleChange(e) {
-    console.log(e.target.files[0]);
+    console.log(e.target.files.length);
+    e.target.files.length === 0? console.log("file is not included") : 
     this.setState({
       loaded: true,
       success: false,
