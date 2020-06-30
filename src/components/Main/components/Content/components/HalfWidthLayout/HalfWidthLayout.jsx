@@ -24,25 +24,62 @@ const HalfContext = (props) => {
 
 const HalfWidthLayout = (props) => {
   const renderBlock = (blockName) => {
-    switch (blockName) {
-      // TODO: Depreciated usage
-      // case "Lists":
-      //   return <Lists {...props} />;
-      case "Popup":
-        //目前放着这，但以后可以单独拿出来用
-        return (
-          <React.Fragment>
-            <Button type={"DELETE"} />
-            <Button type={"UPDATE"} />
+    if(props.role === "student"){
+      switch (blockName) {
+        // TODO: Depreciated usage
+        // case "Lists":
+        //   return <Lists {...props} />;
+        case "Popup":
+          //目前放着这，但以后可以单独拿出来用
+          return (
+            <React.Fragment>
+              <Button type={"DELETE"} />
+              <Button type={"UPDATE"} />
+              <Button type={"CREATE"} />
+            </React.Fragment>
+          );
+        case "Context":
+          return <HalfContext {...props} />;
+        case "StudentAssignment":
+          return <StudentAssignment {...props} />;
+        default:
+          return null;
+      }
+    }else if(props.role === "teacher"){
+      switch (blockName) {
+        // TODO: Depreciated usage
+        // case "Lists":
+        //   return <Lists {...props} />;
+        case "Popup":
+          //目前放着这，但以后可以单独拿出来用
+          return (
+            <React.Fragment>
+              <Button type={"DELETE"} />
+              <Button type={"UPDATE"} />
+              <Button type={"CREATE"} />
+            </React.Fragment>
+          );
+        case "Context":
+          return <HalfContext {...props} />;
+        case "StudentAssignment":
+          return <StudentAssignment {...props} />;
+        default:
+          return null;
+      }
+    }else{
+      switch (blockName) {
+        // TODO: Depreciated usage
+        // case "Lists":
+        //   return <Lists {...props} />;
+        case "Popup":
+          return (
             <Button type={"CREATE"} />
-          </React.Fragment>
-        );
-      case "Context":
-        return <HalfContext {...props} />;
-      case "StudentAssignment":
-        return <StudentAssignment {...props} />;
-      default:
-        return null;
+          );
+        case "Context":
+          return <HalfContext {...props} />;
+        default:
+          return null;
+      }
     }
   };
   return (

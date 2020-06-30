@@ -3,6 +3,8 @@ import styles from "./Popup.module.scss";
 import Update from "./Update";
 import Create from "./Create";
 import Delete from "./Delete";
+import AdminCreateStudent from "./AdminCreateStudent";
+import AdminCreateTeacher from "./AdminCreateTeacher";
 
 class Popup extends React.Component {
   constructor(props){
@@ -18,6 +20,10 @@ class Popup extends React.Component {
         return <Create onClick={this.props.toggle} />;
       case "DELETE":
         return <Delete onClick={this.props.toggle} />;
+      case "AdminCreateStudent":
+        return <AdminCreateStudent onClick={this.props.toggle} />;
+      case "AdminCreateTeacher":
+        return <AdminCreateTeacher onClick={this.props.toggle} />;
       default:
         return null;
     }
