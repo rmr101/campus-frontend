@@ -79,6 +79,9 @@ class App extends React.Component {
         //TODO: Frank 改这里。
         contentArray = UserInfoContent;
         break;
+      case "Teachers":
+        contentArray = ContentArray.TeachersContent[id];
+        break;
       case "Help":
         contentArray = ContentArray.HelpContent[id];
         break;
@@ -111,7 +114,6 @@ class App extends React.Component {
   setLoginStatue(role){
     //之后可以logout
     console.log("logged in");
-    console.log(role);
     this.setState({ 
       role:role,
       login: true });

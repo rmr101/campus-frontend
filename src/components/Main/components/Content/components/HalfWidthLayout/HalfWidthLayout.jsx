@@ -3,7 +3,6 @@ import styles from "./HalfWidthLayout.module.scss";
 import Button from "../Button";
 import StudentAssignment from './../StudentAssignment';
 
-
 const Detail = ({ title, description }) => {
   return (
     <div className={styles.detailWrapper}>
@@ -68,12 +67,13 @@ const HalfWidthLayout = (props) => {
       }
     }else{
       switch (blockName) {
+        
         // TODO: Depreciated usage
         // case "Lists":
         //   return <Lists {...props} />;
-        case "Popup":
+        case "AdminCreateTeacher":
           return (
-            <Button type={"CREATE"} />
+            <Button type={"AdminCreateTeacher"} />
           );
         case "Context":
           return <HalfContext {...props} />;

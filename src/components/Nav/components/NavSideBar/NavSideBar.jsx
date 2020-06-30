@@ -69,7 +69,6 @@ class NavSideBar extends React.Component {
     }
   }
   handleClick(event,name){
-    console.log(name + " name");
     switch (name) {
       case "Dashboard":
         this.changeCurrent(name);

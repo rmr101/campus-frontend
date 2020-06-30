@@ -12,6 +12,8 @@ export const DashboardContent = [
            { type: "StudentAssignment", range: "Half", title: "Upload" },
            { type: "Context", range: "Half", title: "Information" },
            { type: "Popup", range: "Half", title: "Change Name" },
+           { type: "AdminCreateStudent", range: "Half", title: "Change Name" },
+           { type: "AdminCreateTeacher", range: "Half", title: "Change Name" },
          ],
        ];
 
@@ -156,6 +158,8 @@ range: "Half",
 title: "Information about Configuration",
 },
 { type: "Popup", range: "Half", title: "Detail" },
+
+{ type: "AdminCreateTeacher", range: "Half", title: "Create New Teacher" },
 ],
 ];
 export const StudentsContent = [

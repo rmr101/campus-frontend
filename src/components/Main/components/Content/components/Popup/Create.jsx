@@ -76,7 +76,7 @@ class Create extends React.Component {
   render() {
     return (
       <form className={styles.form} onSubmit={this.onSubmit}>
-        <h3 className={styles.title}>Create</h3>
+        <h3 className={styles.title}>Create123</h3>
         <div className={styles.control}>
           <label>Email:</label>
           <input
