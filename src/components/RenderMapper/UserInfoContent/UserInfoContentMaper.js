@@ -20,6 +20,12 @@ export const UserInfoContent = [
     context: "Queen St, Melbourne VIC 3000",
   },
   {
+    type: "UserChangePassword",
+    range: "Half",
+    title: "Change Password",
+    context: "012345678",
+  },
+  {
     type: "Context",
     range: "Half",
     title: "Postcode",
@@ -37,4 +43,5 @@ export const UserInfoContent = [
     title: "Phone",
     context: "012345678",
   },
+  
 ];

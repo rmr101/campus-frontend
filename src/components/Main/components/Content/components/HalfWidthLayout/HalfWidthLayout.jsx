@@ -71,6 +71,10 @@ const HalfWidthLayout = (props) => {
         // TODO: Depreciated usage
         // case "Lists":
         //   return <Lists {...props} />;
+        case "UserChangePassword":
+          return (
+            <Button type={"UserChangePassword"} />
+          );
         case "AdminCreateTeacher":
           return (
             <Button type={"AdminCreateTeacher"} />
