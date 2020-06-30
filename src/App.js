@@ -85,9 +85,15 @@ class App extends React.Component {
       case "Setting":
         contentArray = ContentArray.ConfigurationContent[id];
         break;
-      case "DisplayFull":
-        console.log(HeaderTitle, id);
-        contentArray = ContentArray.DisplayFullContent[0];
+      case "SubjectCourse":
+        console.log("I got executed");
+        contentArray = ContentArray.SubjectCourseContent[0];
+        //append ID to the subject
+        contentArray= [{
+          ...contentArray[0],
+          subjectID:id
+        }];
+        console.log(contentArray);
         break;
       default:
         contentArray = ContentArray.NoContent[0];
