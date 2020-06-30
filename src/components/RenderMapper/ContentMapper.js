@@ -12,18 +12,6 @@ export const DashboardContent = [
            { type: "StudentAssignment", range: "Half", title: "Upload" },
            { type: "Context", range: "Half", title: "Information" },
            { type: "Popup", range: "Half", title: "Change Name" },
-           {
-             type: "Lists",
-             range: "Half",
-             title: "List 1",
-             linkIDArray: [0, 1],
-           },
-           {
-             type: "Lists",
-             range: "Half",
-             title: "List 2",
-             linkIDArray: [0],
-           },
          ],
        ];
 
@@ -203,16 +191,14 @@ context: "other 101",
 
 ],
 ];
-export const CoursesContent = [
-[
-{
-type: "Context",
-range: "Half",
-title: "Information about Configuration",
-},
-{ type: "Popup", range: "Half", title: "Detail" },
-],
-];
+export const CourseContent = [
+         [
+           {
+             type: "Context",
+             range: "Full",
+           },
+         ],
+       ];
 export const TeachingCourseContent = [
 [
 {

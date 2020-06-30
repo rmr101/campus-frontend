@@ -3,11 +3,12 @@ import styles from "./FullWidthLayout.module.scss";
 import CourseDetail from './components/CourseDetail';
 import SubjectCourse from './../SubjectCourse';
 
+
+//TODO: To be refactored.
 const FullWidthLayout = (props) => {
   const renderBlock = (blockName) => {
     switch (blockName) {
       case "SubjectCourse":
-        console.log(props);
         return <SubjectCourse {...props} />;
       default:
         return <CourseDetail />;

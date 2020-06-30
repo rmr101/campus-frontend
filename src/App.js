@@ -28,7 +28,7 @@ class App extends React.Component {
       ],
     };
    
-    this.handleClickNav = this.handleClickNav.bind(this);
+    this.handleClickLink = this.handleClickLink.bind(this);
     this.handleClickHeader = this.handleClickHeader.bind(this);
     this.handleAddHeader = this.handleAddHeader.bind(this); 
     
@@ -62,7 +62,7 @@ class App extends React.Component {
       this.setState({ history: newHistory });
     }
   }
-  handleClickNav(e, HeaderTitle, id, currentNavItem) {
+  handleClickLink(e, HeaderTitle, id, currentNavItem) {
     let contentArray;
     // mapping for content to be display
     switch (currentNavItem) {
@@ -89,11 +89,17 @@ class App extends React.Component {
         console.log("I got executed");
         contentArray = ContentArray.SubjectCourseContent[0];
         //append ID to the subject
-        contentArray= [{
-          ...contentArray[0],
-          subjectID:id
-        }];
+        contentArray = [
+          {
+            ...contentArray[0],
+            subjectID: id,
+          },
+        ];
         console.log(contentArray);
+        break;
+        //TODO: To added a course display page after clicked
+      case "Course":
+        contentArray = ContentArray.CourseContent[0];
         break;
       default:
         contentArray = ContentArray.NoContent[0];
@@ -127,8 +133,8 @@ class App extends React.Component {
               <div className={styles.nav}>
                 <Nav
                   role={this.state.role}
-                  onClick={this.handleClickNav}
-                  handleClickDashboard={(e)=>this.handleClickHeader(e,1)}
+                  onClick={this.handleClickLink}
+                  handleClickDashboard={(e) => this.handleClickHeader(e, 1)}
                 />
               </div>
               <div className={styles.main}>
@@ -138,7 +144,7 @@ class App extends React.Component {
                   role={this.state.role}
                   current={this.state.current}
                   handleClickHeader={this.handleClickHeader}
-                  handleAddHeader={this.handleAddHeader}
+                  onClick={this.handleClickLink}
                 />
               </div>
             </Route>

@@ -30,7 +30,7 @@ class Main extends React.Component {
       <Content
         key={"content_id" + Math.random()}
         {...obj}
-        onClick={this.props.handleAddHeader}
+        onClick={this.props.onClick}
       />
     ));
 

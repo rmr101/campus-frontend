@@ -3,6 +3,8 @@ import styles from "./Lists.module.scss";
 import Link from './components/Link';
 import { LinksRepo } from "./LinksRenderMapper";
 
+//TODO: To be deleted component
+
 class Lists extends React.Component{
   constructor(props){
     super(props);

@@ -1,7 +1,22 @@
 @import './../../../../../../variable';
 
+.wrapper{
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+}
 .loading{
   h4{
-    color:$white-color;
+    color: $dark-color;
+  }
+}
+.container{
+  font-size: 1.2em;
+  font-weight: 500;
+  margin: 5px 5px;
+  color: $dark-color;
+  display:flex;
+  .heading{
+    flex:1;
   }
 }

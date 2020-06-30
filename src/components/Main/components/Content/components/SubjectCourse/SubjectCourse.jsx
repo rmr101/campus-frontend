@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './SubjectCourse.module.scss';
-import RenderLink from './../../../../../Nav/components/NavSideBar/components/Canvas/components/RenderLink';
+import RenderContentLink from "./../RenderContentLink";
 
 const Loading = () => (
   <div className={styles.loading}>
@@ -38,15 +38,27 @@ class SubjectCourse extends React.Component {
   }
 
   render() {
-    return this.state.loading ? (
-      //TODO: 可复用 loading
-      <Loading />
-    ) : (
-      //TODO: 提出来，Nav 和 main 都能用
-      <RenderLink
-        onClick={this.props.onClick}
-        RenderArray={this.state.courseList}
-      />
+    return (
+      <div className={styles.wrapper}>
+        {this.state.loading ? (
+          //TODO: 可复用 loading
+          <Loading />
+        ) : (
+          //TODO: 提出来，Nav 和 main 都能用
+          <React.Fragment>
+            <div className={styles.container}>
+              <div className={styles.heading}>Course Name:</div>
+              <div className={styles.heading}>Course ID:</div>
+              <div className={styles.heading}>Introduction:</div>
+            </div>
+            <RenderContentLink
+              onClick={this.props.onClick}
+              RenderArray={this.state.courseList}
+              CurrentItem={"Course"}
+            />
+          </React.Fragment>
+        )}
+      </div>
     );
   }
 };
