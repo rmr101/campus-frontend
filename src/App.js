@@ -6,7 +6,7 @@ import Login from './components/Login';
 import * as ContentArray from "./components/RenderMapper/ContentMapper";
 import { UserInfoContent } from "./components/RenderMapper/UserInfoContent/UserInfoContentMaper";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-
+import {connect} from 'react-redux';
 
 //Dashboard content ID 0,
 //role: student 
@@ -16,8 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      role: "admin",
-      login:false,
+      role: this.props.userRole,
       current: "Dashboard",
       history: [
         {
@@ -32,7 +31,6 @@ class App extends React.Component {
     this.handleClickHeader = this.handleClickHeader.bind(this);
     this.handleAddHeader = this.handleAddHeader.bind(this); 
     
-    this.setLoginStatue = this.setLoginStatue.bind(this);
   }
 
   handleClickHeader(event,headingID) {
@@ -111,30 +109,23 @@ class App extends React.Component {
       current: currentNavItem,
     },() => this.handleAddHeader(e,HeaderTitle,contentArray));
   }
-  setLoginStatue(role){
-    //之后可以logout
-    console.log("logged in");
-    this.setState({ 
-      role:role,
-      login: true });
-  }
 
   render() {
     return (
       <div className={styles.wrapper}>
         <Router>
-          {!this.state.login ? (
+          {!this.props.loginState ? (
             <Route path="/login">
-              <Login onClick={this.setLoginStatue} />
+              <Login />
             </Route>
           ) : (
             <Redirect to="/" />
           )}
-          {this.state.login ? (
+          {this.props.loginState ? (
             <Route path="/" exact>
               <div className={styles.nav}>
                 <Nav
-                  role={this.state.role}
+                  role={this.props.userRole}
                   onClick={this.handleClickLink}
                   handleClickDashboard={(e) => this.handleClickHeader(e, 1)}
                 />
@@ -143,7 +134,7 @@ class App extends React.Component {
                 <Main
                   history={this.state.history}
                   title={this.state.title}
-                  role={this.state.role}
+                  role={this.props.userRole}
                   current={this.state.current}
                   handleClickHeader={this.handleClickHeader}
                   onClick={this.handleClickLink}
@@ -158,5 +149,11 @@ class App extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) =>({
+  userRole: state.userRole,
+  loginState: state.loginState,
+})
 
-export default App;
+const AppContainer = connect(mapStateToProps, null)(App);
+
+export default AppContainer;

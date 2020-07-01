@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./LoginForm.module.scss";
-
+import {connect} from 'react-redux';
+import ChangeRole from "../../../../store/campus/actions/ChangeRole";
+import SetLogin from "../../../../store/campus/actions/SetLogin";
 class LoginForm extends React.Component{
   constructor(props){
     super(props);
@@ -8,6 +10,7 @@ class LoginForm extends React.Component{
       role:""
     };
   }
+
   render(){
         return (
           <div>
@@ -35,22 +38,19 @@ class LoginForm extends React.Component{
                 </div> */}
                 <button
                   className={styles.button}
-                  type="submit"
-                  onClick={() => this.props.toggle("student")}
+                  onClick={() => this.props.onClick("student")}
                 >
                   Log in as Student
                 </button>
                 <button
                   className={styles.button}
-                  type="submit"
-                  onClick={() => this.props.toggle("teacher")}
+                  onClick={() => this.props.onClick("teacher")}
                 >
                   Log in as Teacher
                 </button>
                 <button
                   className={styles.button}
-                  type="submit"
-                  onClick={() => this.props.toggle("admin")}
+                  onClick={() => this.props.onClick("admin")}
                 >
                   Log in as Admin
                 </button>
@@ -62,4 +62,14 @@ class LoginForm extends React.Component{
       }
     }
 
-export default LoginForm;
+
+const mapDispatchToProps = (dispatch) => ({
+    onClick:(text) => {
+    dispatch(SetLogin());
+    dispatch(ChangeRole(text));
+
+  } 
+})
+
+const LoginFormContainer = connect(null, mapDispatchToProps)(LoginForm);
+export default LoginFormContainer;
