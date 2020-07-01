@@ -2,6 +2,12 @@
 
 export const UserInfoContent = [
   {
+    type: "Profile",
+    range: "Half",
+    title: "get info",
+    context: "teacher title",
+  },
+  {
     type: "Context",
     range: "Half",
     title: "Surname",

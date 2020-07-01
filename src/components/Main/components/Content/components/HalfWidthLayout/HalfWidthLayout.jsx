@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./HalfWidthLayout.module.scss";
 import Button from "../Button";
 import StudentAssignment from './../StudentAssignment';
+import Profile from './../Profile';
 
 const Detail = ({ title, description }) => {
   return (
@@ -71,6 +72,8 @@ const HalfWidthLayout = (props) => {
         // TODO: Depreciated usage
         // case "Lists":
         //   return <Lists {...props} />;
+        case "Profile":
+          return <Profile {...props} />;
         case "UserChangePassword":
           return (
             <Button type={"UserChangePassword"} />
