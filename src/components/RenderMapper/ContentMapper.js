@@ -24,6 +24,12 @@ export const DashboardContent = [
              title: "List 2",
              linkIDArray: [0],
            },
+           {
+            type: "Lists",
+            range: "Half",
+            title: "student",
+            linkIDArray: [3],
+          },
          ],
        ];
 

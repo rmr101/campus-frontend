@@ -2,6 +2,7 @@ import React from "react";
 import styles from './form.module.scss';
 import axios from 'axios';
 
+import StudentDetail from "../FullWidthLayout/components/StudentDetail";
 
 // Post object would need a name
 
@@ -42,16 +43,36 @@ class Create extends React.Component {
            },
          }
        )
-       .then((res) => this.setState({ respDto: res.data }));
-    console.log(this.state.respDto);
+       .then((res) => this.setState({ respDto: res.data }))
+       console.log(this.state.items);
   }
+
+  // async postStudent(){
+  //   await axios
+  //      .post(
+  //        "http://localhost:8080/users/students",
+  //        {
+  //          headers: {
+  //            "Content-Type": "application/json",
+  //          },
+  //          body:{
+  //            "email":this.state.email,
+  //            "firstName":this.state.firstName,
+  //            "lastName":this.state.lastName,
+  //          }
+  //        }
+  //      )
+  //      .then((res) => this.setState({ respDto: res.data })).then(<StudentList/>);
+  //       // .then((res) => this.setState({ respDto: res.data }));
+  // }
+
   async onSubmit(event){
     event.preventDefault();
     await this.sendDto();
     this.props.onClick(event);
-
+    return(<StudentDetail/>);
+    
     // this is to resemble sending JSON to the server
-
   }
 
   onEmailTyping(event){
