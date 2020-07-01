@@ -1,8 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import RenderLink from '../RenderLink';
 import CanvasLoading from '../CanvasLoading';
-
+import getSubjectList from './../../../../../../../../apis/getSubjectList';
 
 
 class CourseMarket extends React.Component {
@@ -18,17 +17,18 @@ class CourseMarket extends React.Component {
   finishLoading() {
     this.setState({ loading: false });
   }
+
   async getSubjectList() {
-    await axios
-      .get(`http://localhost:8080/subjects`)
-      .then((res) => this.setState({ subjectList: res.data.subjectList },
-        ()=>this.setState({loading:false})));
+    const {subjectList} = await getSubjectList();
+    this.setState(
+      {subjectList: subjectList,
+        loading: false});
     console.log(this.state.subjectList);
   }
+
   componentDidMount() {
     this.getSubjectList();
   }
-
 
   render() {
     return this.state.loading ? (

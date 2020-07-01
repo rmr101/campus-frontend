@@ -2,20 +2,20 @@ import React from "react";
 import styles from "./RenderContentLink.module.scss";
 
 //TODO: To be merged with nav bar RenderLink after refactored.
+// Refactor to be less depended on the RenderArray.
 const RenderContentLink = ({ onClick, RenderArray, CurrentItem }) => {
   return RenderArray.map((obj) => (
-    <div className={styles.container}>
+    <div key={"name_" + Math.random()} className={styles.container}>
       <div
         onClick={(e) => onClick(e, obj.name, obj.id, CurrentItem)}
         className={`${styles.links} ${styles.heading}`}
-        key={"name_" + Math.random()}
       >
         {obj.name}
       </div>
-      <div className={styles.heading} key={"id_" + Math.random()}>
+      <div className={styles.heading}>
         {obj.id}
       </div>
-      <div className={styles.heading} key={"intro_" + Math.random()}>
+      <div className={styles.heading}>
         {obj.introduction}
       </div>
     </div>
