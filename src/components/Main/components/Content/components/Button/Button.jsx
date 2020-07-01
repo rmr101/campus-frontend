@@ -32,6 +32,8 @@ class Button extends React.Component {
         return styles.createBtn;
       case "AdminCreateTeacher":
         return styles.createBtn;
+      case "UserChangePassword":
+        return styles.createBtn;
       default:
         return null;
     }
@@ -91,6 +93,20 @@ class Button extends React.Component {
           </button>
           {this.state.seen ? (
             <Popup type={"AdminCreateTeacher"} toggle={this.togglePop} />
+          ) : null}
+        </React.Fragment>
+      );
+      case "UserChangePassword":
+      return (
+        <React.Fragment>
+          <button
+            className={`${styles.btn} + ${this.buttonType("UserChangePassword")}`}
+            onClick={this.togglePop}
+          >
+            Change Password
+          </button>
+          {this.state.seen ? (
+            <Popup type={"UserChangePassword"} toggle={this.togglePop} />
           ) : null}
         </React.Fragment>
       );

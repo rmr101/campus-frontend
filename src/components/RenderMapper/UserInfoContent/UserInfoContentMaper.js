@@ -2,6 +2,12 @@
 
 export const UserInfoContent = [
   {
+    type: "Profile",
+    range: "Half",
+    title: "get info",
+    context: "teacher title",
+  },
+  {
     type: "Context",
     range: "Half",
     title: "Surname",
@@ -18,6 +24,12 @@ export const UserInfoContent = [
     range: "Half",
     title: "Address",
     context: "Queen St, Melbourne VIC 3000",
+  },
+  {
+    type: "UserChangePassword",
+    range: "Half",
+    title: "Change Password",
+    context: "012345678",
   },
   {
     type: "Context",
@@ -37,4 +49,5 @@ export const UserInfoContent = [
     title: "Phone",
     context: "012345678",
   },
+  
 ];
