@@ -1,25 +1,24 @@
 import React from "react";
 import styles from "./FullWidthLayout.module.scss";
 import CourseDetail from './components/CourseDetail';
-import StudentDetail from './components/StudentDetail';
+import SubjectCourse from './../SubjectCourse';
 
+
+//TODO: To be refactored.
 const FullWidthLayout = (props) => {
-  const fullWidthdetails = (detail) => {
-    switch (detail) {
-      case "course":
-        return <CourseDetail {...props} />;
-      case "student":
-        return <StudentDetail {...props} />;
+  const renderBlock = (blockName) => {
+    switch (blockName) {
+      case "SubjectCourse":
+        return <SubjectCourse {...props} />;
       default:
-        return null;
+        return <CourseDetail />;
     }
   };
   return (
     <div className={styles.wrapper}>
-        {fullWidthdetails(props.type)}
+     {renderBlock(props.type)}
     </div>
   );
 }
-
 
 export default FullWidthLayout;
