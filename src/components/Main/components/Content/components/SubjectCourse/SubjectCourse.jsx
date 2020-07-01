@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import styles from './SubjectCourse.module.scss';
 import RenderContentLink from "./../RenderContentLink";
+import getCourseListBySubjectID from './../../../../../../apis/getCourseListBySubjectID';
 
 const Loading = () => (
   <div className={styles.loading}>
@@ -24,15 +24,16 @@ class SubjectCourse extends React.Component {
     this.setState({ loading: false });
   }
   async getCourseList() {
-    await axios
-      .get(`http://localhost:8080/subjects/${this.props.subjectID}`)
-      .then((res) =>
-        this.setState({ courseList: res.data.courseList }, () =>
-          this.setState({ loading: false })
-        )
-      );
+    console.log("i got executed too.");
+    const { courseList } = await getCourseListBySubjectID(this.props.subjectID);
+    console.log(courseList);
+    this.setState({ 
+    courseList: courseList,
+    loading: false });
+
     console.log(this.state.courseList);
   }
+  
   componentDidMount() {
     this.getCourseList();
   }
