@@ -1,10 +1,9 @@
-import { SET_LOGIN_STATUS } from "../../type";
+import { SET_CURRENT_DIRECTOR } from "../../type";
 
-export default (state = false, action) => {
+export default (state = "Dashboard", action) => {
   switch (action.type) {
-    case SET_LOGIN_STATUS:
-      console.log("i am getting run.");
-      return true;
+    case SET_CURRENT_DIRECTOR:
+      return action.payload;
     default:
       return state;
   }

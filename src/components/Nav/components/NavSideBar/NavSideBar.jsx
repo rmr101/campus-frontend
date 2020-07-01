@@ -3,7 +3,8 @@ import styles from "./NavSideBar.module.scss";
 import NavItems from "./components/NavItems";
 import * as NavItemsRenderMapper from './NavItemsRenderMapper';
 import Canvas from './components/Canvas';
-
+import ClickLink from "../../../../store/campus/actions/ClickLink";
+import { connect } from "react-redux";
 
 
 
@@ -11,7 +12,7 @@ class NavSideBar extends React.Component {
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this); 
-    this.state= {
+    this.state = {
       canvasOn:false,
       current:"Dashboard",
     }
@@ -78,19 +79,19 @@ class NavSideBar extends React.Component {
       case "Teachers":
         this.changeCurrent(name);
         //id here doesn't matter 
-        this.props.onClick(event, "Teachers", 0, name);
+        this.props.onClick(event, "Teachers",);
         this.setState({ canvasOn: false });
         break;
       case "Students":
         this.changeCurrent(name);
         //id here doesn't matter 
-        this.props.onClick(event, "Students", 0, name);
+        this.props.onClick(event, "Students",);
         this.setState({ canvasOn: false });
         break;
       case "UserInfo":
         this.changeCurrent(name);
         //id here doesn't matter 
-        this.props.onClick(event, "Profile", 0, name);
+        this.props.onClick(event, "Profile",);
         this.setState({ canvasOn: false });
         break;
       default:
@@ -115,9 +116,7 @@ class NavSideBar extends React.Component {
         >
           {this.state.canvasOn ? (
             <Canvas
-              onClick={this.props.onClick}
               current={this.state.current}
-              role={this.props.role}
             />
           ) : null}
         </div>
@@ -127,4 +126,17 @@ class NavSideBar extends React.Component {
   }
 }
 
-export default NavSideBar;
+const mapDispatchToProps = (dispatch) => ({
+  onClick: (event, headingTitle) => {
+    dispatch(ClickLink(event, headingTitle));
+  },
+});
+const mapStateToProps = state => ({
+  role:state.userRole,
+});
+
+const NavSideBarContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavSideBar);
+export default NavSideBarContainer;

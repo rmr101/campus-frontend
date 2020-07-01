@@ -2,3 +2,8 @@
 //role reducer
 export const CHANGE_ROLE = "CHANGE_ROLE";
 export const SET_LOGIN_STATUS = "SET_LOGIN_STATUS";
+export const SET_CURRENT_DIRECTOR = "SET_CURRENT_DIRECTOR";
+
+//
+export const ADD_HEADER_HISTORY = "ADD_HEADER_HISTORY";
+export const CLICK_HEADER = "CLICK_HEADER";
