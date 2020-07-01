@@ -30,6 +30,8 @@ class Button extends React.Component {
         return styles.updateBtn;
       case "CREATE":
         return styles.createBtn;
+      case "AdminCreateTeacher":
+        return styles.createBtn;
       default:
         return null;
     }
@@ -78,6 +80,20 @@ class Button extends React.Component {
             ) : null}
           </React.Fragment>
         );
+      case "AdminCreateTeacher":
+      return (
+        <React.Fragment>
+          <button
+            className={`${styles.btn} + ${this.buttonType("AdminCreateTeacher")}`}
+            onClick={this.togglePop}
+          >
+            Create New Teacher
+          </button>
+          {this.state.seen ? (
+            <Popup type={"AdminCreateTeacher"} toggle={this.togglePop} />
+          ) : null}
+        </React.Fragment>
+      );
       case "UPLOAD":
         return (
           <div className={styles.uploadContainer}>

@@ -28,6 +28,7 @@ class Main extends React.Component {
     //update to the newest component
     let renderArray = contentArray.map((obj) => (
       <Content
+        {...this.props}
         key={"content_id" + Math.random()}
         {...obj}
         onClick={this.props.onClick}

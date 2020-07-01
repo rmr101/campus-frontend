@@ -75,6 +75,18 @@ class NavSideBar extends React.Component {
         this.props.handleClickDashboard(event);
         this.setState({ canvasOn: false });
         break;
+      case "Teachers":
+        this.changeCurrent(name);
+        //id here doesn't matter 
+        this.props.onClick(event, "Teachers", 0, name);
+        this.setState({ canvasOn: false });
+        break;
+      case "Students":
+        this.changeCurrent(name);
+        //id here doesn't matter 
+        this.props.onClick(event, "Students", 0, name);
+        this.setState({ canvasOn: false });
+        break;
       case "UserInfo":
         this.changeCurrent(name);
         //id here doesn't matter 

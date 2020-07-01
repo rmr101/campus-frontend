@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // Post object would need a name
 
-class Create extends React.Component {
+class AdminCreateTeacher extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,20 +22,20 @@ class Create extends React.Component {
   
   //目前是，如果拿不回来你们的窗口不会关。所以要强行关掉
   async sendDto(){
-    const newStudent = {
+    const newTeacher = {
       email:this.state.email,
       firstName:this.state.firstName,
       lastName:this.state.lastName,
     }
-    const studentDTO = JSON.stringify(newStudent);
+    const teacherDTO = JSON.stringify(newTeacher);
 
 
     //这里的格式千万要注意。不要放一个{ }到post 的第二个argument。因为这样后端的格式就不是JSON
-      console.log(studentDTO);
+      console.log(teacherDTO);
      await axios
        .post(
-         "http://localhost:8080/users/students",
-         studentDTO ,
+         "http://localhost:8080/users/teachers",
+         teacherDTO ,
          {
            headers: {
              "Content-Type": "application/json",
@@ -76,7 +76,7 @@ class Create extends React.Component {
   render() {
     return (
       <form className={styles.form} onSubmit={this.onSubmit}>
-        <h3 className={styles.title}>Create123</h3>
+        <h3 className={styles.title}>Create New Teacher</h3>
         <div className={styles.control}>
           <label>Email:</label>
           <input
@@ -115,4 +115,4 @@ class Create extends React.Component {
   }
 }
 
-export default Create;
+export default AdminCreateTeacher;
