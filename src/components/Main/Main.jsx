@@ -4,8 +4,6 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 import { connect } from "react-redux";
 
-
-
 const Main =({
   history,
 })=> {
@@ -34,8 +32,12 @@ const Main =({
   }
     return (
       <div className={styles.wrapper}>
-        <div className={styles.header}>{renderHeader()}</div>
-        <div className={styles.content}>{renderComponent()}</div>
+        <div className={styles.header}>
+          {renderHeader()}
+          </div>
+        <div className={styles.content}>
+          {renderComponent()}
+          </div>
       </div>
     );
   }
