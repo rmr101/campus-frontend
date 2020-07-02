@@ -75,6 +75,7 @@ const handleClickLink = (LinkNameID,id) => {
       contentArray = ContentArray.ConfigurationContent;
       break;
     case "SubjectCourse":
+      console.log("SubjectCourse");
       contentArray = ContentArray.SubjectCourseContent;
       //append ID to the subject
       contentArray = [
@@ -87,10 +88,10 @@ const handleClickLink = (LinkNameID,id) => {
 
     //TODO: To added a course display page after clicked
     case "Course":
-      contentArray = ContentArray.CourseContent[0];
+      contentArray = ContentArray.CourseContent;
       break;
     default:
-      contentArray = ContentArray.NoContent[0];
+      contentArray = ContentArray.NoContent;
   }
   return contentArray;
 };

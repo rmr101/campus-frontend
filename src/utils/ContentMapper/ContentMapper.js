@@ -95,12 +95,10 @@ title: "other",
 context: "other 101",
 },];
 export const CourseContent = [
-         [
            {
              type: "Context",
              range: "Full",
            },
-         ],
        ];
 
 export const TeachingCourseContent = [];

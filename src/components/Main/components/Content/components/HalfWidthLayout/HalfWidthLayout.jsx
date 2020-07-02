@@ -23,14 +23,11 @@ const HalfContext = (props) => {
   );
 };
 
-
+//TODO: 这里以后需要refactor 一下的。
 const HalfWidthLayout = (props) => {
   const renderBlock = (blockName) => {
     if(props.role === "student"){
       switch (blockName) {
-        // TODO: Depreciated usage
-        // case "Lists":
-        //   return <Lists {...props} />;
         case "Popup":
           //目前放着这，但以后可以单独拿出来用
           return (
@@ -67,10 +64,6 @@ const HalfWidthLayout = (props) => {
       }
     }else{
       switch (blockName) {
-        
-        // TODO: Depreciated usage
-        // case "Lists":
-        //   return <Lists {...props} />;
         case "Profile":
           return <Profile {...props} />;
         case "UserChangePassword":

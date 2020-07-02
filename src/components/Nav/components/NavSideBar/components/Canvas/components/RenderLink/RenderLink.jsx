@@ -7,9 +7,7 @@ import ClickLink from './../../../../../../../../store/campus/actions/ClickLink'
 const RenderLink = ({ RenderArray, onClick, CurrentNavItem }) =>
   RenderArray.map((obj) => (
     <div
-      onClick={(event) =>
-        onClick(event, CurrentNavItem, obj.id, CurrentNavItem)
-      }
+      onClick={(event) => onClick(event, obj.name, obj.id, CurrentNavItem)}
       className={styles.links}
       key={"id" + Math.random()}
     >
@@ -18,8 +16,8 @@ const RenderLink = ({ RenderArray, onClick, CurrentNavItem }) =>
   ));
 
   const mapDispatchToProps = (dispatch) => ({
-    onClick: (event, headingTitle,id) => {
-      dispatch(ClickLink(event, headingTitle,id));
+    onClick: (event, headingTitle, id, CurrentNavItem) => {
+      dispatch(ClickLink(event, headingTitle, id, CurrentNavItem));
     },
   });
 

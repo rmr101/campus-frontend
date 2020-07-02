@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Canvas.module.scss';
 import CourseMarket from "./components/CourseMarket";
 import Course from "./components/Course";
-import {connect} from "react-redux";
 
 
 const Canvas= ({current}) => {
@@ -35,8 +34,4 @@ const renderCanvas = (current) =>{
   );
 }
 
-const mapStateToProps = (state) =>({
-  current: state.currentDirectory,
-})
-const CanvasContainer = connect(mapStateToProps,null)(Canvas);
-export default CanvasContainer;
+export default Canvas;
