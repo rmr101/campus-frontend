@@ -1,18 +1,52 @@
+
+$mask-background:linear-gradient(#f4f6ff,#e4f9ff);
+$greeting-background:#84a9ac;
+$white-color:#fff;
+
+.wrapper{
+  position: fixed;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:$mask-background ;
+  z-index: 10;
+ 
+}
 .modal {
-    position: fixed;
-    width: 300px;
-    height: 280px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    border-radius: 10px;
-    background: #fff;
-    overflow: hidden;
-    z-index: 9999;
-    box-shadow: inset 0 0 1px 0 #000;
-    }
+  display:flex; 
+  border-radius: 20px; 
+  overflow: hidden;
+  box-shadow: 1px 1px 20px -15px #000;
+  }
+
+.greeting{
+  width:400px;
+  padding:50px;
+  display: flex;
+  flex-direction: column;
+  background-color: $greeting-background;
+  p,h1,h3{
+  text-align: left;
+  padding: 0;
+  margin:0;
+  color:$white-color;
+  }
+  h1{
+    margin-top: 30px;
+    font-size: 48px;
+  }
+  p{
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  h3{
+    font-size: 36px;
+  }
+}
 
 .title{
       text-align: center;
@@ -50,36 +84,24 @@
 
 .control input :focus{
  outline: 0;
- border-color: #777;
+ border-color: $greeting-background;
 }
 .control input:focus::placeholder {
   color: transparent;
 }
 .button{
-cursor: pointer;
-background-color: #3498db;
-border:10px solid #3498db;
-border-radius: 5px;
-color:#fff;
-display: block;
-font-size: 16px;
-padding: 10 px;
-margin-top:10px;
-height:0%;
-width:100%;
+  cursor: pointer;
+  border: none;
+  background-color: $greeting-background;
+  border-radius: 10px;
+  color:$white-color;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 15px;
+  width: 100%;
+  margin-top:10px;
+  outline: none;
 }
-
-.mask {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(#bdc3c7,#34495e);
-      opacity: 1;
-      z-index: 9998;
-    }
-
 label {
   padding-bottom: 5px;
 }
