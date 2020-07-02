@@ -1,57 +1,59 @@
 import React from "react";
+import studentService from "../../../../../../apis/studentService";
 import Button from ".././Button";
-import axios from "axios";
+import styles from "./StudentList.module.scss";
 
 
 class StudentList extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        items: [],
+        students: [],
       };
     }
   
-    componentDidMount() {
-      axios.get(`http://localhost:8080/students`).then((res) => {
-        this.setState({ items: res.data.studentList});
+    componentDidMount(){
+      studentService.getAll()
+      .then(response => {
+        this.setState({
+          students: response.data.studentList
+        });
+        console.log(this.state.students);
+      })
+      .catch(e => {
+        console.log(e);
       });
     }
   
     render() {
       return (
-        <table>
+        <div className={styles.wrapper}>
+        <table className={styles.table}>
           <thead>
-            <tr>
-              <th>No.</th>
-              <th>StudentID</th>
-              <th>FirstName</th>
-              <th>LastName</th>
-              <th><Button type={"CREATE"} /></th>
+            <tr className={styles.tr}>
+              <th className={styles.th}>No.</th>
+              <th className={styles.th}>Name</th>
+              <th className={styles.th}><Button type={"CREATE"} /></th>
             </tr>
           </thead>
           <tbody>
-            {this.state.items.map(function (item, index) {
+            {this.state.students.map(function (student, index) {
               return (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{item.uuid}</td>
-                  <td>{item.firstName}</td>
-                  <td>{item.lastName}</td>
-                  <td>
-                  <React.Fragment>
-                      <Button type="UPDATE"></Button>
-                    </React.Fragment>
+                <tr className={styles.tr} key={index}>
+                  <td className={styles.td}>{index + 1}</td>
+                  <td className={styles.td}>{student.name}</td>
+                  <td className={styles.td}>
+                      <Button type="UPDATE" ></Button>
                   </td>
                   <td>
-                  <React.Fragment>
                       <Button type="DELETE"></Button>
-                    </React.Fragment>
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+        </div>
       );
     }
   }
