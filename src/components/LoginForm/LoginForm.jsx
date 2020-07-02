@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./LoginForm.module.scss";
 import {connect} from 'react-redux';
-import ChangeRole from "../../../../store/campus/actions/ChangeRole";
-import SetLogin from "../../../../store/campus/actions/SetLogin";
+import { withRouter } from "react-router-dom";
+import ChangeRole from "../../store/authentication/actions/ChangeRole";
+import SetLogin from "../../store/authentication/actions/SetLogin";
 class LoginForm extends React.Component{
   constructor(props){
     super(props);
@@ -38,18 +39,21 @@ class LoginForm extends React.Component{
                 </div> */}
                 <button
                   className={styles.button}
+                  to="/"
                   onClick={() => this.props.onClick("student")}
                 >
                   Log in as Student
                 </button>
                 <button
                   className={styles.button}
+                  to="/"
                   onClick={() => this.props.onClick("teacher")}
                 >
                   Log in as Teacher
                 </button>
                 <button
                   className={styles.button}
+                  to="/"
                   onClick={() => this.props.onClick("admin")}
                 >
                   Log in as Admin
@@ -72,4 +76,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const LoginFormContainer = connect(null, mapDispatchToProps)(LoginForm);
-export default LoginFormContainer;
+export default withRouter(LoginFormContainer);

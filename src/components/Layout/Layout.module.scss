@@ -1,0 +1,25 @@
+@import './../../variable';
+
+.nav{
+  width: 250px;
+  min-width: 250px;
+  background-color: $light-dark-color;
+}
+
+.main{
+
+  flex:1;
+  background-color: $light-color;
+}
+
+h3,h1,h2{
+  margin: 0;
+color: $dark-color;
+}
+p{
+    margin: 0;
+color:$light-dark-color;
+}
+a{
+  cursor: pointer;
+}
