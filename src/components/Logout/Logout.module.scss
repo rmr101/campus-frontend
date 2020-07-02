@@ -1,0 +1,85 @@
+.modal {
+    position: fixed;
+    width: 300px;
+    height: 280px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+    z-index: 9999;
+    box-shadow: inset 0 0 1px 0 #000;
+    }
+
+.title{
+      text-align: center;
+      margin: 0 0 20px;
+    }
+
+.form{
+  padding:30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.control{
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  position: relative;
+    }
+
+.control label{
+  color: #777;
+  display:block;
+  margin-bottom: relative;
+}
+
+.control input{
+  border: 2px solid #f0f0f0;
+  border-radius: 5px;
+  display: block;
+  width: 90%;
+  padding:10px;
+  font-size: 14px;
+}
+
+.control input :focus{
+ outline: 0;
+ border-color: #777;
+}
+.control input:focus::placeholder {
+  color: transparent;
+}
+.button{
+cursor: pointer;
+background-color: #3498db;
+border:10px solid #3498db;
+border-radius: 5px;
+color:#fff;
+display: block;
+font-size: 16px;
+padding: 10 px;
+margin-top:10px;
+height:0%;
+width:100%;
+}
+
+.mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(#bdc3c7,#34495e);
+      opacity: 1;
+      z-index: 9998;
+    }
+
+label {
+  padding-bottom: 5px;
+}
