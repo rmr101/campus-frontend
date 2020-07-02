@@ -1,13 +1,16 @@
 import React from "react";
 import styles from "./Header.module.scss";
+import { connect } from "react-redux";
+import ClickHeader from './../../../../store/campus/actions/ClickHeader';
 
 const Header = ({
   title,
-  onClick
+  onClick,
+  headingID,
   }) => {
     console.log(styles);
   return (
-    <div className={styles.wrapper} onClick={onClick}>
+    <div className={styles.wrapper} onClick={(event)=>onClick(event,headingID)}>
       <h2 className={styles.title}>
         {title === "Dashboard" ? (
           title
@@ -20,4 +23,10 @@ const Header = ({
   );
 }
 
-export default Header;
+const mapDispatchToProps = (dispatch) =>({
+  onClick: (event,headingID)=> dispatch(ClickHeader(event,headingID))
+})
+
+const HeaderContainer = connect(null,mapDispatchToProps)(Header);
+
+export default HeaderContainer;

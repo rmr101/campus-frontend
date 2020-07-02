@@ -3,128 +3,131 @@ import styles from "./NavSideBar.module.scss";
 import NavItems from "./components/NavItems";
 import * as NavItemsRenderMapper from './NavItemsRenderMapper';
 import Canvas from './components/Canvas';
+import ClickLink from "../../../../store/campus/actions/ClickLink";
+import { connect } from "react-redux";
+import ChangeCanvasActive from "./../../../../store/campus/actions/ChangeCanvasActive.js";
+import ToggleCanvasStatus from "./../../../../store/campus/actions/ToggleCanvasStatus";
+import SetCanvasStatus from './../../../../store/campus/actions/SetCanvasStatus';
+import ClickHeader from "./../../../../store/campus/actions/ClickHeader";
 
-
-
-
-class NavSideBar extends React.Component {
-  constructor(props){
-    super(props);
-    this.handleClick = this.handleClick.bind(this); 
-    this.state= {
-      canvasOn:false,
-      current:"Dashboard",
-    }
-  }
-  readConfig(ConfigArray){
+const NavSideBar = ({
+  role,
+  canvasOn,
+  current,
+  toggleCanvas,
+  onClick,
+  changeActive,
+  setCanvasBoolean,
+  clickDashboard,
+}) => {
+  const readConfig = (ConfigArray) => {
     return ConfigArray.map((obj) => {
       if (obj.filler) {
-          return <div key={"Filler"} className={styles.filler}></div>
-      } else { 
-        return(
+        return <div key={"Filler"} className={styles.filler}></div>;
+      } else {
+        return (
           <NavItems
-            active={this.state.current === obj.id}
-            collapse={this.state.canvasOn}
+            active={current === obj.NavId}
+            collapse={canvasOn}
             key={"NavItem_id" + Math.random()}
             icon={obj.icon}
             title={obj.title}
-            id={obj.id}
-            onClick={this.handleClick}
-          />)
+            NavId={obj.NavId}
+            onClick={handleClick}
+          />
+        );
       }
     });
-  }
+  };
 
-  renderNavItem() {
-    switch (this.props.role) {
+  const renderNavItem = () => {
+    switch (role) {
       case "student":
-        return this.readConfig(NavItemsRenderMapper.StudentConfig);
+        return readConfig(NavItemsRenderMapper.StudentConfig);
       case "teacher":
-        return this.readConfig(NavItemsRenderMapper.TeacherConfig);
+        return readConfig(NavItemsRenderMapper.TeacherConfig);
       case "admin":
-        return this.readConfig(NavItemsRenderMapper.AdminConfig);
+        return readConfig(NavItemsRenderMapper.AdminConfig);
       default:
         return null;
     }
-} 
-  changeCurrent(name){
-    this.setState({
-      current:name,
-    })
-  }
-  clickToDisplayCanvas(name){
-    if (name === this.state.current) {
-      this.setState({
-        canvasOn: !this.state.canvasOn,
-      });
-    }else if(name !== this.state.current){
-      //这个method 好像不太好，因为吃performance，之后要想想怎么处理这个问题
-      this.setState({
-        canvasOn: false,
-
-      },()=>this.setState({
-          canvasOn: true,
-
-        }))
+  };
+  const clickToDisplayCanvas = (name) => {
+    if (name === current) {
+      toggleCanvas();
+    } else if (name !== current) {
+      //toggle canvas twice
+      setCanvasBoolean(false);
+      setCanvasBoolean(true);
     }
-  }
-  handleClick(event,name){
+  };
+  const handleClick = (event, name) => {
     switch (name) {
       case "Dashboard":
-        this.changeCurrent(name);
-        this.props.handleClickDashboard(event);
-        this.setState({ canvasOn: false });
+        changeActive(name);
+        setCanvasBoolean(false);
+        clickDashboard(event);
         break;
       case "Teachers":
-        this.changeCurrent(name);
-        //id here doesn't matter 
-        this.props.onClick(event, "Teachers", 0, name);
-        this.setState({ canvasOn: false });
+        changeActive(name);
+        //id here doesn't matter
+        onClick(event, "Teachers", "Teachers");
+        setCanvasBoolean(false);
         break;
       case "Students":
-        this.changeCurrent(name);
-        //id here doesn't matter 
-        this.props.onClick(event, "Students", 0, name);
-        this.setState({ canvasOn: false });
+        changeActive(name);
+        //id here doesn't matter
+        onClick(event, "Students", "Students");
+        setCanvasBoolean(false);
         break;
       case "UserInfo":
-        this.changeCurrent(name);
-        //id here doesn't matter 
-        this.props.onClick(event, "Profile", 0, name);
-        this.setState({ canvasOn: false });
+        changeActive(name);
+        console.log("I got executed");
+        //id here doesn't matter
+        onClick(event, "Profile", "UserInfo");
+        setCanvasBoolean(false);
         break;
       default:
         event.preventDefault();
-        this.clickToDisplayCanvas(name);
-        this.changeCurrent(name);
+        changeActive(name);
+        clickToDisplayCanvas(name);
     }
-  }
-
-  render(){
-    return (
-      <div className={styles.wrapper}>
-        <div
-          className={`${styles.sideWrapper} + ${
-            this.state.canvasOn ? null : styles.sideWrapperNotCollapse
-          }`}
-        >
-          {this.renderNavItem()}
-        </div>
-        <div
-          className={this.state.canvasOn ? styles.canvasActive : styles.canvas}
-        >
-          {this.state.canvasOn ? (
-            <Canvas
-              onClick={this.props.onClick}
-              current={this.state.current}
-              role={this.props.role}
-            />
-          ) : null}
-        </div>
-   
+  };
+  return (
+    <div className={styles.wrapper}>
+      <div
+        className={`${styles.sideWrapper} + ${
+          canvasOn ? null : styles.sideWrapperNotCollapse
+        }`}
+      >
+        {renderNavItem()}
       </div>
-    );
-  }
-}
+      <div className={canvasOn ? styles.canvasActive : styles.canvas}>
+        {canvasOn ? <Canvas current={current} /> : null}
+      </div>
+    </div>
+  );
+};
 
-export default NavSideBar;
+
+const mapDispatchToProps = (dispatch) => ({
+  onClick: (event, headingTitle, headingID) => {
+    dispatch(ClickLink(event, headingTitle, 0, headingID));
+  },
+  toggleCanvas: () => dispatch(ToggleCanvasStatus()),
+  setCanvasBoolean: (boo) => dispatch(SetCanvasStatus(boo)),
+  changeActive: (name) => dispatch(ChangeCanvasActive(name)),
+  clickDashboard: (event) => dispatch(ClickHeader(event,1))
+});
+
+const mapStateToProps = state => ({
+  role:state.userRole,
+  canvasOn:state.navCanvasStatus.canvasOn,
+  current:state.navCanvasStatus.current,
+});
+
+const NavSideBarContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavSideBar);
+export default NavSideBarContainer;

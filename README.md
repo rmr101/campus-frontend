@@ -25,10 +25,19 @@ Different role panel
 
 ![find](readme_img/role-panel.png)
 
-Update student popup
+#### Supported features
+
+Student submission upload, files stored in AWS S3.
+
+- Support file type: .pdf
+- File size limit : Less than 25 MB.
+
+![find](readme_img/upload.png)
+
+
+Add/Update/Delete Students/Teachers/Assignments/Courses/
 
 ![find](readme_img/update-popup.png)
-
 
 
 #### Site Structure

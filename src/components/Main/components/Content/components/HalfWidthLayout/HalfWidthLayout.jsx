@@ -3,6 +3,8 @@ import styles from "./HalfWidthLayout.module.scss";
 import Button from "../Button";
 import StudentAssignment from './../StudentAssignment';
 import Profile from './../Profile';
+import { connect } from "react-redux";
+
 
 const Detail = ({ title, description }) => {
   return (
@@ -21,14 +23,11 @@ const HalfContext = (props) => {
   );
 };
 
-
+//TODO: 这里以后需要refactor 一下的。
 const HalfWidthLayout = (props) => {
   const renderBlock = (blockName) => {
     if(props.role === "student"){
       switch (blockName) {
-        // TODO: Depreciated usage
-        // case "Lists":
-        //   return <Lists {...props} />;
         case "Popup":
           //目前放着这，但以后可以单独拿出来用
           return (
@@ -47,9 +46,6 @@ const HalfWidthLayout = (props) => {
       }
     }else if(props.role === "teacher"){
       switch (blockName) {
-        // TODO: Depreciated usage
-        // case "Lists":
-        //   return <Lists {...props} />;
         case "Popup":
           //目前放着这，但以后可以单独拿出来用
           return (
@@ -68,10 +64,6 @@ const HalfWidthLayout = (props) => {
       }
     }else{
       switch (blockName) {
-        
-        // TODO: Depreciated usage
-        // case "Lists":
-        //   return <Lists {...props} />;
         case "Profile":
           return <Profile {...props} />;
         case "UserChangePassword":
@@ -101,4 +93,10 @@ const HalfWidthLayout = (props) => {
   );
 }
 
-export default HalfWidthLayout;
+const mapStateToProps = state =>({
+  role:state.userRole
+})
+
+const HalfWidthLayoutContainer = connect(mapStateToProps, null)(HalfWidthLayout);
+
+export default HalfWidthLayoutContainer;
