@@ -35,12 +35,12 @@ class CourseMarket extends React.Component {
       <CanvasLoading />
     ) : (
       <RenderLink
-        onClick={this.props.onClick}
         RenderArray={this.state.subjectList}
         CurrentNavItem={"SubjectCourse"}
       />
     );
   }
 };
+
 
 export default CourseMarket;

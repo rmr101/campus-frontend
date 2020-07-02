@@ -4,18 +4,7 @@ import CourseMarket from "./components/CourseMarket";
 import Course from "./components/Course";
 
 
-const Canvas= ({current,onClick}) => {
-
-  // //目前先用student
-  // switch (role) {
-  //   case "student":
-  //     return renderRoleSelection(renderMap.StudentRenderMap[current]);
-  //   case "teacher":
-  //     return renderRoleSelection(renderMap.TeacherRenderMap[current]);
-  //   case "admin":
-  //     return renderRoleSelection(renderMap.AdminRenderMap[current]);
-  //     default:
-  //       return null}
+const Canvas= ({current}) => {
 const renderCanvas = (current) =>{
   switch (current) {
     // case "Dashboard" :
@@ -25,9 +14,9 @@ const renderCanvas = (current) =>{
     // case "MarkSystem" :
     //   return <MarkSystem/>
     case "CourseMarket":
-      return <CourseMarket onClick={onClick} />;
+      return <CourseMarket/>;
     case "Courses":
-      return <Course onClick={onClick} />;
+      return <Course />;
     // case "Help" :
     //   return <Help/>
     // case "Setting" :
@@ -44,4 +33,5 @@ const renderCanvas = (current) =>{
     </div>
   );
 }
+
 export default Canvas;

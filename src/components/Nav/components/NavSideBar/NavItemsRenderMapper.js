@@ -37,31 +37,31 @@ export const renderList = {
 // ID here is important for the secondary list in <Canvas/> component. 
 // config for each role
 export const StudentConfig = [
-         { icon: renderList.Dashboard, title: "Dashboard", id: "Dashboard" },
+         { icon: renderList.Dashboard, title: "Dashboard", NavId: "Dashboard" },
          {
            icon: renderList.Enrollment,
            title: "My Course",
-           id: "Enrollment",
+           NavId: "Enrollment",
          },
          {
            icon: renderList.Assignment,
            title: "Assignment",
-           id: "Assignment",
+           NavId: "Assignment",
          },
          {
            icon: renderList.Payment,
            title: "Payment",
-           id: "Payment",
+           NavId: "Payment",
          },
          {
            icon: renderList.CourseMarket,
            title: "Course market",
-           id:"CourseMarket"
+           NavId:"CourseMarket"
          },
          {
            icon: renderList.UserInfo,
            title: "Profile",
-           id:"UserInfo",
+           NavId:"UserInfo",
          },
          {
            filler: true,
@@ -69,36 +69,36 @@ export const StudentConfig = [
          {
            icon: renderList.Help,
            title: "Help",
-           id:"Help",
+           NavId:"Help",
          },
          {
            icon: renderList.Setting,
            title: "Setting",
-           id:"Setting",
+           NavId:"Setting",
          },
        ];
 
 export const TeacherConfig = [
-         { icon: renderList.Dashboard, title: "Dashboard", id: "Dashboard" },
+         { icon: renderList.Dashboard, title: "Dashboard", NavId: "Dashboard" },
          {
            icon: renderList.TeachingCourse,
            title: "Teaching",
-           id: "TeachingCourse",
+           NavId: "TeachingCourse",
          },
          {
            icon: renderList.MarkSystem,
            title: "Marking",
-           id: "MarkSystem",
+           NavId: "MarkSystem",
          },
          {
            icon: renderList.CourseMarket,
            title: "Course market",
-           id: "CourseMarket",
+           NavId: "CourseMarket",
          },
          {
            icon: renderList.UserInfo,
            title: "Profile",
-           id: "UserInfo",
+           NavId: "UserInfo",
          },
          {
            filler: true,
@@ -106,41 +106,41 @@ export const TeacherConfig = [
          {
            icon: renderList.Help,
            title: "Help",
-           id: "Help",
+           NavId: "Help",
          },
          {
            icon: renderList.Setting,
            title: "Setting",
-           id: "Setting",
+           NavId: "Setting",
          },
        ];
 export const AdminConfig = [
-         { icon: renderList.Dashboard, title: "Dashboard", id: "Dashboard" },
+         { icon: renderList.Dashboard, title: "Dashboard", NavId: "Dashboard" },
          {
            icon: renderList.Teachers,
            title: "Teachers",
-           id: "Teachers",
+           NavId: "Teachers",
          },
          {
            icon: renderList.Students,
            title: "Students",
-           id: "Students",
+           NavId: "Students",
          },
          {
            icon: renderList.Courses,
            title: "Courses",
-           id: "Courses",
+           NavId: "Courses",
          },
 
          {
            icon: renderList.Classroom,
            title: "Classroom",
-           id: "Classroom",
+           NavId: "Classroom",
          },
          {
            icon: renderList.UserInfo,
            title: "Profile",
-           id: "UserInfo",
+           NavId: "UserInfo",
          },
          {
            filler: true,
@@ -148,11 +148,11 @@ export const AdminConfig = [
          {
            icon: renderList.Help,
            title: "Help",
-           id: "Help",
+           NavId: "Help",
          },
          {
            icon: renderList.Setting,
            title: "Setting",
-           id: "Setting",
+           NavId: "Setting",
          },
        ];

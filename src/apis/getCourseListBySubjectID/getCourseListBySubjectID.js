@@ -1,4 +1,4 @@
-import {get} from './../../utils/CampusSeverMap/CampusSever';
+import {get} from '../../utils/CampusSever/CampusSever';
 
 // make it empty for now
 

@@ -2,33 +2,30 @@ import React from "react";
 import NavHeader from "./components/NavHeader";
 import NavSidebar from "./components/NavSideBar";
 import styles from "./Nav.module.scss";
+import {connect} from "react-redux";
 import NavAvatar from './components/NavAvatar';
 
-const NavFooter = ({role}) => <h3> {role + " version"}</h3>;
-class Nav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    console.log(this.props.role);
-  }
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.header}>
-          <NavHeader />
-        </div>
-          <NavAvatar />
-        <div className={styles.sideBar}>
-          <NavSidebar {...this.props} />
-        </div>
-        <div className={styles.footer}>
-          <NavFooter role={this.props.role}/>
-        </div>
+const NavFooter = ({ userRole }) => <h3> {userRole + " version"}</h3>;
+
+const Nav = ({ userRole }) => {
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <NavHeader />
       </div>
-    );
-  }
+        <NavAvatar />
+      <div className={styles.sideBar}>
+        <NavSidebar />
+      </div>
+      <div className={styles.footer}>
+        <NavFooter userRole={userRole} />
+      </div>
+    </div>
+  );
+};
 
-
-}
-
-export default Nav;
+const mapStateToProps = (state) => ({
+  userRole: state.userRole,
+});
+const NavContainer = connect(mapStateToProps ,null)(Nav);
+export default NavContainer;

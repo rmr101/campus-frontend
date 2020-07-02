@@ -1,9 +1,13 @@
 import React from "react";
 import styles from "./RenderContentLink.module.scss";
+import { connect } from "react-redux";
+import ClickLink from './../../../../../../store/campus/actions/ClickLink';
 
-//TODO: To be merged with nav bar RenderLink after refactored.
 // Refactor to be less depended on the RenderArray.
-const RenderContentLink = ({ onClick, RenderArray, CurrentItem }) => {
+const RenderContentLink = ({ 
+  onClick, 
+  RenderArray, 
+  CurrentItem }) => {
   return RenderArray.map((obj) => (
     <div key={"name_" + Math.random()} className={styles.container}>
       <div
@@ -22,4 +26,19 @@ const RenderContentLink = ({ onClick, RenderArray, CurrentItem }) => {
   ));
 };
 
-export default RenderContentLink;
+
+const mapDispatchToProps = (dispatch) => ({
+  onClick: (event, headingTitle, id, LinkNameID) => {
+    dispatch(ClickLink(event, headingTitle, id, LinkNameID));
+  },
+});
+
+const RenderContentLinkContainer = connect(
+  null,
+  mapDispatchToProps
+  
+)(RenderContentLink);
+
+
+
+export default RenderContentLinkContainer;

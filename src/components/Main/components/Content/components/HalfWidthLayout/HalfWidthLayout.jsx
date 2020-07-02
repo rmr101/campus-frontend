@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./HalfWidthLayout.module.scss";
 import Button from "../Button";
 import StudentAssignment from './../StudentAssignment';
+import Profile from './../Profile';
+import { connect } from "react-redux";
 
 
 const Detail = ({ title, description }) => {
@@ -21,28 +23,62 @@ const HalfContext = (props) => {
   );
 };
 
-
+//TODO: 这里以后需要refactor 一下的。
 const HalfWidthLayout = (props) => {
   const renderBlock = (blockName) => {
-    switch (blockName) {
-      // TODO: Depreciated usage
-      // case "Lists":
-      //   return <Lists {...props} />;
-      case "Popup":
-        //目前放着这，但以后可以单独拿出来用
-        return (
-          <React.Fragment>
-            <Button type={"DELETE"} />
-            <Button type={"UPDATE"} />
-            <Button type={"CREATE"} />
-          </React.Fragment>
-        );
-      case "Context":
-        return <HalfContext {...props} />;
-      case "StudentAssignment":
-        return <StudentAssignment {...props} />;
-      default:
-        return null;
+    if(props.role === "student"){
+      switch (blockName) {
+        case "Popup":
+          //目前放着这，但以后可以单独拿出来用
+          return (
+            <React.Fragment>
+              <Button type={"DELETE"} />
+              <Button type={"UPDATE"} />
+              <Button type={"CREATE"} />
+            </React.Fragment>
+          );
+        case "Context":
+          return <HalfContext {...props} />;
+        case "StudentAssignment":
+          return <StudentAssignment {...props} />;
+        default:
+          return null;
+      }
+    }else if(props.role === "teacher"){
+      switch (blockName) {
+        case "Popup":
+          //目前放着这，但以后可以单独拿出来用
+          return (
+            <React.Fragment>
+              <Button type={"DELETE"} />
+              <Button type={"UPDATE"} />
+              <Button type={"CREATE"} />
+            </React.Fragment>
+          );
+        case "Context":
+          return <HalfContext {...props} />;
+        case "StudentAssignment":
+          return <StudentAssignment {...props} />;
+        default:
+          return null;
+      }
+    }else{
+      switch (blockName) {
+        case "Profile":
+          return <Profile {...props} />;
+        case "UserChangePassword":
+          return (
+            <Button type={"UserChangePassword"} />
+          );
+        case "AdminCreateTeacher":
+          return (
+            <Button type={"AdminCreateTeacher"} />
+          );
+        case "Context":
+          return <HalfContext {...props} />;
+        default:
+          return null;
+      }
     }
   };
   return (
@@ -57,4 +93,10 @@ const HalfWidthLayout = (props) => {
   );
 }
 
-export default HalfWidthLayout;
+const mapStateToProps = state =>({
+  role:state.userRole
+})
+
+const HalfWidthLayoutContainer = connect(mapStateToProps, null)(HalfWidthLayout);
+
+export default HalfWidthLayoutContainer;
