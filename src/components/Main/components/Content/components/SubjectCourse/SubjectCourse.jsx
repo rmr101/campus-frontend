@@ -9,7 +9,6 @@ const Loading = () => (
   </div>
 );
 
-
 class SubjectCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +23,6 @@ class SubjectCourse extends React.Component {
     this.setState({ loading: false });
   }
   async getCourseList() {
-    console.log("i got executed too.");
     const { courseList } = await getCourseListBySubjectID(this.props.subjectID);
     console.log(courseList);
     this.setState({ 
@@ -53,7 +51,6 @@ class SubjectCourse extends React.Component {
               <div className={styles.heading}>Introduction:</div>
             </div>
             <RenderContentLink
-              onClick={this.props.onClick}
               RenderArray={this.state.courseList}
               CurrentItem={"Course"}
             />

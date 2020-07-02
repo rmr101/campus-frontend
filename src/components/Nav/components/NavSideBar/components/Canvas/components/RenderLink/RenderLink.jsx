@@ -7,7 +7,9 @@ import ClickLink from './../../../../../../../../store/campus/actions/ClickLink'
 const RenderLink = ({ RenderArray, onClick, CurrentNavItem }) =>
   RenderArray.map((obj) => (
     <div
-      onClick={(event) => onClick(event, CurrentNavItem, obj.id)}
+      onClick={(event) =>
+        onClick(event, CurrentNavItem, obj.id, CurrentNavItem)
+      }
       className={styles.links}
       key={"id" + Math.random()}
     >

@@ -3,6 +3,7 @@ import userRole from './campus/reducers/userRole';
 import loginState from './campus/reducers/loginState';
 import currentDirectory from './campus/reducers/currentDirectory';
 import headerHistory from "./campus/reducers/headerHistory";
+import navCanvasStatus from "./campus/reducers/navCanvasStatus";
 import thunk from "redux-thunk";
 
 const middleWares = compose(
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   loginState,
   headerHistory,
   currentDirectory,
+  navCanvasStatus,
 });
 
 export default createStore(reducer, middleWares);

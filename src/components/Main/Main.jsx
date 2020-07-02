@@ -13,6 +13,7 @@ const Main =({
   const renderHeader = () => {
     let renderArray = history.map((obj) => (
       <Header
+        headingID={obj.headingID}
         key={"header_id" + Math.random()}
         title={obj.title}
       />
@@ -24,11 +25,10 @@ const Main =({
     const lastHistory = history[history.length - 1];
     const contentArray = lastHistory.content;
     //update to the newest component
+
     let renderArray = contentArray.map((obj) => (
-      <Content
-        key={"content_id" + Math.random()}
-        {...obj}
-      />
+      <Content key={"content_id" + Math.random()} 
+      {...obj} />
     ));
     return renderArray;
   }
@@ -44,7 +44,7 @@ const Main =({
 
 const mapStateToProps = state => ({
   history:state.headerHistory,
+});
 
-})
 const MainContainer =connect(mapStateToProps,null)(Main);
 export default MainContainer;

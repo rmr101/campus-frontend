@@ -2,11 +2,13 @@ import React from 'react';
 import styles from './NavItems.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const NavItems = ({title,icon,collapse,onClick,active,id}) => {
+const NavItems = ({title,icon,collapse,onClick,active,NavId}) => {
   return (
     <div
-      className={`${styles.wrapper} ${active ? styles.active : styles.inActive}`}
-      onClick={e => onClick(e,id)}
+      className={`${styles.wrapper} ${
+        active ? styles.active : styles.inActive
+      }`}
+      onClick={(e) => onClick(e, NavId)}
     >
       <div className={styles.icon}>
         <FontAwesomeIcon icon={icon} />

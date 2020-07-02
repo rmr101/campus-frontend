@@ -10,12 +10,11 @@ const initState =
 export default (state = initState, action) => {
   switch (action.type) {
     case ADD_HEADER_HISTORY:
-      let contentArray = handleClickLink(
-        action.clickedLinkName,
-        action.id
-      ); 
-      handleAddHeader(state, action.event, action.headingTitle, contentArray);
-      return 
+     
+      let contentArray = handleClickLink(action.LinkNameID, action.id); 
+      let newHistory = handleAddHeader(state, action.event, action.headingTitle, contentArray);
+       console.log(newHistory);
+      return newHistory;
     case CLICK_HEADER:
       return handleClickHeader(state,action.event,action.headingID);
     default:
@@ -26,10 +25,8 @@ export default (state = initState, action) => {
 
 const handleClickHeader = (state,event,headingID) =>{
     event.preventDefault();
-    return state.slice(0,headingID)
+    return state.slice(0,headingID);
   }
-
-
 
   
 const handleAddHeader = (state, event, headingTitle, contentArray) => {
@@ -46,13 +43,15 @@ const handleAddHeader = (state, event, headingTitle, contentArray) => {
       },
     ];
     return newHistory;
+  }else{
+    return history;
   }
 };
 
-const handleClickLink = (clickedLinkName,id) => {
+const handleClickLink = (LinkNameID,id) => {
   let contentArray;
   // mapping for content to be display
-  switch (clickedLinkName) {
+  switch (LinkNameID) {
     case "Dashboard":
       contentArray = ContentArray.DashboardContent;
       break;
@@ -63,8 +62,8 @@ const handleClickLink = (clickedLinkName,id) => {
       contentArray = ContentArray.EnrollmentsContent;
       break;
     case "UserInfo":
-      //TODO: Frank 改这里。
       contentArray = ContentArray.UserInfoContent;
+      console.log(contentArray);
       break;
     case "Teachers":
       contentArray = ContentArray.TeachersContent;
