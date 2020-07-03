@@ -1,5 +1,5 @@
-import { LOGOUT } from "../../type";
+import { LOG_OUT } from "../../type";
 
 export default () => ({
-  type: LOGOUT,
+  type: LOG_OUT,
 });

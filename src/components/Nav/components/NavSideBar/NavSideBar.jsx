@@ -120,10 +120,10 @@ const mapDispatchToProps = (dispatch) => ({
   clickDashboard: (event) => dispatch(ClickHeader(event,1))
 });
 
-const mapStateToProps = state => ({
-  role:state.userRole,
-  canvasOn:state.navCanvasStatus.canvasOn,
-  current:state.navCanvasStatus.current,
+const mapStateToProps = (state) => ({
+  role: state.Authentication.role.toLowerCase(),
+  canvasOn: state.navCanvasStatus.canvasOn,
+  current: state.navCanvasStatus.current,
 });
 
 const NavSideBarContainer = connect(

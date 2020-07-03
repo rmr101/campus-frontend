@@ -54,6 +54,7 @@ const HalfWidthLayout = (props) => {
               <Button type={"DELETE"} />
               <Button type={"UPDATE"} />
               <Button type={"CREATE"} />
+              <Button type={"LOGOUT"} />
             </React.Fragment>
           );
         case "Context":
@@ -65,6 +66,8 @@ const HalfWidthLayout = (props) => {
       }
     }else{
       switch (blockName) {
+        case "Popup":
+          return <Button type={"LOGOUT"} />;
         case "Profile":
           return <Profile {...props} />;
         case "UserChangePassword":
@@ -95,7 +98,7 @@ const HalfWidthLayout = (props) => {
 }
 
 const mapStateToProps = state =>({
-  role:state.userRole
+  role:state.Authentication.role.toLowerCase(),
 })
 
 const HalfWidthLayoutContainer = connect(mapStateToProps, null)(HalfWidthLayout);

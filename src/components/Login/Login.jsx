@@ -2,111 +2,99 @@ import React from "react";
 import styles from "./Login.module.scss";
 import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
-import ChangeRole from "../../store/authentication/actions/ChangeRole";
-import SetLogin from "../../store/authentication/actions/SetLogin";
+import storeAuthToState from "../../store/authentication/actions/storeAuthToState";
+import {login} from '../../apis/authentication';
+import Greeting from './Greeting';
 
 // user id : admin   password: admin 
 // user id : S95778487   password: S95778487 Student. 
-// user id : T54346913   password: T54346913 Teacher.div
+// user id : T54346913   password: T54346913 Teacher.
 
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      username: "",
+      password: "",
+    };
+  }
+  handleValueChange(name){
+    return (event) => {
+      const { value } = event.target;
+      this.setState(
+        {
+          [name]: value,
+        });
+    };
+  }
 
-const Greeting = () => {
-const Day = [ "Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-const Month = ["Jan","Feb","Mar","Apr","May","Jun","July","Aug","Sep","Oct","Nov","Dec"]
-const date = new Date();
-return (
-  <div className={styles.greeting}>
-    <h3 className={styles.date}>{`${Day[date.getDay()].toUpperCase()}`}</h3>
-    <h3 className={styles.date}>{`${date.getDate()}, ${Month[
-      date.getMonth()
-    ].toUpperCase()}`}</h3>
-    <h1 className={styles.title}>Hello Friend!</h1>
-    <p>A management system which only makes room for things that matter.</p>
-  </div>
-);
-}
+  async loginToSever(username, password) {
+    this.setState({
+          loading: true,
+        });
 
-const Login = ({
-  onClick,
-  history
-}) => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.modal}>
-        <Greeting />
-        <form className={styles.form}>
-          <div className={styles.control}>
-            <label>User ID</label>
-            <input
-              type="text"
-              placeholder="Enter User ID"
-              maxLength={30}
-              required
-            />
-          </div>
-          <div className={styles.control}>
-            <label className={styles.label}>Password</label>
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="Enter Password"
-              maxLength={30}
-              required
-            />
-          </div>
-          <button
-            className={styles.button}
-            to="/"
-            onClick={(e) => {
-              history.push("/");
-              onClick("student");
+    await login(username, password)
+      .then((res) => {
+        console.log(res.data);
+        this.props.storeAuthToState(res.data);
+        this.setState(
+          {
+            loading: false,
+          },
+          () => this.props.history.push("/")
+        );
+      })
+      .catch((err) => console.log(err));
+    //TODO: need a better handler.
+  }
+  render() {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.modal}>
+          <Greeting />
+          <form
+            className={styles.form}
+            onSubmit={(e) => {
+              e.preventDefault();
+              this.loginToSever(this.state.username, this.state.password);
             }}
           >
-            Log in
-          </button>
-          <button
-            className={styles.button}
-            to="/"
-            onClick={(e) => {
-              history.push("/");
-              onClick("student");
-            }}
-          >
-            Log in as Student
-          </button>
-          <button
-            className={styles.button}
-            to="/"
-            onClick={(e) => {
-              history.push("/");
-              onClick("teacher");
-            }}
-          >
-            Log in as Teacher
-          </button>
-          <button
-            className={styles.button}
-            onClick={(e) => {
-              history.push("/");
-              onClick("admin");
-            }}
-            to="/"
-          >
-            Log in as Admin
-          </button>
-        </form>
+            <div className={styles.control}>
+              <label>User ID</label>
+              <input
+                type="text"
+                placeholder="Enter User ID"
+                maxLength={30}
+                required
+                onChange={(event) => this.handleValueChange("username")(event)}
+              />
+            </div>
+            <div className={styles.control}>
+              <label className={styles.label}>Password</label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                maxLength={30}
+                autoComplete="on"
+                onChange={(event) => this.handleValueChange("password")(event)}
+                required
+              />
+            </div>
+            <button className={styles.button} type="submit">
+              Log in
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 
 const mapDispatchToProps = (dispatch) => ({
-    onClick:(text) => {
-    dispatch(SetLogin());
-    dispatch(ChangeRole(text));
-  } 
-})
+    storeAuthToState:(data) => dispatch(storeAuthToState(data))
+  });
 
 const LoginContainer = connect(null, mapDispatchToProps)(Login);
 export default withRouter(LoginContainer);

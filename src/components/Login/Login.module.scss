@@ -1,105 +1,103 @@
+$mask-background: linear-gradient(#f4f6ff, #e4f9ff);
+$greeting-background: #84a9ac;
+$white-color: #fff;
 
-$mask-background:linear-gradient(#f4f6ff,#e4f9ff);
-$greeting-background:#84a9ac;
-$white-color:#fff;
-
-.wrapper{
+.wrapper {
   position: fixed;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  background-color:$mask-background ;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $mask-background;
   z-index: 10;
- 
 }
 .modal {
-  display:flex; 
-  border-radius: 20px; 
+  display: flex;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 1px 1px 20px -15px #000;
-  }
+}
 
-.greeting{
-  width:400px;
-  padding:50px;
+.greeting {
+  width: 400px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   background-color: $greeting-background;
-  p,h1,h3{
-  text-align: left;
-  padding: 0;
-  margin:0;
-  color:$white-color;
+  p,
+  h1,
+  h3 {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    color: $white-color;
   }
-  h1{
+  h1 {
     margin-top: 30px;
     font-size: 48px;
   }
-  p{
+  p {
     margin-top: 10px;
     font-size: 20px;
   }
-  h3{
+  h3 {
     font-size: 36px;
   }
 }
 
-.title{
-      text-align: center;
-      margin: 0 0 20px;
-    }
+.title {
+  text-align: center;
+  margin: 0 0 20px;
+}
 
-.form{
-  padding:30px 40px;
+.form {
+  padding: 80px 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.control{
+.control {
   margin-bottom: 10px;
   padding-bottom: 20px;
   position: relative;
+  input {
+    border: 2px solid #f0f0f0;
+    border-radius: 5px;
+    display: block;
+    width: 90%;
+    padding: 10px;
+    font-size: 14px;
+    &:focus {
+      outline:none;
+      border-color: $greeting-background;
     }
-
-.control label{
-  color: #777;
-  display:block;
-  margin-bottom: relative;
+  }
+  input:focus::placeholder {
+    color: transparent;
+  }
+  label {
+    color: #777;
+    display: block;
+    margin-bottom: relative;
+  }
 }
 
-.control input{
-  border: 2px solid #f0f0f0;
-  border-radius: 5px;
-  display: block;
-  width: 90%;
-  padding:10px;
-  font-size: 14px;
-}
-
-.control input :focus{
- outline: 0;
- border-color: $greeting-background;
-}
-.control input:focus::placeholder {
-  color: transparent;
-}
-.button{
+.button {
   cursor: pointer;
   border: none;
   background-color: $greeting-background;
   border-radius: 10px;
-  color:$white-color;
+  color: $white-color;
   font-size: 20px;
   font-weight: 400;
   padding: 15px;
   width: 100%;
-  margin-top:10px;
+  margin-top: 10px;
   outline: none;
 }
 label {

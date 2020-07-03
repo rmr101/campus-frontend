@@ -1,12 +1,12 @@
-import {get} from '../../utils/CampusSever/CampusSever';
+import CampusSever from "../../utils/CampusSever";
 
 // make it empty for now
 
 const url = 'subjects/';
-const params ={};
+const config ={};
 
 export default (id) =>
-  get(`${url}${id}`, params)
-  .then((res) => (res.data))
-  .catch(e => console.log(e));
+  CampusSever.get(`${url}${id}`, config)
+    .then((res) => res.data)
+    .catch((e) => console.log(e));
   ;
