@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import storeAuthToState from "../../store/authentication/actions/storeAuthToState";
 import {login} from '../../apis/authentication';
 import Greeting from './Greeting';
+import Loader from '../Loader';
 
 // user id : admin   password: admin 
 // user id : S95778487   password: S95778487 Student. 
@@ -15,11 +16,15 @@ class Login extends React.Component {
     super(props);
     this.state = {
       loading: false,
+      failLogin:false,
       username: "",
       password: "",
     };
   }
   handleValueChange(name){
+    this.setState({
+      failLogin: false,
+    });
     return (event) => {
       const { value } = event.target;
       this.setState(
@@ -31,8 +36,8 @@ class Login extends React.Component {
 
   async loginToSever(username, password) {
     this.setState({
-          loading: true,
-        });
+      loading: true,
+    });
 
     await login(username, password)
       .then((res) => {
@@ -45,7 +50,16 @@ class Login extends React.Component {
           () => this.props.history.push("/")
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        //TODO: now its all considered as wrong password or username
+        this.setState({
+          failLogin: true,
+          loading: false,
+        });
+        console.log(err.Message)
+      });
+
+
     //TODO: need a better handler.
   }
   render() {
@@ -60,9 +74,14 @@ class Login extends React.Component {
               this.loginToSever(this.state.username, this.state.password);
             }}
           >
+           {this.state.loading ? <div className={styles.loaderContainer}>
+              <Loader />
+            </div>:null
+            }
             <div className={styles.control}>
               <label>User ID</label>
               <input
+                className={this.state.failLogin ? styles.failLogin : null}
                 type="text"
                 placeholder="Enter User ID"
                 maxLength={30}
@@ -73,6 +92,7 @@ class Login extends React.Component {
             <div className={styles.control}>
               <label className={styles.label}>Password</label>
               <input
+                className={this.state.failLogin ? styles.failLogin : null}
                 type="password"
                 placeholder="Enter Password"
                 maxLength={30}
@@ -84,6 +104,9 @@ class Login extends React.Component {
             <button className={styles.button} type="submit">
               Log in
             </button>
+            {this.state.failLogin ? (
+              <small> Incorrect username or password. </small>
+            ) : null}
           </form>
         </div>
       </div>

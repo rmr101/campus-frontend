@@ -5,5 +5,4 @@ import CampusSever from "../utils/CampusSever/CampusSever";
 const AuthUrl = "/authenticate";
 
 export const login = (username, password) =>
-  {console.log("I got run");
-  return CampusSever.post(AuthUrl, { username, password });};
+  CampusSever.post(AuthUrl, { username, password });
