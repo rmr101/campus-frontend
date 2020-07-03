@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./form.module.scss";
-import studentService from "../../../../../../apis/studentService";
-
+import studentService from "./../../apis/studentService";
 // Post object would need a name
 
 class Update extends React.Component {

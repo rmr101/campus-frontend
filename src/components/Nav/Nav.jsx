@@ -25,7 +25,7 @@ const Nav = ({ userRole }) => {
 };
 
 const mapStateToProps = (state) => ({
-  userRole: state.userRole,
+  userRole: state.Authentication.role.toLowerCase(),
 });
 const NavContainer = connect(mapStateToProps ,null)(Nav);
 export default NavContainer;

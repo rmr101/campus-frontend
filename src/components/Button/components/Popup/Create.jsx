@@ -1,8 +1,10 @@
 import React from "react";
-import styles from "./form.module.scss";
-import studentService from "../../../../../../apis/studentService";
+import styles from './form.module.scss';
+import axios from 'axios';
 
-// Post object would need a name
+
+// Post object would need a name 
+//TODO: 这个不要了
 
 class Create extends React.Component {
   constructor(props) {
@@ -11,50 +13,61 @@ class Create extends React.Component {
       email: "",
       firstName: "",
       lastName: "",
-      submitted: false,
+      respDto:{},
     };
     this.onEmailTyping = this.onEmailTyping.bind(this);
     this.onFirstNameTyping = this.onFirstNameTyping.bind(this);
     this.onLastNameTyping = this.onLastNameTyping.bind(this);
-    this.save = this.save.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  
+  //目前是，如果拿不回来你们的窗口不会关。所以要强行关掉
+  async sendDto(){
+    const newStudent = {
+      email:this.state.email,
+      firstName:this.state.firstName,
+      lastName:this.state.lastName,
+    }
+    const studentDTO = JSON.stringify(newStudent);
+
+
+    //这里的格式千万要注意。不要放一个{ }到post 的第二个argument。因为这样后端的格式就不是JSON
+      console.log(studentDTO);
+     await axios
+       .post(
+         "http://localhost:8080/users/students",
+         studentDTO ,
+         {
+           headers: {
+             "Content-Type": "application/json",
+           },
+         }
+       )
+       .then((res) => this.setState({ respDto: res.data }));
+    console.log(this.state.respDto);
+  }
+  async onSubmit(event){
+    event.preventDefault();
+    await this.sendDto();
+    this.props.onClick(event);
+
+    // this is to resemble sending JSON to the server
+
   }
 
-  save() {
-    var data = {
-      email: this.state.email,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-    };
-
-    studentService
-      .create(data)
-      .then((response) => {
-        this.setState({
-          email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          submitted: true,
-        });
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  onEmailTyping(event) {
+  onEmailTyping(event){
     console.log(event.target.email);
     this.setState({
       email: event.target.value,
     });
   }
-  onFirstNameTyping(event) {
+  onFirstNameTyping(event){
     console.log(event.target.firstName);
     this.setState({
       firstName: event.target.value,
     });
   }
-  onLastNameTyping(event) {
+  onLastNameTyping(event){
     console.log(event.target.lastName);
     this.setState({
       lastName: event.target.value,
@@ -63,11 +76,7 @@ class Create extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.submitted ?(<div>
-        <h3 className={styles.title}>Student has been created Successfully!</h3>
-        </div>):(
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={this.onSubmit}>
         <h3 className={styles.title}>Create</h3>
         <div className={styles.control}>
           <label>Email:</label>
@@ -95,16 +104,14 @@ class Create extends React.Component {
             required
           />
         </div>
+
         <button
-          onClick={this.save}
           className={styles.button}
           type="submit"
         >
           Submit
         </button>
       </form>
-      )}
-      </div>
     );
   }
 }

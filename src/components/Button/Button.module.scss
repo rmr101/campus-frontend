@@ -1,10 +1,11 @@
-@import './../../../../../../variable';
+@import './../../variable';
 
 $delete-color:#e7305b;
 $update-color:#ffcb74;
 $create-color:#9bdeac;
 $upload-color:#b9ac92;
 $confirm-color:#7aa5d2;
+$logout-color:#7aa5d2;
 $hover-color:#fff;
 
 //TODO: 之后要去掉,因为这就是一个button而已
@@ -67,6 +68,7 @@ $hover-color:#fff;
     background-color: $confirm-color;
   }
 }
+
 .uploadInput{
   display: none;
 }

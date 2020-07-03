@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Button.module.scss';
 import Popup from './../Popup';
+import LogOutBtn from './components/LogOutBtn';
 
 
 //TODO: 这个肯定要 重构的，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
@@ -30,6 +31,8 @@ class Button extends React.Component {
         return styles.updateBtn;
       case "CREATE":
         return styles.createBtn;
+      case "LOGOUT":
+        return styles.logOutBtn;
       case "AdminCreateTeacher":
         return styles.createBtn;
       case "UserChangePassword":
@@ -159,6 +162,8 @@ class Button extends React.Component {
             </div>
           </div>
         );
+      case "LOGOUT":
+        return <LogOutBtn/>
       default:
         return null;
     }

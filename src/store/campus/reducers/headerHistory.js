@@ -10,7 +10,6 @@ const initState =
 export default (state = initState, action) => {
   switch (action.type) {
     case ADD_HEADER_HISTORY:
-     
       let contentArray = handleClickLink(action.LinkNameID, action.id); 
       let newHistory = handleAddHeader(state, action.event, action.headingTitle, contentArray);
        console.log(newHistory);

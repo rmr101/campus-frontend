@@ -2,12 +2,15 @@ import React from 'react';
 import styles from './SubjectCourse.module.scss';
 import RenderContentLink from "./../RenderContentLink";
 import getCourseListBySubjectID from './../../../../../../apis/getCourseListBySubjectID';
+import {connect} from "react-redux";
 
 const Loading = () => (
   <div className={styles.loading}>
     <h4>Loading...</h4>
   </div>
 );
+
+//props.current
 
 class SubjectCourse extends React.Component {
   constructor(props) {
@@ -61,4 +64,9 @@ class SubjectCourse extends React.Component {
   }
 };
 
-export default SubjectCourse;
+const mapStateToProps = (state) => ({
+  current: state.currentDirector,
+});
+
+const SubjectCourseContainer = connect(mapStateToProps, null)(SubjectCourse);
+export default SubjectCourseContainer;

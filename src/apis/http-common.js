@@ -1,8 +1,5 @@
 import axios from "axios";
-
+//TODO: 我创了一个instance 叫Campus sever了
 export default axios.create({
-  baseURL: "http://localhost:8080/",
-  headers: {
-    "Content-type": "application/json"
-  }
+   
 });

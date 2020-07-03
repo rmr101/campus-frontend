@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../Button';
+import Button from './../../../../../Button';
 import S3 from "react-aws-s3";
 
 // import the AWS S3 key

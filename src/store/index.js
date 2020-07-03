@@ -1,8 +1,7 @@
 import {applyMiddleware,combineReducers,createStore,compose} from 'redux';
-import userRole from './authentication/reducers/userRole';
-import loginState from './authentication/reducers/loginState';
 import currentDirectory from './campus/reducers/currentDirectory';
 import headerHistory from "./campus/reducers/headerHistory";
+import Authentication from './authentication/reducers/Authentication';
 import navCanvasStatus from "./campus/reducers/navCanvasStatus";
 import thunk from "redux-thunk";
 
@@ -12,11 +11,10 @@ const middleWares = compose(
 );
 
 const reducer = combineReducers({
-  userRole,
-  loginState,
   headerHistory,
   currentDirectory,
   navCanvasStatus,
+  Authentication,
 });
 
 export default createStore(reducer, middleWares);
