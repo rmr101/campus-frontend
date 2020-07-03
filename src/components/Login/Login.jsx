@@ -74,10 +74,11 @@ class Login extends React.Component {
               this.loginToSever(this.state.username, this.state.password);
             }}
           >
-           {this.state.loading ? <div className={styles.loaderContainer}>
-              <Loader />
-            </div>:null
-            }
+            {this.state.loading ? (
+              <div className={styles.loaderContainer}>
+                <Loader />
+              </div>
+            ) : null}
             <div className={styles.control}>
               <label>User ID</label>
               <input
@@ -101,12 +102,14 @@ class Login extends React.Component {
                 required
               />
             </div>
-            <button className={styles.button} type="submit">
-              Log in
-            </button>
             {this.state.failLogin ? (
               <small> Incorrect username or password. </small>
             ) : null}
+            <button className={styles.button} type="submit">
+              Log in
+            </button>
+            {/* TODO: will have to implement later */}
+            <div className={styles.forget}> Forget password ?</div>
           </form>
         </div>
       </div>

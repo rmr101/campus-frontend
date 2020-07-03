@@ -1,6 +1,7 @@
 $mask-background: linear-gradient(#f4f6ff, #e4f9ff);
 $greeting-background: #84a9ac;
 $white-color: #fff;
+$font-color:#777;
 $fail-color:#e7305b;
 
 
@@ -58,13 +59,13 @@ $fail-color:#e7305b;
 
 .form {
   position: relative;
-  padding: 80px 50px;
+  padding: 80px 50px 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   small{
-    bottom:50px;
+    bottom:160px;
     position: absolute;
     color:$fail-color;
   }
@@ -110,7 +111,11 @@ $fail-color:#e7305b;
     margin-bottom: relative;
   }
 }
-
+.forget{
+  margin-top: 20px;
+  display: block;
+  color: $font-color;
+}
 .button {
   cursor: pointer;
   border: none;
