@@ -73,8 +73,13 @@ title: "font-family",
 context: "Arial",
 }
 ];
-export const TeachersContent = [];
-export const StudentsContent = [];
+export const UsersContent = [
+  {
+    type: "StudentList",
+    range: "Full"
+    },
+];
+
 export const ClassroomContent = [
 {
 type: "Context",

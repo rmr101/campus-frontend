@@ -64,8 +64,8 @@ const handleClickLink = (LinkNameID,id) => {
       contentArray = ContentArray.UserInfoContent;
       console.log(contentArray);
       break;
-    case "Teachers":
-      contentArray = ContentArray.TeachersContent;
+    case "Users":
+      contentArray = ContentArray.UsersContent;
       break;
     case "Help":
       contentArray = ContentArray.HelpContent;
