@@ -1,4 +1,4 @@
-import CampusSever from "../../utils/CampusSever";
+import CampusSever from "../../utils/CampusSever/AuthenticatedAccess";
 
 // make it empty for now
 

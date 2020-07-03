@@ -1,6 +1,6 @@
 import React from "react";
 import studentService from "../../../../../../apis/studentService";
-import Button from ".././Button";
+import Button from "./../../../../../Button";
 import styles from "./StudentList.module.scss";
 
 

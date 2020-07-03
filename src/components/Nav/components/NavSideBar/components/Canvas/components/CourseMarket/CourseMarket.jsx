@@ -20,10 +20,10 @@ class CourseMarket extends React.Component {
 
   async getSubjectList() {
     const {subjectList} = await getSubjectList();
-    this.setState(
+      this.setState(
       {subjectList: subjectList,
-        loading: false});
-    console.log(this.state.subjectList);
+      loading: false}
+      );
   }
 
   componentDidMount() {

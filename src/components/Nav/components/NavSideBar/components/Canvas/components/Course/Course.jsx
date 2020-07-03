@@ -17,10 +17,14 @@ class Course extends React.Component {
     this.setState({ loading: false });
   }
 
-  async getSubjectList() {
-    const { subjectList } = await getSubjectList();
-    this.setState({ subjectList: subjectList, loading: false });
-    console.log(this.state.subjectList);
+  getSubjectList() {
+    getSubjectList()
+      .then((res) =>
+        this.setState({ subjectList: res.data, loading: false }, () =>
+          console.log(this.state.subjectList)
+        )
+      )
+      .catch((e) => console.log(e));
   }
 
   componentDidMount() {
@@ -32,7 +36,6 @@ class Course extends React.Component {
       <CanvasLoading />
     ) : (
       <RenderLink
-        onClick={this.props.onClick}
         RenderArray={this.state.subjectList}
         CurrentNavItem={"SubjectCourse"}
       />
