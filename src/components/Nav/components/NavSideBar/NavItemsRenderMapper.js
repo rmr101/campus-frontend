@@ -8,7 +8,6 @@ import {
   faQuestionCircle,
   faCog,
   faColumns,
-  faUsers,
   faChalkboardTeacher,
   faClipboardCheck,
   faChalkboard,
@@ -26,8 +25,7 @@ export const renderList = {
          UserInfo: faUser,
          Help: faQuestionCircle,
          Setting: faCog,
-         Students: faUsers,
-         Teachers: faChalkboardTeacher,
+         Users: faChalkboardTeacher,
          MarkSystem:faClipboardCheck,
          TeachingCourse:faChalkboard,
          Courses:faLightbulb,
@@ -117,14 +115,9 @@ export const TeacherConfig = [
 export const AdminConfig = [
          { icon: renderList.Dashboard, title: "Dashboard", NavId: "Dashboard" },
          {
-           icon: renderList.Teachers,
-           title: "Teachers",
-           NavId: "Teachers",
-         },
-         {
-           icon: renderList.Students,
-           title: "Students",
-           NavId: "Students",
+           icon: renderList.Users,
+           title: "UserManagement",
+           NavId: "Users",
          },
          {
            icon: renderList.Courses,

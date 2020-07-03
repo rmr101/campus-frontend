@@ -68,16 +68,10 @@ const NavSideBar = ({
         setCanvasBoolean(false);
         clickDashboard(event);
         break;
-      case "Teachers":
+      case "Users":
         changeActive(name);
         //id here doesn't matter
-        onClick(event, "Teachers", "Teachers");
-        setCanvasBoolean(false);
-        break;
-      case "Students":
-        changeActive(name);
-        //id here doesn't matter
-        onClick(event, "Students", "Students");
+        onClick(event, "UserManagement", "Users");
         setCanvasBoolean(false);
         break;
       case "UserInfo":
