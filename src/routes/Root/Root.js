@@ -16,26 +16,3 @@ export default () => (
     </Switch>
   </Router>
 );
-
-// export default Root;
-// <Router>
-//   {!loginState ? (
-//     <Route path="/login">
-//       <Login />
-//     </Route>
-//   ) : (
-//     <Redirect to="/" />
-//   )}
-//   {loginState ? (
-//     <Route path="/" exact>
-//       <div className={styles.nav}>
-//         <Nav />
-//       </div>
-//       <div className={styles.main}>
-//         <Main />
-//       </div>
-//     </Route>
-//   ) : (
-//     <Redirect to="/login" />
-//   )}
-// </Router>;
