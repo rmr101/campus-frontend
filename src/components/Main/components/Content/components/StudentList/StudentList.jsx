@@ -1,10 +1,6 @@
 import React from "react";
 import studentService from "../../../../../../apis/studentService";
-<<<<<<< HEAD
 import Button from "./../../../../../Button";
-=======
-import Button from "../../../../../Button";
->>>>>>> 0fc11a085d6b798f43b2c9773abb87f47fa720d2
 import styles from "./StudentList.module.scss";
 
 
