@@ -5,26 +5,11 @@ import Content from "./components/Content";
 import { connect } from "react-redux";
 
 const Main =({
-  history,
+  content,
 })=> {
-
-  const renderHeader = () => {
-    let renderArray = history.map((obj) => (
-      <Header
-        headingID={obj.headingID}
-        key={"header_id" + Math.random()}
-        title={obj.title}
-      />
-    ));
-    return renderArray;
-  }
-
   const renderComponent=()=> {
-    const lastHistory = history[history.length - 1];
-    const contentArray = lastHistory.content;
     //update to the newest component
-
-    let renderArray = contentArray.map((obj) => (
+    let renderArray = content.map((obj) => (
       <Content key={"content_id" + Math.random()} 
       {...obj} />
     ));
@@ -33,7 +18,7 @@ const Main =({
     return (
       <div className={styles.wrapper}>
         <div className={styles.header}>
-          {renderHeader()}
+          <Header/>
           </div>
         <div className={styles.content}>
           {renderComponent()}
@@ -45,7 +30,7 @@ const Main =({
 
 
 const mapStateToProps = state => ({
-  history:state.headerHistory,
+  content:state.headerHistory.content,
 });
 
 const MainContainer =connect(mapStateToProps,null)(Main);

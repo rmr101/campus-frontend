@@ -1,11 +1,10 @@
 import { ADD_HEADER } from "../../type";
 import * as ContentArray from "./../../../utils/ContentMapper/ContentMapper";
-const initState = [
+const initState = 
   {
     title: "Dashboard",
     content: ContentArray.DashboardContent,
-  },
-];
+  };
 
 export default (state = initState, action) => {
   switch (action.type) {

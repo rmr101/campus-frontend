@@ -19,11 +19,11 @@ export default (state = initialState, action) => {
       localStorage.setItem("role", action.payload.role);
       return action.payload;
     case LOG_OUT:
-       localStorage.clear();
+      localStorage.clear();
       return {
-        jwt:null,
-        role:null,
-        uuid:null
+        jwt: null,
+        role: null,
+        uuid: null,
       };
     default:
       return state;

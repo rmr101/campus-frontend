@@ -41,7 +41,6 @@ class Login extends React.Component {
 
     await login(username, password)
       .then((res) => {
-        console.log(res.data);
         this.props.storeAuthToState(res.data);
         this.setState(
           {
@@ -56,9 +55,9 @@ class Login extends React.Component {
           failLogin: true,
           loading: false,
         });
-        console.log(err.Message)
+        
       });
-
+       console.log("I have finish uploading it to the store");
 
     //TODO: need a better handler.
   }

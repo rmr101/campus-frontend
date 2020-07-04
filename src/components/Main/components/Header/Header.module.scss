@@ -1,13 +1,19 @@
 @import './../../../../variable';
 
+
 .wrapper{
-  cursor: pointer;
-  &:hover{
-    .title{
-    color:$theme-color;
-    }
-  }
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 60px;
 }
+
+.btnWrapper{
+  display: flex;
+  justify-content: flex-end;
+}
+
+
 .title{
   display: block;
   margin: 0;

@@ -3,12 +3,11 @@ import styles from "./NavSideBar.module.scss";
 import NavItems from "./components/NavItems";
 import * as NavItemsRenderMapper from './NavItemsRenderMapper';
 import Canvas from './components/Canvas';
-import ClickLink from "../../../../store/campus/actions/ClickLink";
+import AddHeader from "../../../../store/campus/actions/AddHeader";
 import { connect } from "react-redux";
 import ChangeCanvasActive from "./../../../../store/campus/actions/ChangeCanvasActive.js";
 import ToggleCanvasStatus from "./../../../../store/campus/actions/ToggleCanvasStatus";
 import SetCanvasStatus from './../../../../store/campus/actions/SetCanvasStatus';
-import ClickHeader from "./../../../../store/campus/actions/ClickHeader";
 
 const NavSideBar = ({
   role,
@@ -66,18 +65,16 @@ const NavSideBar = ({
       case "Dashboard":
         changeActive(name);
         setCanvasBoolean(false);
-        clickDashboard(event);
+        onClick(event, "Dashboard", "Dashboard");
         break;
       case "Users":
         changeActive(name);
-        //id here doesn't matter
+        //TODO: UserManagement 是ID 还是 Users 是？
         onClick(event, "UserManagement", "Users");
         setCanvasBoolean(false);
         break;
       case "UserInfo":
         changeActive(name);
-        console.log("I got executed");
-        //id here doesn't matter
         onClick(event, "Profile", "UserInfo");
         setCanvasBoolean(false);
         break;
@@ -106,12 +103,11 @@ const NavSideBar = ({
 
 const mapDispatchToProps = (dispatch) => ({
   onClick: (event, headingTitle, headingID) => {
-    dispatch(ClickLink(event, headingTitle, 0, headingID));
+    dispatch(AddHeader(event, headingTitle, headingID));
   },
   toggleCanvas: () => dispatch(ToggleCanvasStatus()),
   setCanvasBoolean: (boo) => dispatch(SetCanvasStatus(boo)),
   changeActive: (name) => dispatch(ChangeCanvasActive(name)),
-  clickDashboard: (event) => dispatch(ClickHeader(event,1))
 });
 
 const mapStateToProps = (state) => ({

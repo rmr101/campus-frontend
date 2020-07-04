@@ -4,6 +4,8 @@ import RenderContentLink from "./../RenderContentLink";
 import getCourseListBySubjectID from './../../../../../../apis/getCourseListBySubjectID';
 import {connect} from "react-redux";
 
+
+//TODO: Loading need to implement new loader.
 const Loading = () => (
   <div className={styles.loading}>
     <h4>Loading...</h4>
