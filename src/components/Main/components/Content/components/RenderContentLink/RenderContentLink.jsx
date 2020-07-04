@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./RenderContentLink.module.scss";
 import { connect } from "react-redux";
-import ClickLink from './../../../../../../store/campus/actions/ClickLink';
+import AddHeader from "./../../../../../../store/campus/actions/AddHeader";
 
 // Refactor to be less depended on the RenderArray.
 const RenderContentLink = ({ 
@@ -11,25 +11,21 @@ const RenderContentLink = ({
   return RenderArray.map((obj) => (
     <div key={"name_" + Math.random()} className={styles.container}>
       <div
-        onClick={(e) => onClick(e, obj.name, obj.id, CurrentItem)}
+        onClick={(e) => onClick(e, obj.name, CurrentItem, obj.id)}
         className={`${styles.links} ${styles.heading}`}
       >
         {obj.name}
       </div>
-      <div className={styles.heading}>
-        {obj.id}
-      </div>
-      <div className={styles.heading}>
-        {obj.introduction}
-      </div>
+      <div className={styles.heading}>{obj.id}</div>
+      <div className={styles.heading}>{obj.introduction}</div>
     </div>
   ));
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: (event, headingTitle, id, LinkNameID) => {
-    dispatch(ClickLink(event, headingTitle, id, LinkNameID));
+  onClick: (event, headingTitle, contentType, id) => {
+    dispatch(AddHeader(event, headingTitle, contentType, id));
   },
 });
 

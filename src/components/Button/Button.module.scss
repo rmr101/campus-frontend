@@ -5,25 +5,24 @@ $update-color:#ffcb74;
 $create-color:#9bdeac;
 $upload-color:#b9ac92;
 $confirm-color:#7aa5d2;
-$logout-color:#7aa5d2;
+$logout-color:#84a9ac;
 $hover-color:#fff;
 
 //TODO: 之后要去掉,因为这就是一个button而已
 .wrapper{
   display: flex;
-  width: 400px;
 }
 
 .btn {
     display: block;
     text-align: center;
     outline: none;
-    font-size: 1.1em;
+    font-size: 16px;
     font-weight: 700;
     background-color: $white-color;
     border:none;
-    padding: 10px 30px;
-    border-radius: 30px;
+    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
     box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.2);
   }

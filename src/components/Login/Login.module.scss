@@ -1,6 +1,10 @@
 $mask-background: linear-gradient(#f4f6ff, #e4f9ff);
 $greeting-background: #84a9ac;
 $white-color: #fff;
+$font-color:#777;
+$fail-color:#e7305b;
+
+
 
 .wrapper {
   position: fixed;
@@ -54,17 +58,38 @@ $white-color: #fff;
 }
 
 .form {
-  padding: 80px 50px;
+  position: relative;
+  padding: 80px 50px 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  small{
+    bottom:160px;
+    position: absolute;
+    color:$fail-color;
+  }
+  .loaderContainer{
+    z-index: 3000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba($color: #f4f6ff, $alpha: 0.4);
+  }
 }
 
 .control {
   margin-bottom: 10px;
   padding-bottom: 20px;
   position: relative;
+  .failLogin{
+    border-color: $fail-color;
+  }
   input {
     border: 2px solid #f0f0f0;
     border-radius: 5px;
@@ -86,7 +111,11 @@ $white-color: #fff;
     margin-bottom: relative;
   }
 }
-
+.forget{
+  margin-top: 20px;
+  display: block;
+  color: $font-color;
+}
 .button {
   cursor: pointer;
   border: none;
@@ -102,4 +131,19 @@ $white-color: #fff;
 }
 label {
   padding-bottom: 5px;
+}
+
+//loader
+.loader {
+  border: 16px solid #e4f9ff; /* Light grey */
+  border-top: 16px solid $greeting-background; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

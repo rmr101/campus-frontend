@@ -35,7 +35,6 @@ const HalfWidthLayout = (props) => {
               <Button type={"DELETE"} />
               <Button type={"UPDATE"} />
               <Button type={"CREATE"} />
-              <Button type={"LOGOUT"} />
             </React.Fragment>
           );
         case "Context":
@@ -54,7 +53,6 @@ const HalfWidthLayout = (props) => {
               <Button type={"DELETE"} />
               <Button type={"UPDATE"} />
               <Button type={"CREATE"} />
-              <Button type={"LOGOUT"} />
             </React.Fragment>
           );
         case "Context":

@@ -1,8 +1,12 @@
-import CampusSever from "../../utils/CampusSever/AuthenticatedAccess";
+import CampusSever from "../../utils/CampusSever";
+import { Auth } from "../../utils/CampusSever/AuthenticatedAccess";
+
 // make it empty for now
 const url = "/subjects"
-const config ={};
 
-export default () =>
-  CampusSever.get(url, config).then(res => res.data).catch(e => console.log(e));
-  ;
+export default () =>{
+  const AuthCampusSever = Auth(CampusSever);
+  return AuthCampusSever.get(url)
+    .then((res) => res.data)
+    .catch((e) => console.log(e));
+}

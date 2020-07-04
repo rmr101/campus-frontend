@@ -9,6 +9,16 @@
   display: flex;
   flex-direction: column;
 }
+.nameWrapper{
+  height:40px;
+  display: flex;
+  justify-content: center;
+  .loading,.name{
+    color:$white-color;
+    font-size: 20px;
+    font-weight: 900;
+  }
+}
 
 .sideBar{
   flex: 1;

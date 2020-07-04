@@ -9,6 +9,7 @@ const Loading = () => (
 );
 
 // 先取 teacher 之後再重構, uuid hardcoded
+//TODO:要重构；
 class Profile extends React.Component {
   constructor(props) {
     super(props);
