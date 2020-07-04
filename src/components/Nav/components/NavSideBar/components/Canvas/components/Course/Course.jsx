@@ -2,6 +2,7 @@ import React from "react";
 import RenderLink from "../RenderLink";
 import CanvasLoading from "../CanvasLoading";
 import getSubjectList from "./../../../../../../../../apis/getSubjectList";
+import styles from "./Course.module.scss";
 
 class Course extends React.Component {
   constructor(props) {
@@ -17,14 +18,9 @@ class Course extends React.Component {
     this.setState({ loading: false });
   }
 
-  getSubjectList() {
-    getSubjectList()
-      .then((res) =>
-        this.setState({ subjectList: res.data, loading: false }, () =>
-          console.log(this.state.subjectList)
-        )
-      )
-      .catch((e) => console.log(e));
+  async getSubjectList() {
+    const { subjectList } = await getSubjectList();
+    this.setState({ subjectList: subjectList, loading: false });
   }
 
   componentDidMount() {
@@ -32,13 +28,17 @@ class Course extends React.Component {
   }
 
   render() {
-    return this.state.loading ? (
-      <CanvasLoading />
-    ) : (
-      <RenderLink
-        RenderArray={this.state.subjectList}
-        CurrentNavItem={"SubjectCourse"}
-      />
+    return (
+      <div className={styles.wrapper}>
+        {this.state.loading ? (
+          <CanvasLoading />
+        ) : (
+          <RenderLink
+            RenderArray={this.state.subjectList}
+            CurrentNavItem={"SubjectCourse"}
+          />
+        )}
+      </div>
     );
   }
 }

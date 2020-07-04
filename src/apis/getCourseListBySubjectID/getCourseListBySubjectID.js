@@ -7,7 +7,7 @@ const url = 'subjects/';
 
 export default (id) =>
   {
-    const AuthCampusSever = Auth(CampusSever);
+  const AuthCampusSever = Auth(CampusSever);
   return AuthCampusSever.get(`${url}${id}`)
     .then((res) => res.data)
     .catch((e) => console.log(e));
