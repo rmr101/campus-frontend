@@ -1,53 +1,34 @@
-import { ADD_HEADER_HISTORY,CLICK_HEADER } from "../../type";
+import { ADD_HEADER } from "../../type";
 import * as ContentArray from "./../../../utils/ContentMapper/ContentMapper";
-const initState = 
-[{
-    headingID: 1,
+const initState = [
+  {
     title: "Dashboard",
     content: ContentArray.DashboardContent,
-  }]
+  },
+];
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case ADD_HEADER_HISTORY:
-      let contentArray = handleClickLink(action.LinkNameID, action.id); 
-      let newHistory = handleAddHeader(state, action.event, action.headingTitle, contentArray);
-       console.log(newHistory);
-      return newHistory;
-    case CLICK_HEADER:
-      return handleClickHeader(state,action.event,action.headingID);
+    case ADD_HEADER:
+      let contentArray = addContent(action.contentType, action.id); 
+      let newState = addHeader(action.event,action.headingTitle,contentArray);
+       console.log(newState);
+      return newState;
     default:
       return state;
   }
 };
 
-
-const handleClickHeader = (state,event,headingID) =>{
-    event.preventDefault();
-    return state.slice(0,headingID);
-  }
-
   
-const handleAddHeader = (state, event, headingTitle, contentArray) => {
+const addHeader = (event, headerTitle, contentArray) => {
   event.preventDefault();
-  let history = state;
-  if (headingTitle !== history[history.length - 1].title) {
-    let id = history.length + 1;
-    let newHistory = [
-      ...history,
-      {
-        headingID: id,
-        title: headingTitle,
-        content: contentArray,
-      },
-    ];
-    return newHistory;
-  }else{
-    return history;
-  }
+  return {
+    title: headerTitle,
+    content: contentArray,
+  };
 };
 
-const handleClickLink = (LinkNameID,id) => {
+const addContent = (LinkNameID, id) => {
   let contentArray;
   // mapping for content to be display
   switch (LinkNameID) {

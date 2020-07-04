@@ -1,7 +1,19 @@
 @import './../../../../NavSideBar-variable';
 
+$Canvas-Loader-Color: white;
+
 .loading{
-  h4{
-    color:$white-color;
+  div{
+    div{
+      color:$Canvas-Loader-Color;
+    }
   }
+  position:absolute;
+  display: flex;
+  top: 50px;
+  bottom:0;
+  left:50px;
+  right:50px;
+  justify-content: center;
+  align-items: center;
 }

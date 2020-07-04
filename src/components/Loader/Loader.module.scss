@@ -1,8 +1,16 @@
 $circle-color: #84a9ac;
+$white: #fff;
+
 .circle {
   width: 60px;
   height: 60px;
-  position: relative; 
+  position: relative;
+  
+}
+.white{
+  .circleDot:before {
+    background-color: $white;
+  }
 }
 
 .circleDot {
