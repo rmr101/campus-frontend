@@ -51,12 +51,11 @@ class Login extends React.Component {
       })
       .catch((err) => {
         //TODO: now its all considered as wrong password or username
-        this.setState({
-          failLogin: true,
-          loading: false,
+            this.setState({
+              failLogin: true,
+              loading: false,
+            });
         });
-        
-      });
        console.log("I have finish uploading it to the store");
 
     //TODO: need a better handler.

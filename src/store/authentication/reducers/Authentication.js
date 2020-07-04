@@ -1,4 +1,4 @@
-import { STORE_AUTH_TO_STATE, LOG_OUT } from "../../type";
+import { STORE_AUTH_TO_STATE, LOG_OUT } from "../type";
 
 
 const jwt = localStorage.getItem("jwt");

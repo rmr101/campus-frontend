@@ -5,115 +5,123 @@ import * as NavItemsRenderMapper from './NavItemsRenderMapper';
 import Canvas from './components/Canvas';
 import AddHeader from "../../../../store/campus/actions/AddHeader";
 import { connect } from "react-redux";
-import ChangeCanvasActive from "./../../../../store/campus/actions/ChangeCanvasActive.js";
-import ToggleCanvasStatus from "./../../../../store/campus/actions/ToggleCanvasStatus";
-import SetCanvasStatus from './../../../../store/campus/actions/SetCanvasStatus';
 
-const NavSideBar = ({
-  role,
-  canvasOn,
-  current,
-  toggleCanvas,
-  onClick,
-  changeActive,
-  setCanvasBoolean,
-  clickDashboard,
-}) => {
-  const readConfig = (ConfigArray) => {
+class NavSideBar extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      canvasOn:false,
+      current:"Dashboard",
+    }
+    this.handleClick=this.handleClick.bind(this);
+  }
+  readConfig(ConfigArray){
     return ConfigArray.map((obj) => {
       if (obj.filler) {
         return <div key={"Filler"} className={styles.filler}></div>;
       } else {
         return (
           <NavItems
-            active={current === obj.NavId}
-            collapse={canvasOn}
+            active={this.state.current === obj.NavId}
+            collapse={this.state.canvasOn}
             key={"NavItem_id" + Math.random()}
             icon={obj.icon}
             title={obj.title}
             NavId={obj.NavId}
-            onClick={handleClick}
+            onClick={this.handleClick}
           />
         );
       }
     });
   };
 
-  const renderNavItem = () => {
-    switch (role) {
+  renderNavItem(){
+    switch (this.props.role) {
       case "student":
-        return readConfig(NavItemsRenderMapper.StudentConfig);
+        return this.readConfig(NavItemsRenderMapper.StudentConfig);
       case "teacher":
-        return readConfig(NavItemsRenderMapper.TeacherConfig);
+        return this.readConfig(NavItemsRenderMapper.TeacherConfig);
       case "admin":
-        return readConfig(NavItemsRenderMapper.AdminConfig);
+        return this.readConfig(NavItemsRenderMapper.AdminConfig);
       default:
         return null;
     }
   };
-  const clickToDisplayCanvas = (name) => {
-    if (name === current) {
-      toggleCanvas();
-    } else if (name !== current) {
-      //toggle canvas twice
-      setCanvasBoolean(false);
-      setCanvasBoolean(true);
-    }
+  changeActive(name){
+    this.setState({
+      current:name,
+    })
+  }
+  setCanvasStatus(boo){
+    this.setState(
+      {canvasOn: boo});
+  }
+  toggleCanvas(){
+    this.setState({
+      canvasOn:!this.state.canvasOn,
+    })
+  }
+  clickToDisplayCanvas = (name) => {
+    if (name === this.state.current) {
+      this.toggleCanvas();
+    } else if (name !== this.state.current) {
+             //toggle canvas twice
+             this.setCanvasStatus(false);
+             this.setCanvasStatus(true);
+           }
   };
-  const handleClick = (event, name) => {
+  handleClick(event, name){
     switch (name) {
       case "Dashboard":
-        changeActive(name);
-        setCanvasBoolean(false);
-        onClick(event, "Dashboard", "Dashboard");
+        this.changeActive(name);
+        this.setCanvasStatus(false);
+        this.props.addHeader(event, "Dashboard", "Dashboard");
         break;
       case "Users":
-        changeActive(name);
+        this.changeActive(name);
         //TODO: UserManagement 是ID 还是 Users 是？
-        onClick(event, "UserManagement", "Users");
-        setCanvasBoolean(false);
+        this.props.addHeader(event, "UserManagement", "Users");
+        this.setCanvasStatus(false);
         break;
       case "UserInfo":
-        changeActive(name);
-        onClick(event, "Profile", "UserInfo");
-        setCanvasBoolean(false);
+        this.changeActive(name);
+        this.props.addHeader(event, "Profile", "UserInfo");
+        this.setCanvasStatus(false);
         break;
       default:
         event.preventDefault();
-        changeActive(name);
-        clickToDisplayCanvas(name);
+        this.changeActive(name);
+        this.clickToDisplayCanvas(name);
     }
   };
+  render(){
   return (
     <div className={styles.wrapper}>
       <div
         className={`${styles.sideWrapper} + ${
-          canvasOn ? null : styles.sideWrapperNotCollapse
+          this.state.canvasOn ? null : styles.sideWrapperNotCollapse
         }`}
       >
-        {renderNavItem()}
+        {this.renderNavItem()}
       </div>
-      <div className={canvasOn ? styles.canvasActive : styles.canvas}>
-        {canvasOn ? <Canvas current={current} /> : null}
+      <div
+        className={this.state.canvasOn ? styles.canvasActive : styles.canvas}
+      >
+        {this.state.canvasOn ? <Canvas current={this.state.current} /> : null}
       </div>
     </div>
   );
+}
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: (event, headingTitle, headingID) => {
-    dispatch(AddHeader(event, headingTitle, headingID));
-  },
-  toggleCanvas: () => dispatch(ToggleCanvasStatus()),
-  setCanvasBoolean: (boo) => dispatch(SetCanvasStatus(boo)),
-  changeActive: (name) => dispatch(ChangeCanvasActive(name)),
+  addHeader: (event, headingTitle, headingID) => 
+  dispatch(AddHeader(event, headingTitle, headingID))
 });
 
 const mapStateToProps = (state) => ({
   role: state.Authentication.role.toLowerCase(),
-  canvasOn: state.navCanvasStatus.canvasOn,
-  current: state.navCanvasStatus.current,
 });
 
 const NavSideBarContainer = connect(
