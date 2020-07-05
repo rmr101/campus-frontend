@@ -1,8 +1,7 @@
-import React from 'react';
-import styles from './Button.module.scss';
-import Popup from './../Popup';
-import LogOutBtn from './components/LogOutBtn';
-
+import React from "react";
+import styles from "./Button.module.scss";
+import Popup from "./../Popup";
+import LogOutBtn from "./components/LogOutBtn";
 
 //TODO: 这个肯定要 重构的，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
 class Button extends React.Component {
@@ -30,9 +29,11 @@ class Button extends React.Component {
       case "UPDATE":
         return styles.updateBtn;
       case "CREATE":
-        return styles.createBtn;
+        return styles.updateBtn;
       case "LOGOUT":
         return styles.logOutBtn;
+      case "SEARCH":
+        return styles.searchBtn;
       case "AdminCreateTeacher":
         return styles.createBtn;
       case "UserChangePassword":
@@ -86,33 +87,37 @@ class Button extends React.Component {
           </React.Fragment>
         );
       case "AdminCreateTeacher":
-      return (
-        <React.Fragment>
-          <button
-            className={`${styles.btn} + ${this.buttonType("AdminCreateTeacher")}`}
-            onClick={this.togglePop}
-          >
-            Create New Teacher
-          </button>
-          {this.state.seen ? (
-            <Popup type={"AdminCreateTeacher"} toggle={this.togglePop} />
-          ) : null}
-        </React.Fragment>
-      );
+        return (
+          <React.Fragment>
+            <button
+              className={`${styles.btn} + ${this.buttonType(
+                "AdminCreateTeacher"
+              )}`}
+              onClick={this.togglePop}
+            >
+              Create New Teacher
+            </button>
+            {this.state.seen ? (
+              <Popup type={"AdminCreateTeacher"} toggle={this.togglePop} />
+            ) : null}
+          </React.Fragment>
+        );
       case "UserChangePassword":
-      return (
-        <React.Fragment>
-          <button
-            className={`${styles.btn} + ${this.buttonType("UserChangePassword")}`}
-            onClick={this.togglePop}
-          >
-            Change Password
-          </button>
-          {this.state.seen ? (
-            <Popup type={"UserChangePassword"} toggle={this.togglePop} />
-          ) : null}
-        </React.Fragment>
-      );
+        return (
+          <React.Fragment>
+            <button
+              className={`${styles.btn} + ${this.buttonType(
+                "UserChangePassword"
+              )}`}
+              onClick={this.togglePop}
+            >
+              Change Password
+            </button>
+            {this.state.seen ? (
+              <Popup type={"UserChangePassword"} toggle={this.togglePop} />
+            ) : null}
+          </React.Fragment>
+        );
       case "UPLOAD":
         return (
           <div className={styles.uploadContainer}>
@@ -151,19 +156,41 @@ class Button extends React.Component {
                   again.
                 </div>
               ) : null}
-              {this.props.success? (
-                    <div
-                      className={styles.successText}
-                    >
-                      Upload Successfully.
-                    </div>
-                  )
-                : null}
+              {this.props.success ? (
+                <div className={styles.successText}>Upload Successfully.</div>
+              ) : null}
             </div>
           </div>
         );
       case "LOGOUT":
-        return <LogOutBtn/>
+        return <LogOutBtn />;
+      case "SEARCH":
+        return (
+          <div className={styles.searchInput}>
+           <label htmlFor="Search">Search by:  </label>
+            <input
+              id="search"
+              placeholder="Please Input studentID"
+              className={styles.searchInput}
+              type="text"
+              onChange={this.props.onChange}
+            />
+            <label htmlFor="OR">  OR:  </label>
+            <input
+              id="search"
+              placeholder="Please Input studentName"
+              className={styles.searchInput}
+              type="text"
+              onChange={this.props.onChange}
+            />
+             <button
+              className={`${styles.btn} + ${this.buttonType("SEARCH")}`}
+              onClick={this.props.onClick}
+            >
+            Search
+            </button>
+          </div>
+        );
       default:
         return null;
     }
