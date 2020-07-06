@@ -1,7 +1,7 @@
 import React from "react";
 import studentService from "../../../../../../apis/studentService";
-import Button from "./../../../../../Button";
-import SearchBar from './../../../../../SearchBar';
+import Button from "../../../../../Button";
+import SearchBar from '../../../../../SearchBar';
 import styles from "./StudentList.module.scss";
 
 class StudentList extends React.Component {
