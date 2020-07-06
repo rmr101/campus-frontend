@@ -1,6 +1,7 @@
 import React from "react";
 import studentService from "../../../../../../apis/studentService";
 import Button from "./../../../../../Button";
+import SearchBar from './../../../../../SearchBar';
 import styles from "./StudentList.module.scss";
 
 class StudentList extends React.Component {
@@ -28,14 +29,7 @@ class StudentList extends React.Component {
   render() {
     return (
       <div>
-          <label className={styles.label}>Please select: </label>
-          <select  name="role" id="role">
-            <option value="student">student</option>
-            <option value="teacher">teacher</option>
-          </select>
-        <div className={styles.wrapper}>
-          <Button type={"SEARCH"} />
-        </div>
+        <SearchBar />
         <div className={styles.wrapper}>
           <table className={styles.table}>
             <thead>

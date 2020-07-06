@@ -32,8 +32,6 @@ class Button extends React.Component {
         return styles.updateBtn;
       case "LOGOUT":
         return styles.logOutBtn;
-      case "SEARCH":
-        return styles.searchBtn;
       case "AdminCreateTeacher":
         return styles.createBtn;
       case "UserChangePassword":
@@ -164,33 +162,6 @@ class Button extends React.Component {
         );
       case "LOGOUT":
         return <LogOutBtn />;
-      case "SEARCH":
-        return (
-          <div className={styles.searchInput}>
-           <label htmlFor="Search">Search by:  </label>
-            <input
-              id="search"
-              placeholder="Please Input studentID"
-              className={styles.searchInput}
-              type="text"
-              onChange={this.props.onChange}
-            />
-            <label htmlFor="OR">  OR:  </label>
-            <input
-              id="search"
-              placeholder="Please Input studentName"
-              className={styles.searchInput}
-              type="text"
-              onChange={this.props.onChange}
-            />
-             <button
-              className={`${styles.btn} + ${this.buttonType("SEARCH")}`}
-              onClick={this.props.onClick}
-            >
-            Search
-            </button>
-          </div>
-        );
       default:
         return null;
     }
