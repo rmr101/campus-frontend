@@ -115,6 +115,13 @@ export const SubjectCourseContent =
              range: "Full",
            },
          ];
+export const StudentCourseAssignment =[];
+export const TeacherCourseAssignment = [
+         {
+           type: "SubjectCourse",
+           range: "Full",
+         },
+       ];
 
 export const UserInfoContent = [
   {

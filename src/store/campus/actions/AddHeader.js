@@ -1,9 +1,9 @@
 import {ADD_HEADER } from "../type";
 
-export default (event,headingTitle, contentType, id = "") => ({
+export default (event, headingTitle, toPageID, id = "") => ({
   event,
   headingTitle,
-  contentType,
+  toPageID,
   id,
   type: ADD_HEADER,
 });

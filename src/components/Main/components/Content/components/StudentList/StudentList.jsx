@@ -2,6 +2,7 @@ import React from "react";
 import studentService from "../../../../../../apis/studentService";
 import Button from "./../../../../../Button";
 import styles from "./StudentList.module.scss";
+import FullWidthLayout from '../FullWidthLayout';
 
 class StudentList extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class StudentList extends React.Component {
 
   render() {
     return (
-      <div>
+      <FullWidthLayout>
           <label className={styles.label}>Please select: </label>
           <select  name="role" id="role">
             <option value="student">student</option>
@@ -65,7 +66,7 @@ class StudentList extends React.Component {
             </tbody>
           </table>
         </div>
-      </div>
+       </FullWidthLayout>
     );
   }
 }

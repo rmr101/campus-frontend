@@ -26,7 +26,6 @@ const HalfContext = (props) => {
 //TODO: 这里以后需要refactor 一下的。
 const HalfWidthLayout = (props) => {
   const renderBlock = (blockName) => {
-    if(props.role === "student"){
       switch (blockName) {
         case "Popup":
           //目前放着这，但以后可以单独拿出来用
@@ -41,48 +40,14 @@ const HalfWidthLayout = (props) => {
           return <HalfContext {...props} />;
         case "StudentAssignment":
           return <StudentAssignment {...props} />;
-        default:
-          return null;
-      }
-    }else if(props.role === "teacher"){
-      switch (blockName) {
-        case "Popup":
-          //目前放着这，但以后可以单独拿出来用
-          return (
-            <React.Fragment>
-              <Button type={"DELETE"} />
-              <Button type={"UPDATE"} />
-              <Button type={"CREATE"} />
-            </React.Fragment>
-          );
-        case "Context":
-          return <HalfContext {...props} />;
-        case "StudentAssignment":
-          return <StudentAssignment {...props} />;
-        default:
-          return null;
-      }
-    }else{
-      switch (blockName) {
-        case "Popup":
-          return <Button type={"LOGOUT"} />;
-        case "Profile":
-          return <Profile {...props} />;
-        case "UserChangePassword":
-          return (
-            <Button type={"UserChangePassword"} />
-          );
-        case "AdminCreateTeacher":
-          return (
-            <Button type={"AdminCreateTeacher"} />
-          );
-        case "Context":
-          return <HalfContext {...props} />;
+        // case "UserChangePassword":
+        //   return <Button type={"UserChangePassword"} />
+        // case "AdminCreateTeacher":
+        //   return <Button type={"AdminCreateTeacher"} />
         default:
           return null;
       }
     }
-  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.heading}>

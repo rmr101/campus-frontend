@@ -1,24 +1,30 @@
 import React from "react";
 import styles from "./Content.module.scss";
-import HalfWidthLayout from "./components/HalfWidthLayout";
-import FullWidthLayout from './components/FullWidthLayout';
+import SubjectCourse from './components/SubjectCourse';
+import StudentList from "./components/StudentList";
+import TeacherCourseAssignment from "./components/TeacherCourseAssignment";
+import Profile from "./components/Profile";
+import CourseDetail from "./components/CourseDetail";
 
-const Content = (props) => { 
-  const renderComponent=(props)=>{
-    switch (props.range) {
-      case "Full":
-        return <FullWidthLayout {...props} />;
-      case "Half":
-        return <HalfWidthLayout {...props} />;
+
+const Content = ({pageID}) => {
+  const renderComponent=(pageID)=>{
+    switch (pageID) {
+      case "SubjectCourse":
+        return <SubjectCourse />;
+      case "StudentList":
+        return <StudentList />;
+      case "TeacherCourseAssignment":
+        return <TeacherCourseAssignment />;
+      case "Profile":
+        return <Profile />;
       default:
-        return null;
+        return <CourseDetail />;
     }
-
   }
-
   return (
     <div className={styles.wrapper}>
-      {renderComponent(props)}
+      {renderComponent(pageID)}
     </div>
   );
 }

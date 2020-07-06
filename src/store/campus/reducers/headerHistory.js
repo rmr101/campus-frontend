@@ -1,16 +1,14 @@
 import { ADD_HEADER } from "../type";
-import * as ContentArray from "./../../../utils/ContentMapper/ContentMapper";
-const initState = 
-  {
-    title: "Dashboard",
-    content: ContentArray.DashboardContent,
-  };
+const initState = {
+  title: "Dashboard",
+  content: { pageID: "Dashboard"},
+};
 
 export default (state = initState, action) => {
   switch (action.type) {
     case ADD_HEADER:
-      let contentArray = addContent(action.contentType, action.id); 
-      let newState = addHeader(action.event,action.headingTitle,contentArray);
+      let contentObj = addContent(action.toPageID, action.id); 
+      let newState = addHeader(action.event,action.headingTitle,contentObj);
        console.log(newState);
       return newState;
     default:
@@ -19,58 +17,40 @@ export default (state = initState, action) => {
 };
 
   
-const addHeader = (event, headerTitle, contentArray) => {
+const addHeader = (event, headerTitle, contentObj) => {
   event.preventDefault();
   return {
     title: headerTitle,
-    content: contentArray,
+    content: contentObj,
   };
 };
 
-const addContent = (LinkNameID, id) => {
-  let contentArray;
+const addContent = (toPageID, id) => {
   // mapping for content to be display
-  switch (LinkNameID) {
+  switch (toPageID) {
     case "Dashboard":
-      contentArray = ContentArray.DashboardContent;
-      break;
+      return { pageID: "Dashboard" };
     case "Assignment":
-      contentArray = ContentArray.AssignmentsContent;
-      break;
+      return { pageID: "Assignment" };
     case "Enrollment":
-      contentArray = ContentArray.EnrollmentsContent;
-      break;
+      return { pageID: "Enrollment" };
     case "UserInfo":
-      contentArray = ContentArray.UserInfoContent;
-      console.log(contentArray);
-      break;
+      return { pageID: "UserInfo" };
     case "Users":
-      contentArray = ContentArray.UsersContent;
-      break;
+      return { pageID: "Users" };
     case "Help":
-      contentArray = ContentArray.HelpContent;
-      break;
+      return { pageID: "Help" };
     case "Setting":
-      contentArray = ContentArray.ConfigurationContent;
-      break;
+      return { pageID: "Setting" };
     case "SubjectCourse":
-      console.log("SubjectCourse");
-      contentArray = ContentArray.SubjectCourseContent;
-      //append ID to the subject
-      contentArray = [
-        {
-          ...contentArray[0],
-          subjectID: id,
-        },
-      ];
-      break;
-
-    //TODO: To added a course display page after clicked
+      return { pageID: "SubjectCourse", id: id };
+    case "TeacherCourseAssignment":
+      return { pageID: "TeacherCourseAssignment", courseID: id };
+    //TODO: case "TeacherAssignment":
+    //TODO: case "StudentAssignment":
     case "Course":
-      contentArray = ContentArray.CourseContent;
-      break;
+      return { pageID: "Course" };
     default:
-      contentArray = ContentArray.NoContent;
+      return { pageID: "Dashboard" };
   }
-  return contentArray;
 };

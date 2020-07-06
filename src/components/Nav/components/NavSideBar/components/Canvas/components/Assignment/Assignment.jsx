@@ -4,18 +4,13 @@ import CanvasLoading from '../CanvasLoading';
 import getSubjectList from '../../../../../../../../apis/getSubjectList';
 
 
-class CourseMarket extends React.Component {
+class Assignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       subjectList: null,
       loading: true,
     };
-    this.finishLoading = this.finishLoading.bind(this);
-  }
-
-  finishLoading() {
-    this.setState({ loading: false });
   }
 
   async getSubjectList() {
@@ -36,11 +31,11 @@ class CourseMarket extends React.Component {
     ) : (
       <RenderLink
         RenderArray={this.state.subjectList}
-        CurrentNavItem={"SubjectCourse"}
+        toPageID={"SubjectCourse"}
       />
     );
   }
 };
 
 
-export default CourseMarket;
+export default Assignment;

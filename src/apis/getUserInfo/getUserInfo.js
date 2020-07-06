@@ -15,7 +15,7 @@ export default (role,id) =>{
         .catch((e) => console.log(e.response));
     case "teacher":
       return AuthCampusSever.get(teacherUrl + `/${id}`, config)
-        .then((res) => res.data)
+        .then((res) => res.data.teacherInfo)
         .catch((e) => console.log(e.response));
     default :
       return new Promise((resFunc, rejFunc) => {

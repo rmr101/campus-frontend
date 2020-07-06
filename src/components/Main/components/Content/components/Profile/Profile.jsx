@@ -1,43 +1,39 @@
 import React from 'react';
-import axios from 'axios';
 import styles from './Profile.module.scss';
-
-const Loading = () => (
-  <div className={styles.loading}>
-    <h4>Loading...</h4>
-  </div>
-);
-
-// 先取 teacher 之後再重構, uuid hardcoded
-//TODO:要重构；
+import getUserInfo from "../../../../../../apis/getUserInfo";
+import Loading from '../Loading';
+import {connect} from 'react-redux';
+//TODO: 把名字写到redux里。
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      personDetail: null,
+      userInfo: null,
       loading: true,
-      uuid:"6fe87e23-7885-4193-9906-fabbf677932d",
-      courseList:[],
     };
-    this.finishLoading = this.finishLoading.bind(this);
   }
+  async getUserInfo() {
 
-  finishLoading() {
-    this.setState({ loading: false });
-  }
-  async getPersonDetail() {
-    console.log(this.state.uuid + " uuid");
-    await axios
-      .get(`http://localhost:8080/teachers/${this.state.uuid}`)
-      .then((res) =>
-        this.setState({ personDetail: res.data }, () =>
-          this.setState({ loading: false }
-            ,() => this.setState({courseList: res.data.courseList}))
-        )
-      );
+    const resp = await getUserInfo(this.props.userRole, this.props.userID);
+    if (this.props.userRole === "student") {
+      const userInfo = resp ? resp : [];
+      this.setState({
+        userInfo: userInfo,
+        loading: false,
+      });
+      console.log(userInfo);
+    } else if (this.props.userRole === "teacher") {
+      const userInfo = resp ? resp: [];
+      this.setState({
+        userInfo: userInfo,
+        loading: false,
+      });
+      console.log(userInfo);
+    }
+
   }
   componentDidMount() {
-    this.getPersonDetail();
+    this.getUserInfo();
   }
 
   render() {
@@ -47,20 +43,16 @@ class Profile extends React.Component {
           <Loading />
         ) : (
           <React.Fragment>
-            <div className={styles.container}>
-              uuid:{this.state.personDetail.uuid}
-              <br />
-              name:{this.state.personDetail.name}
-              <br />
-              title:{this.state.personDetail.title}
-              <br />
-              courseList:{this.state.courseList}
-            </div>
+            <div className={styles.container}>hello</div>
           </React.Fragment>
         )}
       </div>
     );
   }
 };
-
-export default Profile;
+const mapStateToProps = (state) => ({
+  userRole: state.Authentication.role.toLowerCase(),
+  userID: state.Authentication.uuid,
+});
+const ProfileContainer = connect(mapStateToProps, null)(Profile);
+export default ProfileContainer;

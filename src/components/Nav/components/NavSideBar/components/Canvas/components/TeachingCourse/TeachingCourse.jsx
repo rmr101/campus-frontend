@@ -4,6 +4,7 @@ import CanvasLoading from '../CanvasLoading';
 import getTeachingList from "../../../../../../../../apis/getTeachingList";
 import styles from "./TeachingCourse.module.scss";
 import NothingDisplay from '../NothingDisplay';
+import CanvasTitleWrap from '../CanvasTitleWrapper';
 
 //TODO: configure for this 
 class TeachingCourse extends React.Component {
@@ -13,11 +14,6 @@ class TeachingCourse extends React.Component {
       teachingList: null,
       loading: true,
     };
-    this.finishLoading = this.finishLoading.bind(this);
-  }
-
-  finishLoading() {
-    this.setState({ loading: false });
   }
 
   async getTeachingList() {
@@ -41,12 +37,16 @@ class TeachingCourse extends React.Component {
   }
   renderList(){
 
-    return this.state.teachingList.length !== 0 ? 
-          <RenderLink
-            RenderArray={this.MapToRenderArray(this.state.teachingList)}
-            CurrentNavItem={"TeachingCourse"}
-          /> : 
-          <NothingDisplay name={"Teaching Courses"}/>
+    return this.state.teachingList.length !== 0 ? (
+      <CanvasTitleWrap title={"Your Teaching"}>
+        <RenderLink
+          RenderArray={this.MapToRenderArray(this.state.teachingList)}
+          toPageID={"TeacherCourseAssignment"}
+        />
+      </CanvasTitleWrap>
+    ) : (
+      <NothingDisplay name={"Teaching Courses"} />
+    );
   }
   render() {
     return (

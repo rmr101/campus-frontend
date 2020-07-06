@@ -2,18 +2,12 @@ import React from 'react';
 import styles from './SubjectCourse.module.scss';
 import RenderContentLink from "./../RenderContentLink";
 import getCourseListBySubjectID from './../../../../../../apis/getCourseListBySubjectID';
-import {connect} from "react-redux";
+import Loading from '../Loading';
+import FullWidthLayout from "../FullWidthLayout";
+import {connect} from 'react-redux';
 
-
-//TODO: Loading need to implement new loader.
-const Loading = () => (
-  <div className={styles.loading}>
-    <h4>Loading...</h4>
-  </div>
-);
-
-//props.current
-
+//TODO: 要用thunk
+// 下面的state change 他就会re-render了
 class SubjectCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -21,54 +15,64 @@ class SubjectCourse extends React.Component {
       courseList: null,
       loading: true,
     };
-    this.finishLoading = this.finishLoading.bind(this);
   }
 
-  finishLoading() {
-    this.setState({ loading: false });
+  async getCourseList(id) {
+    const resp = await getCourseListBySubjectID(id);
+    const courseList = resp ? resp.courseList : [];
+    console.log(resp);
+    this.setState({
+      courseList: courseList,
+      loading: false,
+    });
   }
-  async getCourseList() {
-    const { courseList } = await getCourseListBySubjectID(this.props.subjectID);
-    console.log(courseList);
-    this.setState({ 
-    courseList: courseList,
-    loading: false });
 
-    console.log(this.state.courseList);
-  }
-  
   componentDidMount() {
-    this.getCourseList();
+    this.getCourseList(this.props.id);
+  }
+
+  renderCoursesList() {
+
+    let array = this.state.courseList;
+    return array.map((obj) => {
+      let { name, id, subjectId, ...rest } = obj;
+      let RenderObj = {
+        name: name,
+        id: id,
+        ...rest,
+      };
+
+      //TODO: subjectID is useless
+
+      return (
+        <RenderContentLink
+          key={"SubjectCourse" + Math.random()}
+          RenderObj={RenderObj}
+          toPageID={"Course"}
+        />
+      );
+    });
   }
 
   render() {
     return (
-      <div className={styles.wrapper}>
-        {this.state.loading ? (
-          //TODO: 可复用 loading
-          <Loading />
-        ) : (
-          //TODO: 提出来，Nav 和 main 都能用
-          <React.Fragment>
-            <div className={styles.container}>
-              <div className={styles.heading}>Course Name:</div>
-              <div className={styles.heading}>Course ID:</div>
-              <div className={styles.heading}>Introduction:</div>
-            </div>
-            <RenderContentLink
-              RenderArray={this.state.courseList}
-              CurrentItem={"Course"}
-            />
-          </React.Fragment>
-        )}
-      </div>
+      <FullWidthLayout>
+        <div className={styles.wrapper}>
+          <div className={styles.container}>
+          <div className={styles.heading}>Course Name:</div>
+          <div className={styles.heading}>Course ID:</div>
+          <div className={styles.heading}>Introduction:</div>
+        </div>
+          {this.state.loading ? (
+            <Loading /> ) : (this.renderCoursesList())}
+        </div>
+      </FullWidthLayout>
     );
   }
 };
 
 const mapStateToProps = (state) => ({
-  current: state.currentDirector,
+  id: state.headerHistory.content.id,
 });
-
-const SubjectCourseContainer = connect(mapStateToProps, null)(SubjectCourse);
+const SubjectCourseContainer = connect(mapStateToProps)(SubjectCourse);
 export default SubjectCourseContainer;

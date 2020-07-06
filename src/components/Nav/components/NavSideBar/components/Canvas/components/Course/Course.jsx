@@ -11,11 +11,6 @@ class Course extends React.Component {
       subjectList: null,
       loading: true,
     };
-    this.finishLoading = this.finishLoading.bind(this);
-  }
-
-  finishLoading() {
-    this.setState({ loading: false });
   }
 
   async getSubjectList() {
@@ -40,7 +35,7 @@ class Course extends React.Component {
         ) : (
           <RenderLink
             RenderArray={this.state.subjectList}
-            CurrentNavItem={"SubjectCourse"}
+            toPageID={"SubjectCourse"}
           />
         )}
       </div>

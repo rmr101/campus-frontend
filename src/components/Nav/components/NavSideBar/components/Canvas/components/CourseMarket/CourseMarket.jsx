@@ -12,23 +12,21 @@ class CourseMarket extends React.Component {
       subjectList: null,
       loading: true,
     };
-    this.finishLoading = this.finishLoading.bind(this);
-  }
-
-  finishLoading() {
-    this.setState({ loading: false });
   }
 
   async getSubjectList() {
-    const {subjectList} = await getSubjectList();
-      this.setState(
-      {subjectList: subjectList,
-      loading: false}
-      );
+    const { subjectList } = await getSubjectList();
+    this.setState({ subjectList: subjectList, loading: false });
   }
 
   componentDidMount() {
     this.getSubjectList();
+  }
+  MapToRenderArray(array) {
+    return array.map((obj) => ({
+      name: obj.name,
+      id: obj.id,
+    }));
   }
 
   render() {
@@ -39,10 +37,10 @@ class CourseMarket extends React.Component {
         ) : (
           <CanvasTitleWrap title={"Subjects"}>
             <RenderLink
-              RenderArray={this.state.subjectList}
-              CurrentNavItem={"SubjectCourse"}
-            /> 
-          </CanvasTitleWrap >
+              RenderArray={this.MapToRenderArray(this.state.subjectList)}
+              toPageID={"SubjectCourse"}
+            />
+          </CanvasTitleWrap>
         )}
       </div>
     );
