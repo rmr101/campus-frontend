@@ -19,14 +19,19 @@ class Course extends React.Component {
   }
 
   async getSubjectList() {
-    const { subjectList } = await getSubjectList();
+    //TODO:: 这种保护很有必要
+    const resp = await getSubjectList();
+    const { subjectList } =  resp ? resp : [];
     this.setState({ subjectList: subjectList, loading: false });
   }
 
   componentDidMount() {
+
     this.getSubjectList();
   }
-
+  componentDidCatch(e){
+    console.log(e);
+  }
   render() {
     return (
       <div className={styles.wrapper}>

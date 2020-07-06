@@ -21,7 +21,8 @@ class UserName extends React.Component{
   }
   async getUserName(){
     console.log(this.props.userRole);
-    const {name} = await getName(this.props.userRole,this.props.userID);
+    const resp = await getName(this.props.userRole, this.props.userID);
+    const name = resp ? resp.name : "something wrong";
     this.setState({
       loading:false,
       name:name,

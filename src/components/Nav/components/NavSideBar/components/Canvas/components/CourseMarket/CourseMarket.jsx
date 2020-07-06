@@ -3,6 +3,7 @@ import RenderLink from '../RenderLink';
 import CanvasLoading from '../CanvasLoading';
 import getSubjectList from './../../../../../../../../apis/getSubjectList';
 import styles from "./CourseMarket.module.scss";
+import CanvasTitleWrap from '../CanvasTitleWrapper';
 
 class CourseMarket extends React.Component {
   constructor(props) {
@@ -36,10 +37,12 @@ class CourseMarket extends React.Component {
         {this.state.loading ? (
           <CanvasLoading />
         ) : (
-          <RenderLink
-            RenderArray={this.state.subjectList}
-            CurrentNavItem={"SubjectCourse"}
-          /> 
+          <CanvasTitleWrap title={"Subjects"}>
+            <RenderLink
+              RenderArray={this.state.subjectList}
+              CurrentNavItem={"SubjectCourse"}
+            /> 
+          </CanvasTitleWrap >
         )}
       </div>
     );

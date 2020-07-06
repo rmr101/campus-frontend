@@ -2,15 +2,15 @@ import React from 'react';
 import styles from './Canvas.module.scss';
 import CourseMarket from "./components/CourseMarket";
 import Course from "./components/Course";
-
+import TeachingCourse from './components/TeachingCourse';
 
 const Canvas= ({current}) => {
 const renderCanvas = (current) =>{
   switch (current) {
     // case "Dashboard" :
     //   return <DashboardCanvas/>
-    // case "TeachingCourse" :
-    //   return <TeachingCourse/>
+    case "TeachingCourse" :
+      return <TeachingCourse/>
     // case "MarkSystem" :
     //   return <MarkSystem/>
     case "CourseMarket":
