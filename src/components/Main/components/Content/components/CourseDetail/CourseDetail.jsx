@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CourseDetail.module.scss";
-import FullWidthLayout from '../FullWidthLayout';
+import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 //this is so far a hard codeded version
 const CourseDetail = ({title,type}) => {
   console.log(type);

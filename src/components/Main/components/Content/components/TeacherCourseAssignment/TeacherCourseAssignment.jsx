@@ -3,7 +3,7 @@ import styles from "./TeacherCourseAssignment.module.scss";
 import RenderContentLink from "../RenderContentLink";
 import getAssignmentListByCourse from "../../../../../../apis/getAssignmentListByCourse";
 import Loading from "../Loading";
-import FullWidthLayout from "../FullWidthLayout";
+import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 
 
 class TeacherCourseAssignment extends React.Component {

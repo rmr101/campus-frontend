@@ -24,10 +24,9 @@ const handleError = (err) => {
     case 401:
       console.log("I am logging out due to 401");
       redirectToLogin();
-      break;
+      return Promise.reject(err);
     default:
       //TODO: 现在都log out 
-      redirectToLogin();
-      break;
+      return Promise.reject(err);
   }
 };

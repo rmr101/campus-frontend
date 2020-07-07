@@ -2,7 +2,7 @@ import React from "react";
 import studentService from "../../../../../../apis/studentService";
 import Button from "./../../../../../Button";
 import styles from "./StudentList.module.scss";
-import FullWidthLayout from '../FullWidthLayout';
+import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 
 class StudentList extends React.Component {
   constructor(props) {

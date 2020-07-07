@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 import { connect } from "react-redux";
 
-const Main=({pageID,title}) => {
+const Main = ({pageID,title}) => {
   const renderComponent = () => {
     return (<div className={styles.wrapper}>
       <div className={styles.header}>
