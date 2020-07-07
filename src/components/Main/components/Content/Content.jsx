@@ -5,7 +5,6 @@ import StudentList from "./components/StudentList";
 import TeacherCourseAssignment from "./components/TeacherCourseAssignment";
 import Profile from "./components/Profile";
 import CourseDetail from "./components/CourseDetail";
-import {connect} from "react-redux"
 import Dashboard from "./components/Dashboard";
 
 
@@ -27,12 +26,6 @@ const Content = ({pageID}) => {
         return <CourseDetail />;
     }
   }
-  
   return <div className={styles.wrapper}>{renderComponent()}</div>;
 }
-
-const mapStateToProps = (state) => ({
-  id: state.headerHistory.content.id,
-});
-const ContentContainer = connect(mapStateToProps)(Content);
-export default ContentContainer;
+export default Content;
