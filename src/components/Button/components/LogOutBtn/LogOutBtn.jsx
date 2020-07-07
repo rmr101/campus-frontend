@@ -5,8 +5,7 @@ import LogOut from './../../../../store/authentication/actions/LogOut.js';
 import { withRouter } from "react-router-dom";
 
 //TODO: 所有的button 都应该是独立的 component
-//TODO: 目前logout 不会清空jwt。
-const LogOutBtn = ({ logOut,history}) => (
+const LogOutBtn = ({logOut}) => (
   <button 
     className={`${styles.btn} + ${styles.logOutBtn}`} onClick={logOut}
     to = '/login'

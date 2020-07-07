@@ -39,7 +39,6 @@ Student submission upload, files stored in AWS S3.
 
 ![find](readme_img/upload.png)
 
-
 Add/Update/Delete Students/Teachers/Assignments/Courses/
 
 ![find](readme_img/update-popup.png)

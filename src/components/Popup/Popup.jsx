@@ -4,7 +4,7 @@ import Update from "./Update";
 import Create from "./Create";
 import Delete from "./Delete";
 import AdminCreateTeacher from "./AdminCreateTeacher";
-import UserChangePassword from "./UserChangePassword";
+import UserChangePassword from "./components/UserChangePassword/UserChangePassword";
 
 class Popup extends React.Component {
   constructor(props){
@@ -21,8 +21,8 @@ class Popup extends React.Component {
         return <Delete onClick={this.props.toggle} />;
       case "AdminCreateTeacher":
         return <AdminCreateTeacher onClick={this.props.toggle} />;
-      case "UserChangePassword":
-        return <UserChangePassword onClick={this.props.toggle} />;
+      case "CHANGE_PASSWORD":
+        return <UserChangePassword />;
       default:
         return null;
     }
