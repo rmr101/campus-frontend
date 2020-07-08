@@ -1,5 +1,5 @@
-$circle-color: #84a9ac;
-$white: #fff;
+@import '../Button/color';
+$default-circle-color: #84a9ac;
 
 .circle {
   width: 60px;
@@ -7,9 +7,14 @@ $white: #fff;
   position: relative;
   
 }
+.update{
+  .circleDot:before {
+    background-color:$update-color;
+  }
+}
 .white{
   .circleDot:before {
-    background-color: $white;
+    background-color: $hover-color;
   }
 }
 
@@ -26,7 +31,7 @@ $white: #fff;
     display: block;
     width: 15%;
     height: 15%;
-    background-color: $circle-color;
+    background-color: $default-circle-color;
     border-radius: 100%;
     animation: circle 1.2s infinite ease-in-out both; 
 }

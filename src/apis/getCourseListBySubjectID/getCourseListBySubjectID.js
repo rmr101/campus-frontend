@@ -9,6 +9,7 @@ export default (id) =>
   {
   const AuthCampusSever = Auth(CampusSever);
   return AuthCampusSever.get(`${url}${id}`)
-    .then((res) => res.data)
+    .then((res) => {
+      return res.data})
     .catch((e) => console.log(e));
   }

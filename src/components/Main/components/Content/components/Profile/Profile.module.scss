@@ -13,11 +13,18 @@
 .container{
   font-size: 1.2em;
   font-weight: 500;
-  margin: 5px 5px;
   color: $dark-color;
   display:flex;
 
 .heading{
     flex:1;
   }
+}
+
+.BtnContainer{
+  justify-content: center;
+}
+
+.noText{
+  color:$light-text-color;
 }

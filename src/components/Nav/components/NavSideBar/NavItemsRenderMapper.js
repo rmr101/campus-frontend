@@ -131,11 +131,6 @@ export const AdminConfig = [
            NavId: "Classroom",
          },
          {
-           icon: renderList.UserInfo,
-           title: "Profile",
-           NavId: "UserInfo",
-         },
-         {
            filler: true,
          },
          {

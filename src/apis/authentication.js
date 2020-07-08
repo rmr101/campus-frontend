@@ -6,5 +6,8 @@ import axios from 'axios';
 const baseURL = "http://localhost:8080";
 const AuthUrl = "/authenticate";
 
+
+// No interceptor login
 export const login = (username, password) =>
          axios.post(baseURL+AuthUrl, { username, password });
+

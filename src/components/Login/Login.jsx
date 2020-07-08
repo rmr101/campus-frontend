@@ -50,15 +50,20 @@ class Login extends React.Component {
         );
       })
       .catch((err) => {
-        //TODO: now its all considered as wrong password or username
+        switch(err.response.status){
+          case 401:
             this.setState({
               failLogin: true,
               loading: false,
             });
-        });
+            console.log(err.response);
+            break;
+          default:
+            console.log(err.response);
+            break
+        }});
        console.log("I have finish uploading it to the store");
 
-    //TODO: need a better handler.
   }
   render() {
     return (

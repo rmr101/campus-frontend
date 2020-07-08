@@ -3,7 +3,7 @@ import styles from "./Button.module.scss";
 import Popup from "./../Popup";
 import LogOutBtn from "./components/LogOutBtn";
 
-//TODO: 这个肯定要 重构的，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
+//TODO: 这个肯定要重构的，直接return 一个button 就好了，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
 class Button extends React.Component {
   constructor(props) {
     super(props);
@@ -17,8 +17,8 @@ class Button extends React.Component {
       seen: !this.state.seen,
     });
   }
-
   buttonType(type) {
+    console.log(type);
     switch (type) {
       case "UPLOAD":
         return styles.uploadBtn;
@@ -32,12 +32,12 @@ class Button extends React.Component {
         return styles.updateBtn;
       case "LOGOUT":
         return styles.logOutBtn;
-      case "AdminCreateTeacher":
-        return styles.createBtn;
-      case "UserChangePassword":
-        return styles.createBtn;
+      // case "AdminCreateTeacher":
+        // return styles.createBtn;
+      case "CHANGE_PASSWORD":
+        return styles.updateBtn;
       default:
-        return null;
+        return styles.createBtn;
     }
   }
   renderButton(type) {
@@ -46,7 +46,7 @@ class Button extends React.Component {
         return (
           <React.Fragment>
             <button
-              className={`${styles.btn} + ${this.buttonType("DELETE")}`}
+              className={`${styles.btn} ${this.buttonType("DELETE")}`}
               onClick={this.togglePop}
             >
               Delete
@@ -60,7 +60,7 @@ class Button extends React.Component {
         return (
           <React.Fragment>
             <button
-              className={`${styles.btn} + ${this.buttonType("UPDATE")}`}
+              className={`${styles.btn} ${this.buttonType("UPDATE")}`}
               onClick={this.togglePop}
             >
               Update
@@ -74,7 +74,7 @@ class Button extends React.Component {
         return (
           <React.Fragment>
             <button
-              className={`${styles.btn} + ${this.buttonType("CREATE")}`}
+              className={`${styles.btn} ${this.buttonType("CREATE")}`}
               onClick={this.togglePop}
             >
               Create
@@ -84,35 +84,33 @@ class Button extends React.Component {
             ) : null}
           </React.Fragment>
         );
-      case "AdminCreateTeacher":
+      // case "AdminCreateTeacher":
+      //   return (
+      //     <React.Fragment>
+      //       <button
+      //         className={`${styles.btn} ${this.buttonType(
+      //           "AdminCreateTeacher"
+      //         )}`}
+      //         onClick={this.togglePop}
+      //       >
+      //         Create New Teacher
+      //       </button>
+      //       {this.state.seen ? (
+      //         <Popup type={"AdminCreateTeacher"} toggle={this.togglePop} />
+      //       ) : null}
+      //     </React.Fragment>
+      //   );
+      case "CHANGE_PASSWORD":
         return (
           <React.Fragment>
             <button
-              className={`${styles.btn} + ${this.buttonType(
-                "AdminCreateTeacher"
-              )}`}
-              onClick={this.togglePop}
-            >
-              Create New Teacher
-            </button>
-            {this.state.seen ? (
-              <Popup type={"AdminCreateTeacher"} toggle={this.togglePop} />
-            ) : null}
-          </React.Fragment>
-        );
-      case "UserChangePassword":
-        return (
-          <React.Fragment>
-            <button
-              className={`${styles.btn} + ${this.buttonType(
-                "UserChangePassword"
-              )}`}
+              className={`${styles.btn} ${this.buttonType("CHANGE_PASSWORD")}`}
               onClick={this.togglePop}
             >
               Change Password
             </button>
             {this.state.seen ? (
-              <Popup type={"UserChangePassword"} toggle={this.togglePop} />
+              <Popup type={"CHANGE_PASSWORD"} toggle={this.togglePop} />
             ) : null}
           </React.Fragment>
         );
@@ -162,6 +160,36 @@ class Button extends React.Component {
         );
       case "LOGOUT":
         return <LogOutBtn />;
+<<<<<<< HEAD
+=======
+      case "SEARCH":
+        return (
+          <div className={styles.searchInput}>
+            <label htmlFor="Search">Search by: </label>
+            <input
+              id="search"
+              placeholder="Please Input studentID"
+              className={styles.searchInput}
+              type="text"
+              onChange={this.props.onChange}
+            />
+            <label htmlFor="OR"> OR: </label>
+            <input
+              id="search"
+              placeholder="Please Input studentName"
+              className={styles.searchInput}
+              type="text"
+              onChange={this.props.onChange}
+            />
+            <button
+              className={`${styles.btn} + ${this.buttonType("SEARCH")}`}
+              onClick={this.props.onClick}
+            >
+              Search
+            </button>
+          </div>
+        );
+>>>>>>> master
       default:
         return null;
     }

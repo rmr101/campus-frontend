@@ -4,11 +4,14 @@
   cursor: pointer;
   font-size: 20px;
   font-weight: 500;
-  margin: 5px 5px;
-  border-bottom: 2px solid $dark-color;
+  padding-left:10px;
+  padding-top: 10px;
+  padding-bottom:5px;
+  border-bottom: 1px solid $dark-color;
   color: $white-color;
   text-decoration: none;
   &:hover{
     color:$theme-color;
+    background-color: $lighten-dark-color;
   }
 }

@@ -18,7 +18,6 @@ class NavAvatar extends React.Component {
     this.changeAvatar = this.changeAvatar.bind(this);
   }
   toggleSelectionPanel() {
-    console.log("this got clicked");
     this.setState({
       selectionPanelShow: !this.state.selectionPanelShow,
     });

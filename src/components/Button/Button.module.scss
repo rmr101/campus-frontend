@@ -1,17 +1,10 @@
 @import './../../variable';
+@import './color';
 
-$delete-color:#e7305b;
-$update-color:#ffcb74;
-$create-color:#9bdeac;
-$upload-color:#b9ac92;
-$search-color:#2200b9;
-$confirm-color:#7aa5d2;
-$logout-color:#84a9ac;
-$hover-color:#fff;
 
 //TODO: 之后要去掉,因为这就是一个button而已
 .wrapper{
-  display: flex;
+  display: inline-flex;
 }
 
 .btn {

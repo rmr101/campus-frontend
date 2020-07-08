@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Header.module.scss";
-import { connect } from "react-redux";
 import Button from "../../../Button";
 
 const Header = ({
@@ -15,10 +14,5 @@ const Header = ({
   );
 }
 
-const mapSateToProps = (state) =>({
-  title: state.headerHistory.title,
-})
 
-const HeaderContainer = connect(mapSateToProps)(Header);
-
-export default HeaderContainer;
+export default Header;

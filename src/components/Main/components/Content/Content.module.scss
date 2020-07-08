@@ -1,9 +1,4 @@
-@import './content-variable';
 
 .wrapper{
-    //应该也要孩子来撑大的
-  width: 100%;
-  // 应该也要复用的,可以放到全局
   padding:30px 0;
-  border-bottom: solid 2px $border-color;
 }

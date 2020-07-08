@@ -1,0 +1,18 @@
+@import './../../../../../../variable';
+
+
+.wrapper{
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+}
+.container{
+  font-size: 20px;
+  font-weight: 500;
+  margin: 5px 5px;
+  color: $dark-color;
+  display:flex;
+  .heading{
+    flex:1;
+  }
+}
