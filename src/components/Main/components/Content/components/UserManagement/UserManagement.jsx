@@ -1,5 +1,5 @@
 import React from "react";
-import getName from "./../../../../../../apis/getName";
+import getUserInfo from "./../../../../../../apis/getUserInfo";
 import Button from "../../../../../Button";
 import SearchBar from "../../../../../SearchBar";
 import styles from "./UserManagement.module.scss";
@@ -19,7 +19,7 @@ class UserManagement extends React.Component {
   async getUserName() {
     console.log(this.state.role);
     try{
-    const nameList = await getName(this.state.role,this.state.search);
+    const nameList = await getUserInfo(this.state.role,this.state.search);
     console.log(nameList);
     this.setState({
       nameList: [nameList],
