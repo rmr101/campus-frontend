@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./FullWidthLayout.module.scss";
 import CourseDetail from './components/CourseDetail';
 import SubjectCourse from './../SubjectCourse';
-import StudentList from './../StudentList';
+import UserManagement from './../UserManagement';
 
 
 //TODO: To be refactored.
@@ -12,7 +12,7 @@ const FullWidthLayout = (props) => {
       case "SubjectCourse":
         return <SubjectCourse {...props} />;
       case "StudentList":
-        return <StudentList />;
+        return <UserManagement />;
       default:
         return <CourseDetail />;
     }
