@@ -15,7 +15,6 @@ class SubjectCourse extends React.Component {
       subjectId: 0,
       courseList: null,
       loading: true,
-      mounted: false,
     };
   }
 
@@ -43,11 +42,11 @@ class SubjectCourse extends React.Component {
     let array = this.state.courseList;
     return array.map((obj) => {
       // TODO: 后端乱加column 这里也会炸
-      let { name, id, subjectId, subject,...rest } = obj;
+      let { name, id, introduction } = obj;
       let RenderObj = {
         name: name,
         id: id,
-        ...rest,
+        introduction,
       };
       //TODO: subjectID is useless
       return (
