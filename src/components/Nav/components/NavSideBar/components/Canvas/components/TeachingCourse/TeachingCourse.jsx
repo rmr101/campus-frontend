@@ -16,24 +16,25 @@ class TeachingCourse extends React.Component {
     };
   }
 
+
   async getTeachingList() {
     const resp = await getTeachingList();
     // TODO: Protect from breaking the app
-    const teachingList = resp ? resp.courseList : [{}];
-    console.log(teachingList);
+    const teachingList = resp.hasOwnProperty("courseList") ? resp.courseList : [];
     this.setState({ teachingList: teachingList, loading: false });
   }
 
   componentDidMount() {
     this.getTeachingList();
   }
-  // specific tailored for the RenderLink component
-  // TODO: incase the backend has inconsistent string use.
+
   MapToRenderArray(array) {
-    return array.map((obj) => ({
+    return array.map((obj) => {
+      return {
       name: obj.name,
       id: obj.id,
-    }));
+    }
+  });
   }
   renderList(){
 

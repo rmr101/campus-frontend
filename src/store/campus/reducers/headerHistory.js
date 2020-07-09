@@ -8,7 +8,7 @@ export default (state = initState, action) => {
   switch (action.type) {
     case ADD_HEADER:
       let contentObj = addContent(action.toPageID, action.id); 
-      let newState = addHeader(action.event,action.headingTitle,contentObj);
+      let newState = addHeader(action.headingTitle,contentObj);
        console.log(newState);
       return newState;
     default:
@@ -17,8 +17,7 @@ export default (state = initState, action) => {
 };
 
   
-const addHeader = (event, headerTitle, contentObj) => {
-  event.preventDefault();
+const addHeader = (headerTitle, contentObj) => {
   return {
     title: headerTitle,
     content: contentObj,
@@ -45,7 +44,7 @@ const addContent = (toPageID, id) => {
     case "SubjectCourse":
       return { pageID: "SubjectCourse", id: id };
     case "TeacherCourseAssignment":
-      return { pageID: "TeacherCourseAssignment", courseID: id };
+      return { pageID: "TeacherCourseAssignment", id: id };
     //TODO: case "TeacherAssignment":
     //TODO: case "StudentAssignment":
     case "Course":

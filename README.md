@@ -3,6 +3,15 @@
 This is project three from JR Academy. We are team RMR101.
 Backend of this project can be found [here](https://github.com/rmr101/campus-backend).
 
+## How to interact with this app.
+
+1. Set up Backend and docker container for MySql image. Click [here](https://github.com/rmr101/campus-backend) for the backend application.
+2. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
+3. Change directory into `cd campus-frontend`.
+4. run `npm install` or `yarn install`
+5. `npm start` or `yarn start` , make sure you have set up the back end for this project.
+  
+
 ## About this Campus system.
 
 **Objective:** Deliver a Learning management system which includes:

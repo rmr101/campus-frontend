@@ -13,6 +13,7 @@ class NavSideBar extends React.Component{
       canvasOn:false,
       current:"Dashboard",
     }
+    console.log()
     this.handleClick=this.handleClick.bind(this);
   }
   readConfig(ConfigArray){
@@ -35,6 +36,9 @@ class NavSideBar extends React.Component{
     });
   };
 
+  componentDidMount(){
+    this.changeActive("Dashboard");
+  }
   renderNavItem(){
     switch (this.props.role) {
       case "student":
@@ -70,26 +74,25 @@ class NavSideBar extends React.Component{
              this.setCanvasStatus(true);
            }
   };
-  handleClick(event, name){
+  handleClick(name){
     switch (name) {
       case "Dashboard":
         this.changeActive(name);
         this.setCanvasStatus(false);
-        this.props.addHeader(event, "Dashboard", "Dashboard");
+        this.props.addHeader( "Dashboard", "Dashboard");
         break;
       case "Users":
         this.changeActive(name);
         //TODO: UserManagement 是ID 还是 Users 是？
-        this.props.addHeader(event, "UserManagement", "Users");
+        this.props.addHeader("UserManagement", "Users");
         this.setCanvasStatus(false);
         break;
       case "UserInfo":
         this.changeActive(name);
-        this.props.addHeader(event, "Profile", "UserInfo");
+        this.props.addHeader("Profile", "UserInfo");
         this.setCanvasStatus(false);
         break;
       default:
-        event.preventDefault();
         this.changeActive(name);
         this.clickToDisplayCanvas(name);
     }
@@ -116,8 +119,8 @@ class NavSideBar extends React.Component{
 
 
 const mapDispatchToProps = (dispatch) => ({
-  addHeader: (event, headingTitle, headingID) => 
-  dispatch(AddHeader(event, headingTitle, headingID))
+  addHeader: (headingTitle, headingID) => 
+  dispatch(AddHeader(headingTitle, headingID))
 });
 
 const mapStateToProps = (state) => ({

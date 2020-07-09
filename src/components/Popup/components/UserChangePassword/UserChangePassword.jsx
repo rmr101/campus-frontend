@@ -66,8 +66,9 @@ class UserChangePassword extends React.Component {
       const { value } = event.target;
       this.setState({
         [name]: value,
-      },() => {
-        this.noMissMatch()
+      },
+      () => {
+        return name === "confirmPassword" ? this.noMissMatch() : null
       });
     };
   }

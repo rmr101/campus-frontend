@@ -7,7 +7,6 @@ import AddHeader from "./../../../../../../store/campus/actions/AddHeader";
 const renderRest = (rest) => {
     let result = [];
     for (let props in rest) {
-      console.log(rest);
       result.push(renderColumn(rest[props]));
     }
     return result;
@@ -21,30 +20,31 @@ const renderColumn = (detail) => {
   );
 };
 
-const RenderContentLink = ({ onClick, RenderObj, toPageID }) => {
-  
+const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
   const { name, id, ...rest } = RenderObj;
   renderRest(rest);
 
-    return (
-      <div key={"name_" + Math.random()} className={styles.container}>
-        <div
-          onClick={(e) => onClick(e, name, toPageID, id)}
-          className={`${styles.links} ${styles.heading}`}
-        >
-          {name}
-        </div>
-        <div className={styles.heading}>
-          {id}
-        </div>
-        {renderRest(rest)}
-      </div>)
-  };
+  return (
+    <div key={"name_" + Math.random()} className={styles.container}>
+      <div
+        onClick={(e) => {
+          e.preventDefault();
+          onClick(name, toPageID, id);
+        }}
+        className={`${styles.links} ${styles.heading}`}
+      >
+        {name}
+      </div>
+      <div className={styles.heading}>{id}</div>
+      {renderRest(rest)}
+    </div>
+  );
+};
 
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: (event, headingTitle, contentType, id) => {
-    dispatch(AddHeader(event, headingTitle, contentType, id));
+  onClick: (headingTitle, contentType, id) => {
+    dispatch(AddHeader(headingTitle, contentType, id));
   },
 });
 

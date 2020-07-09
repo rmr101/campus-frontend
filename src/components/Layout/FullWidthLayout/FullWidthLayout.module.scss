@@ -1,9 +1,13 @@
 @import './../../../variable';
 
 .wrapper{
-  background-color: $white-color; 
-  border-radius: 5px;
-  box-shadow: 1px 1px 13px -11px rgba(0,0,0,0.75);
+  padding-bottom: 20px;
+  padding-top: 10px;
   border-bottom: solid 2px $border-color;
-  width: 100%;
+  width: 100%; 
+}
+.container{
+  border-radius: 5px;
+  background-color: $white-color;
+  position: relative; 
 }

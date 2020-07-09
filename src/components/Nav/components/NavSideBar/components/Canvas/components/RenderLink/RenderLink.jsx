@@ -7,8 +7,10 @@ import AddHeader from "../../../../../../../../store/campus/actions/AddHeader";
 const RenderLink = ({ RenderArray, onClick, toPageID }) =>
   RenderArray.map((obj) => (
     <div
-      onClick={(event) =>
-        onClick(event, capitalize(obj.name), toPageID, obj.id)
+      onClick={(event) =>{
+        event.preventDefault();
+        onClick(capitalize(obj.name), toPageID, obj.id)
+        }
       }
       className={styles.links}
       key={"id" + Math.random()}
@@ -20,8 +22,8 @@ const RenderLink = ({ RenderArray, onClick, toPageID }) =>
 const capitalize=(name)=>(name[0].toUpperCase() + name.slice(1,name.length))
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: (event, headingTitle, contentType,id) => {
-    dispatch(AddHeader(event, headingTitle, contentType, id));
+  onClick: (headingTitle, contentType,id) => {
+    dispatch(AddHeader(headingTitle, contentType, id));
   },
 });
 
