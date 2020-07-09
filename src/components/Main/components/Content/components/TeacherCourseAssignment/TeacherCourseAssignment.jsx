@@ -20,6 +20,7 @@ class TeacherCourseAssignment extends React.Component {
       acceptanceCriteria: "",
       content: "",
       title: "",
+      dueDate:"",
       publishLoading: false,
       publishSuccessful: false,
     };
@@ -49,9 +50,9 @@ class TeacherCourseAssignment extends React.Component {
   renderAssignmentList() {
     let array = this.state.assignmentList;
     return array.map((obj) => {
-      let { name, id, dueDate } = obj;
+      let { title, id, dueDate } = obj;
       let RenderObj = {
-        name: name,
+        name: title,
         id: id,
         dueDate,
       };
@@ -77,19 +78,23 @@ class TeacherCourseAssignment extends React.Component {
     const AC = this.state.acceptanceCriteria;
     const content = this.state.content;
     const courseID = this.state.courseAssignmentId;
+    const dueDate = this.state.dueDate;
     this.setState({
       publishLoading: true,
     });
-    await teacherPublishAssignment(title, AC, content, courseID)
-    .then(()=> {
+    await teacherPublishAssignment(title, AC, content, dueDate, courseID)
+      .then(() => {
         this.getAssignmentList();
         this.setState(
           {
             publishLoading: false,
             publishSuccessful: true,
           },
-          () => setTimeout(this.setState({ publishSuccessful: false }), 1000)
-        );}).catch(console.log);
+          () =>
+            setTimeout(() => this.setState({ publishSuccessful: false }), 2000)
+        );
+      })
+      .catch(console.log);
   }
   onSubmit() {
     this.publishAssignment();
@@ -111,7 +116,7 @@ class TeacherCourseAssignment extends React.Component {
         <FullWidthLayout>
           <div className={styles.AssignmentPostWrapper}>
             <form
-              className={`${styles.form} ${this.state.publishSuccessful?styles.successful:null}`}
+              className={`${styles.form} ${this.state.publishSuccessful && styles.successful}`}
               onSubmit={(e) => {
                 e.preventDefault();
                 this.onSubmit();
@@ -123,29 +128,35 @@ class TeacherCourseAssignment extends React.Component {
                   <Loader />
                 </div>
               ) : null}
-              <div className={styles.control +" "+ styles.dueDate}>
-                <div>
-                <label>Title: </label>
-                <input
-                  className={styles.oldPass}
-                  type="text"
-                  placeholder="Enter title for the assignment"
-                  autoComplete="on"
-                  maxLength={30}
-                  required
-                  onChange={(event) => this.handleValueChange("title")(event)}
-                />
+              <div className={styles.control + " " + styles.firstRow}>
+                <div className={styles.titleInput}>
+                  <label htmlFor="title">Title: </label>
+                  <input
+                    id="title"
+                    type="text"
+                    placeholder="Enter title for the assignment"
+                    maxLength={30}
+                    required
+                    onChange={(event) => this.handleValueChange("title")(event)}
+                  />
                 </div>
                 <div>
-                  <label for="start">Due Date:</label>
-                    <input type="date" id="start" name="trip-start"
-                  value="2018-07-22"
-                  min="2018-01-01" max="2018-12-31"/>
+                  <label htmlFor="dueDate">Due Date (11:59 pm):</label>
+                  <input
+                    onChange={(event) =>
+                      this.handleValueChange("dueDate")(event)
+                    }
+                    required
+                    type="date"
+                    id="dueDate"
+                    className={styles.dueDate}
+                  />
                 </div>
               </div>
               <div className={styles.control}>
-                <label>Criteria: </label>
+                <label htmlFor="AC">Criteria: </label>
                 <textarea
+                  id="AC"
                   className={styles.acceptance}
                   placeholder="Enter acceptance criteria"
                   required
@@ -155,8 +166,9 @@ class TeacherCourseAssignment extends React.Component {
                 ></textarea>
               </div>
               <div className={styles.control}>
-                <label>Content: </label>
+                <label htmlFor="content">Content: </label>
                 <textarea
+                  id="content"
                   className={styles.content}
                   placeholder="Enter assignment content"
                   required
@@ -168,6 +180,9 @@ class TeacherCourseAssignment extends React.Component {
               <button className={styles.button} type="submit">
                 Publish
               </button>
+              {this.state.publishSuccessful ? (
+                <small className={styles.successfulText}> Assignment published successfully. </small>
+              ) : null}
             </form>
           </div>
         </FullWidthLayout>
@@ -179,6 +194,7 @@ class TeacherCourseAssignment extends React.Component {
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
+  header: state.headerHistory.title,
 });
 const TeacherCourseAssignmentContainer = connect(mapStateToProps)(
   TeacherCourseAssignment

@@ -1,30 +1,21 @@
-// import CampusSever from "../../utils/CampusSever";
-// import { Auth } from "../../utils/CampusSever/AuthenticatedAccess";
-// import store from "../../store";
+import CampusSever from "../../utils/CampusSever";
+import { Auth } from "../../utils/CampusSever/AuthenticatedAccess";
+import store from "../../store";
 
 // // make it empty for now
 
-// const teacherUrl = "teachers/";
-// const studentUrl = "students/";
-// const passwordUrl = "/password";
+const assignmentUrl = "assignments/";
+const courseUrl = "courses/";
 
-// export default (title, AC, content, courseID) => {
-//   const state = store.getState();
-//   const uuid = state.Authentication.uuid;
-//   let url;
-//   switch (state.Authentication.role) {
-//     case "TEACHER":
-//       url = teacherUrl;
-//       break;
-//     case "STUDENT":
-//       url = studentUrl;
-//       break;
-//     default:
-//       break;
-//   }
-//   const AuthCampusSever = Auth(CampusSever);
-//   return AuthCampusSever.put(`${url}${uuid}${passwordUrl}`, {
-//     currentPassword: oldPassword,
-//     newPassword: newPassword,
-//   });
-// };
+export default (title, AC, content,dueDate, courseID) => {
+  const state = store.getState();
+  const name = state.userInfo.name;
+  const AuthCampusSever = Auth(CampusSever);
+  return AuthCampusSever.post(`${courseUrl}${courseID}/${assignmentUrl}`, {
+    title,
+    acceptanceCriteria: AC,
+    content,
+    // dueDate: `${dueDate} 11:59 pm`,
+    publisher: name,
+  });
+};

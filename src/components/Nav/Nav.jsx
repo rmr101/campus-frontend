@@ -5,6 +5,7 @@ import styles from "./Nav.module.scss";
 import {connect} from "react-redux";
 import NavAvatar from './components/NavAvatar';
 import getUserInfo from "../../apis/getUserInfo";
+import AddUserInfo from '../../store/campus/actions/AddUserInfo';
 
 const Loading = () => (
   <div className={styles.loading}>
@@ -23,11 +24,13 @@ class UserName extends React.Component{
     console.log(this.props.userRole);
     const resp = await getUserInfo(this.props.userRole, this.props.userID);
     const name = resp ? resp.name : "something wrong";
-    this.setState({
-      loading:false,
-      name:name,
-    })
-    console.log(name);
+    this.setState(
+      {
+        loading: false,
+        name: name,
+      },
+      () => this.props.addNameToRedux(name)
+    );
   }
   componentDidMount(){
     this.getUserName();
@@ -52,14 +55,14 @@ const NavFooter = ({ userRole }) => (
   <h3> {capitalize(userRole) + " Version"}</h3>
 );
 
-const Nav = ({ userRole, userID }) => {
+const Nav = ({ userRole, userID,addName }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <NavHeader />
       </div>
       <NavAvatar />
-      <UserName userRole={userRole} userID={userID} />
+      <UserName userRole={userRole} userID={userID} addNameToRedux={addName} />
       <div className={styles.sideBar}>
         <NavSidebar />
       </div>
@@ -76,5 +79,11 @@ const mapStateToProps = (state) => ({
   userRole: state.Authentication.role.toLowerCase(),
   userID: state.Authentication.uuid,
 });
-const NavContainer = connect(mapStateToProps ,null)(Nav);
+
+const mapDispatchToProps = (dispatch) => ({
+  addName: (name) => dispatch(AddUserInfo(name))
+})
+
+
+const NavContainer = connect(mapStateToProps, mapDispatchToProps)(Nav);
 export default NavContainer;
