@@ -6,6 +6,7 @@ import TeacherCourseAssignment from "./components/TeacherCourseAssignment";
 import Profile from "./components/Profile";
 import CourseDetail from "./components/CourseDetail";
 import Dashboard from "./components/Dashboard";
+import Assignment from './components/Assignment';
 
 
 const Content = ({pageID}) => {
@@ -22,6 +23,8 @@ const Content = ({pageID}) => {
         return <TeacherCourseAssignment />;
       case "UserInfo":
         return <Profile />;
+      case "Assignment":
+        return <Assignment />;
       default:
         return <CourseDetail />;
     }

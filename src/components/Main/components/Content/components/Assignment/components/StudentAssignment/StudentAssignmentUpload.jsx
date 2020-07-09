@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './../../../../../Button';
+import Button from '../../../../../../../Button';
 import S3 from "react-aws-s3";
 
 
@@ -36,9 +36,12 @@ const truncateName=(name)=> {
       name.slice(fileSuffixIndex - 5, fileSuffixIndex) +
       fileSuffix
     : name;}
+
 const FILE_LIMIT = 25;//MB
 const FILE_ACCEPT_TYPE ="application/pdf";
-class StudentAssignment extends React.Component {
+
+
+class StudentAssignmentUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -93,7 +96,7 @@ class StudentAssignment extends React.Component {
   }
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Button
           type={"UPLOAD"}
           handleConfirm={this.handleConfirm}
@@ -104,8 +107,8 @@ class StudentAssignment extends React.Component {
           overSize={fileSizeToMB(this.state.fileSize) > FILE_LIMIT}
           success={this.state.success}
         />
-      </div>
+      </React.Fragment>
     );
   }
 };
-export default StudentAssignment;
+export default StudentAssignmentUpload;

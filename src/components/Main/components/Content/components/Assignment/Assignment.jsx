@@ -1,92 +1,81 @@
 import React from 'react';
-import styles from './Profile.module.scss';
-import getUserInfo from "../../../../../../apis/getUserInfo";
-import Loading from '../Loading';
+import styles from './Assignment.module.scss';
+import getAssignmentDetail from "../../../../../../apis/getAssignmentDetail";
+import Loader from '../../../../../Loader';
 import {connect} from 'react-redux';
-import HalfWidthLayout from '../../../../../Layout/HalfWidthLayout/HalfWidthLayout';
-import Button from "../../../../../Button";
+import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
+import HalfWidthLayout from '../../../../../Layout/HalfWidthLayout';
+import StudentAssignmentUpload from './components/StudentAssignment';
 
-//TODO: 把名字写到redux里。
-class Profile extends React.Component {
+class Assignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: null,
+      assignmentDetail: null,
       loading: true,
     };
   }
-  async getUserInfo() {
-
-    const resp = await getUserInfo(this.props.userRole, this.props.userID);
-    if (this.props.userRole === "student") {
-      const userInfo = resp ? resp : {name:"Loading ..."};
+  async getAssignment() {
+    const {id,courseID} = this.props;
+    console.log( id, courseID );
+    const { assignment } = await getAssignmentDetail(id, courseID);
       this.setState({
-        userInfo: userInfo,
+        assignmentDetail: assignment,
         loading: false,
       });
-      console.log(userInfo);
-    } else if (this.props.userRole === "teacher") {
-      const userInfo = resp ? resp : { name: "Loading ..." };
-      this.setState({
-        userInfo: userInfo,
-        loading: false,
-      });
-      console.log(userInfo);
-    }
-
   }
   componentDidMount() {
-    this.getUserInfo();
+    this.getAssignment();
   }
+  renderAssignmentDetail(){
+    const {title,courseName,dueDate,acceptanceCriteria,content}=this.state.assignmentDetail
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.title}>
+          {courseName} - {title}
+        </div>
+        <div className={styles.container}>
+          <div className={styles.dueDate}>Due: {dueDate} 11:59 pm </div>
+          <div className={styles.subHeading}>Acceptance Criteria: </div>
+          <p className={styles.paragraph}> {acceptanceCriteria} </p>
+          <div className={styles.subHeading}>Content: </div>
+          <p className={styles.paragraph}> {content} </p>
+        </div>
+      </div>
+    );}
+  
 
   render() {
     return (
-      <div className={styles.wrapper}>
-        {this.state.loading ? (
-          <Loading />
-        ) : (
-          <React.Fragment>
-            {/* for title display */}
-            {this.state.userInfo.hasOwnProperty("title") ? (
-              <HalfWidthLayout title={"Title"} background>
-                <div className={styles.container}>
-                  {this.state.userInfo.title !== null ? (
-                    this.state.userInfo.title
-                  ) : (
-                    <span className={styles.noText}> No Title.</span>
-                  )}
-                </div>
-              </HalfWidthLayout>
-            ) : null}
-            {/* for intro display */}
-            {this.state.userInfo.hasOwnProperty("introduction") ? (
-              <HalfWidthLayout title={"Intro"} description={"Intro"} background>
-                <div className={styles.container}>
-                  {this.state.userInfo.title !== null ? (
-                    this.state.userInfo.introduction
-                  ) : (
-                    <span className={styles.noText}> No Introduction.</span>
-                  )}
-                </div>
-              </HalfWidthLayout>
-            ) : null}
-            <HalfWidthLayout title={"Name"} description={"Intro"} background >
-              <div className={styles.container}>{this.state.userInfo.name}</div>
-            </HalfWidthLayout>
-            <HalfWidthLayout title={"Change Password"}>
-              <div className={styles.BtnContainer + " " + styles.container}>
-                <Button type={"CHANGE_PASSWORD"} />
-              </div>
-            </HalfWidthLayout>
-          </React.Fragment>
-        )}
-      </div>
+      <React.Fragment>
+        <FullWidthLayout>
+          {this.state.loading ? (
+            <div className={styles.loadingContainer}>
+              <Loader />
+            </div>
+          ) : (
+            this.renderAssignmentDetail()
+          )}
+        </FullWidthLayout>
+  {/* TODO: put this back for student */}
+        {/* {this.props.userRole === "STUDENT"? */}
+        <HalfWidthLayout
+          title={"Upload you file"}
+          description={
+            "File size must be less than 25MB. Only .pdf type is accepted"
+          }
+        >
+          <StudentAssignmentUpload />
+        </HalfWidthLayout>
+        {/* {/* :null} */} 
+      </React.Fragment>
     );
   }
 };
 const mapStateToProps = (state) => ({
-  userRole: state.Authentication.role.toLowerCase(),
-  userID: state.Authentication.uuid,
+  id: state.headerHistory.content.id,
+  userRole : state.Authentication.role.toLowerCase(),
+  courseID: state.headerHistory.content.courseID,
 });
-const ProfileContainer = connect(mapStateToProps, null)(Profile);
-export default ProfileContainer;
+const AssignmentContainer = connect(mapStateToProps)(Assignment);
+export default AssignmentContainer;

@@ -54,6 +54,7 @@ class TeacherCourseAssignment extends React.Component {
       let RenderObj = {
         name: title,
         id: id,
+        secondID: this.props.id,
         dueDate: dueDate + " 11:59 pm ",
       };
       return (

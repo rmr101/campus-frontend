@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Button.module.scss";
 import Popup from "./../Popup";
 import LogOutBtn from "./components/LogOutBtn";
+import UploadBtn from "./components/UploadBtn";
 
 //TODO: 这个肯定要重构的，直接return 一个button 就好了，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
 class Button extends React.Component {
@@ -20,10 +21,6 @@ class Button extends React.Component {
   buttonType(type) {
     console.log(type);
     switch (type) {
-      case "UPLOAD":
-        return styles.uploadBtn;
-      case "CONFIRM":
-        return styles.confirmBtn;
       case "DELETE":
         return styles.deleteBtn;
       case "UPDATE":
@@ -32,8 +29,6 @@ class Button extends React.Component {
         return styles.updateBtn;
       case "SEARCH":
         return styles.searchBtn;
-      // case "AdminCreateTeacher":
-        // return styles.createBtn;
       case "CHANGE_PASSWORD":
         return styles.updateBtn;
       default:
@@ -84,22 +79,6 @@ class Button extends React.Component {
             ) : null}
           </React.Fragment>
         );
-      // case "AdminCreateTeacher":
-      //   return (
-      //     <React.Fragment>
-      //       <button
-      //         className={`${styles.btn} ${this.buttonType(
-      //           "AdminCreateTeacher"
-      //         )}`}
-      //         onClick={this.togglePop}
-      //       >
-      //         Create New Teacher
-      //       </button>
-      //       {this.state.seen ? (
-      //         <Popup type={"AdminCreateTeacher"} toggle={this.togglePop} />
-      //       ) : null}
-      //     </React.Fragment>
-      //   );
       case "CHANGE_PASSWORD":
         return (
           <React.Fragment>
@@ -115,49 +94,7 @@ class Button extends React.Component {
           </React.Fragment>
         );
       case "UPLOAD":
-        return (
-          <div className={styles.uploadContainer}>
-            {/* hide this input  */}
-            <input
-              id="UPLOAD"
-              className={styles.uploadInput}
-              type="file"
-              onChange={this.props.onChange}
-            />
-            <label htmlFor="UPLOAD" className={styles.uploadLabel}>
-              <div className={`${styles.btn} + ${this.buttonType("UPLOAD")}`}>
-                {this.props.loaded ? this.props.fileName : "Upload"}
-              </div>
-            </label>
-            {this.props.loaded &&
-            !this.props.wrongType &&
-            !this.props.overSize &&
-            !this.props.success ? (
-              <button
-                className={`${styles.btn} + ${this.buttonType("CONFIRM")}`}
-                onClick={(e) => this.props.handleConfirm(e)}
-              >
-                Confirm
-              </button>
-            ) : null}
-            <div className={styles.floatWarning}>
-              {this.props.wrongType ? (
-                <div className={styles.warningText}>
-                  X Only support .pdf format. Please uploaded again.
-                </div>
-              ) : null}
-              {this.props.overSize ? (
-                <div className={styles.warningText}>
-                  X Only support file size less than 25 MB. Please uploaded
-                  again.
-                </div>
-              ) : null}
-              {this.props.success ? (
-                <div className={styles.successText}>Upload Successfully.</div>
-              ) : null}
-            </div>
-          </div>
-        );
+        return <UploadBtn {...this.props} />;
       case "LOGOUT":
         return <LogOutBtn />;
       case "SEARCH":

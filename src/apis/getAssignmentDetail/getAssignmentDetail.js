@@ -1,17 +1,14 @@
 import CampusSever from "../../utils/CampusSever";
 import { Auth } from "../../utils/CampusSever/AuthenticatedAccess";
 
-const url = "/courses/";
-const query = {
-  params: {
-    detail: "assignments",
-  },
-};
-export default (id) =>
-  {
-  console.log("I got run");
+// make it empty for now
+
+const coursesUrl = "/courses/";
+const assignmentUrl = "/assignments/";
+
+export default (id,courseID) => {
   const AuthCampusSever = Auth(CampusSever);
-  return AuthCampusSever.get(`${url}${id}`,query)
+  return AuthCampusSever.get(`${coursesUrl}${courseID}${assignmentUrl}${id}`)
     .then((res) => res.data)
     .catch((e) => console.log(e));
-  }
+};

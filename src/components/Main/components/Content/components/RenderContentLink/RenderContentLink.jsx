@@ -21,15 +21,14 @@ const renderColumn = (detail) => {
 };
 
 const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
-  const { name, id, ...rest } = RenderObj;
-  renderRest(rest);
-
+  let { name, id, ...restRaw } = RenderObj;
+  let { secondID, ...rest } = restRaw.hasOwnProperty("secondID") ? restRaw : 0;
   return (
     <div key={"name_" + Math.random()} className={styles.container}>
       <div
         onClick={(e) => {
           e.preventDefault();
-          onClick(name, toPageID, id);
+          onClick(name, toPageID, id , secondID);
         }}
         className={`${styles.links} ${styles.heading}`}
       >
@@ -43,8 +42,8 @@ const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: (headingTitle, contentType, id) => {
-    dispatch(AddHeader(headingTitle, contentType, id));
+  onClick: (headingTitle, contentType, id, secondID) => {
+    dispatch(AddHeader(headingTitle, contentType, id, secondID));
   },
 });
 
