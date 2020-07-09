@@ -54,7 +54,7 @@ class TeacherCourseAssignment extends React.Component {
       let RenderObj = {
         name: title,
         id: id,
-        dueDate,
+        dueDate: dueDate + " 11:59 pm ",
       };
       return (
         <RenderContentLink

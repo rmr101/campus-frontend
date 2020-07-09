@@ -15,7 +15,7 @@ export default (title, AC, content,dueDate, courseID) => {
     title,
     acceptanceCriteria: AC,
     content,
-    // dueDate: `${dueDate} 11:59 pm`,
+    dueDate,
     publisher: name,
   });
 };
