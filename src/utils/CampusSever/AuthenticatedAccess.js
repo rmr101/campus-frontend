@@ -12,7 +12,6 @@ const enrichCampusSeverWithJWT = (config) =>
 }
 
 export const Auth = (AxiosInstance) => {
-  console.log("I am enriching jwt");
   AxiosInstance.interceptors.request.use(enrichCampusSeverWithJWT);
   // Error management //
   AxiosInstance.interceptors.response.use(res=>res,handleError);
@@ -26,7 +25,6 @@ const handleError = (err) => {
       redirectToLogin();
       return Promise.reject(err);
     default:
-      //TODO: 现在都log out 
       return Promise.reject(err);
   }
 };

@@ -6,8 +6,7 @@ import Loading from '../Loading';
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import {connect} from 'react-redux';
 
-//TODO: 要用thunk
-// 下面的state change 他就会re-render了
+
 class SubjectCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +18,10 @@ class SubjectCourse extends React.Component {
   }
 
   async getCourseList() {
-    await this.setState({
+    this.setState({
       loading: true,
     });
-    const {courseList} = await getCourseListBySubjectID(this.props.id);
+    const { courseList } = await getCourseListBySubjectID(this.props.id);
     this.setState({
       courseList: courseList,
       loading: false,
@@ -32,7 +31,6 @@ class SubjectCourse extends React.Component {
     if(this.state.subjectId !== this.props.id){
       this.setState({ subjectId: this.props.id }, () => this.getCourseList());
     }
-    console.log(this.state.subjectId);
   }
   componentDidMount() {
     this.getCourseList();
@@ -41,14 +39,12 @@ class SubjectCourse extends React.Component {
   renderCoursesList() {
     let array = this.state.courseList;
     return array.map((obj) => {
-      // TODO: 后端乱加column 这里也会炸
       let { name, id, introduction } = obj;
       let RenderObj = {
         name: name,
         id: id,
         introduction,
       };
-      //TODO: subjectID is useless
       return (
         <RenderContentLink
           key={"SubjectCourse" + Math.random()}

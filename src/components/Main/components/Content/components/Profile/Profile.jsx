@@ -60,7 +60,7 @@ class Profile extends React.Component {
             ) : null}
             {/* for intro display */}
             {this.state.userInfo.hasOwnProperty("introduction") ? (
-              <HalfWidthLayout title={"Intro"} background>
+              <HalfWidthLayout title={"Intro"} description={"Intro"} background>
                 <div className={styles.container}>
                   {this.state.userInfo.title !== null ? (
                     this.state.userInfo.introduction
@@ -70,7 +70,7 @@ class Profile extends React.Component {
                 </div>
               </HalfWidthLayout>
             ) : null}
-            <HalfWidthLayout title={"Name"} background>
+            <HalfWidthLayout title={"Name"} description={"Intro"} background >
               <div className={styles.container}>{this.state.userInfo.name}</div>
             </HalfWidthLayout>
             <HalfWidthLayout title={"Change Password"}>
