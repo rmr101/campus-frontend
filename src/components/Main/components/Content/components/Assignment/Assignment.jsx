@@ -56,16 +56,15 @@ class Assignment extends React.Component {
             this.renderAssignmentDetail()
           )}
         </FullWidthLayout>
-        {this.props.userRole === "STUDENT"?
-        <HalfWidthLayout
-          title={"Upload you file"}
-          description={
-            "File size must be less than 25MB. Only .pdf type is accepted"
-          }
-        >
-          <StudentAssignmentUpload />
-        </HalfWidthLayout>
-        :null}
+        {this.props.userRole === "student" ? (
+          <HalfWidthLayout
+            title={"Upload File"}
+            description={
+              "File must be less than 25MB and only PDF is accepted." }
+          >
+            <StudentAssignmentUpload />
+          </HalfWidthLayout>
+        ) : null}
       </React.Fragment>
     );
   }

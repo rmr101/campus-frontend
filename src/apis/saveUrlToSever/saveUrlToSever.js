@@ -5,8 +5,7 @@ const studentUrl = "/students";
 const assignmentUrl = "/assignments/";
 
 export default (location,id) => {
+  const data = { attachmentUrl: location };
   const AuthCampusSever = Auth(CampusSever);
-  return AuthCampusSever.put(`${studentUrl}${assignmentUrl}${id}`, {
-    data: { location },
-  })
+  return AuthCampusSever.put(`${studentUrl}${assignmentUrl}${id}`,data);
 };

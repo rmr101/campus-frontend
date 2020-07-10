@@ -4,6 +4,15 @@ import { connect } from "react-redux";
 import AddHeader from "./../../../../../../store/campus/actions/AddHeader";
 
 
+const sortInRenderOrder=(unordered)=>{
+  const ordered = {};
+  Object.keys(unordered)
+    .sort()
+    .forEach((key) => 
+      ordered[key] = unordered[key]
+    );
+  return ordered;
+}
 const renderRest = (rest) => {
     let result = [];
     for (let props in rest) {
@@ -22,6 +31,7 @@ const renderColumn = (detail) => {
 
 const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
   let { name, id, secondID, ...rest } = RenderObj;
+  rest = sortInRenderOrder(rest);
   return (
     <div key={"name_" + Math.random()} className={styles.container}>
       <div

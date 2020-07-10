@@ -3,7 +3,7 @@ import Button from '../../../../../../../Button';
 import S3 from "react-aws-s3";
 import Loader from '../../../../../../../Loader';
 import {connect} from 'react-redux';
-
+import saveUrlToSever from "../../../../../../../../apis/saveUrlToSever";
 // import the AWS S3 key
 let SecretAccessKey, AccessKeyID;
 try {
@@ -67,20 +67,20 @@ class StudentAssignmentUpload extends React.Component {
       file: e.target.files[0],
     });
   }
-  // async saveUrl(location,id){
-  //   await saveUrlToSever(location, id)
-  //     .then(() =>
-  //       this.setState(
-  //         {
-  //           loaded: false,
-  //           success: true,
-  //           loading: false,
-  //         },
-  //         () => setTimeout(() => this.setState({ success: false }), 3000)
-  //       )
-  //     )
-  //     .catch(console.log);
-  // }
+  async saveUrl(location,id){
+    await saveUrlToSever(location, id)
+      .then(() =>
+        this.setState(
+          {
+            loaded: false,
+            success: true,
+            loading: false,
+          },
+          () => setTimeout(() => this.setState({ success: false }), 3000)
+        )
+      )
+      .catch(console.log);
+  }
 
   handleConfirm(e) {
     e.preventDefault();

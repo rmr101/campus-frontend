@@ -20,12 +20,8 @@ class StudentAssignment extends React.Component {
     this.setState({
       loading: true,
     });
-    const { assignmentList } = await getStudentAssignmentList();
-      //
-      // TODO: 想测试 empty 的时候 解封这个,{assignmentList:[]};
-      // TODO： 还要filter 已经交了的作业
-      // TODO: Loader 居中没做。
-      // 
+     const { assignmentList } = await getStudentAssignmentList();
+
       this.setState({
         assignmentList: assignmentList,
         loading: false,
@@ -47,6 +43,8 @@ class StudentAssignment extends React.Component {
         <div className={styles.heading}>Assignment Name:</div>
         <div className={styles.heading}>Assignment ID:</div>
         <div className={styles.heading}>Assignment Due:</div>
+        <div className={styles.heading}>Submitted status:</div>
+        <div className={styles.heading}>Result status:</div>
       </div>,
       this.renderAssignmentList(),
     ];
@@ -55,13 +53,16 @@ class StudentAssignment extends React.Component {
   }
   renderAssignmentList() {
     let array = this.state.assignmentList;
+    //a_ for sorting purpose
     return array.map((obj) => {
-      let { id } = obj;
+      let { id, score, submitted, scored } = obj;
       let { title, dueDate } = obj.assignment;
       let RenderObj = {
         name: title,
         id: id,
-        dueDate: dueDate + " 11:59 pm ",
+        a_dueDate: dueDate + " 11:59 pm ",
+        b_submitted: submitted ? "Done" : "No Submitted",
+        c_scored: scored ? score : "Not Marked yet",
       };
 
       return (
@@ -79,10 +80,11 @@ class StudentAssignment extends React.Component {
       <React.Fragment>
         <FullWidthLayout>
           <div className={styles.wrapper}>
-            {this.state.loading ? <Loader /> 
-
+            {this.state.loading ? 
+            <div className={styles.LoadingWrapper}>
+              <Loader />
+            </div>
             : this.renderResult()}
-            
           </div>
         </FullWidthLayout>
       </React.Fragment>
