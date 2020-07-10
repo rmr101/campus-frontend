@@ -1,28 +1,27 @@
 import React from 'react';
 import styles from "./NavAvatar.module.scss";
-import {faUserTie} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SelectAvatar from './components/SelectAvatar';
 import avatarStyles from './components/SelectAvatar/SelectAvatar.module.scss';
-// import putAvatarToSever from '../../../../apis/putAvatarToSever';
-// import getUserInfo from "../../../../apis/getUserInfo";
+import { faUserTie, faUserGraduate,faUserSecret } from "@fortawesome/free-solid-svg-icons";
+import getUserInfo from "../../../../apis/getUserInfo";
 
-
-// const initialState = {
-//       icon: faUserTie,
-//       color: avatarStyles.green,
-//       background: avatarStyles.light,
-//     };
+const IconObj = {
+  faUserTie,
+  faUserGraduate,
+  faUserSecret,
+};
 
 class NavAvatar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectionPanelShow: false,
-      icon: faUserTie,
-      color: avatarStyles.green,
-      background: avatarStyles.light,
+      icon: "faUserTie",
+      color: "green",
+      background: "light",
     };
+   
     this.toggleSelectionPanel = this.toggleSelectionPanel.bind(this);
     this.changeAvatar = this.changeAvatar.bind(this);
   }
@@ -32,7 +31,6 @@ class NavAvatar extends React.Component {
     });
   }
   changeAvatar(icon, color, background) {
-    // const avatar = { icon, color, background };
     this.setState(
       {
         selectionPanelShow: false,
@@ -41,26 +39,35 @@ class NavAvatar extends React.Component {
         background: background,
       },
     );
+    
   }
-  // async saveAvatar(avatar) {
-  //   await putAvatarToSever(avatar);
-  // }
-  // async getAvatar(){
-  //   const { avatar } = await getUserInfo();
-  //   console.log(avatar);
-  //   // avatar? this.setState(initialState) : this.setState(JSON.parse(avatar));
-  // }
-  // componentDidMount(){
-  //   this.getAvatar();
-  // }
+
+  async getAvatar(){
+    const {userRole, userID} = this.props
+    const {avatar} = await getUserInfo(userRole, userID);
+    const avatarArray = avatar?avatar.split(" "):[];
+    console.log(avatarArray);
+    if(avatarArray.length !== 0){
+      this.setState({
+        icon: avatarArray[0],
+        color: avatarArray[1],
+        background: avatarArray[2],
+      })
+    }
+  }
+  componentDidMount(){
+    this.getAvatar();
+  }
   render() {
     return (
-      <div className={`${styles.wrapper} ${this.state.background}`}>
+      <div
+        className={`${styles.wrapper} ${avatarStyles[this.state.background]}`}
+      >
         <div
-          className={`${styles.avatar} ${this.state.color}`}
+          className={`${styles.avatar} ${avatarStyles[this.state.color]}`}
           onClick={this.toggleSelectionPanel}
         >
-          <FontAwesomeIcon icon={this.state.icon} />
+          <FontAwesomeIcon icon={IconObj[this.state.icon]} />
         </div>
         {this.state.selectionPanelShow ? (
           <SelectAvatar

@@ -14,12 +14,13 @@ export default (avatar) =>{
   switch(role){
     case "student":
       return AuthCampusSever.put(studentUrl + `/${uuid}`, {
-        avatar:"hello"})
+        avatar,})
         .then(() => console.log(avatar))
         .catch(console.log);
     case "teacher":
       return AuthCampusSever.put(teacherUrl + `/${uuid}`, {
-        avatar: "hello",
+        avatar,
+        title:"null",
       })
         .then(() => console.log(avatar))
         .catch(console.log);

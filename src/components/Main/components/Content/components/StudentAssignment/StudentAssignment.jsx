@@ -11,6 +11,7 @@ class StudentAssignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      displayOption:"all",
       renderArray: null,
       assignmentList: null,
       loading: true,
@@ -36,10 +37,14 @@ class StudentAssignment extends React.Component {
   renderOption(option) {
     switch (option) {
       case "all":
-        this.setState({ renderArray: this.state.assignmentList });
+        this.setState({
+          renderArray: this.state.assignmentList,
+          displayOption: "all",
+        });
         break;
       case "notSubmitted":
         this.setState({
+          displayOption: "notSubmitted",
           renderArray: this.state.assignmentList.filter(
             (obj) => !obj.submitted
           ),
@@ -47,6 +52,7 @@ class StudentAssignment extends React.Component {
         break;
       case "scored":
         this.setState({
+          displayOption: "scored",
           renderArray: this.state.assignmentList.filter((obj) => obj.scored),
         });
         break;
@@ -115,33 +121,44 @@ class StudentAssignment extends React.Component {
                       id="all"
                       type="radio"
                       name="display"
+                      checked={
+                        this.state.displayOption === "all" ? true : false
+                      }
                       onChange={() => this.renderOption("all")}
                     />
                     <label className={styles.radioLabel} htmlFor="all">
-                      Display All
+                      All
                     </label>
                   </div>
                   <div className={styles.radio}>
-                  <input
-                    id="notSubmitted"
-                    type="radio"
-                    name="display"
-                    onChange={() => this.renderOption("notSubmitted")}
-                  />
-                  <label htmlFor="notSubmitted" className={styles.radioLabel}>
-                    Display only not submitted
-                  </label>
+                    <input
+                      id="notSubmitted"
+                      type="radio"
+                      name="display"
+                      checked={
+                        this.state.displayOption === "notSubmitted"
+                          ? true
+                          : false
+                      }
+                      onChange={() => this.renderOption("notSubmitted")}
+                    />
+                    <label htmlFor="notSubmitted" className={styles.radioLabel}>
+                      Only not submitted
+                    </label>
                   </div>
                   <div className={styles.radio}>
-                  <input
-                    id="scored"
-                    type="radio"
-                    name="display"
-                    onChange={() => this.renderOption("scored")}
-                  />
-                  <label htmlFor="scored" className={styles.radioLabel}>
-                    Display only marked
-                  </label>
+                    <input
+                      id="scored"
+                      type="radio"
+                      name="display"
+                      checked={
+                        this.state.displayOption === "scored" ? true : false
+                      }
+                      onChange={() => this.renderOption("scored")}
+                    />
+                    <label htmlFor="scored" className={styles.radioLabel}>
+                      Only marked
+                    </label>
                   </div>
                 </div>
                 {this.renderResult(this.state.renderArray)}

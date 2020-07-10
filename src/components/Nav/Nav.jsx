@@ -18,7 +18,6 @@ class UserName extends React.Component{
     this.state={
       loading:true,
       name:null,
-      avatar:null,
     }
   }
   async getUserName(){
@@ -62,7 +61,7 @@ const Nav = ({ userRole, userID,addName }) => {
       <div className={styles.header}>
         <NavHeader />
       </div>
-      <NavAvatar/>
+      <NavAvatar userRole={userRole} userID={userID} />
       <UserName userRole={userRole} userID={userID} addNameToRedux={addName} />
       <div className={styles.sideBar}>
         <NavSidebar />
