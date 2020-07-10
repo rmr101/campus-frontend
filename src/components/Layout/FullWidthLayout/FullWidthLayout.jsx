@@ -3,7 +3,9 @@ import styles from "./FullWidthLayout.module.scss";
 
 const FullWidthLayout = ({children}) => 
     <div className={styles.wrapper}>
-     {children}
+        <div className={styles.container}>
+            {children}
+        </div>
     </div>
 
 export default FullWidthLayout;

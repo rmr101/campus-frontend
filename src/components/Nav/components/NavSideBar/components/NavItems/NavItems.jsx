@@ -8,7 +8,9 @@ const NavItems = ({title,icon,collapse,onClick,active,NavId}) => {
       className={`${styles.wrapper} ${
         active ? styles.active : styles.inActive
       }`}
-      onClick={(e) => onClick(e, NavId)}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(NavId);}}
     >
       <div className={styles.icon}>
         <FontAwesomeIcon icon={icon} />
