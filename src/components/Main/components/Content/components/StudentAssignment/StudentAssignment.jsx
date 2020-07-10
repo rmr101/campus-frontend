@@ -1,111 +1,104 @@
 import React from 'react';
-import Button from './../../../../../Button';
-import S3 from "react-aws-s3";
+import styles from "./StudentAssignment.module.scss";
+import getStudentAssignmentList from "../../../../../../apis/getStudentAssignmentList";
+import Loader from '../../../../../Loader';
+import {connect} from 'react-redux';
+import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
+import NoContent from '../NoContent/NoContent';
+import RenderContentLink from '../RenderContentLink';
 
-
-// import the AWS S3 key
-let SecretAccessKey, AccessKeyID;
-try {
-    const AWSKey = require("./JackyAWSKey");
-    console.log(AWSKey);
-    SecretAccessKey = AWSKey.SecretAccessKey;
-    AccessKeyID = AWSKey.AccessKeyID;
-}catch(err){
-  console.log("You need the IAM key to access to AWS S3, ask jacky for that ^.^;")
-  SecretAccessKey = "";
-  AccessKeyID= "";
-}
-
-const config = {
-  bucketName: "campus-file-system",
-  dirName: "assignment" /* optional */,
-  region: "ap-southeast-2",
-  accessKeyId: AccessKeyID,
-  secretAccessKey: SecretAccessKey,
-};
-const ReactS3Client = new S3(config);
-/*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
-
-const fileSizeToMB=(size)=> (((size)/1024)/1024).toFixed(0);
-const truncateName=(name)=> {
-  let fileSuffixIndex = name.lastIndexOf(".")
-  let fileSuffix = name.slice(fileSuffixIndex - 1, name.length);
-  return name.length > 16
-    ? name.slice(0, 6) +
-      "..." +
-      name.slice(fileSuffixIndex - 5, fileSuffixIndex) +
-      fileSuffix
-    : name;}
-const FILE_LIMIT = 25;//MB
-const FILE_ACCEPT_TYPE ="application/pdf";
 class StudentAssignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
-      file: null,
-      fileName: "",
-      fileType: "application/pdf",
-      fileSize: 0,
-      success: false,
-      uploadClickable: true,
+      assignmentList: null,
+      loading: true,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleConfirm = this.handleConfirm.bind(this);
   }
-  handleChange(e) {
-    console.log(e.target.files.length);
-    e.target.files.length === 0? console.log("file is not included") : 
-    this.setState({
-      loaded: true,
-      success: false,
-      fileName: e.target.files[0] ? e.target.files[0].name : "",
-      fileSize: e.target.files[0] ? e.target.files[0].size : 0,
-      fileType: e.target.files[0] ? e.target.files[0].type : "application/pdf",
-      file: e.target.files[0],
-    });
-  }
-  //TODO: pass the secret key to team mate
-  handleConfirm(e) {
-    e.preventDefault();
-    /* This is optional */
-    const newFileName = new Date();
 
-    //TODO: pass the secret key to team mate
-    this.state.uploadClickable ? ReactS3Client
-      .uploadFile(this.state.file, newFileName)
-      .then((data) => {
-        console.log(data);
-        this.setState(
-          {
-            loaded: false,
-            success: true,
-            uploadClickable: true,
-          },
-          () => setTimeout(() => this.setState({ success: false }), 3000)
-        );
-      })
-      .catch((err) => console.error(err)):console.log("Please wait till upload finish...");
-      //this is to prevent uploaded multiple time.
-      this.setState ({
-        uploadClickable: false,
+  async getAssignmentList() {
+    this.setState({
+      loading: true,
+    });
+     const { assignmentList } = await getStudentAssignmentList();
+
+      this.setState({
+        assignmentList: assignmentList,
+        loading: false,
       });
   }
+
+  componentDidMount() {
+    this.getAssignmentList();
+  }
+  renderResult(){
+    if (this.state.assignmentList.length ===0){
+      return <NoContent text={"You have no assignment to be done."}/>
+    } else {
+    let renderArray = [
+      <div
+        className={styles.container}
+        key={"StudentAssignment " + Math.random()}
+      > 
+      {/* TODO: Filter can be added for showing only not submitted and not mark */}
+        <div className={styles.heading}>Assignment Name:</div>
+        <div className={styles.heading}>Assignment ID:</div>
+        <div className={styles.heading}>Assignment Due:</div>
+        <div className={styles.heading}>Submitted status:</div>
+        <div className={styles.heading}>Result status:</div>
+      </div>,
+      this.renderAssignmentList(),
+    ];
+    return renderArray;
+  }
+  }
+  renderAssignmentList() {
+    let array = this.state.assignmentList;
+    //a_ for sorting purpose
+    return array.map((obj) => {
+      let { id, score, submitted, scored } = obj;
+      let { title, dueDate } = obj.assignment;
+      let RenderObj = {
+        name: title,
+        id: id,
+        a_dueDate: dueDate + " 11:59 pm ",
+        b_submitted: submitted ? "Done" : "No Submitted",
+        c_scored: scored ? score : "Not Marked yet",
+      };
+
+      return (
+        <RenderContentLink
+          key={"StudentAssignment " + Math.random()}
+          RenderObj={RenderObj}
+          toPageID={"Assignment"}
+        />
+      );
+    });
+  }
+
   render() {
     return (
-      <div>
-        <Button
-          type={"UPLOAD"}
-          handleConfirm={this.handleConfirm}
-          onChange={this.handleChange}
-          loaded={this.state.loaded}
-          fileName={truncateName(this.state.fileName)}
-          wrongType={this.state.fileType !== FILE_ACCEPT_TYPE}
-          overSize={fileSizeToMB(this.state.fileSize) > FILE_LIMIT}
-          success={this.state.success}
-        />
-      </div>
+      <React.Fragment>
+        <FullWidthLayout>
+          <div className={styles.wrapper}>
+            {this.state.loading ? 
+            <div className={styles.LoadingWrapper}>
+              <Loader />
+            </div>
+            : this.renderResult()}
+          </div>
+        </FullWidthLayout>
+      </React.Fragment>
     );
   }
-};
-export default StudentAssignment;
+}
+
+
+const mapStateToProps = (state) => ({
+  id: state.headerHistory.content.id,
+  header: state.headerHistory.title,
+});
+const StudentAssignmentContainer = connect(mapStateToProps)(
+  StudentAssignment
+);
+export default StudentAssignmentContainer;
