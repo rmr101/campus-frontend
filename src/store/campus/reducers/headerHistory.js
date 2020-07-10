@@ -46,7 +46,8 @@ const addContent = (toPageID, id , courseID) => {
     case "TeacherCourseAssignment":
       return { pageID: "TeacherCourseAssignment", id, };
     //TODO: case "TeacherAssignment":
-    //TODO: case "StudentAssignment":
+    case "StudentAssignment":
+      return { pageID: "StudentAssignment"};
     case "Course":
       return { pageID: "Course" };
     default:

@@ -7,7 +7,7 @@ import Profile from "./components/Profile";
 import CourseDetail from "./components/CourseDetail";
 import Dashboard from "./components/Dashboard";
 import Assignment from './components/Assignment';
-
+import StudentAssignment from './components/StudentAssignment';
 
 const Content = ({pageID}) => {
 
@@ -21,6 +21,8 @@ const Content = ({pageID}) => {
         return <StudentList />;
       case "TeacherCourseAssignment":
         return <TeacherCourseAssignment />;
+      case "StudentAssignment":
+        return <StudentAssignment />;
       case "UserInfo":
         return <Profile />;
       case "Assignment":

@@ -79,12 +79,17 @@ class NavSideBar extends React.Component{
       case "Dashboard":
         this.changeActive(name);
         this.setCanvasStatus(false);
-        this.props.addHeader( "Dashboard", "Dashboard");
+        this.props.addHeader("Dashboard", "Dashboard");
         break;
       case "Users":
         this.changeActive(name);
         //TODO: UserManagement 是ID 还是 Users 是？
         this.props.addHeader("UserManagement", "Users");
+        this.setCanvasStatus(false);
+        break;
+      case "Assignment":
+        this.changeActive(name);
+        this.props.addHeader("Assignment", "StudentAssignment");
         this.setCanvasStatus(false);
         break;
       case "UserInfo":

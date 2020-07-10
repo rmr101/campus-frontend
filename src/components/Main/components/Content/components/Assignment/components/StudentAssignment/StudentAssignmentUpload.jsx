@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '../../../../../../../Button';
 import S3 from "react-aws-s3";
-
+import Loader from '../../../../../../../Loader';
+import {connect} from 'react-redux';
 
 // import the AWS S3 key
 let SecretAccessKey, AccessKeyID;
@@ -40,7 +41,6 @@ const truncateName=(name)=> {
 const FILE_LIMIT = 25;//MB
 const FILE_ACCEPT_TYPE ="application/pdf";
 
-
 class StudentAssignmentUpload extends React.Component {
   constructor(props) {
     super(props);
@@ -51,13 +51,12 @@ class StudentAssignmentUpload extends React.Component {
       fileType: "application/pdf",
       fileSize: 0,
       success: false,
-      uploadClickable: true,
+      loading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
   }
   handleChange(e) {
-    console.log(e.target.files.length);
     e.target.files.length === 0? console.log("file is not included") : 
     this.setState({
       loaded: true,
@@ -68,35 +67,43 @@ class StudentAssignmentUpload extends React.Component {
       file: e.target.files[0],
     });
   }
-  //TODO: pass the secret key to team mate
+  // async saveUrl(location,id){
+  //   await saveUrlToSever(location, id)
+  //     .then(() =>
+  //       this.setState(
+  //         {
+  //           loaded: false,
+  //           success: true,
+  //           loading: false,
+  //         },
+  //         () => setTimeout(() => this.setState({ success: false }), 3000)
+  //       )
+  //     )
+  //     .catch(console.log);
+  // }
+
   handleConfirm(e) {
     e.preventDefault();
-    /* This is optional */
+
+    this.setState({
+      loading:true,
+    })
+
     const newFileName = new Date();
 
-    //TODO: pass the secret key to team mate
-    this.state.uploadClickable ? ReactS3Client
+    ReactS3Client
       .uploadFile(this.state.file, newFileName)
       .then((data) => {
+        const {location}= data;
         console.log(data);
-        this.setState(
-          {
-            loaded: false,
-            success: true,
-            uploadClickable: true,
-          },
-          () => setTimeout(() => this.setState({ success: false }), 3000)
-        );
-      })
-      .catch((err) => console.error(err)):console.log("Please wait till upload finish...");
-      //this is to prevent uploaded multiple time.
-      this.setState ({
-        uploadClickable: false,
-      });
+        this.saveUrl(location,this.props.id)})
+      .catch(console.log);
   }
+
   render() {
     return (
       <React.Fragment>
+        {this.state.loading? <Loader color="upload"/> :
         <Button
           type={"UPLOAD"}
           handleConfirm={this.handleConfirm}
@@ -106,9 +113,14 @@ class StudentAssignmentUpload extends React.Component {
           wrongType={this.state.fileType !== FILE_ACCEPT_TYPE}
           overSize={fileSizeToMB(this.state.fileSize) > FILE_LIMIT}
           success={this.state.success}
-        />
+        />}
       </React.Fragment>
     );
   }
 };
-export default StudentAssignmentUpload;
+
+const mapStateToProps = (state) =>({
+  id: state.headerHistory.content.id
+})
+const StudentAssignmentUploadContainer = connect(mapStateToProps)(StudentAssignmentUpload);
+export default StudentAssignmentUploadContainer;

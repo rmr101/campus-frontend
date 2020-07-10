@@ -44,7 +44,6 @@ class Assignment extends React.Component {
       </div>
     );}
   
-
   render() {
     return (
       <React.Fragment>
@@ -57,8 +56,7 @@ class Assignment extends React.Component {
             this.renderAssignmentDetail()
           )}
         </FullWidthLayout>
-  {/* TODO: put this back for student */}
-        {/* {this.props.userRole === "STUDENT"? */}
+        {this.props.userRole === "STUDENT"?
         <HalfWidthLayout
           title={"Upload you file"}
           description={
@@ -67,7 +65,7 @@ class Assignment extends React.Component {
         >
           <StudentAssignmentUpload />
         </HalfWidthLayout>
-        {/* {/* :null} */} 
+        :null}
       </React.Fragment>
     );
   }

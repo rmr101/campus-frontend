@@ -13,6 +13,7 @@ const UploadBtn = ({
 }) => (
   <div className={styles.uploadContainer}>
     {/* hide this input  */}
+    {/* TODO: add loading */}
     <input
       id="UPLOAD"
       className={styles.uploadInput}

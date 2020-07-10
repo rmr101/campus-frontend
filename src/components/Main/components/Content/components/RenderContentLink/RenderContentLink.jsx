@@ -21,14 +21,13 @@ const renderColumn = (detail) => {
 };
 
 const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
-  let { name, id, ...restRaw } = RenderObj;
-  let { secondID, ...rest } = restRaw.hasOwnProperty("secondID") ? restRaw : 0;
+  let { name, id, secondID, ...rest } = RenderObj;
   return (
     <div key={"name_" + Math.random()} className={styles.container}>
       <div
         onClick={(e) => {
           e.preventDefault();
-          onClick(name, toPageID, id , secondID);
+          onClick(name, toPageID, id, secondID);
         }}
         className={`${styles.links} ${styles.heading}`}
       >
