@@ -4,6 +4,15 @@ import {faUserTie} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SelectAvatar from './components/SelectAvatar';
 import avatarStyles from './components/SelectAvatar/SelectAvatar.module.scss';
+// import putAvatarToSever from '../../../../apis/putAvatarToSever';
+// import getUserInfo from "../../../../apis/getUserInfo";
+
+
+// const initialState = {
+//       icon: faUserTie,
+//       color: avatarStyles.green,
+//       background: avatarStyles.light,
+//     };
 
 class NavAvatar extends React.Component {
   constructor(props) {
@@ -22,16 +31,28 @@ class NavAvatar extends React.Component {
       selectionPanelShow: !this.state.selectionPanelShow,
     });
   }
-  changeAvatar(icon,color,background) {
-    console.log(color);
-    this.setState({
-      selectionPanelShow: false,
-      icon: icon,
-      color: color,
-      background: background,
-    });
+  changeAvatar(icon, color, background) {
+    // const avatar = { icon, color, background };
+    this.setState(
+      {
+        selectionPanelShow: false,
+        icon: icon,
+        color: color,
+        background: background,
+      },
+    );
   }
-
+  // async saveAvatar(avatar) {
+  //   await putAvatarToSever(avatar);
+  // }
+  // async getAvatar(){
+  //   const { avatar } = await getUserInfo();
+  //   console.log(avatar);
+  //   // avatar? this.setState(initialState) : this.setState(JSON.parse(avatar));
+  // }
+  // componentDidMount(){
+  //   this.getAvatar();
+  // }
   render() {
     return (
       <div className={`${styles.wrapper} ${this.state.background}`}>
@@ -53,4 +74,6 @@ class NavAvatar extends React.Component {
     );
   }
 };
-export default NavAvatar;
+
+
+export default NavAvatar

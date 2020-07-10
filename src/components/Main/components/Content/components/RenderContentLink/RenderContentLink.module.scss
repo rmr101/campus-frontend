@@ -19,8 +19,10 @@
 }
 
 .container{
+  padding:5px;
   display:flex;
   .heading{
     flex:1;
+    font-weight: $font-light;
   }
 }

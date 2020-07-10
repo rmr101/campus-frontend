@@ -17,8 +17,8 @@ const SelectAvatar =({icon,onClick,color,background})=>{
 
 
     return (
-      <div className={`${styles.wrapper}`}>
-        <div className={`${styles.avatarSelection} ${styles.row}`}>
+      <div className={styles.wrapper}>
+        <div className={styles.row}>
           <p className={styles.name}>Avatar </p>
           <div className={styles.selectionRow}>
             <div
@@ -41,7 +41,7 @@ const SelectAvatar =({icon,onClick,color,background})=>{
             </div>
           </div>
         </div>
-        <div className={`${styles.avatarColorSelection} ${styles.row}`}>
+        <div className={styles.row}>
           <p className={styles.name}>Color </p>
           <div className={styles.selectionRow}>
             <div
@@ -76,7 +76,7 @@ const SelectAvatar =({icon,onClick,color,background})=>{
             </div>
           </div>
         </div>
-        <div className={`${styles.backgoundColorSelection} ${styles.row}`}>
+        <div className={styles.row}>
           <p className={styles.name}>Background</p>
           <div className={styles.selectionRow}>
             <div
