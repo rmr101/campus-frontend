@@ -3,6 +3,7 @@ import getUserInfo from "./../../../../../../apis/getUserInfo";
 import Button from "../../../../../Button";
 import SearchBar from "../../../../../SearchBar";
 import styles from "./UserManagement.module.scss";
+import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 
 class UserManagement extends React.Component {
   constructor(props) {
@@ -55,6 +56,7 @@ class UserManagement extends React.Component {
 
   render() {
     return (
+      <FullWidthLayout>
       <div>
         <SearchBar
           search={this.state.search}
@@ -93,6 +95,7 @@ class UserManagement extends React.Component {
           </table>
         </div>
       </div>
+      </FullWidthLayout>
     );
   }
 }

@@ -160,8 +160,6 @@ class Button extends React.Component {
         );
       case "LOGOUT":
         return <LogOutBtn />;
-<<<<<<< HEAD
-=======
       case "SEARCH":
         return (
           <div className={styles.searchInput}>
@@ -189,7 +187,6 @@ class Button extends React.Component {
             </button>
           </div>
         );
->>>>>>> master
       default:
         return null;
     }
