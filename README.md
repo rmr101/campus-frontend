@@ -42,11 +42,11 @@ Various panel according to your role
 
 ### Assignment
 
-Teacher assignment publish.
+Teacher publish assignments.
 
 ![find](readme_img/publish-new-assignment.png)
 
-Student can view the newest assignment, for an enrolled course.
+Student can view the newest assignment, for every enrolled course.
 ![find](readme_img/student-assignment-filter.png)
 
 Upon completion, student can upload their response. File is stored in AWS S3.
@@ -117,8 +117,9 @@ Add/Update/Delete Students/Teachers/Assignments/Courses/
 Only authenticated admin could manage all users, products, service .etc.
 
 Teacher
-- Manage assignment
-- View students’ assignment
+- Manage assignments
+- View students’ assignments
+- Review students’ assignments
 
 Student
 - Enroll courses
