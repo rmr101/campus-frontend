@@ -69,11 +69,12 @@ class StudentAssignment extends React.Component {
           className={styles.container}
           key={"StudentAssignment " + Math.random()}
         >
-          <div className={styles.heading}>Assignment Name:</div>
-          <div className={styles.heading}>Assignment ID:</div>
-          <div className={styles.heading}>Assignment Due:</div>
-          <div className={styles.heading}>Submitted status:</div>
-          <div className={styles.heading}>Result status:</div>
+          <div className={styles.heading}>Name:</div>
+          <div className={styles.heading}>ID:</div>
+          <div className={styles.heading}>Due:</div>
+          <div className={styles.heading}>Submitted :</div>
+          <div className={styles.heading}>Result :</div>
+          <div className={styles.heading}>Comment :</div>
         </div>,
         this.renderAssignmentList(this.state.renderArray),
       ];
@@ -83,11 +84,13 @@ class StudentAssignment extends React.Component {
   renderAssignmentList(array) {
     //a_ for sorting purpose
     return array.map((obj) => {
-      let { id, score, submitted, scored } = obj;
+      let { id, score, submitted, scored ,comment} = obj;
       let { title, dueDate } = obj.assignment;
       let RenderObj = {
+        disable: scored,
         name: title,
         id: id,
+        d_comment: comment,
         a_dueDate: dueDate + " 11:59 pm ",
         b_submitted: submitted ? "Done" : "No Submitted",
         c_scored: scored ? score : "Not Marked yet",

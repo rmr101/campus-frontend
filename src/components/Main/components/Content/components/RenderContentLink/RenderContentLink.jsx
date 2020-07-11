@@ -30,16 +30,16 @@ const renderColumn = (detail) => {
 };
 
 const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
-  let { name, id, secondID, ...rest } = RenderObj;
+  let { disable,name, id, secondID, ...rest } = RenderObj;
   rest = sortInRenderOrder(rest);
   return (
     <div key={"name_" + Math.random()} className={styles.container}>
       <div
         onClick={(e) => {
           e.preventDefault();
-          onClick(name, toPageID, id, secondID);
+          return !disable ? onClick(name, toPageID, id, secondID) : null;
         }}
-        className={`${styles.links} ${styles.heading}`}
+        className={`${styles.heading} ${disable?null:styles.links}`}
       >
         {name}
       </div>

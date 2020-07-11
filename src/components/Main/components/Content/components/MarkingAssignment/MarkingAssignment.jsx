@@ -12,44 +12,68 @@ class MarkingAssignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      scoreChange:false,
+      displayOption: "all",
+      scoreChange: false,
       assignmentDetail: null,
-      studentAssignmentList:[],
+      studentAssignmentList: [],
+      renderArray: [],
       loading: true,
     };
     this.handleReview = this.handleReview.bind(this);
   }
   async getStudentAssignmentList() {
-    const {id,courseID} = this.props;
+    const { id, courseID } = this.props;
     const { assignment, studentAssignmentList } = await getAssignmentDetail(
       id,
       courseID
     );
-      this.setState({
-        assignmentDetail: assignment,
-        studentAssignmentList,
-        loading: false,
-      });
+    this.setState({
+      assignmentDetail: assignment,
+      studentAssignmentList,
+      renderArray: studentAssignmentList,
+      loading: false,
+    });
   }
-  downloadFileFromS3(key){
+  renderOption(option) {
+    switch (option) {
+      case "all":
+        this.setState({
+          renderArray: this.state.studentAssignmentList,
+          displayOption: "all",
+        });
+        break;
+      case "notMarked":
+        this.setState({
+          displayOption: "notMarked",
+          renderArray: this.state.studentAssignmentList.filter(
+            (obj) => obj.submitted && !obj.scored
+          ),
+        });
+        break;
+      default:
+        this.setState({ renderArray: this.state.studentAssignmentList });
+    }
+  }
+  downloadFileFromS3(key) {
     ReactS3Download(key);
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     if (this.state.scoreChange) {
-      this.setState({ scoreChange: false },()=> this.getStudentAssignmentList());
-      
+      this.setState({ scoreChange: false }, () =>
+        this.getStudentAssignmentList()
+      );
     }
   }
   componentDidMount() {
     this.getStudentAssignmentList();
   }
-  handleReview(){
-    this.setState({scoreChange: true});
+  handleReview() {
+    this.setState({ scoreChange: true });
   }
-  renderArray(array){
+  renderArray(array) {
     let renderArray = [];
-    array.forEach((obj,number)=>{
-      const { attachmentUrl, score, submitted, scored,id } = obj;
+    array.forEach((obj, number) => {
+      const { attachmentUrl, score, submitted, scored, id } = obj;
       renderArray.push(
         <div
           key={"MarkingAssignmentID" + Math.random()}
@@ -67,20 +91,26 @@ class MarkingAssignment extends React.Component {
             <div className={styles.LinksItem}>Not Submitted yet</div>
           )}
           <div className={styles.LinksItem}>
-            {scored ?  score  : "Not Marked yet"}
+            {scored ? score : "Not Marked yet"}
           </div>
           <div className={styles.LinksItem}>
-            <Button type="MARKING" id={id} handleReview={this.handleReview} />
+            {submitted ? (
+              <Button type="MARKING" id={id} handleReview={this.handleReview} />
+            ) : null}
           </div>
         </div>
       );
-    })
+    });
     return renderArray;
   }
-  renderStudentAssignmentList(){
-    const {studentAssignmentList} = this.state;
-    if (studentAssignmentList.length === 0) {
-      return (<div className={styles.LinksWrapper}> <NoContent text="No assignment to be marked." /> </div>
+  renderStudentAssignmentList() {
+    const { renderArray } = this.state;
+    if (renderArray.length === 0) {
+      return (
+        <div className={styles.LinksWrapper}>
+          {" "}
+          <NoContent text="No assignment to be marked." />{" "}
+        </div>
       );
     } else {
       return (
@@ -89,9 +119,9 @@ class MarkingAssignment extends React.Component {
             <div className={styles.LinksHeading}>No. </div>
             <div className={styles.LinksHeading}>Response status: </div>
             <div className={styles.LinksHeading}>Score:</div>
-            <div className={styles.LinksHeading}>Mark:</div>
+            <div className={styles.LinksHeading}></div>
           </div>
-          {this.renderArray(studentAssignmentList)}
+          {this.renderArray(this.state.renderArray)}
         </div>
       );
     }
@@ -134,8 +164,36 @@ class MarkingAssignment extends React.Component {
           )}
         </FullWidthLayout>
         <FullWidthLayout>
-          
-              {this.renderStudentAssignmentList()}
+          <div className={styles.radioWrapper}>
+            <div className={styles.RadioTitle}> Display Option: </div>
+            <div className={styles.radio}>
+              <input
+                id="all"
+                type="radio"
+                name="display"
+                checked={this.state.displayOption === "all" ? true : false}
+                onChange={() => this.renderOption("all")}
+              />
+              <label className={styles.radioLabel} htmlFor="all">
+                All
+              </label>
+            </div>
+            <div className={styles.radio}>
+              <input
+                id="notMarked"
+                type="radio"
+                name="display"
+                checked={
+                  this.state.displayOption === "notMarked" ? true : false
+                }
+                onChange={() => this.renderOption("notMarked")}
+              />
+              <label htmlFor="notMarked" className={styles.radioLabel}>
+                Only not marked
+              </label>
+            </div>
+          </div>
+          {this.renderStudentAssignmentList()}
         </FullWidthLayout>
       </React.Fragment>
     );

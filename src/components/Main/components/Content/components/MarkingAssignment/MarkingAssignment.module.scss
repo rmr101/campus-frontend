@@ -1,4 +1,5 @@
 @import './../../../../../../variable';
+@import '../../components/StudentAssignment/RadioButton.module.scss';
 
 .loadingContainer{
   width: 100%;
@@ -83,5 +84,18 @@
     &:hover{
       color:$theme-color
     }
+  }
+}
+
+//radio
+.radioWrapper{
+  display: flex;
+  padding:20px;
+  align-items: center;
+  div,label{
+    color:$dark-color;
+    font-size:$text-rg;
+    font-weight:$font-bold;
+    margin-right: 10px;
   }
 }

@@ -2,7 +2,7 @@
 
 
 .container{
-  font-size: 20px;
+  font-size: $text-rg;
   font-weight: 500;
   margin: 5px 5px;
   color: $dark-color;
@@ -10,9 +10,7 @@
   border-bottom: 1px solid $border-color;
 }
 .links{
-  display: inline;
   cursor: pointer;
-  text-decoration: none;
   &:hover{
     color:$theme-color;
   }

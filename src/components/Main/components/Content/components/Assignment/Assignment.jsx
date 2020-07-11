@@ -17,7 +17,6 @@ class Assignment extends React.Component {
   }
   async getAssignment() {
     const {id,courseID} = this.props;
-    console.log( id, courseID );
     const { assignment } = await getAssignmentDetail(id, courseID);
       this.setState({
         assignmentDetail: assignment,
@@ -44,7 +43,23 @@ class Assignment extends React.Component {
       </div>
     );}
   
+  renderOption(){
+    const { userRole} = this.props
+    if ( userRole === "student"){
+      return (
+      <HalfWidthLayout
+          title={"Upload File"}
+          description={"File must be less than 25MB and only PDF is accepted."}
+        >
+          <StudentAssignmentUpload />
+      </HalfWidthLayout>)
+    } else{
+      return null;
+    }
+  }
+  
   render() {
+   
     return (
       <React.Fragment>
         <FullWidthLayout>
@@ -56,15 +71,7 @@ class Assignment extends React.Component {
             this.renderAssignmentDetail()
           )}
         </FullWidthLayout>
-        {this.props.userRole === "student" ? (
-          <HalfWidthLayout
-            title={"Upload File"}
-            description={
-              "File must be less than 25MB and only PDF is accepted." }
-          >
-            <StudentAssignmentUpload />
-          </HalfWidthLayout>
-        ) : null}
+        {this.renderOption()}
       </React.Fragment>
     );
   }

@@ -3,7 +3,7 @@ import styles from "./MarkingBtn.module.scss";
 
 const MarkingBtn = ({onClick }) => (
   <button onClick={onClick} className={`${styles.btn} + ${styles.markBtn}`}>
-    Edit
+    Mark
   </button>
 );  
 
