@@ -40,6 +40,12 @@ input.placeholder {
   border-right: hidden;
 }
 
+.errors{
+display:block;
+padding-left:30px;
+color:$delete-color;
+}
+
 .button {
   padding: 8px 0px 0px 15px ;
   width: 30px;

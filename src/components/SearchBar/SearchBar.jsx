@@ -37,6 +37,7 @@ class SearchBar extends React.Component {
               value={this.props.search}
               onChange={this.handleSearchTemp}
             />
+            <span className={styles.errors}>{this.props.errors}</span>
           </div>
           <div onClick={this.props.onClick} className={styles.button}>
             <FontAwesomeIcon icon={faSearch} />
