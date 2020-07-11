@@ -1,7 +1,6 @@
 import { ADD_USER_INFO } from "../type";
 
-export default (name, avatar = "") => ({
+export default (name) => ({
   name,
-  avatar,
   type: ADD_USER_INFO,
 });

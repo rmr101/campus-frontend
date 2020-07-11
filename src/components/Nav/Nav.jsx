@@ -22,8 +22,8 @@ class UserName extends React.Component{
   }
   async getUserName(){
     console.log(this.props.userRole);
-    const resp = await getUserInfo(this.props.userRole, this.props.userID);
-    const name = resp ? resp.name : "something wrong";
+    const {name} = await getUserInfo(this.props.userRole, this.props.userID);
+    
     this.setState(
       {
         loading: false,
@@ -61,7 +61,7 @@ const Nav = ({ userRole, userID,addName }) => {
       <div className={styles.header}>
         <NavHeader />
       </div>
-      <NavAvatar />
+      <NavAvatar userRole={userRole} userID={userID} />
       <UserName userRole={userRole} userID={userID} addNameToRedux={addName} />
       <div className={styles.sideBar}>
         <NavSidebar />

@@ -24,13 +24,15 @@ const addHeader = (headerTitle, contentObj) => {
   };
 };
 
-const addContent = (toPageID, id , courseID) => {
+const addContent = (toPageID, id , secondID) => {
   // mapping for content to be display
   switch (toPageID) {
     case "Dashboard":
       return { pageID: "Dashboard" };
+    case "MarkingAssignment":
+      return { pageID: "MarkingAssignment", id, secondID };
     case "Assignment":
-      return { pageID: "Assignment", id, courseID };
+      return { pageID: "Assignment", id, secondID };
     case "Enrollment":
       return { pageID: "Enrollment" };
     case "UserInfo":
@@ -42,12 +44,13 @@ const addContent = (toPageID, id , courseID) => {
     case "Setting":
       return { pageID: "Setting" };
     case "SubjectCourse":
-      return { pageID: "SubjectCourse", id, };
+      return { pageID: "SubjectCourse", id };
     case "TeacherCourseAssignment":
-      return { pageID: "TeacherCourseAssignment", id, };
-    //TODO: case "TeacherAssignment":
+      return { pageID: "TeacherCourseAssignment", id };
+    case "TeacherMarkingSystem":
+      return { pageID: "TeacherMarkingSystem",id };
     case "StudentAssignment":
-      return { pageID: "StudentAssignment"};
+      return { pageID: "StudentAssignment" };
     case "Course":
       return { pageID: "Course" };
     default:

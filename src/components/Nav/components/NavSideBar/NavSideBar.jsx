@@ -56,9 +56,8 @@ class NavSideBar extends React.Component{
       current:name,
     })
   }
-  setCanvasStatus(boo){
-    this.setState(
-      {canvasOn: boo});
+  setCanvasStatus(boolean){
+    this.setState({ canvasOn: boolean });
   }
   toggleCanvas(){
     this.setState({

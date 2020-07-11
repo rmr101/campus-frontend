@@ -5,6 +5,7 @@ import getCourseListBySubjectID from './../../../../../../apis/getCourseListBySu
 import Loading from '../Loading';
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import {connect} from 'react-redux';
+import NoContent from '../NoContent/NoContent';
 
 
 class SubjectCourse extends React.Component {
@@ -54,19 +55,31 @@ class SubjectCourse extends React.Component {
       );
     });
   }
+  renderContent(){
+    if (this.state.courseList.length === 0) {
+      return <NoContent text={"No courses under this subject."}/>
+    } else {
+      return (
+        <React.Fragment>
+          <div className={styles.container}>
+            <div className={styles.heading}>Course Name:</div>
+            <div className={styles.heading}>Course ID:</div>
+            <div className={styles.heading}>Course Introduction:</div>
+          </div>
+          {this.renderCoursesList()}
+        </React.Fragment>
+      );
+    }
+  }
 
   render() {
     return (
-    <FullWidthLayout>
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <div className={styles.heading}>Course Name:</div>
-          <div className={styles.heading}>Course ID:</div>
-          <div className={styles.heading}>Course Introduction:</div>
+      <FullWidthLayout>
+        <div className={styles.wrapper}>
+          {this.state.loading ? <Loading /> : this.renderContent()}
         </div>
-        {this.state.loading ? <Loading /> : this.renderCoursesList()}
-      </div>
-      </FullWidthLayout>)
+      </FullWidthLayout>
+    );
   }
 };
 

@@ -1,31 +1,9 @@
 import React from 'react';
 import Button from '../../../../../../../Button';
-import S3 from "react-aws-s3";
 import Loader from '../../../../../../../Loader';
 import {connect} from 'react-redux';
 import saveUrlToSever from "../../../../../../../../apis/saveUrlToSever";
-// import the AWS S3 key
-let SecretAccessKey, AccessKeyID;
-try {
-    const AWSKey = require("./JackyAWSKey");
-    console.log(AWSKey);
-    SecretAccessKey = AWSKey.SecretAccessKey;
-    AccessKeyID = AWSKey.AccessKeyID;
-}catch(err){
-  console.log("You need the IAM key to access to AWS S3, ask jacky for that ^.^;")
-  SecretAccessKey = "";
-  AccessKeyID= "";
-}
-
-const config = {
-  bucketName: "campus-file-system",
-  dirName: "assignment" /* optional */,
-  region: "ap-southeast-2",
-  accessKeyId: AccessKeyID,
-  secretAccessKey: SecretAccessKey,
-};
-const ReactS3Client = new S3(config);
-/*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
+import ReactS3Client from "../../../../../../../../utils/AWS_S3/ReactS3Client";
 
 const fileSizeToMB=(size)=> (((size)/1024)/1024).toFixed(0);
 const truncateName=(name)=> {
@@ -94,9 +72,9 @@ class StudentAssignmentUpload extends React.Component {
     ReactS3Client
       .uploadFile(this.state.file, newFileName)
       .then((data) => {
-        const {location}= data;
+        const {key}= data;
         console.log(data);
-        this.saveUrl(location,this.props.id)})
+        this.saveUrl(key, this.props.id);})
       .catch(console.log);
   }
 
