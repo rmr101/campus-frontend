@@ -27,6 +27,7 @@ const ReactS3Download=(key)=>{
   let S3 = new AWS.S3();
   S3.getObject({ Bucket: "campus-file-system", Key: key }, (error, data) => {
     if (error != null) {
+      console.log(key);
       console.log("Failed to retrieve an object: " + error);
     } else {
       console.log("Loaded " + data.ContentLength + " bytes");

@@ -6,15 +6,18 @@ import {connect} from 'react-redux';
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout'
 import NoContent from '../NoContent/NoContent';
 import ReactS3Download from '../../../../../../utils/AWS_S3/ReactS3Download';
+import Button from "../../../../../Button";
 
 class MarkingAssignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      scoreChange:false,
       assignmentDetail: null,
       studentAssignmentList:[],
       loading: true,
     };
+    this.handleReview = this.handleReview.bind(this);
   }
   async getStudentAssignmentList() {
     const {id,courseID} = this.props;
@@ -29,16 +32,24 @@ class MarkingAssignment extends React.Component {
       });
   }
   downloadFileFromS3(key){
-    console.log("I got run");
     ReactS3Download(key);
+  }
+  componentDidUpdate(){
+    if (this.state.scoreChange) {
+      this.setState({ scoreChange: false },()=> this.getStudentAssignmentList());
+      
+    }
   }
   componentDidMount() {
     this.getStudentAssignmentList();
   }
+  handleReview(){
+    this.setState({scoreChange: true});
+  }
   renderArray(array){
     let renderArray = [];
     array.forEach((obj,number)=>{
-      const { attachmentUrl, score, submitted, scored } = obj;
+      const { attachmentUrl, score, submitted, scored,id } = obj;
       renderArray.push(
         <div
           key={"MarkingAssignmentID" + Math.random()}
@@ -47,8 +58,8 @@ class MarkingAssignment extends React.Component {
           <div className={styles.LinksItem}>No. {number + 1}</div>
           {submitted ? (
             <div
-              className={styles.LinksItem+" "+styles.Link}
-              onClick={()=>this.downloadFileFromS3(attachmentUrl)}
+              className={styles.LinksItem + " " + styles.Link}
+              onClick={() => this.downloadFileFromS3(attachmentUrl)}
             >
               Download Response
             </div>
@@ -56,7 +67,10 @@ class MarkingAssignment extends React.Component {
             <div className={styles.LinksItem}>Not Submitted yet</div>
           )}
           <div className={styles.LinksItem}>
-            {scored ? { score } : "Not Marked yet"}
+            {scored ?  score  : "Not Marked yet"}
+          </div>
+          <div className={styles.LinksItem}>
+            <Button type="MARKING" id={id} handleReview={this.handleReview} />
           </div>
         </div>
       );
@@ -71,10 +85,11 @@ class MarkingAssignment extends React.Component {
     } else {
       return (
         <div className={styles.LinksWrapper}>
-          <div className={styles.LinksContainer}>
+          <div className={styles.headingContainer}>
             <div className={styles.LinksHeading}>No. </div>
             <div className={styles.LinksHeading}>Response status: </div>
             <div className={styles.LinksHeading}>Score:</div>
+            <div className={styles.LinksHeading}>Mark:</div>
           </div>
           {this.renderArray(studentAssignmentList)}
         </div>

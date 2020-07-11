@@ -3,7 +3,7 @@ import styles from "./Button.module.scss";
 import Popup from "./../Popup";
 import LogOutBtn from "./components/LogOutBtn";
 import UploadBtn from "./components/UploadBtn";
-
+import MarkingBtn from "./components/MarkingBtn";
 //TODO: 这个肯定要重构的，直接return 一个button 就好了，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
 class Button extends React.Component {
   constructor(props) {
@@ -97,6 +97,23 @@ class Button extends React.Component {
         return <UploadBtn {...this.props} />;
       case "LOGOUT":
         return <LogOutBtn />;
+      case "MARKING":
+        console.log(this.props);
+        return (
+          <React.Fragment>
+            <MarkingBtn {...this.props} onClick={this.togglePop} />
+            {this.state.seen ? (
+              <Popup
+                type={"MARKING"}
+                {...this.props}
+                toggle={()=>{
+                  this.props.handleReview();
+                  this.togglePop()}}
+              />
+            ) : null}
+          </React.Fragment>
+        );
+        
       case "SEARCH":
         return (
           <div className={styles.searchInput}>

@@ -48,12 +48,25 @@
   position:relative;
   flex-direction: column;
 }
-.LinksContainer{
+
+.headingContainer{
   font-size: 20px;
-  font-weight: 500;
-  margin: 5px 5px;
+  font-weight: $font-bold;
+  padding:5px;
   color: $dark-color;
   display:flex;
+  align-items: center;
+  .LinksHeading{
+    flex:1;
+  }
+}
+.LinksContainer{
+  font-size: 20px;
+  padding:10px 5px;
+  color: $dark-color;
+  border-bottom: 1px solid $border-color;
+  display:flex;
+  align-items: center;
   .LinksHeading{
     flex:1;
   }
