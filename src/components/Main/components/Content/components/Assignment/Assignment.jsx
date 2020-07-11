@@ -72,7 +72,7 @@ class Assignment extends React.Component {
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
   userRole : state.Authentication.role.toLowerCase(),
-  courseID: state.headerHistory.content.courseID,
+  courseID: state.headerHistory.content.secondID,
 });
 const AssignmentContainer = connect(mapStateToProps)(Assignment);
 export default AssignmentContainer;

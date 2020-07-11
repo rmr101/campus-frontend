@@ -8,6 +8,8 @@ import CourseDetail from "./components/CourseDetail";
 import Dashboard from "./components/Dashboard";
 import Assignment from './components/Assignment';
 import StudentAssignment from './components/StudentAssignment';
+import TeacherMarkingSystem from './components/TeacherMarkingSystem';
+import MarkingAssignment from "./components/MarkingAssignment";
 
 const Content = ({pageID}) => {
 
@@ -21,6 +23,10 @@ const Content = ({pageID}) => {
         return <StudentList />;
       case "TeacherCourseAssignment":
         return <TeacherCourseAssignment />;
+      case "TeacherMarkingSystem":
+        return <TeacherMarkingSystem />;
+      case "MarkingAssignment":
+        return <MarkingAssignment/>;
       case "StudentAssignment":
         return <StudentAssignment />;
       case "UserInfo":
