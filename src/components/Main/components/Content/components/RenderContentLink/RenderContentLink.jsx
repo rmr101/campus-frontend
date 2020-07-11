@@ -4,6 +4,15 @@ import { connect } from "react-redux";
 import AddHeader from "./../../../../../../store/campus/actions/AddHeader";
 
 
+const sortInRenderOrder=(unordered)=>{
+  const ordered = {};
+  Object.keys(unordered)
+    .sort()
+    .forEach((key) => 
+      ordered[key] = unordered[key]
+    );
+  return ordered;
+}
 const renderRest = (rest) => {
     let result = [];
     for (let props in rest) {
@@ -21,17 +30,16 @@ const renderColumn = (detail) => {
 };
 
 const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
-  const { name, id, ...rest } = RenderObj;
-  renderRest(rest);
-
+  let { disable,name, id, secondID, ...rest } = RenderObj;
+  rest = sortInRenderOrder(rest);
   return (
     <div key={"name_" + Math.random()} className={styles.container}>
       <div
         onClick={(e) => {
           e.preventDefault();
-          onClick(name, toPageID, id);
+          return !disable ? onClick(name, toPageID, id, secondID) : null;
         }}
-        className={`${styles.links} ${styles.heading}`}
+        className={`${styles.heading} ${disable?null:styles.links}`}
       >
         {name}
       </div>
@@ -43,8 +51,8 @@ const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: (headingTitle, contentType, id) => {
-    dispatch(AddHeader(headingTitle, contentType, id));
+  onClick: (headingTitle, contentType, id, secondID) => {
+    dispatch(AddHeader(headingTitle, contentType, id, secondID));
   },
 });
 

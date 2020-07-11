@@ -1,111 +1,182 @@
-import React from 'react';
-import Button from './../../../../../Button';
-import S3 from "react-aws-s3";
+import React from "react";
+import styles from "./StudentAssignment.module.scss";
+import getStudentAssignmentList from "../../../../../../apis/getStudentAssignmentList";
+import Loader from "../../../../../Loader";
+import { connect } from "react-redux";
+import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
+import NoContent from "../NoContent/NoContent";
+import RenderContentLink from "../RenderContentLink";
 
-
-// import the AWS S3 key
-let SecretAccessKey, AccessKeyID;
-try {
-    const AWSKey = require("./JackyAWSKey");
-    console.log(AWSKey);
-    SecretAccessKey = AWSKey.SecretAccessKey;
-    AccessKeyID = AWSKey.AccessKeyID;
-}catch(err){
-  console.log("You need the IAM key to access to AWS S3, ask jacky for that ^.^;")
-  SecretAccessKey = "";
-  AccessKeyID= "";
-}
-
-const config = {
-  bucketName: "campus-file-system",
-  dirName: "assignment" /* optional */,
-  region: "ap-southeast-2",
-  accessKeyId: AccessKeyID,
-  secretAccessKey: SecretAccessKey,
-};
-const ReactS3Client = new S3(config);
-/*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
-
-const fileSizeToMB=(size)=> (((size)/1024)/1024).toFixed(0);
-const truncateName=(name)=> {
-  let fileSuffixIndex = name.lastIndexOf(".")
-  let fileSuffix = name.slice(fileSuffixIndex - 1, name.length);
-  return name.length > 16
-    ? name.slice(0, 6) +
-      "..." +
-      name.slice(fileSuffixIndex - 5, fileSuffixIndex) +
-      fileSuffix
-    : name;}
-const FILE_LIMIT = 25;//MB
-const FILE_ACCEPT_TYPE ="application/pdf";
 class StudentAssignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
-      file: null,
-      fileName: "",
-      fileType: "application/pdf",
-      fileSize: 0,
-      success: false,
-      uploadClickable: true,
+      displayOption:"all",
+      renderArray: null,
+      assignmentList: null,
+      loading: true,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleConfirm = this.handleConfirm.bind(this);
   }
-  handleChange(e) {
-    console.log(e.target.files.length);
-    e.target.files.length === 0? console.log("file is not included") : 
+
+  async getAssignmentList() {
     this.setState({
-      loaded: true,
-      success: false,
-      fileName: e.target.files[0] ? e.target.files[0].name : "",
-      fileSize: e.target.files[0] ? e.target.files[0].size : 0,
-      fileType: e.target.files[0] ? e.target.files[0].type : "application/pdf",
-      file: e.target.files[0],
+      loading: true,
+    });
+    const { assignmentList } = await getStudentAssignmentList();
+
+    this.setState({
+      renderArray: assignmentList,
+      assignmentList: assignmentList,
+      loading: false,
     });
   }
-  //TODO: pass the secret key to team mate
-  handleConfirm(e) {
-    e.preventDefault();
-    /* This is optional */
-    const newFileName = new Date();
 
-    //TODO: pass the secret key to team mate
-    this.state.uploadClickable ? ReactS3Client
-      .uploadFile(this.state.file, newFileName)
-      .then((data) => {
-        console.log(data);
-        this.setState(
-          {
-            loaded: false,
-            success: true,
-            uploadClickable: true,
-          },
-          () => setTimeout(() => this.setState({ success: false }), 3000)
-        );
-      })
-      .catch((err) => console.error(err)):console.log("Please wait till upload finish...");
-      //this is to prevent uploaded multiple time.
-      this.setState ({
-        uploadClickable: false,
-      });
+  componentDidMount() {
+    this.getAssignmentList();
   }
+  renderOption(option) {
+    switch (option) {
+      case "all":
+        this.setState({
+          renderArray: this.state.assignmentList,
+          displayOption: "all",
+        });
+        break;
+      case "notSubmitted":
+        this.setState({
+          displayOption: "notSubmitted",
+          renderArray: this.state.assignmentList.filter(
+            (obj) => !obj.submitted
+          ),
+        });
+        break;
+      case "scored":
+        this.setState({
+          displayOption: "scored",
+          renderArray: this.state.assignmentList.filter((obj) => obj.scored),
+        });
+        break;
+      default:
+         this.setState({ renderArray: this.state.assignmentList });
+    }
+  }
+  renderResult(array) {
+    if (array.length === 0) {
+      return <NoContent text={"You have no assignment to be done."} />;
+    } else {
+      let renderArray = [
+        <div
+          className={styles.container}
+          key={"StudentAssignment " + Math.random()}
+        >
+          <div className={styles.heading}>Name:</div>
+          <div className={styles.heading}>ID:</div>
+          <div className={styles.heading}>Due:</div>
+          <div className={styles.heading}>Submitted :</div>
+          <div className={styles.heading}>Result :</div>
+          <div className={styles.heading}>Comment :</div>
+        </div>,
+        this.renderAssignmentList(this.state.renderArray),
+      ];
+      return renderArray;
+    }
+  }
+  renderAssignmentList(array) {
+    //a_ for sorting purpose
+    return array.map((obj) => {
+      let { id, score, submitted, scored ,comment} = obj;
+      let { title, dueDate } = obj.assignment;
+      let RenderObj = {
+        disable: scored,
+        name: title,
+        id: id,
+        d_comment: comment,
+        a_dueDate: dueDate + " 11:59 pm ",
+        b_submitted: submitted ? "Done" : "No Submitted",
+        c_scored: scored ? score : "Not Marked yet",
+      };
+
+      return (
+        <RenderContentLink
+          key={"StudentAssignment " + Math.random()}
+          RenderObj={RenderObj}
+          toPageID={"Assignment"}
+        />
+      );
+    });
+  }
+
   render() {
     return (
-      <div>
-        <Button
-          type={"UPLOAD"}
-          handleConfirm={this.handleConfirm}
-          onChange={this.handleChange}
-          loaded={this.state.loaded}
-          fileName={truncateName(this.state.fileName)}
-          wrongType={this.state.fileType !== FILE_ACCEPT_TYPE}
-          overSize={fileSizeToMB(this.state.fileSize) > FILE_LIMIT}
-          success={this.state.success}
-        />
-      </div>
+      <React.Fragment>
+        <FullWidthLayout>
+          <div className={styles.wrapper}>
+            {this.state.loading ? (
+              <div className={styles.LoadingWrapper}>
+                <Loader />
+              </div>
+            ) : (
+              <div className={styles.contentWrapper}>
+                <div className={styles.radioWrapper}>
+                  <div className={styles.title}> Display Option: </div>
+                  <div className={styles.radio}>
+                    <input
+                      id="all"
+                      type="radio"
+                      name="display"
+                      checked={
+                        this.state.displayOption === "all" ? true : false
+                      }
+                      onChange={() => this.renderOption("all")}
+                    />
+                    <label className={styles.radioLabel} htmlFor="all">
+                      All
+                    </label>
+                  </div>
+                  <div className={styles.radio}>
+                    <input
+                      id="notSubmitted"
+                      type="radio"
+                      name="display"
+                      checked={
+                        this.state.displayOption === "notSubmitted"
+                          ? true
+                          : false
+                      }
+                      onChange={() => this.renderOption("notSubmitted")}
+                    />
+                    <label htmlFor="notSubmitted" className={styles.radioLabel}>
+                      Only not submitted
+                    </label>
+                  </div>
+                  <div className={styles.radio}>
+                    <input
+                      id="scored"
+                      type="radio"
+                      name="display"
+                      checked={
+                        this.state.displayOption === "scored" ? true : false
+                      }
+                      onChange={() => this.renderOption("scored")}
+                    />
+                    <label htmlFor="scored" className={styles.radioLabel}>
+                      Only marked
+                    </label>
+                  </div>
+                </div>
+                {this.renderResult(this.state.renderArray)}
+              </div>
+            )}
+          </div>
+        </FullWidthLayout>
+      </React.Fragment>
     );
   }
-};
-export default StudentAssignment;
+}
+
+const mapStateToProps = (state) => ({
+  id: state.headerHistory.content.id,
+  header: state.headerHistory.title,
+});
+const StudentAssignmentContainer = connect(mapStateToProps)(StudentAssignment);
+export default StudentAssignmentContainer;

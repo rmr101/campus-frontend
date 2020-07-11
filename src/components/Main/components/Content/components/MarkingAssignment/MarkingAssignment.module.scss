@@ -1,0 +1,101 @@
+@import './../../../../../../variable';
+@import '../../components/StudentAssignment/RadioButton.module.scss';
+
+.loadingContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper{
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+}
+.container{
+  padding-left: 10px;
+}
+
+.title{
+  margin:20px 0;
+  color: $dark-color;
+  font-size: $text-xlg;
+  font-weight: $font-bold;
+}
+
+.dueDate{
+  margin-bottom:20px;
+  color: $dark-color;
+  font-size: $text-lg;
+  font-weight: $font-bold;
+}
+
+.subHeading{ 
+  margin-bottom:5px;
+  color: $dark-color;
+  font-size: $text-lg;
+  font-weight: $font-bold;
+}
+.paragraph{
+  margin-bottom:10px;
+  color: $dark-color;
+  font-size: $text-rg;
+}
+
+//Links
+.LinksWrapper{
+  padding:10px;
+  display: flex;
+  position:relative;
+  flex-direction: column;
+}
+
+.headingContainer{
+  font-size: 20px;
+  font-weight: $font-bold;
+  padding:5px;
+  color: $dark-color;
+  display:flex;
+  align-items: center;
+  .LinksHeading{
+    flex:1;
+  }
+}
+.LinksContainer{
+  font-size: 20px;
+  padding:10px 5px;
+  color: $dark-color;
+  border-bottom: 1px solid $border-color;
+  display:flex;
+  align-items: center;
+  .LinksHeading{
+    flex:1;
+  }
+  .LinksItem{
+    display: block;
+    flex:1;
+    font-size: $text-rg;
+    font-weight: $font-light;
+  }
+  .Link{
+    cursor: pointer;
+    text-decoration: none;
+    color:$link-color;
+    &:hover{
+      color:$theme-color
+    }
+  }
+}
+
+//radio
+.radioWrapper{
+  display: flex;
+  padding:20px;
+  align-items: center;
+  div,label{
+    color:$dark-color;
+    font-size:$text-rg;
+    font-weight:$font-bold;
+    margin-right: 10px;
+  }
+}

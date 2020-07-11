@@ -7,7 +7,7 @@ const initState = {
 export default (state = initState, action) => {
   switch (action.type) {
     case ADD_HEADER:
-      let contentObj = addContent(action.toPageID, action.id); 
+      let contentObj = addContent(action.toPageID, action.id, action.courseID); 
       let newState = addHeader(action.headingTitle,contentObj);
        console.log(newState);
       return newState;
@@ -24,13 +24,15 @@ const addHeader = (headerTitle, contentObj) => {
   };
 };
 
-const addContent = (toPageID, id) => {
+const addContent = (toPageID, id , secondID) => {
   // mapping for content to be display
   switch (toPageID) {
     case "Dashboard":
       return { pageID: "Dashboard" };
+    case "MarkingAssignment":
+      return { pageID: "MarkingAssignment", id, secondID };
     case "Assignment":
-      return { pageID: "Assignment" };
+      return { pageID: "Assignment", id, secondID };
     case "Enrollment":
       return { pageID: "Enrollment" };
     case "UserInfo":
@@ -42,11 +44,13 @@ const addContent = (toPageID, id) => {
     case "Setting":
       return { pageID: "Setting" };
     case "SubjectCourse":
-      return { pageID: "SubjectCourse", id: id };
+      return { pageID: "SubjectCourse", id };
     case "TeacherCourseAssignment":
-      return { pageID: "TeacherCourseAssignment", id: id };
-    //TODO: case "TeacherAssignment":
-    //TODO: case "StudentAssignment":
+      return { pageID: "TeacherCourseAssignment", id };
+    case "TeacherMarkingSystem":
+      return { pageID: "TeacherMarkingSystem",id };
+    case "StudentAssignment":
+      return { pageID: "StudentAssignment" };
     case "Course":
       return { pageID: "Course" };
     default:

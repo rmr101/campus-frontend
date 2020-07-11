@@ -1,0 +1,10 @@
+@import './../../Button.module.scss';
+
+.markBtn{
+  border: solid 1px $mark-color;
+  color: $mark-color;
+  &:hover{
+    color:$hover-color;
+    background-color: $mark-color;
+  }
+}

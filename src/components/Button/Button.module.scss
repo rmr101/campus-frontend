@@ -29,6 +29,7 @@
     background-color: $delete-color;
   }
 }
+
 .createBtn{
   border: solid 1px $create-color;
   color: $create-color;
@@ -37,6 +38,7 @@
     background-color: $create-color;
   }
 }
+
 .updateBtn{
   border: solid 1px $update-color;
   color: $update-color;
@@ -45,55 +47,18 @@
     background-color: $update-color;
   }
 }
-.uploadBtn{
-  border: solid 1px $upload-color;
-  color: $upload-color;
+.searchBtn{
+  display:float;
+  float: right;
+  border: solid 1px $search-color;
+  color: $search-color;
   &:hover{
-    color:$hover-color;
-    background-color: $upload-color;
+     color:$hover-color;
+    background-color: $search-color;
   }
 }
 
-.confirmBtn{
-  border: solid 1px $confirm-color;
-  color: $confirm-color;
-  &:hover{
-    color:$hover-color;
-    background-color: $confirm-color;
-  }
-}
-
-.uploadInput{
-  display: none;
-}
-
-.uploadLabel{
-  padding:0;
-}
-.uploadContainer{
-  position: relative;
-}
-.floatWarning{
- 
-  width: 400px;
-  position: absolute;
-  
-  div{
-    margin-top: 5px;
-    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.2);
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-weight: 600;
-  }
-  //TODO: 可以复用的style
-  .warningText{
-    background-color: $hover-color;
-    color: $delete-color;
-    border: 1px solid $delete-color;
-  }
-  .successText{
-    width: 200px;
-    color: $hover-color;
-    background-color: $create-color;
-  }
+.searchInput{
+  display: inline-block;
+  padding-left: 10px;;
 }

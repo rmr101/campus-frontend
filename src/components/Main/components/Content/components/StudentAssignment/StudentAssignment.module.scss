@@ -1,0 +1,40 @@
+@import './../../../../../../variable';
+@import './RadioButton.module.scss';
+
+.wrapper{
+  padding:10px;
+  position:relative;
+}
+.radioWrapper{
+  display: flex;
+  margin: 20px;
+
+  div,label{
+    color:$dark-color;
+    font-size:$text-rg;
+    font-weight:$font-bold;
+    margin-right: 10px;
+  }
+}
+.contentWrapper{
+  display:flex;
+  flex-direction: column;
+}
+.LoadingWrapper{
+  width: 100%;
+  padding:20px;
+  position: relative;
+  display:flex;
+  justify-content: center;
+}
+.container{
+  padding:5px;
+  font-size: 20px;
+  font-weight: 500;
+  color: $dark-color;
+  display:flex;
+  .heading{
+    flex:1;
+  }
+}
+

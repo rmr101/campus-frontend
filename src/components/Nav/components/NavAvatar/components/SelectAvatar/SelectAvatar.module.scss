@@ -10,12 +10,13 @@
   align-content: center;
   height:150px;
   width:280px;
-  position: absolute;
+  position: fixed;
   cursor: auto;
   border-radius: 30px;
   left: 200px;
   background-color: $white-color;
   box-shadow: 3px 3px 20px -4px rgba(0,0,0,0.75);
+  z-index: 100;
 }
 .row{
   flex:1;
