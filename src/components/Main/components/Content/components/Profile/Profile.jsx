@@ -53,7 +53,7 @@ class Profile extends React.Component {
                   {this.state.userInfo.title !== null ? (
                     this.state.userInfo.title
                   ) : (
-                    <span className={styles.noText}> No Title.</span>
+                    <span className={styles.noText}>No Title.</span>
                   )}
                 </div>
               </HalfWidthLayout>
@@ -65,7 +65,7 @@ class Profile extends React.Component {
                   {this.state.userInfo.title !== null ? (
                     this.state.userInfo.introduction
                   ) : (
-                    <span className={styles.noText}> No Introduction.</span>
+                    <span className={styles.noText}>No Introduction.</span>
                   )}
                 </div>
               </HalfWidthLayout>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
-import NoContent from './NoContent.test';
+import NoContent from './NoContent';
 
 describe("<NoContent/>", () => {
 

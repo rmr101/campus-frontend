@@ -16,7 +16,8 @@ class Login extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      failLogin:false,
+      failLogin: false,
+      InactiveUser: false,
       username: "",
       password: "",
     };
@@ -24,6 +25,7 @@ class Login extends React.Component {
   handleValueChange(name){
     this.setState({
       failLogin: false,
+      InactiveUser: false,
     });
     return (event) => {
       const { value } = event.target;
@@ -50,7 +52,7 @@ class Login extends React.Component {
         );
       })
       .catch((err) => {
-        switch(err.response.status){
+        switch (err.response.status) {
           case 401:
             this.setState({
               failLogin: true,
@@ -58,12 +60,20 @@ class Login extends React.Component {
             });
             console.log(err.response);
             break;
-          default:
+          case 403:
+            this.setState({
+              InactiveUser: true,
+              loading: false,
+            });
             console.log(err.response);
-            break
+            break;
+          default:
+            this.setState({
+              loading: false,
+            });
+            console.log(err.response);
+            break;
         }});
-       console.log("I have finish uploading it to the store");
-
   }
   render() {
     return (
@@ -85,7 +95,11 @@ class Login extends React.Component {
             <div className={styles.control}>
               <label>User ID</label>
               <input
-                className={this.state.failLogin ? styles.failLogin : null}
+                className={
+                  this.state.failLogin || this.state.InactiveUser
+                    ? styles.failLogin
+                    : null
+                }
                 type="text"
                 placeholder="Enter User ID"
                 maxLength={30}
@@ -107,6 +121,9 @@ class Login extends React.Component {
             </div>
             {this.state.failLogin ? (
               <small> Incorrect username or password. </small>
+            ) : null}
+            {this.state.InactiveUser ? (
+              <small> Inactive user. Please contact admin. </small>
             ) : null}
             <button className={styles.button} type="submit">
               Log in
