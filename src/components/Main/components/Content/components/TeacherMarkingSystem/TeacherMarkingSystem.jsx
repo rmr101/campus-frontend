@@ -6,7 +6,6 @@ import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
 
-
 //TODO: Can a
 class TeacherMarkingSystem extends React.Component {
   constructor(props) {
@@ -34,9 +33,10 @@ class TeacherMarkingSystem extends React.Component {
 
   renderAssignmentList() {
     let array = this.state.assignmentList;
-    return array.map((obj) => {
+    return array.map((obj, index) => {
       let { title, id, dueDate } = obj;
       let RenderObj = {
+        index: index,
         name: title,
         id: id,
         secondID: this.props.id,
@@ -58,6 +58,7 @@ class TeacherMarkingSystem extends React.Component {
         <FullWidthLayout>
           <div className={styles.wrapper}>
             <div className={styles.container}>
+              <div className={styles.heading}>No:</div>
               <div className={styles.heading}>Assignment Name:</div>
               <div className={styles.heading}>Assignment ID:</div>
               <div className={styles.heading}>Assignment Due:</div>
@@ -69,7 +70,6 @@ class TeacherMarkingSystem extends React.Component {
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,

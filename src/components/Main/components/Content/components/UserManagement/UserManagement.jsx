@@ -3,7 +3,10 @@ import getUserQuery from "./../../../../../../apis/getUserQuery";
 import Button from "../../../../../Button";
 import SearchBar from "../../../../../SearchBar";
 import styles from "./UserManagement.module.scss";
+import RenderContentLink from "./../RenderContentLink";
+import NoContent from "../NoContent/NoContent";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
+import { connect } from "react-redux";
 
 class UserManagement extends React.Component {
   constructor(props) {
@@ -94,7 +97,35 @@ class UserManagement extends React.Component {
     console.log(this.state.search, this.state.errors);
   };
 
-  ValidateInput(errors) {}
+  renderUserList() {
+    let array = this.state.nameList;
+    return array.map((obj,index) => {
+      let { uuid, name } = obj;
+      let RenderObj = {
+        index:index,
+        id: uuid,
+        name: name,
+      };
+      return <RenderContentLink key={"UserManagement" + Math.random()} RenderObj={RenderObj} toPageID={"UserInfo"} />;
+    });
+  }
+
+  renderContent() {
+    if (this.state.nameList.length < 1) {
+      return <NoContent text={"There is no such user!"} />;
+    } else {
+      return (
+        <React.Fragment>
+          <div className={styles.container}>
+            <div className={styles.heading}>No:</div>
+            <div className={styles.heading}>Name:</div>
+            <div className={styles.heading}>Campus ID:</div>
+          </div>
+          {this.renderUserList()}
+        </React.Fragment>
+      );
+    }
+  }
 
   render() {
     return (
@@ -112,34 +143,7 @@ class UserManagement extends React.Component {
             <Button type={"CREATE"} />
           </div>
           <div className={styles.wrapper}>
-            <table className={styles.table}>
-              <thead>
-                <tr className={styles.tr}>
-                  <th className={styles.th}>No.</th>
-                  <th className={styles.th}>Name</th>
-                  <th className={styles.th}></th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.nameList.length < 1 ? (
-                  <tr>
-                    <td>
-                      <h3>There is no such user!</h3>
-                    </td>
-                  </tr>
-                ) : (
-                  (console.log(this.state.nameList),
-                  this.state.nameList.map(function (user, index) {
-                    return (
-                      <tr className={styles.tr} key={index}>
-                        <td className={styles.td}>{index + 1}</td>
-                        <td className={styles.td}>{user.name}</td>
-                      </tr>
-                    );
-                  }))
-                )}
-              </tbody>
-            </table>
+            {this.renderContent()}
           </div>
         </div>
       </FullWidthLayout>
@@ -147,4 +151,10 @@ class UserManagement extends React.Component {
   }
 }
 
-export default UserManagement;
+const mapStateToProps = (state) => ({
+  id: state.headerHistory.content.id,
+  header: state.headerHistory.title,
+});
+const UserManagementContainer = connect(mapStateToProps)(UserManagement);
+export default UserManagementContainer;
+

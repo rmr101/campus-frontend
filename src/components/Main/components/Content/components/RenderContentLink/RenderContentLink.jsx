@@ -3,23 +3,20 @@ import styles from "./RenderContentLink.module.scss";
 import { connect } from "react-redux";
 import AddHeader from "./../../../../../../store/campus/actions/AddHeader";
 
-
-const sortInRenderOrder=(unordered)=>{
+const sortInRenderOrder = (unordered) => {
   const ordered = {};
   Object.keys(unordered)
     .sort()
-    .forEach((key) => 
-      ordered[key] = unordered[key]
-    );
+    .forEach((key) => (ordered[key] = unordered[key]));
   return ordered;
-}
+};
 const renderRest = (rest) => {
-    let result = [];
-    for (let props in rest) {
-      result.push(renderColumn(rest[props]));
-    }
-    return result;
-  };
+  let result = [];
+  for (let props in rest) {
+    result.push(renderColumn(rest[props]));
+  }
+  return result;
+};
 
 const renderColumn = (detail) => {
   return (
@@ -29,17 +26,23 @@ const renderColumn = (detail) => {
   );
 };
 
-const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
-  let { disable,name, id, secondID, ...rest } = RenderObj;
+const RenderContentLink = ({ onClick, RenderObj, toPageID }) => {
+  let { disable, name, id, secondID,index, ...rest } = RenderObj;
   rest = sortInRenderOrder(rest);
+
   return (
-    <div key={"name_" + Math.random()} className={styles.container}>
+    <div key={"name_" + Math.random()}   className={`${styles.container} ${disable ? null : styles.links}`}  onClick={(e) => {
+      e.preventDefault();
+      return !disable ? onClick(name, toPageID, id, secondID) : null;
+    }} >
+      <div className={styles.heading}>{index+1}</div>
       <div
-        onClick={(e) => {
-          e.preventDefault();
-          return !disable ? onClick(name, toPageID, id, secondID) : null;
-        }}
-        className={`${styles.heading} ${disable?null:styles.links}`}
+        // onClick={(e) => {
+        //   e.preventDefault();
+        //   return !disable ? onClick(name, toPageID, id, secondID) : null;
+        // }}
+        // className={`${styles.heading} ${disable ? null : styles.links}`}
+        className={styles.heading}
       >
         {name}
       </div>
@@ -48,7 +51,6 @@ const RenderContentLink = ({ onClick, RenderObj, toPageID}) => {
     </div>
   );
 };
-
 
 const mapDispatchToProps = (dispatch) => ({
   onClick: (headingTitle, contentType, id, secondID) => {
@@ -59,9 +61,6 @@ const mapDispatchToProps = (dispatch) => ({
 const RenderContentLinkContainer = connect(
   null,
   mapDispatchToProps
-  
 )(RenderContentLink);
-
-
 
 export default RenderContentLinkContainer;
