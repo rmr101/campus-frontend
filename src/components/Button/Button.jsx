@@ -27,8 +27,10 @@ class Button extends React.Component {
         return styles.updateBtn;
       case "CREATE":
         return styles.updateBtn;
-      case "SEARCH":
-        return styles.searchBtn;
+      case "LOGOUT":
+        return styles.logOutBtn;
+      // case "AdminCreateTeacher":
+        // return styles.createBtn;
       case "CHANGE_PASSWORD":
         return styles.updateBtn;
       default:

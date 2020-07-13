@@ -1,12 +1,11 @@
-import React from 'react';
-import styles from './SubjectCourse.module.scss';
+import React from "react";
+import styles from "./SubjectCourse.module.scss";
 import RenderContentLink from "./../RenderContentLink";
-import getCourseListBySubjectID from './../../../../../../apis/getCourseListBySubjectID';
-import Loading from '../Loading';
+import getCourseListBySubjectID from "./../../../../../../apis/getCourseListBySubjectID";
+import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
-import {connect} from 'react-redux';
-import NoContent from '../NoContent/NoContent';
-
+import { connect } from "react-redux";
+import NoContent from "../NoContent/NoContent";
 
 class SubjectCourse extends React.Component {
   constructor(props) {
@@ -28,8 +27,8 @@ class SubjectCourse extends React.Component {
       loading: false,
     });
   }
-  componentDidUpdate(){
-    if(this.state.subjectId !== this.props.id){
+  componentDidUpdate() {
+    if (this.state.subjectId !== this.props.id) {
       this.setState({ subjectId: this.props.id }, () => this.getCourseList());
     }
   }
@@ -39,9 +38,10 @@ class SubjectCourse extends React.Component {
 
   renderCoursesList() {
     let array = this.state.courseList;
-    return array.map((obj) => {
+    return array.map((obj, index) => {
       let { name, id, introduction } = obj;
       let RenderObj = {
+        index: index,
         name: name,
         id: id,
         introduction,
@@ -55,13 +55,14 @@ class SubjectCourse extends React.Component {
       );
     });
   }
-  renderContent(){
+  renderContent() {
     if (this.state.courseList.length === 0) {
-      return <NoContent text={"No courses under this subject."}/>
+      return <NoContent text={"No courses under this subject."} />;
     } else {
       return (
         <React.Fragment>
           <div className={styles.container}>
+            <div className={styles.heading}>No:</div>
             <div className={styles.heading}>Course Name:</div>
             <div className={styles.heading}>Course ID:</div>
             <div className={styles.heading}>Course Introduction:</div>
@@ -81,7 +82,7 @@ class SubjectCourse extends React.Component {
       </FullWidthLayout>
     );
   }
-};
+}
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,

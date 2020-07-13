@@ -8,7 +8,6 @@ import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import Loader from "../../../../../Loader";
 import { connect } from "react-redux";
 
-
 //TODO: Can a
 class TeacherCourseAssignment extends React.Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class TeacherCourseAssignment extends React.Component {
       acceptanceCriteria: "",
       content: "",
       title: "",
-      dueDate:"",
+      dueDate: "",
       publishLoading: false,
       publishSuccessful: false,
     };
@@ -49,9 +48,10 @@ class TeacherCourseAssignment extends React.Component {
 
   renderAssignmentList() {
     let array = this.state.assignmentList;
-    return array.map((obj) => {
+    return array.map((obj, index) => {
       let { title, id, dueDate } = obj;
       let RenderObj = {
+        index: index,
         name: title,
         id: id,
         secondID: this.props.id,
@@ -74,7 +74,7 @@ class TeacherCourseAssignment extends React.Component {
       });
     };
   }
-  async publishAssignment(){
+  async publishAssignment() {
     const title = this.state.title;
     const AC = this.state.acceptanceCriteria;
     const content = this.state.content;
@@ -107,6 +107,7 @@ class TeacherCourseAssignment extends React.Component {
         <FullWidthLayout>
           <div className={styles.wrapper}>
             <div className={styles.container}>
+              <div className={styles.heading}>No:</div>
               <div className={styles.heading}>Assignment Name:</div>
               <div className={styles.heading}>Assignment ID:</div>
               <div className={styles.heading}>Assignment Due:</div>
@@ -117,7 +118,9 @@ class TeacherCourseAssignment extends React.Component {
         <FullWidthLayout>
           <div className={styles.AssignmentPostWrapper}>
             <form
-              className={`${styles.form} ${this.state.publishSuccessful && styles.successful}`}
+              className={`${styles.form} ${
+                this.state.publishSuccessful && styles.successful
+              }`}
               onSubmit={(e) => {
                 e.preventDefault();
                 this.onSubmit();
@@ -182,7 +185,10 @@ class TeacherCourseAssignment extends React.Component {
                 Publish
               </button>
               {this.state.publishSuccessful ? (
-                <small className={styles.successfulText}> Assignment published successfully. </small>
+                <small className={styles.successfulText}>
+                  {" "}
+                  Assignment published successfully.{" "}
+                </small>
               ) : null}
             </form>
           </div>
@@ -191,7 +197,6 @@ class TeacherCourseAssignment extends React.Component {
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
