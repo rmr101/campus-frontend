@@ -12,7 +12,7 @@
 .links{
   cursor: pointer;
   &:hover{
-    color:$theme-color;
+    background-color:$link-color;
   }
 }
 

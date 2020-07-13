@@ -116,7 +116,7 @@ export const AdminConfig = [
          { icon: renderList.Dashboard, title: "Dashboard", NavId: "Dashboard" },
          {
            icon: renderList.Users,
-           title: "UserManagement",
+           title: "User management",
            NavId: "Users",
          },
          {
