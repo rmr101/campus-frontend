@@ -112,6 +112,7 @@ class PostSubjectForm extends React.Component {
                 <input
                   id="subjectCode"
                   type="text"
+                  placeholder="Enter 3 letters subject code"
                   minLength={3}
                   maxLength={3}
                   required
@@ -127,7 +128,7 @@ class PostSubjectForm extends React.Component {
               <textarea
                 id="Intro"
                 className={styles.intro}
-                placeholder="Enter introduction for the subject."
+                placeholder="Enter introduction for the subject"
                 required
                 onChange={(event) => {
                   this.handleValueChange("introduction")(event);
@@ -144,9 +145,9 @@ class PostSubjectForm extends React.Component {
             {this.state.postSuccessful ? (
               <small className={styles.successfulText}>Successful.</small>
             ) : null}
-            {this.state.errorMessage ||this.state.notNullableError ? (
+            {this.state.errorMessage || this.state.notNullableError ? (
               <small className={styles.errorText}>
-                {this.state.errorMessage +" " +this.state.notNullableError}
+                {this.state.errorMessage + " " + this.state.notNullableError}
               </small>
             ) : null}
           </form>

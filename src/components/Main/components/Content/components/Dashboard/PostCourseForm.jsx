@@ -165,7 +165,7 @@ class PostCourseForm extends React.Component {
               <textarea
                 id="outcome"
                 className={styles.outcome}
-                placeholder="Enter learning outcomes."
+                placeholder="Enter learning outcomes"
                 required
                 onChange={(event) => {
                   this.handleValueChange("learningOutcome")(event);
@@ -177,7 +177,7 @@ class PostCourseForm extends React.Component {
               <textarea
                 id="assessment"
                 className={styles.content}
-                placeholder="Enter assessments for the course."
+                placeholder="Enter assessments for the course"
                 required
                 onChange={(event) => {
                   this.handleValueChange("assessment")(event);
@@ -189,7 +189,7 @@ class PostCourseForm extends React.Component {
               <textarea
                 id="Intro"
                 className={styles.intro}
-                placeholder="Enter introduction for the course."
+                placeholder="Enter introduction for the course"
                 required
                 onChange={(event) => {
                   this.handleValueChange("introduction")(event);
