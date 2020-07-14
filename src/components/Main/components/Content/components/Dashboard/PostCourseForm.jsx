@@ -6,7 +6,7 @@ import postCourse from '../../../../../../apis/postCourse';
 
 const date = new Date();
 const year = date.getFullYear();
-const semester = date.getMonth()<7? "First" : "Second";
+const semester = date.getMonth()<7? 1 : 2;
 
 class PostCourseForm extends React.Component {
   constructor(props) {
@@ -136,18 +136,6 @@ class PostCourseForm extends React.Component {
               />
             </div>
             <div className={styles.control}>
-              <label htmlFor="Intro">Introduction: </label>
-              <textarea
-                id="Intro"
-                className={styles.intro}
-                placeholder="Enter introduction for the course."
-                required
-                onChange={(event) => {
-                  this.handleValueChange("introduction")(event);
-                }}
-              ></textarea>
-            </div>
-            <div className={styles.control}>
               <label htmlFor="outcome">Learning Outcome: </label>
               <textarea
                 id="outcome"
@@ -168,6 +156,18 @@ class PostCourseForm extends React.Component {
                 required
                 onChange={(event) => {
                   this.handleValueChange("assessment")(event);
+                }}
+              ></textarea>
+            </div>
+            <div className={styles.control}>
+              <label htmlFor="Intro">Introduction: </label>
+              <textarea
+                id="Intro"
+                className={styles.intro}
+                placeholder="Enter introduction for the course."
+                required
+                onChange={(event) => {
+                  this.handleValueChange("introduction")(event);
                 }}
               ></textarea>
             </div>
