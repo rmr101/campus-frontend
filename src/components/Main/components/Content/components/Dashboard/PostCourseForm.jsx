@@ -2,16 +2,7 @@ import React from 'react';
 import Loader from "../../../../../Loader";
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 import styles from "./PostCourseForm.module.scss";
-// {
-//   "assessment": "string",
-//   "learningOutcome": "string",
-//   "location": "string",
-//  
-//   "semester": "string",
-//   "subjectId": 0,
-//   "workLoad": "string",
-//   "year": "string"
-// }
+import postCourse from '../../../../../../apis/postCourse';
 
 const date = new Date();
 const year = date.getFullYear();
@@ -24,10 +15,14 @@ class PostCourseForm extends React.Component {
       postSuccessful: false,
       loading: false,
       name: "",
+      location:"",
       introduction: "",
+      assessment:"",
       workLoad: 12.5,
+      learningOutcome:"",
       year,
       semester,
+      subjectId:0,
     };
   }
   handleValueChange(name) {
@@ -38,32 +33,26 @@ class PostCourseForm extends React.Component {
       });
     };
   }
-  // async publishAssignment() {
-  //   const title = this.state.title;
-  //   const AC = this.state.acceptanceCriteria;
-  //   const content = this.state.content;
-  //   const courseID = this.state.courseAssignmentId;
-  //   const dueDate = this.state.dueDate;
-  //   this.setState({
-  //     publishLoading: true,
-  //   });
-  //   await teacherPublishAssignment(title, AC, content, dueDate, courseID)
-  //     .then(() => {
-  //       this.getAssignmentList();
-  //       this.setState(
-  //         {
-  //           publishLoading: false,
-  //           publishSuccessful: true,
-  //         },
-  //         () =>
-  //           setTimeout(() => this.setState({ publishSuccessful: false }), 2000)
-  //       );
-  //     })
-  //     .catch(console.log);
-  // }
-  // onSubmit() {
-  //   this.publishAssignment();
-  // }
+  async postCourse() {
+    const {loading,postSuccessful,...postBody} = this.state;
+    this.setState({
+      loading: true,
+    });
+    await postCourse(postBody)
+      .then(() => {
+        this.setState(
+          {
+            loading: false,
+            postSuccessful: true,
+          },
+          () => setTimeout(() => this.setState({ postSuccessful: false }), 2000)
+        );
+      })
+      .catch(console.log);
+  }
+  onSubmit() {
+    this.postCourse();
+  }
   render() {
     return (
       <FullWidthLayout>
@@ -83,7 +72,7 @@ class PostCourseForm extends React.Component {
                 <Loader />
               </div>
             ) : null}
-            <div className={styles.control + " " + styles.firstRow}>
+            <div className={styles.control + " " + styles.horizontalRow}>
               <div className={styles.titleInput}>
                 <label htmlFor="name">Name: </label>
                 <input
@@ -112,16 +101,39 @@ class PostCourseForm extends React.Component {
                   <option value={100}>100</option>
                 </select>
               </div>
+              <div className={styles.subjectID}>
+                {/* TODO can be deleted after implemented  */}
+                <label htmlFor="subjectID">SubjectID: </label>
+                <input
+                  id="subjectID"
+                  type="number"
+                  required
+                  onChange={(event) =>
+                    this.handleValueChange("subjectId")(event)
+                  }
+                />
+              </div>
             </div>
-            <div className={styles.control + " " + styles.firstRow}>
+            <div className={styles.control + " " + styles.horizontalRow}>
               <div className={styles.titleInput}>
                 <label> Year: </label>
-                <div>{year}</div>
+                <div className={styles.displayValue}>{year}</div>
               </div>
               <div className={styles.titleInput}>
                 <label> Semester: </label>
-                <div>{semester}</div>
+                <div className={styles.displayValue}>{semester}</div>
               </div>
+            </div>
+            <div className={styles.control}>
+              <label htmlFor="location">Location: </label>
+              <input
+                id="location"
+                type="text"
+                placeholder="Enter location for the course"
+                maxLength={30}
+                required
+                onChange={(event) => this.handleValueChange("location")(event)}
+              />
             </div>
             <div className={styles.control}>
               <label htmlFor="Intro">Introduction: </label>
@@ -136,37 +148,34 @@ class PostCourseForm extends React.Component {
               ></textarea>
             </div>
             <div className={styles.control}>
-              <label htmlFor="outcome">learningOutcome: </label>
+              <label htmlFor="outcome">Learning Outcome: </label>
               <textarea
                 id="outcome"
                 className={styles.outcome}
                 placeholder="Enter learning outcomes."
                 required
                 onChange={(event) => {
-                  this.handleValueChange("outcome")(event);
+                  this.handleValueChange("learningOutcome")(event);
                 }}
               ></textarea>
             </div>
             <div className={styles.control}>
-              <label htmlFor="content">Content: </label>
+              <label htmlFor="assessment">Assessments: </label>
               <textarea
-                id="content"
+                id="assessment"
                 className={styles.content}
-                placeholder="Enter assignment content"
+                placeholder="Enter assessments for the course."
                 required
                 onChange={(event) => {
-                  this.handleValueChange("content")(event);
+                  this.handleValueChange("assessment")(event);
                 }}
               ></textarea>
             </div>
             <button className={styles.button} type="submit">
-              Publish
+              Post
             </button>
-            {this.state.publishSuccessful ? (
-              <small className={styles.successfulText}>
-                {" "}
-                Assignment published successfully.{" "}
-              </small>
+            {this.state.postSuccessful ? (
+              <small className={styles.successfulText}>Successful.</small>
             ) : null}
           </form>
         </div>

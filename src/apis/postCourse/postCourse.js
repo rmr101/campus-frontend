@@ -4,13 +4,8 @@ import {Auth} from '../../utils/CampusSever/AuthenticatedAccess';
 
 const courseUrl = "/courses";
 
-export default (subjectID,courseDetail) =>{
-  const postBody =
-    {...courseDetail,
-    subjectID,}
+export default (postBody) =>{
   const AuthCampusSever = Auth(CampusSever);
-  AuthCampusSever.post(courseUrl, postBody)
-        .then(() => console.log('post successfully'))
-        .catch(console.log);
+  return AuthCampusSever.post(courseUrl, postBody);
   }
   

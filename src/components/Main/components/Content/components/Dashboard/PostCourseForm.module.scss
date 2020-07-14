@@ -62,7 +62,7 @@ textarea{
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
-.firstRow{
+.horizontalRow{
   display:flex;
   
 }
@@ -93,8 +93,16 @@ textarea{
   .outcome{
     height:150px;
   }
+  .displayValue{
+    font-size: $text-lg;
+    color: $light-text-color;
+    font-weight: $font-bold;
+  }
+  .subjectID{
+    margin-left: 40px;
+  }
  
-  input,textarea,.workLoad {
+  input,textarea,.workLoad{
     box-sizing: border-box;
     border: 2px solid #f0f0f0;
     border-radius: 5px;
@@ -116,11 +124,6 @@ textarea{
     display: block;
     margin-bottom: relative;
   }
-}
-.forget{
-  margin-top: 20px;
-  display: block;
-  color: $font-color;
 }
 .button {
   cursor: pointer;
