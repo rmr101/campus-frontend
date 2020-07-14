@@ -1,22 +1,22 @@
 import React from "react";
 import styles from "./NavSideBar.module.scss";
 import NavItems from "./components/NavItems";
-import * as NavItemsRenderMapper from './NavItemsRenderMapper';
-import Canvas from './components/Canvas';
+import * as NavItemsRenderMapper from "./NavItemsRenderMapper";
+import Canvas from "./components/Canvas";
 import AddHeader from "../../../../store/campus/actions/AddHeader";
 import { connect } from "react-redux";
 
-class NavSideBar extends React.Component{
-  constructor(props){
+class NavSideBar extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
-      canvasOn:false,
-      current:"Dashboard",
-    }
-    console.log()
-    this.handleClick=this.handleClick.bind(this);
+    this.state = {
+      canvasOn: false,
+      current: "Dashboard",
+    };
+    console.log();
+    this.handleClick = this.handleClick.bind(this);
   }
-  readConfig(ConfigArray){
+  readConfig(ConfigArray) {
     return ConfigArray.map((obj) => {
       if (obj.filler) {
         return <div key={"Filler"} className={styles.filler}></div>;
@@ -34,12 +34,12 @@ class NavSideBar extends React.Component{
         );
       }
     });
-  };
+  }
 
-  componentDidMount(){
+  componentDidMount() {
     this.changeActive("Dashboard");
   }
-  renderNavItem(){
+  renderNavItem() {
     switch (this.props.role) {
       case "student":
         return this.readConfig(NavItemsRenderMapper.StudentConfig);
@@ -50,30 +50,30 @@ class NavSideBar extends React.Component{
       default:
         return null;
     }
-  };
-  changeActive(name){
-    this.setState({
-      current:name,
-    })
   }
-  setCanvasStatus(boolean){
+  changeActive(name) {
+    this.setState({
+      current: name,
+    });
+  }
+  setCanvasStatus(boolean) {
     this.setState({ canvasOn: boolean });
   }
-  toggleCanvas(){
+  toggleCanvas() {
     this.setState({
-      canvasOn:!this.state.canvasOn,
-    })
+      canvasOn: !this.state.canvasOn,
+    });
   }
   clickToDisplayCanvas = (name) => {
     if (name === this.state.current) {
       this.toggleCanvas();
     } else if (name !== this.state.current) {
-             //toggle canvas twice
-             this.setCanvasStatus(false);
-             this.setCanvasStatus(true);
-           }
+      //toggle canvas twice
+      this.setCanvasStatus(false);
+      this.setCanvasStatus(true);
+    }
   };
-  handleClick(name){
+  handleClick(name) {
     switch (name) {
       case "Dashboard":
         this.changeActive(name);
@@ -84,6 +84,12 @@ class NavSideBar extends React.Component{
         this.changeActive(name);
         //TODO: UserManagement 是ID 还是 Users 是？
         this.props.addHeader("User management", "Users");
+        this.setCanvasStatus(false);
+        break;
+      case "CourseManagement":
+        this.changeActive(name);
+        //TODO: UserManagement 是ID 还是 Users 是？
+        this.props.addHeader("Course management", "CourseManagement");
         this.setCanvasStatus(false);
         break;
       case "Assignment":
@@ -100,31 +106,30 @@ class NavSideBar extends React.Component{
         this.changeActive(name);
         this.clickToDisplayCanvas(name);
     }
-  };
-  render(){
-  return (
-    <div className={styles.wrapper}>
-      <div
-        className={`${styles.sideWrapper} + ${
-          this.state.canvasOn ? null : styles.sideWrapperNotCollapse
-        }`}
-      >
-        {this.renderNavItem()}
+  }
+  render() {
+    return (
+      <div className={styles.wrapper}>
+        <div
+          className={`${styles.sideWrapper} + ${
+            this.state.canvasOn ? null : styles.sideWrapperNotCollapse
+          }`}
+        >
+          {this.renderNavItem()}
+        </div>
+        <div
+          className={this.state.canvasOn ? styles.canvasActive : styles.canvas}
+        >
+          {this.state.canvasOn ? <Canvas current={this.state.current} /> : null}
+        </div>
       </div>
-      <div
-        className={this.state.canvasOn ? styles.canvasActive : styles.canvas}
-      >
-        {this.state.canvasOn ? <Canvas current={this.state.current} /> : null}
-      </div>
-    </div>
-  );
+    );
+  }
 }
-};
-
 
 const mapDispatchToProps = (dispatch) => ({
-  addHeader: (headingTitle, headingID) => 
-  dispatch(AddHeader(headingTitle, headingID))
+  addHeader: (headingTitle, headingID) =>
+    dispatch(AddHeader(headingTitle, headingID)),
 });
 
 const mapStateToProps = (state) => ({
