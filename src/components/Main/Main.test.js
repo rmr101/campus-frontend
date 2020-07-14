@@ -1,20 +1,40 @@
 import React from 'react';
+import {render,screen,within} from '@testing-library/react';
 import Main from './Main';
-import {render} from '@testing-library/react';
+import headerHistoryReducer from '../../store/campus/reducers/headerHistory';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 
-describe('<Main/>',()=>{
 
-  let renderResult;
-  const props = {
-    pageID: "Dashboard",
-    title: "Dashboard",
+
+const initialState = {
+  headerHistory:{
+  title:"Title",
+  content:{
+    pageID:"PageID",
   }
-  beforeEach(()=>{
-    renderResult = render(<Main {...props}/>);
-  })
+}}
+const Wrapper = ({children}) =>
+  <Provider store={createStore(headerHistoryReducer, initialState)}>
+    {children}
+  </Provider>;
 
-  it("should render title",()=>{
-    const {getByText} = renderResult;
-    expect(getByText(props.title)).toBeInTheDocument();
+
+jest.mock('./components/Content', ()=> jest.fn(()=> `<Content/>` ));
+jest.mock("./components/Header", () =>
+  jest.fn(() => `<Header/>`)
+); 
+
+describe("<Main/>", ()=>{
+
+  beforeEach(()=>{
+    render(<Main/>,{wrapper:Wrapper});
   })
+it("should render header",()=>{
+  expect(screen.getByTestId("header")).toBeInTheDocument();
+})
+it("should render Content", () => {
+  expect(screen.getByTestId("content")).toBeInTheDocument();
 });
+
+})

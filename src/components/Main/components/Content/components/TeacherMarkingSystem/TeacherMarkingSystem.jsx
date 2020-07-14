@@ -1,10 +1,18 @@
 import React from "react";
-import styles from "./TeacherMarkingSystem.module.scss";
+
 import RenderContentLink from "../RenderContentLink";
 import getAssignmentListByCourse from "../../../../../../apis/getAssignmentListByCourse";
 import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
+import {
+  IndexItem,
+  HeaderRow,
+  TableLayout,
+  TableItem,
+} from "../../../../../Layout/TableLayout/TableLayout";
+
+
 
 //TODO: Can a
 class TeacherMarkingSystem extends React.Component {
@@ -56,15 +64,14 @@ class TeacherMarkingSystem extends React.Component {
     return (
       <React.Fragment>
         <FullWidthLayout>
-          <div className={styles.wrapper}>
-            <div className={styles.container}>
-              <div className={styles.heading}>No:</div>
-              <div className={styles.heading}>Assignment Name:</div>
-              <div className={styles.heading}>Assignment ID:</div>
-              <div className={styles.heading}>Assignment Due:</div>
-            </div>
+          <TableLayout>
+            <HeaderRow>
+              <IndexItem>No:</IndexItem>
+              <TableItem>Assignment Name:</TableItem>
+              <TableItem>Assignment Due:</TableItem>
+            </HeaderRow>
             {this.state.loading ? <Loading /> : this.renderAssignmentList()}
-          </div>
+          </TableLayout>
         </FullWidthLayout>
       </React.Fragment>
     );

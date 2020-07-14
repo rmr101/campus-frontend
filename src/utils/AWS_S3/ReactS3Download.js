@@ -35,7 +35,7 @@ const ReactS3Download=(key)=>{
         let blob = new Blob([data.Body], { type: data.ContentType });
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = "student_assignment";
+        link.download = Date().split(" ").slice(1, 5).join("_");
         link.click();
       }
     }

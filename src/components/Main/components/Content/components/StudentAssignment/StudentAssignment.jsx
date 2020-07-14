@@ -6,6 +6,13 @@ import { connect } from "react-redux";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import NoContent from "../NoContent/NoContent";
 import RenderContentLink from "../RenderContentLink";
+import {
+  IndexItem,
+  HeaderRow,
+  TableLayout,
+  TableItem,
+} from "../../../../../Layout/TableLayout/TableLayout";
+
 
 class StudentAssignment extends React.Component {
   constructor(props) {
@@ -65,17 +72,15 @@ class StudentAssignment extends React.Component {
       return <NoContent text={"You have no assignment to be done."} />;
     } else {
       let renderArray = [
-        <div
-          className={styles.container}
+        <HeaderRow
           key={"StudentAssignment " + Math.random()}
-        > <div className={styles.heading}>No:</div>
-          <div className={styles.heading}>Name:</div>
-          <div className={styles.heading}>ID:</div>
-          <div className={styles.heading}>Due:</div>
-          <div className={styles.heading}>Submitted :</div>
-          <div className={styles.heading}>Result :</div>
-          <div className={styles.heading}>Comment :</div>
-        </div>,
+        > <IndexItem >No:</IndexItem>
+          <TableItem >Name:</TableItem>
+          <TableItem >Due:</TableItem>
+          <TableItem >Submitted :</TableItem>
+          <TableItem >Result :</TableItem>
+          <TableItem >Comment :</TableItem>
+        </HeaderRow>,
         this.renderAssignmentList(this.state.renderArray),
       ];
       return renderArray;
@@ -165,7 +170,9 @@ class StudentAssignment extends React.Component {
                     </label>
                   </div>
                 </div>
-                {this.renderResult(this.state.renderArray)}
+                <TableLayout>
+                  {this.renderResult(this.state.renderArray)}
+                </TableLayout>
               </div>
             )}
           </div>
