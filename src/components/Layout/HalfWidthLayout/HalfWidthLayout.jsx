@@ -26,10 +26,9 @@ const HalfWidthLayout = ({ title, children, description, ...rest }) => (
       <Detail title={title} description={description} />
     </div>
     <div
+      data-testid="content"
       className={
-        rest.hasOwnProperty("background")
-          ? styles.functionalComponent
-          : null
+        rest.hasOwnProperty("background") ? styles.functionalComponent : null
       }
     >
       {children}

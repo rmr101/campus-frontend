@@ -1,7 +1,12 @@
 import React from "react";
-import styles from "./RenderContentLink.module.scss";
 import { connect } from "react-redux";
 import AddHeader from "./../../../../../../store/campus/actions/AddHeader";
+import {
+  IndexItem,
+  Row,
+  TableItem,
+} from "../../../../../Layout/TableLayout/TableLayout";
+
 
 const sortInRenderOrder = (unordered) => {
   const ordered = {};
@@ -20,35 +25,28 @@ const renderRest = (rest) => {
 
 const renderColumn = (detail) => {
   return (
-    <div key={detail + Math.random()} className={styles.heading}>
+    <TableItem key={detail + Math.random()} >
       {detail}
-    </div>
+    </TableItem>
   );
 };
 
 const RenderContentLink = ({ onClick, RenderObj, toPageID }) => {
   let { disable, name, id, secondID,index, ...rest } = RenderObj;
   rest = sortInRenderOrder(rest);
-
   return (
-    <div key={"name_" + Math.random()}   className={`${styles.container} ${disable ? null : styles.links}`}  onClick={(e) => {
-      e.preventDefault();
-      return !disable ? onClick(name, toPageID, id, secondID) : null;
-    }} >
-      <div className={styles.heading}>{index+1}</div>
-      <div
-        // onClick={(e) => {
-        //   e.preventDefault();
-        //   return !disable ? onClick(name, toPageID, id, secondID) : null;
-        // }}
-        // className={`${styles.heading} ${disable ? null : styles.links}`}
-        className={styles.heading}
-      >
-        {name}
-      </div>
-      <div className={styles.heading}>{id}</div>
+    <Row
+      key={"name_" + Math.random()}
+      disable={disable}
+      onClick={(e) => {
+        e.preventDefault();
+        return !disable ? onClick(name, toPageID, id, secondID) : null;
+      }}
+    >
+      <IndexItem>{index + 1}</IndexItem>
+      <TableItem>{name}</TableItem>
       {renderRest(rest)}
-    </div>
+    </Row>
   );
 };
 

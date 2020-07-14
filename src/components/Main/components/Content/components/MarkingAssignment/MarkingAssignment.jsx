@@ -7,6 +7,14 @@ import FullWidthLayout from '../../../../../Layout/FullWidthLayout'
 import NoContent from '../NoContent/NoContent';
 import ReactS3Download from '../../../../../../utils/AWS_S3/ReactS3Download';
 import Button from "../../../../../Button";
+import {
+  IndexItem,
+  HeaderRow,
+  TableLayout,
+  TableItem,
+  Row
+} from "../../../../../Layout/TableLayout/TableLayout";
+
 
 class MarkingAssignment extends React.Component {
   constructor(props) {
@@ -75,30 +83,22 @@ class MarkingAssignment extends React.Component {
     array.forEach((obj, number) => {
       const { attachmentUrl, score, submitted, scored, id } = obj;
       renderArray.push(
-        <div
-          key={"MarkingAssignmentID" + Math.random()}
-          className={styles.LinksContainer}
-        >
-          <div className={styles.LinksItem}>No. {number + 1}</div>
+        <Row key={"MarkingAssignmentID" + Math.random()}>
+          <IndexItem>No. {number + 1}</IndexItem>
           {submitted ? (
-            <div
-              className={styles.LinksItem + " " + styles.Link}
-              onClick={() => this.downloadFileFromS3(attachmentUrl)}
-            >
+            <TableItem onClick={() => this.downloadFileFromS3(attachmentUrl)}>
               Download Response
-            </div>
+            </TableItem>
           ) : (
-            <div className={styles.LinksItem}>Not Submitted yet</div>
+            <TableItem>Not Submitted yet</TableItem>
           )}
-          <div className={styles.LinksItem}>
-            {scored ? score : "Not Marked yet"}
-          </div>
-          <div className={styles.LinksItem}>
+          <TableItem>{scored ? score : "Not Marked yet"}</TableItem>
+          <TableItem>
             {submitted ? (
               <Button type="MARKING" id={id} handleReview={this.handleReview} />
             ) : null}
-          </div>
-        </div>
+          </TableItem>
+        </Row>
       );
     });
     return renderArray;
@@ -114,15 +114,15 @@ class MarkingAssignment extends React.Component {
       );
     } else {
       return (
-        <div className={styles.LinksWrapper}>
-          <div className={styles.headingContainer}>
-            <div className={styles.LinksHeading}>No. </div>
-            <div className={styles.LinksHeading}>Response status: </div>
-            <div className={styles.LinksHeading}>Score:</div>
-            <div className={styles.LinksHeading}></div>
-          </div>
+        <TableLayout>
+          <HeaderRow>
+            <IndexItem>No. </IndexItem>
+            <TableItem>Response status: </TableItem>
+            <TableItem>Score:</TableItem>
+            <TableItem></TableItem>
+          </HeaderRow>
           {this.renderArray(this.state.renderArray)}
-        </div>
+        </TableLayout>
       );
     }
   }

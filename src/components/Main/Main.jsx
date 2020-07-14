@@ -6,15 +6,16 @@ import { connect } from "react-redux";
 
 const Main = ({pageID,title}) => {
   const renderComponent = () => {
-    return (<div className={styles.wrapper}>
-      <div className={styles.header}>
-        <Header title={title} />
+    return (
+      <div className={styles.wrapper}>
+        <div data-testid="header" className={styles.header}>
+          <Header title={title} />
+        </div>
+        <div data-testid="content" className={styles.content}>
+          <Content pageID={pageID} />
+        </div>
       </div>
-      <div className={styles.content}>
-        <Content pageID={pageID} />
-      </div>
-    </div>
-  );
+    );
   }
   return renderComponent();
 }

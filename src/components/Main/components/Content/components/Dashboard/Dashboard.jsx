@@ -6,10 +6,9 @@ const Dashboard = () => (
   <React.Fragment>
     <HalfWidthLayout title="Welcome" />
     <HalfWidthLayout
-      title="Test"
-      description="This area is for testing purpose"
+      title="Future features" background
     >
-      <Button type={"LOGOUT"} />
+      To be implemented...
     </HalfWidthLayout>
   </React.Fragment>
 );

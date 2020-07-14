@@ -1,11 +1,16 @@
 import React from "react";
-import styles from "./SubjectCourse.module.scss";
 import RenderContentLink from "./../RenderContentLink";
 import getCourseListBySubjectID from "./../../../../../../apis/getCourseListBySubjectID";
 import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
 import NoContent from "../NoContent/NoContent";
+import {
+  IndexItem,
+  HeaderRow,
+  TableLayout,
+  TableItem,
+} from "../../../../../Layout/TableLayout/TableLayout";
 
 class SubjectCourse extends React.Component {
   constructor(props) {
@@ -39,12 +44,14 @@ class SubjectCourse extends React.Component {
   renderCoursesList() {
     let array = this.state.courseList;
     return array.map((obj, index) => {
-      let { name, id, introduction } = obj;
+      let { name, id, courseCode ,year , semester} = obj;
       let RenderObj = {
         index: index,
         name: name,
         id: id,
-        introduction,
+        a_courseCode: courseCode,
+        b_semester: semester,
+        c_year:year
       };
       return (
         <RenderContentLink
@@ -60,15 +67,16 @@ class SubjectCourse extends React.Component {
       return <NoContent text={"No courses under this subject."} />;
     } else {
       return (
-        <React.Fragment>
-          <div className={styles.container}>
-            <div className={styles.heading}>No:</div>
-            <div className={styles.heading}>Course Name:</div>
-            <div className={styles.heading}>Course ID:</div>
-            <div className={styles.heading}>Course Introduction:</div>
-          </div>
+        <TableLayout>
+          <HeaderRow>
+            <IndexItem> No:</IndexItem>
+            <TableItem>Course Name:</TableItem>
+            <TableItem>Course ID:</TableItem>
+            <TableItem>Semester:</TableItem>
+            <TableItem>Year:</TableItem>
+          </HeaderRow>
           {this.renderCoursesList()}
-        </React.Fragment>
+        </TableLayout>
       );
     }
   }
@@ -76,9 +84,7 @@ class SubjectCourse extends React.Component {
   render() {
     return (
       <FullWidthLayout>
-        <div className={styles.wrapper}>
           {this.state.loading ? <Loading /> : this.renderContent()}
-        </div>
       </FullWidthLayout>
     );
   }

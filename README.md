@@ -26,32 +26,48 @@ Energetic Login page
 
 ![find](readme_img/login.png)
 
-
-Avatar selection
+Choose your favorite avatar
 
 ![find](readme_img/avatar-selection.png)
 
-Course details
+View course details
 
 ![find](readme_img/course-detail.png)
 
-Different role panel
+Various panel according to your role
 
 ![find](readme_img/role-panel.png)
 
 #### Supported features
 
-Student submission upload, files stored in AWS S3.
+### Assignment
+
+Teacher publish assignments.
+
+![find](readme_img/publish-new-assignment.png)
+
+Student can view the newest assignment, for every enrolled course.
+![find](readme_img/student-assignment-filter.png)
+
+Upon completion, student can upload their response. File is stored in AWS S3.
 
 - Support file type: .pdf
 - File size limit : Less than 25 MB.
 
 ![find](readme_img/upload.png)
 
+After submission, teacher can download student response.
+
+![find](readme_img/teacher-assignment-filter.png)
+
+After reviewing, teacher can leave a report.
+
+![find](readme_img/teacher-report.png)
+
+### User Management
 Add/Update/Delete Students/Teachers/Assignments/Courses/
 
 ![find](readme_img/update-popup.png)
-
 
 #### Site Structure
 
@@ -101,8 +117,9 @@ Add/Update/Delete Students/Teachers/Assignments/Courses/
 Only authenticated admin could manage all users, products, service .etc.
 
 Teacher
-- Manage assignment
-- View students’ assignment
+- Manage assignments
+- View students’ assignments
+- Review students’ assignments
 
 Student
 - Enroll courses
