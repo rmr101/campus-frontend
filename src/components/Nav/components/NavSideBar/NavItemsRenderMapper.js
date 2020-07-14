@@ -121,8 +121,8 @@ export const AdminConfig = [
          },
          {
            icon: renderList.Courses,
-           title: "Courses",
-           NavId: "Courses",
+           title: "Course management",
+           NavId: "CourseManagement",
          },
 
          {

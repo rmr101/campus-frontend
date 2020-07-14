@@ -1,6 +1,5 @@
 import React from 'react';
 import HalfWidthLayout from '../../../../../Layout/HalfWidthLayout/HalfWidthLayout';
-import Button from "../../../../../Button";
 
 const Dashboard = () => (
   <React.Fragment>

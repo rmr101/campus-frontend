@@ -1,0 +1,27 @@
+@import "./../../../../../../variable";
+
+.wrapper {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.container {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 5px 5px;
+  color: $dark-color;
+  display: flex;
+  .heading {
+    flex: 1;
+  }
+}
+
+.header {
+  display: flex;
+}
+
+.createBtn{
+  display:inline-flex;
+  padding-left: 30px;
+  padding-top: 20px;
+}
