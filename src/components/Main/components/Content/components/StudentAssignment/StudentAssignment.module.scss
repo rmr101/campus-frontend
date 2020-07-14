@@ -10,6 +10,7 @@
   margin: 20px;
 
   div,label{
+    cursor: pointer;
     color:$dark-color;
     font-size:$text-rg;
     font-weight:$font-bold;
@@ -27,14 +28,3 @@
   display:flex;
   justify-content: center;
 }
-.container{
-  padding:5px;
-  font-size: 20px;
-  font-weight: 500;
-  color: $dark-color;
-  display:flex;
-  .heading{
-    flex:1;
-  }
-}
-
