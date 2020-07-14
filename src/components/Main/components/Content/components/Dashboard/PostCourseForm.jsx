@@ -14,27 +14,52 @@ class PostCourseForm extends React.Component {
     this.state = {
       postSuccessful: false,
       loading: false,
+      notNullableError: "",
       name: "",
-      location:"",
+      location: "",
       introduction: "",
-      assessment:"",
+      assessment: "",
       workLoad: 12.5,
-      learningOutcome:"",
+      learningOutcome: "",
       year,
       semester,
-      subjectId:0,
+      subjectId: 0,
     };
+  }
+  checkNull() {
+    const {
+      postSuccessful,
+      loading,
+      notNullableError,
+      workLoad,
+      year,
+      semester,
+      subjectId,
+      ...checkProps
+    } = this.state;
+    for (let prop in checkProps) {
+      if (!checkProps[prop].trim()) {
+        this.setState({ notNullableError: "Not empty input is allowed." });
+      }
+    }
   }
   handleValueChange(name) {
     return (event) => {
       const { value } = event.target;
-      this.setState({
-        [name]: value,
-      });
+      this.setState(
+        {
+          [name]: value,
+          notNullableError: "",
+        },this.checkNull);
     };
   }
   async postCourse() {
-    const {loading,postSuccessful,...postBody} = this.state;
+    const {
+      loading,
+      postSuccessful,
+      notNullableError,
+      ...postBody
+    } = this.state;
     this.setState({
       loading: true,
     });
@@ -171,11 +196,20 @@ class PostCourseForm extends React.Component {
                 }}
               ></textarea>
             </div>
-            <button className={styles.button} type="submit">
-              Post
-            </button>
+            {!this.state.notNullableError ? (
+              <button className={styles.button} type="submit">
+                Add New Course
+              </button>
+            ) : (
+              <div className={styles.inactiveBlock}>Unable to Click</div>
+            )}
             {this.state.postSuccessful ? (
               <small className={styles.successfulText}>Successful.</small>
+            ) : null}
+            {this.state.notNullableError ? (
+              <small className={styles.errorText}>
+                {this.state.notNullableError}
+              </small>
             ) : null}
           </form>
         </div>
