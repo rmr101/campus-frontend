@@ -2,11 +2,9 @@
 import React from 'react';
 import styles from "./CanvasTitleWrap.module.scss";
 
-export default ({ children,title }) => (
-  <div className={styles.wrapper}>
-    <div className={styles.title}>
-      {title}
-    </div>
+export default ({ children, title }) => (
+  <React.Fragment>
+    <div className={styles.title}>{title}</div>
     {children}
-  </div>
+  </React.Fragment>
 );
