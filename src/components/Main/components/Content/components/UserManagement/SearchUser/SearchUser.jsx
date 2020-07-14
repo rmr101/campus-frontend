@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./SearchBar.module.scss";
+import styles from "./SearchUser.module.scss";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-class SearchBar extends React.Component {
+class SearchUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -48,4 +48,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default SearchUser;

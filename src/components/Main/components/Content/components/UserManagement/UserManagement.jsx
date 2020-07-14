@@ -1,12 +1,18 @@
 import React from "react";
 import getUserQuery from "./../../../../../../apis/getUserQuery";
 import Button from "../../../../../Button";
-import SearchBar from "../../../../../SearchBar";
+import SearchBar from "./SearchUser";
 import styles from "./UserManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";
 import NoContent from "../NoContent/NoContent";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
+import {
+  IndexItem,
+  HeaderRow,
+  TableLayout,
+  TableItem,
+} from "../../../../../Layout/TableLayout/TableLayout";
 
 class UserManagement extends React.Component {
   constructor(props) {
@@ -76,6 +82,10 @@ class UserManagement extends React.Component {
       });
     } else if (this.state.errors === "") {
       await (console.log(this.state.role), this.getUserName(this.state.role));
+    } else if (this.state.role !== this.props.role) {
+      this.setState({ errors: "" });
+      await (console.log(this.state.role),
+      this.getUserName(this.state.role));
     }
   }
 
@@ -99,14 +109,21 @@ class UserManagement extends React.Component {
 
   renderUserList() {
     let array = this.state.nameList;
-    return array.map((obj,index) => {
+    console.log(array);
+    return array.map((obj, index) => {
       let { uuid, name } = obj;
       let RenderObj = {
-        index:index,
-        id: uuid,
+        index: index,
+        uuid,
         name: name,
       };
-      return <RenderContentLink key={"UserManagement" + Math.random()} RenderObj={RenderObj} toPageID={"UserInfo"} />;
+      return (
+        <RenderContentLink
+          key={"UserManagement" + Math.random()}
+          RenderObj={RenderObj}
+          toPageID={"UserInfo"}
+        />
+      );
     });
   }
 
@@ -115,14 +132,14 @@ class UserManagement extends React.Component {
       return <NoContent text={"There is no such user!"} />;
     } else {
       return (
-        <React.Fragment>
-          <div className={styles.container}>
-            <div className={styles.heading}>No:</div>
-            <div className={styles.heading}>Name:</div>
-            <div className={styles.heading}>Campus ID:</div>
-          </div>
+        <TableLayout>
+          <HeaderRow>
+            <IndexItem>No:</IndexItem>
+            <TableItem>Name:</TableItem>
+            <TableItem>Campus ID:</TableItem>
+          </HeaderRow>
           {this.renderUserList()}
-        </React.Fragment>
+        </TableLayout>
       );
     }
   }
@@ -130,7 +147,7 @@ class UserManagement extends React.Component {
   render() {
     return (
       <FullWidthLayout>
-        <div>
+        <div className={styles.header}>
           <SearchBar
             search={this.state.search}
             onSearchChange={this.handleSearchTemp}
@@ -139,13 +156,11 @@ class UserManagement extends React.Component {
             onClick={this.onSubmit}
             errors={this.state.errors}
           />
-          <div className={styles.create}>
+          <div className={styles.createBtn}>
             <Button type={"CREATE"} />
           </div>
-          <div className={styles.wrapper}>
-            {this.renderContent()}
-          </div>
         </div>
+        <div className={styles.wrapper}>{this.renderContent()}</div>
       </FullWidthLayout>
     );
   }
@@ -157,4 +172,3 @@ const mapStateToProps = (state) => ({
 });
 const UserManagementContainer = connect(mapStateToProps)(UserManagement);
 export default UserManagementContainer;
-

@@ -6,14 +6,14 @@ import UserManagement from "./components/UserManagement";
 import Profile from "./components/Profile";
 import CourseDetail from "./components/CourseDetail";
 import Dashboard from "./components/Dashboard";
-import Assignment from './components/Assignment';
-import StudentAssignment from './components/StudentAssignment';
-import TeacherMarkingSystem from './components/TeacherMarkingSystem';
+import Assignment from "./components/Assignment";
+import StudentAssignment from "./components/StudentAssignment";
+import CourseManagement from "./components/CourseManagement";
+import TeacherMarkingSystem from "./components/TeacherMarkingSystem";
 import MarkingAssignment from "./components/MarkingAssignment";
 
-const Content = ({pageID}) => {
-
-  const renderComponent = ()=> {
+const Content = ({ pageID }) => {
+  const renderComponent = () => {
     switch (pageID) {
       case "Dashboard":
         return <Dashboard />;
@@ -21,12 +21,14 @@ const Content = ({pageID}) => {
         return <SubjectCourse />;
       case "Users":
         return <UserManagement />;
+      case "CourseManagement":
+        return <CourseManagement />;
       case "TeacherCourseAssignment":
         return <TeacherCourseAssignment />;
       case "TeacherMarkingSystem":
         return <TeacherMarkingSystem />;
       case "MarkingAssignment":
-        return <MarkingAssignment/>;
+        return <MarkingAssignment />;
       case "StudentAssignment":
         return <StudentAssignment />;
       case "UserInfo":

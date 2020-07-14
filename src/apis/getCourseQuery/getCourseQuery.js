@@ -2,7 +2,7 @@ import CampusSever from "../../utils/CampusSever";
 import { Auth } from "../../utils/CampusSever/AuthenticatedAccess";
 
 const courseQueryNameUrl = "/query/courses?name";
-const courseQueryIdUrl = "/query/courses?id";
+const courseQueryIdUrl = "/query/courses?code";
 const config = {};
 
 export default (query, keyword) => {
@@ -10,11 +10,11 @@ export default (query, keyword) => {
   switch (query) {
     case "courseId":
       return AuthCampusSever.get(courseQueryIdUrl + `=${keyword}`, config)
-        .then((res) => res.data.studentList)
+        .then((res) => res.data.courseList)
         .catch((e) => console.log(e.response));
     case "courseName":
       return AuthCampusSever.get(courseQueryNameUrl + `=${keyword}`, config)
-        .then((res) => res.data.studentList)
+        .then((res) => res.data.courseList)
         .catch((e) => console.log(e.response));
     default:
       return new Promise((resFunc, rejFunc) => {

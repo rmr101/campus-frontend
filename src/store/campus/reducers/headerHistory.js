@@ -1,22 +1,21 @@
 import { ADD_HEADER } from "../type";
 const initState = {
   title: "Dashboard",
-  content: { pageID: "Dashboard"},
+  content: { pageID: "Dashboard" },
 };
 
 export default (state = initState, action) => {
   switch (action.type) {
     case ADD_HEADER:
-      let contentObj = addContent(action.toPageID, action.id, action.courseID); 
-      let newState = addHeader(action.headingTitle,contentObj);
-       console.log(newState);
+      let contentObj = addContent(action.toPageID, action.id, action.courseID);
+      let newState = addHeader(action.headingTitle, contentObj);
+      console.log(newState);
       return newState;
     default:
       return state;
   }
 };
 
-  
 const addHeader = (headerTitle, contentObj) => {
   return {
     title: headerTitle,
@@ -24,7 +23,7 @@ const addHeader = (headerTitle, contentObj) => {
   };
 };
 
-const addContent = (toPageID, id , secondID) => {
+const addContent = (toPageID, id, secondID) => {
   // mapping for content to be display
   switch (toPageID) {
     case "Dashboard":
@@ -39,6 +38,8 @@ const addContent = (toPageID, id , secondID) => {
       return { pageID: "UserInfo" };
     case "Users":
       return { pageID: "Users" };
+    case "CourseManagement":
+      return { pageID: "CourseManagement" };
     case "Help":
       return { pageID: "Help" };
     case "Setting":
@@ -48,7 +49,7 @@ const addContent = (toPageID, id , secondID) => {
     case "TeacherCourseAssignment":
       return { pageID: "TeacherCourseAssignment", id };
     case "TeacherMarkingSystem":
-      return { pageID: "TeacherMarkingSystem",id };
+      return { pageID: "TeacherMarkingSystem", id };
     case "StudentAssignment":
       return { pageID: "StudentAssignment" };
     case "Course":
