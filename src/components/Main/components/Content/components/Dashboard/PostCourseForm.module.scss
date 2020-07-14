@@ -55,7 +55,7 @@
 }
 .successful{
   .control{
-    input,textarea{
+    input,textarea,select{
       border-color:$create-color;
     }
   }
