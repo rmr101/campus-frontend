@@ -10,7 +10,7 @@ Backend of this project can be found [here](https://github.com/rmr101/campus-bac
 3. Change directory into `cd campus-frontend`.
 4. run `npm install` or `yarn install`
 5. `npm start` or `yarn start` , make sure you have set up the back end for this project.
-  
+6. This project also implement Redux Dev Tool extension on chrome. If haven't installed them [please check here.](#about-redux-dev-tool-in-this-project)
 
 ## About this Campus system.
 
@@ -68,6 +68,15 @@ After reviewing, teacher can leave a report.
 Add/Update/Delete Students/Teachers/Assignments/Courses/
 
 ![find](readme_img/update-popup.png)
+
+## About Redux dev tool in this project
+This project have used redux dev tool. You may run into error, don't panic! so here is what you can do:
+
+1. If you haven't already installed it for your browser, you could do so at this [link](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
+
+2. Or you could comment out this dependency, under `src/store/index` comment out the following line of code like this,
+![find](readme_img/redux-dev-tool.png)
+   
 
 #### Site Structure
 

@@ -25,7 +25,6 @@ class PostSubjectForm extends React.Component {
   validateSubjectCode() {
     const regex = /[A-Za-z]/;
     const char = this.state.subjectCode.split("").pop();
-    console.log(char);
       if (!regex.test(char) && char) {
         this.setState({ errorMessage: `${char} is not a valid character.` });
         return false;
