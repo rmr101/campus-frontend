@@ -1,7 +1,6 @@
 import React from 'react';
 import RenderLink from '../RenderLink';
 import getTeachingList from "../../../../../../../../apis/getTeachingList";
-import styles from "./MarkingAssignment.module.scss";
 import NothingDisplay from '../NothingDisplay';
 import CanvasTitleWrap from '../CanvasTitleWrapper';
 import LoaderContainer from "../../../../../../../Layout/LoaderContainer";
@@ -52,7 +51,7 @@ class MarkingAssignment extends React.Component {
   }
   render() {
     return (
-      <div className={styles.wrapper}>
+      <React.Fragment>
         {this.state.loading ? (
           <LoaderContainer>
             <Loader color={"white"} />
@@ -60,7 +59,7 @@ class MarkingAssignment extends React.Component {
         ) : (
           this.renderList()
         )}
-      </div>
+      </React.Fragment>
     );
   }
 };

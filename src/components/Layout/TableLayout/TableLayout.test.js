@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import {TableItem,TableLayout,Row,HeaderRow,IndexItem} from './TableLayout';
+import { render, screen, fireEvent } from "@testing-library/react";
+import {TableItem,TableLayout,Row,HeaderRow,IndexItem,Page} from './TableLayout';
 
 describe(" TableLayout ", () => {
   const TestMessage = "Testing"
@@ -66,4 +66,30 @@ describe(" TableLayout ", () => {
    expect(screen.getByText(TestMessage)).toBeInTheDocument();
  });
 
+
+  it("should render corresponding page number after clicking next and prev button", async () => {
+    const { getByTestId,getByText} = render(<TestPage />);
+    fireEvent.click(getByTestId("prev"));
+    expect(getByText("1", { exact: false })).toBeInTheDocument();
+    fireEvent.click(getByTestId("next"));
+    expect(getByText("2", { exact: false })).toBeInTheDocument();
+  });
+
 })
+
+class TestPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 2,
+    };
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+  handlePageChange(page) {
+    this.setState({ page:page });
+  }
+  render(){
+    const {page} = this.state;
+    return <Page currentPage={page} handlePageChange={this.handlePageChange} />;
+  }
+}

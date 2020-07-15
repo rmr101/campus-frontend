@@ -1,14 +1,12 @@
-import React from 'react';
-import RenderLink from '../RenderLink';
+import React from "react";
+import RenderLink from "../RenderLink";
 import getTeachingList from "../../../../../../../../apis/getTeachingList";
-import styles from "./TeachingCourse.module.scss";
-import NothingDisplay from '../NothingDisplay';
-import CanvasTitleWrap from '../CanvasTitleWrapper';
+import NothingDisplay from "../NothingDisplay";
+import CanvasTitleWrap from "../CanvasTitleWrapper";
 import LoaderContainer from "../../../../../../../Layout/LoaderContainer";
 import Loader from "../../../../../../../Loader";
 
-
-//TODO: configure for this 
+//TODO: configure for this
 class TeachingCourse extends React.Component {
   constructor(props) {
     super(props);
@@ -18,11 +16,12 @@ class TeachingCourse extends React.Component {
     };
   }
 
-
   async getTeachingList() {
     const resp = await getTeachingList();
     // TODO: Protect from breaking the app
-    const teachingList = resp.hasOwnProperty("courseList") ? resp.courseList : [];
+    const teachingList = resp.hasOwnProperty("courseList")
+      ? resp.courseList
+      : [];
     this.setState({ teachingList: teachingList, loading: false });
   }
 
@@ -33,13 +32,12 @@ class TeachingCourse extends React.Component {
   MapToRenderArray(array) {
     return array.map((obj) => {
       return {
-      name: obj.name,
-      id: obj.id,
-    }
-  });
+        name: obj.name,
+        id: obj.id,
+      };
+    });
   }
-  renderList(){
-
+  renderList() {
     return this.state.teachingList.length !== 0 ? (
       <CanvasTitleWrap title={"Your Teaching"}>
         <RenderLink
@@ -53,7 +51,7 @@ class TeachingCourse extends React.Component {
   }
   render() {
     return (
-      <div className={styles.wrapper}>
+      <React.Fragment>
         {this.state.loading ? (
           <LoaderContainer>
             <Loader color={"white"} />
@@ -61,10 +59,9 @@ class TeachingCourse extends React.Component {
         ) : (
           this.renderList()
         )}
-      </div>
+      </React.Fragment>
     );
   }
-};
-
+}
 
 export default TeachingCourse;

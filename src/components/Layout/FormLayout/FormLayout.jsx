@@ -42,3 +42,4 @@ export const FormLayout = ({ children, className, ...props }) => (
 export const SmallText = ({ children, className }) => (
          <small className={styles[className] }>{children}</small>
        )
+
