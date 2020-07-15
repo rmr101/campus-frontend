@@ -6,24 +6,33 @@ import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
 import NoContent from "../NoContent/NoContent";
 import PostCourseForm from "./PostCourseForm";
+import pagination from "../../../../../../utils/Algorithm/pagination";
 import {
   IndexItem,
   HeaderRow,
   TableLayout,
+  Page,
   TableItem,
 } from "../../../../../Layout/TableLayout/TableLayout";
+
+const ITEM_PER_PAGE = 8;
 
 class SubjectCourse extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
+      paginationArray: [],
       subjectId: 0,
       courseList: null,
       loading: true,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
-
+  handlePageChange(page) {
+    this.setState({ page });
+  }
   async getCourseList() {
     this.setState({
       loading: true,
@@ -31,6 +40,7 @@ class SubjectCourse extends React.Component {
     const { courseList } = await getCourseListBySubjectID(this.props.id);
     this.setState({
       courseList: courseList,
+      paginationArray: pagination(courseList, ITEM_PER_PAGE),
       loading: false,
     });
   }
@@ -47,7 +57,8 @@ class SubjectCourse extends React.Component {
   }
 
   renderCoursesList() {
-    let array = this.state.courseList;
+    const {page,paginationArray} = this.state;
+    let array = paginationArray[page-1];
     return array.map((obj, index) => {
       let { name, id, courseCode ,year , semester} = obj;
       let RenderObj = {
@@ -68,6 +79,7 @@ class SubjectCourse extends React.Component {
     });
   }
   renderContent() {
+     const { page, paginationArray } = this.state;
     if (this.state.courseList.length === 0) {
       return <NoContent text={"No courses under this subject."} />;
     } else {
@@ -81,6 +93,11 @@ class SubjectCourse extends React.Component {
             <TableItem>Year:</TableItem>
           </HeaderRow>
           {this.renderCoursesList()}
+          <Page
+            currentPage={page}
+            handlePageChange={this.handlePageChange}
+            totalPage={paginationArray.length}
+          />
         </TableLayout>
       );
     }

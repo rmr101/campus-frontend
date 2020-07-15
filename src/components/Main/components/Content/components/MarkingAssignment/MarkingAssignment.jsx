@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./MarkingAssignment.module.scss";
 import getAssignmentDetail from "../../../../../../apis/getAssignmentDetail";
-import Loader from '../../../../../Loader';
+import Loading from '../Loading';
 import {connect} from 'react-redux';
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout'
 import NoContent from '../NoContent/NoContent';
@@ -14,6 +14,11 @@ import {
   TableItem,
   Row
 } from "../../../../../Layout/TableLayout/TableLayout";
+import {
+  RadioItem,
+  RadioLayout,
+  RadioTitle,
+} from "../../../../../Layout/RadioLayout/RadioLayout";
 
 
 class MarkingAssignment extends React.Component {
@@ -108,8 +113,7 @@ class MarkingAssignment extends React.Component {
     if (renderArray.length === 0) {
       return (
         <div className={styles.LinksWrapper}>
-          {" "}
-          <NoContent text="No assignment to be marked." />{" "}
+          <NoContent text="No assignment to be marked." />
         </div>
       );
     } else {
@@ -155,18 +159,12 @@ class MarkingAssignment extends React.Component {
     return (
       <React.Fragment>
         <FullWidthLayout>
-          {this.state.loading ? (
-            <div className={styles.loadingContainer}>
-              <Loader />
-            </div>
-          ) : (
-            this.renderAssignmentDetail()
-          )}
+          {this.state.loading ? <Loading /> : this.renderAssignmentDetail()}
         </FullWidthLayout>
         <FullWidthLayout>
-          <div className={styles.radioWrapper}>
-            <div className={styles.RadioTitle}> Display Option: </div>
-            <div className={styles.radio}>
+          <RadioLayout>
+            <RadioTitle> Display Option: </RadioTitle>
+            <RadioItem>
               <input
                 id="all"
                 type="radio"
@@ -174,11 +172,9 @@ class MarkingAssignment extends React.Component {
                 checked={this.state.displayOption === "all" ? true : false}
                 onChange={() => this.renderOption("all")}
               />
-              <label className={styles.radioLabel} htmlFor="all">
-                All
-              </label>
-            </div>
-            <div className={styles.radio}>
+              <label htmlFor="all">All</label>
+            </RadioItem>
+            <RadioItem>
               <input
                 id="notMarked"
                 type="radio"
@@ -188,11 +184,9 @@ class MarkingAssignment extends React.Component {
                 }
                 onChange={() => this.renderOption("notMarked")}
               />
-              <label htmlFor="notMarked" className={styles.radioLabel}>
-                Only not marked
-              </label>
-            </div>
-          </div>
+              <label htmlFor="notMarked">Only not marked</label>
+            </RadioItem>
+          </RadioLayout>
           {this.renderStudentAssignmentList()}
         </FullWidthLayout>
       </React.Fragment>

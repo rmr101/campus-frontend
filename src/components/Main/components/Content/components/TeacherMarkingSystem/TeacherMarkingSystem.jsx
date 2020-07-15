@@ -1,5 +1,5 @@
 import React from "react";
-
+import pagination from "../../../../../../utils/Algorithm/pagination";
 import RenderContentLink from "../RenderContentLink";
 import getAssignmentListByCourse from "../../../../../../apis/getAssignmentListByCourse";
 import Loading from "../Loading";
@@ -10,21 +10,26 @@ import {
   HeaderRow,
   TableLayout,
   TableItem,
+  Page,
 } from "../../../../../Layout/TableLayout/TableLayout";
 
+const ITEM_PER_PAGE = 8;
 
-
-//TODO: Can a
 class TeacherMarkingSystem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
+      paginationArray: [],
       courseAssignmentId: 0,
       assignmentList: null,
       loading: true,
     };
+   this.handlePageChange = this.handlePageChange.bind(this);
   }
-
+  handlePageChange(page) {
+    this.setState({ page });
+  }
   async getAssignmentList() {
     this.setState({
       loading: true,
@@ -32,6 +37,7 @@ class TeacherMarkingSystem extends React.Component {
     const { assignmentList } = await getAssignmentListByCourse(this.props.id);
     this.setState({
       assignmentList: assignmentList,
+      paginationArray: pagination(assignmentList, ITEM_PER_PAGE),
       loading: false,
     });
   }
@@ -40,7 +46,8 @@ class TeacherMarkingSystem extends React.Component {
   }
 
   renderAssignmentList() {
-    let array = this.state.assignmentList;
+    const {page,paginationArray} = this.state;
+    let array = paginationArray[page-1];
     return array.map((obj, index) => {
       let { title, id, dueDate } = obj;
       let RenderObj = {
@@ -61,6 +68,7 @@ class TeacherMarkingSystem extends React.Component {
   }
 
   render() {
+     const { page, paginationArray } = this.state;
     return (
       <React.Fragment>
         <FullWidthLayout>
@@ -71,6 +79,11 @@ class TeacherMarkingSystem extends React.Component {
               <TableItem>Assignment Due:</TableItem>
             </HeaderRow>
             {this.state.loading ? <Loading /> : this.renderAssignmentList()}
+            <Page
+              currentPage={page}
+              handlePageChange={this.handlePageChange}
+              totalPage={paginationArray.length}
+            />
           </TableLayout>
         </FullWidthLayout>
       </React.Fragment>

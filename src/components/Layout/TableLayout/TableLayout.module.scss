@@ -46,3 +46,29 @@
     color:$theme-color
   }
 }
+
+//Page
+.pagination{
+  display: flex;
+  justify-content: center;
+  
+  div{
+    margin:10px;
+    font-size: $text-rg;
+    font-weight: $font-bold;
+    color: $dark-color;
+  }
+  .number{
+    color: $dark-color;
+  }
+  .total{
+    color:$light-text-color
+  }
+  .clickable{
+    color: $lighten-dark-color;
+    cursor: pointer;
+    &:hover{
+      color:$theme-color;
+    }
+  }
+}

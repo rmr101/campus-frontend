@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Canvas.module.scss';
 import CourseMarket from "./components/CourseMarket";
-import Course from "./components/Course";
 import TeachingCourse from './components/TeachingCourse';
 import MarkingAssignment from './components/MarkingAssignment/MarkingAssignment';
 
@@ -12,8 +11,6 @@ const renderCanvas = (current) =>{
       return <TeachingCourse />;
     case "CourseMarket":
       return <CourseMarket />;
-    case "Courses":
-      return <Course />;
     case "MarkSystem" :
       return <MarkingAssignment/>
     // case "Setting" :

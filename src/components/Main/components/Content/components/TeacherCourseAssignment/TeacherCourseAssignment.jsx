@@ -8,10 +8,12 @@ import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import Loader from "../../../../../Loader";
 import { connect } from "react-redux";
 import LoaderContainer from "../../../../../Layout/LoaderContainer";
+import pagination from "../../../../../../utils/Algorithm/pagination";
 import {
   IndexItem,
   HeaderRow,
   TableLayout,
+  Page,
   TableItem,
 } from "../../../../../Layout/TableLayout/TableLayout";
 import {
@@ -26,11 +28,14 @@ import {
 
 
 
+const ITEM_PER_PAGE = 5;
 
 class TeacherCourseAssignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
+      paginationArray: [],
       courseAssignmentId: 0,
       assignmentList: null,
       notNullableError: "",
@@ -42,6 +47,10 @@ class TeacherCourseAssignment extends React.Component {
       publishLoading: false,
       publishSuccessful: false,
     };
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+  handlePageChange(page) {
+    this.setState({ page });
   }
 
   async getAssignmentList() {
@@ -51,6 +60,7 @@ class TeacherCourseAssignment extends React.Component {
     const { assignmentList } = await getAssignmentListByCourse(this.props.id);
     this.setState({
       assignmentList: assignmentList,
+      paginationArray: pagination(assignmentList, ITEM_PER_PAGE),
       loading: false,
     });
   }
@@ -66,7 +76,8 @@ class TeacherCourseAssignment extends React.Component {
   }
 
   renderAssignmentList() {
-    let array = this.state.assignmentList;
+   const { page, paginationArray } = this.state;
+   let array = paginationArray[page - 1];
     return array.map((obj, index) => {
       let { title, id, dueDate } = obj;
       let RenderObj = {
@@ -94,6 +105,8 @@ class TeacherCourseAssignment extends React.Component {
       dueDate,
       publishLoading,
       publishSuccessful,
+      page,
+      paginationArray,
       ...checkProps
     } = this.state;
     for (let prop in checkProps) {
@@ -142,6 +155,7 @@ class TeacherCourseAssignment extends React.Component {
   }
 
   render() {
+     const { page, paginationArray } = this.state;
     return (
       <React.Fragment>
         <FullWidthLayout>
@@ -152,6 +166,11 @@ class TeacherCourseAssignment extends React.Component {
               <TableItem>Assignment Due:</TableItem>
             </HeaderRow>
             {this.state.loading ? <Loading /> : this.renderAssignmentList()}
+            <Page
+              currentPage={page}
+              handlePageChange={this.handlePageChange}
+              totalPage={paginationArray.length}
+            />
           </TableLayout>
         </FullWidthLayout>
         <FullWidthLayout>
