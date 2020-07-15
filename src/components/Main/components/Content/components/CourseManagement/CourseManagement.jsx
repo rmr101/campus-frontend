@@ -62,6 +62,8 @@ class CourseManagement extends React.Component {
           });
         }
         break;
+        default:
+          break;
     }
   }
 

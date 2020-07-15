@@ -52,8 +52,8 @@ const addContent = (toPageID, id, secondID) => {
       return { pageID: "TeacherMarkingSystem", id };
     case "StudentAssignment":
       return { pageID: "StudentAssignment" };
-    case "Course":
-      return { pageID: "Course" };
+    case "CourseDetail":
+      return { pageID: "CourseDetail", id };
     default:
       return { pageID: "Dashboard" };
   }

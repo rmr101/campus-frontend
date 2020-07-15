@@ -7,6 +7,7 @@ import FullWidthLayout from '../../../../../Layout/FullWidthLayout'
 import NoContent from '../NoContent';
 import ReactS3Download from '../../../../../../utils/AWS_S3/ReactS3Download';
 import Button from "../../../../../Button";
+import {DisplayTitle,DisplaySubHeading,DisplayContent,DisplayLayout} from '../../../../../Layout/DisplayContentLayout/DisplayContentLayout';
 import {
   IndexItem,
   HeaderRow,
@@ -140,18 +141,16 @@ class MarkingAssignment extends React.Component {
     } = this.state.assignmentDetail;
 
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.title}>
+      <DisplayLayout>
+        <DisplayTitle>
           {courseName} - {title}
-        </div>
-        <div className={styles.container}>
-          <div className={styles.dueDate}>Due: {dueDate} 11:59 pm </div>
-          <div className={styles.subHeading}>Acceptance Criteria: </div>
-          <p className={styles.paragraph}> {acceptanceCriteria} </p>
-          <div className={styles.subHeading}>Content: </div>
-          <p className={styles.paragraph}> {content} </p>
-        </div>
-      </div>
+        </DisplayTitle>
+        <DisplaySubHeading>Due: {dueDate} 11:59 pm </DisplaySubHeading>
+        <DisplaySubHeading>Acceptance Criteria: </DisplaySubHeading>
+        <DisplayContent> {acceptanceCriteria} </DisplayContent>
+        <DisplaySubHeading>Content: </DisplaySubHeading>
+        <DisplayContent> {content} </DisplayContent>
+      </DisplayLayout>
     );
   }
 

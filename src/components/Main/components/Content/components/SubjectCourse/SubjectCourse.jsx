@@ -74,7 +74,7 @@ class SubjectCourse extends React.Component {
         <RenderContentLink
           key={"SubjectCourse" + Math.random()}
           RenderObj={RenderObj}
-          toPageID={"Course"}
+          toPageID={"CourseDetail"}
         />
       );
     });
