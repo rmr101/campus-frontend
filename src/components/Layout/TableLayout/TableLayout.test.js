@@ -8,7 +8,7 @@ describe(" TableLayout ", () => {
   //TODO: test if the onClick pass down to the child
   const onClick = (i) => i + 1; 
   const props = {
-    testpropsone: onClick.toString(),
+    testprops: onClick.toString(),
   };
   
   it("should pass all props to the TableItem", () => {
@@ -16,13 +16,13 @@ describe(" TableLayout ", () => {
     render(
       <TableItem {...props}></TableItem>
     );
-    expect(screen.getByTestId("table-item").getAttribute("testpropsone")).toBe(
+    expect(screen.getByTestId("table-item").getAttribute("testprops")).toBe(
       onClick.toString()
     );
   });
   it("should pass all props to the Row", () => {
     render(<Row {...props}></Row>);
-    expect(screen.getByTestId("row").getAttribute("testpropsone")).toBe(
+    expect(screen.getByTestId("row").getAttribute("testprops")).toBe(
       onClick.toString()
     );
   });
