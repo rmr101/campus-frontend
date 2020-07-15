@@ -3,7 +3,16 @@ import Loader from "../../../../../Loader";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import styles from "./PostSubjectForm.module.scss";
 import postSubject from "../../../../../../apis/postSubject";
-
+import LoaderContainer from "../../../../../Layout/LoaderContainer";
+import {
+  FormLayout,
+  FormTitle,
+  FormItem,
+  HorizontalRow,
+  Button,
+  DummyButtonBlock,
+  SmallText,
+} from "../../../../../Layout/FormLayout/FormLayout";
 
 class PostSubjectForm extends React.Component {
   constructor(props) {
@@ -74,84 +83,80 @@ class PostSubjectForm extends React.Component {
   render() {
     return (
       <FullWidthLayout>
-        <div className={styles.postWrapper}>
-          <form
-            className={`${styles.form} ${
-              this.state.postSuccessful && styles.successful
-            }`}
-            onSubmit={(e) => {
-              e.preventDefault();
-              this.onSubmit();
-            }}
-          >
-            <div className={styles.title}>Post New Subject</div>
-            {this.state.loading ? (
-              <div className={styles.loaderContainer}>
-                <Loader />
-              </div>
-            ) : null}
-            <div className={styles.control + " " + styles.horizontalRow}>
-              <div className={styles.titleInput}>
-                <label htmlFor="name">Name: </label>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Enter name for the subject"
-                  maxLength={30}
-                  required
-                  onChange={(event) => this.handleValueChange("name")(event)}
-                />
-              </div>
-              <div className={styles.titleInput}>
-                <label
-                  htmlFor="subjectCode"
-                  className={!this.state.errorMessage ? null : styles.error}
-                >
-                  Subject Code:{" "}
-                </label>
-                <input
-                  id="subjectCode"
-                  type="text"
-                  placeholder="Enter 3 letters subject code"
-                  minLength={3}
-                  maxLength={3}
-                  required
-                  onChange={(event) => {
-                    this.handleValueChange("subjectCode")(event);
-                    this.handleSubjectCodeChange();
-                  }}
-                />
-              </div>
-            </div>
-            <div className={styles.control}>
-              <label htmlFor="Intro">Introduction: </label>
-              <textarea
-                id="Intro"
-                className={styles.intro}
-                placeholder="Enter introduction for the subject"
+        <FormLayout
+          className={this.state.postSuccessful ? "successful" : null}
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.onSubmit();
+          }}
+        >
+          <FormTitle>Post New Subject</FormTitle>
+          {this.state.loading ? (
+            <LoaderContainer>
+              <Loader />
+            </LoaderContainer>
+          ) : null}
+          <HorizontalRow>
+            <FormItem>
+              <label htmlFor="name">Name: </label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Enter name for the subject"
+                maxLength={30}
+                required
+                onChange={(event) => this.handleValueChange("name")(event)}
+              />
+            </FormItem>
+            <FormItem>
+              <label
+                htmlFor="subjectCode"
+                className={!this.state.errorMessage ? null : styles.error}
+              >
+                Subject Code:{" "}
+              </label>
+              <input
+                id="subjectCode"
+                type="text"
+                placeholder="Enter 3 letters subject code"
+                minLength={3}
+                maxLength={3}
                 required
                 onChange={(event) => {
-                  this.handleValueChange("introduction")(event);
+                  this.handleValueChange("subjectCode")(event);
+                  this.handleSubjectCodeChange();
                 }}
-              ></textarea>
-            </div>
-            {!this.state.errorMessage && !this.state.notNullableError ? (
-              <button className={styles.button} type="submit">
-                Add New Subject
-              </button>
-            ) : (
-              <div className={styles.inactiveBlock}>Unable to Click</div>
-            )}
-            {this.state.postSuccessful ? (
-              <small className={styles.successfulText}>Successful.</small>
-            ) : null}
-            {this.state.errorMessage || this.state.notNullableError ? (
-              <small className={styles.errorText}>
-                {this.state.errorMessage + " " + this.state.notNullableError}
-              </small>
-            ) : null}
-          </form>
-        </div>
+              />
+            </FormItem>
+          </HorizontalRow>
+          <FormItem>
+            <label htmlFor="Intro">Introduction: </label>
+            <textarea
+              id="Intro"
+              className={styles.intro}
+              placeholder="Enter introduction for the subject"
+              required
+              onChange={(event) => {
+                this.handleValueChange("introduction")(event);
+              }}
+            />
+          </FormItem>
+          {!this.state.errorMessage && !this.state.notNullableError ? (
+            <Button type="submit">
+              Add New Subject
+            </Button>
+          ) : (
+            <DummyButtonBlock>Unable to Click</DummyButtonBlock>
+          )}
+          {this.state.postSuccessful ? (
+            <SmallText>Successful.</SmallText>
+          ) : null}
+          {this.state.errorMessage || this.state.notNullableError ? (
+            <SmallText className={"error"}>
+              {this.state.errorMessage + " " + this.state.notNullableError}
+            </SmallText>
+          ) : null}
+        </FormLayout>
       </FullWidthLayout>
     );
   }

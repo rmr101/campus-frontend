@@ -3,6 +3,16 @@ import Loader from "../../../../../Loader";
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 import styles from "./PostCourseForm.module.scss";
 import postCourse from '../../../../../../apis/postCourse';
+import {
+  FormLayout,
+  FormTitle,
+  FormItem,
+  HorizontalRow,
+  Button,
+  DummyButtonBlock,
+  SmallText,
+} from "../../../../../Layout/FormLayout/FormLayout";
+import LoaderContainer from '../../../../../Layout/LoaderContainer';
 
 const date = new Date();
 const year = date.getFullYear();
@@ -81,138 +91,128 @@ class PostCourseForm extends React.Component {
   render() {
     return (
       <FullWidthLayout>
-        <div className={styles.postWrapper}>
-          <form
-            className={`${styles.form} ${
-              this.state.postSuccessful && styles.successful
-            }`}
-            onSubmit={(e) => {
-              e.preventDefault();
-              this.onSubmit();
-            }}
-          >
-            <div className={styles.title}>Post New Course</div>
-            {this.state.loading ? (
-              <div className={styles.loaderContainer}>
-                <Loader />
-              </div>
-            ) : null}
-            <div className={styles.control + " " + styles.horizontalRow}>
-              <div className={styles.titleInput}>
-                <label htmlFor="name">Name: </label>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Enter name for the course"
-                  maxLength={30}
-                  required
-                  onChange={(event) => this.handleValueChange("name")(event)}
-                />
-              </div>
-              <div>
-                <label htmlFor="workLoad">Course points:</label>
-                <select
-                  onChange={(event) =>
-                    this.handleValueChange("workLoad")(event)
-                  }
-                  required
-                  id="workLoad"
-                  className={styles.workLoad}
-                >
-                  <option value={12.5}>12.5</option>
-                  <option value={25}>25</option>
-                  <option value={37.5}>37.5</option>
-                  <option value={50}>50</option>
-                  <option value={100}>100</option>
-                </select>
-              </div>
-              <div className={styles.subjectID}>
-                {/* TODO can be deleted after implemented  */}
-                <label htmlFor="subjectID">SubjectID: </label>
-                <input
-                  id="subjectID"
-                  type="number"
-                  required
-                  onChange={(event) =>
-                    this.handleValueChange("subjectId")(event)
-                  }
-                />
-              </div>
-            </div>
-            <div className={styles.control + " " + styles.horizontalRow}>
-              <div className={styles.titleInput}>
-                <label> Year: </label>
-                <div className={styles.displayValue}>{year}</div>
-              </div>
-              <div className={styles.titleInput}>
-                <label> Semester: </label>
-                <div className={styles.displayValue}>{semester}</div>
-              </div>
-            </div>
-            <div className={styles.control}>
-              <label htmlFor="location">Location: </label>
+        <FormLayout
+          className={this.state.postSuccessful ? "successful" : null}
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.onSubmit();
+          }}
+        >
+          {this.state.loading ? (
+            <LoaderContainer>
+              <Loader />
+            </LoaderContainer>
+          ) : null}
+
+          <FormTitle>Post New Course</FormTitle>
+          <HorizontalRow>
+            <FormItem>
+              <label htmlFor="name">Name: </label>
               <input
-                id="location"
+                id="name"
                 type="text"
-                placeholder="Enter location for the course"
+                placeholder="Enter name for the course"
                 maxLength={30}
                 required
-                onChange={(event) => this.handleValueChange("location")(event)}
+                onChange={(event) => this.handleValueChange("name")(event)}
               />
-            </div>
-            <div className={styles.control}>
-              <label htmlFor="outcome">Learning Outcome: </label>
-              <textarea
-                id="outcome"
-                className={styles.outcome}
-                placeholder="Enter learning outcomes"
+            </FormItem>
+            <FormItem>
+              <label htmlFor="workLoad">Course points:</label>
+              <select
+                onChange={(event) => this.handleValueChange("workLoad")(event)}
                 required
-                onChange={(event) => {
-                  this.handleValueChange("learningOutcome")(event);
-                }}
-              ></textarea>
-            </div>
-            <div className={styles.control}>
-              <label htmlFor="assessment">Assessments: </label>
-              <textarea
-                id="assessment"
-                className={styles.content}
-                placeholder="Enter assessments for the course"
+                id="workLoad"
+              >
+                <option value={12.5}>12.5</option>
+                <option value={25}>25</option>
+                <option value={37.5}>37.5</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </select>
+            </FormItem>
+            <FormItem>
+              {/* TODO can be deleted after implemented  */}
+              <label htmlFor="subjectId">SubjectID: </label>
+              <input
+                id="subjectId"
+                type="number"
                 required
-                onChange={(event) => {
-                  this.handleValueChange("assessment")(event);
-                }}
-              ></textarea>
-            </div>
-            <div className={styles.control}>
-              <label htmlFor="Intro">Introduction: </label>
-              <textarea
-                id="Intro"
-                className={styles.intro}
-                placeholder="Enter introduction for the course"
-                required
-                onChange={(event) => {
-                  this.handleValueChange("introduction")(event);
-                }}
-              ></textarea>
-            </div>
-            {!this.state.notNullableError ? (
-              <button className={styles.button} type="submit">
-                Add New Course
-              </button>
-            ) : (
-              <div className={styles.inactiveBlock}>Unable to Click</div>
-            )}
-            {this.state.postSuccessful ? (
-              <small className={styles.successfulText}>Successful.</small>
-            ) : null}
-            {this.state.notNullableError ? (
-              <small className={styles.errorText}>
-                {this.state.notNullableError}
-              </small>
-            ) : null}
-          </form>
-        </div>
+                onChange={(event) => this.handleValueChange("subjectId")(event)}
+              />
+            </FormItem>
+          </HorizontalRow>
+          <HorizontalRow>
+            <FormItem>
+              <label> Year: </label>
+              <div>{year}</div>
+            </FormItem>
+            <FormItem>
+              <label> Semester: </label>
+              <div>{semester}</div>
+            </FormItem>
+          </HorizontalRow>
+          <FormItem>
+            <label htmlFor="location">Location: </label>
+            <input
+              id="location"
+              type="text"
+              placeholder="Enter location for the course"
+              maxLength={30}
+              required
+              onChange={(event) => this.handleValueChange("location")(event)}
+            />
+          </FormItem>
+          <FormItem>
+            <label htmlFor="outcome">Learning Outcome: </label>
+            <textarea
+              id="outcome"
+              className={styles.outcome}
+              placeholder="Enter learning outcomes"
+              required
+              onChange={(event) => {
+                this.handleValueChange("learningOutcome")(event);
+              }}
+            />
+          </FormItem>
+          <FormItem>
+            <label htmlFor="assessment">Assessments: </label>
+            <textarea
+              id="assessment"
+              className={styles.content}
+              placeholder="Enter assessments for the course"
+              required
+              onChange={(event) => {
+                this.handleValueChange("assessment")(event);
+              }}
+            />
+          </FormItem>
+          <FormItem>
+            <label htmlFor="Intro">Introduction: </label>
+            <textarea
+              id="Intro"
+              className={styles.intro}
+              placeholder="Enter introduction for the course"
+              required
+              onChange={(event) => {
+                this.handleValueChange("introduction")(event);
+              }}
+            />
+          </FormItem>
+          {!this.state.notNullableError ? (
+            <Button type="submit">Add New Course</Button>
+          ) : (
+            <DummyButtonBlock>Unable to Click</DummyButtonBlock>
+          )}
+          {this.state.postSuccessful ? (
+            <SmallText>Successful.</SmallText>
+          ) : null}
+          {this.state.notNullableError ? (
+            <SmallText className={"error"}>
+              {this.state.notNullableError}
+            </SmallText>
+          ) : null}
+        </FormLayout>
       </FullWidthLayout>
     );
   }

@@ -7,12 +7,22 @@ import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import Loader from "../../../../../Loader";
 import { connect } from "react-redux";
+import LoaderContainer from "../../../../../Layout/LoaderContainer";
 import {
   IndexItem,
   HeaderRow,
   TableLayout,
   TableItem,
 } from "../../../../../Layout/TableLayout/TableLayout";
+import {
+  FormLayout,
+  FormTitle,
+  FormItem,
+  HorizontalRow,
+  Button,
+  DummyButtonBlock,
+  SmallText,
+} from "../../../../../Layout/FormLayout/FormLayout";
 
 
 
@@ -145,91 +155,79 @@ class TeacherCourseAssignment extends React.Component {
           </TableLayout>
         </FullWidthLayout>
         <FullWidthLayout>
-          <div className={styles.AssignmentPostWrapper}>
-            <form
-              className={`${styles.form} ${
-                this.state.publishSuccessful && styles.successful
-              }`}
-              onSubmit={(e) => {
-                e.preventDefault();
-                this.onSubmit();
-              }}
-            >
-              <div className={styles.title}>Publish New Assignment</div>
-              {this.state.publishLoading ? (
-                <div className={styles.loaderContainer}>
-                  <Loader />
-                </div>
-              ) : null}
-              <div className={styles.control + " " + styles.firstRow}>
-                <div className={styles.titleInput}>
-                  <label htmlFor="title">Title: </label>
-                  <input
-                    id="title"
-                    type="text"
-                    placeholder="Enter title for the assignment"
-                    maxLength={30}
-                    required
-                    onChange={(event) => this.handleValueChange("title")(event)}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="dueDate">Due Date (11:59 pm):</label>
-                  <input
-                    onChange={(event) =>
-                      this.handleValueChange("dueDate")(event)
-                    }
-                    required
-                    type="date"
-                    id="dueDate"
-                    className={styles.dueDate}
-                  />
-                </div>
-              </div>
-              <div className={styles.control}>
-                <label htmlFor="AC">Criteria: </label>
-                <textarea
-                  id="AC"
-                  className={styles.acceptance}
-                  placeholder="Enter acceptance criteria"
+          <FormLayout
+            className={this.state.postSuccessful ? "successful" : null}
+            onSubmit={(e) => {
+              e.preventDefault();
+              this.onSubmit();
+            }}
+          >
+            <FormTitle>Publish New Assignment</FormTitle>
+            {this.state.publishLoading ? (
+              <LoaderContainer>
+                <Loader />
+              </LoaderContainer>
+            ) : null}
+            <HorizontalRow>
+              <FormItem>
+                <label htmlFor="title">Title: </label>
+                <input
+                  id="title"
+                  type="text"
+                  placeholder="Enter title for the assignment"
+                  maxLength={30}
                   required
-                  onChange={(event) => {
-                    this.handleValueChange("acceptanceCriteria")(event);
-                  }}
-                ></textarea>
-              </div>
-              <div className={styles.control}>
-                <label htmlFor="content">Content: </label>
-                <textarea
-                  id="content"
-                  className={styles.content}
-                  placeholder="Enter assignment content"
+                  onChange={(event) => this.handleValueChange("title")(event)}
+                />
+              </FormItem>
+              <FormItem>
+                <label htmlFor="dueDate">Due Date (11:59 pm):</label>
+                <input
+                  onChange={(event) => this.handleValueChange("dueDate")(event)}
                   required
-                  onChange={(event) => {
-                    this.handleValueChange("content")(event);
-                  }}
-                ></textarea>
-              </div>
-              {!this.state.notNullableError ? (
-                <button className={styles.button} type="submit">
-                  Add New Course
-                </button>
-              ) : (
-                <div className={styles.inactiveBlock}>Unable to Click</div>
-              )}
-              {this.state.notNullableError ? (
-                <small className={styles.errorText}>
-                  {this.state.notNullableError}
-                </small>
-              ) : null}
-              {this.state.publishSuccessful ? (
-                <small className={styles.successfulText}>
-                  {" "}
-                  Assignment published successfully.{" "}
-                </small>
-              ) : null}
-            </form>
-          </div>
+                  type="date"
+                  id="dueDate"
+                />
+              </FormItem>
+            </HorizontalRow>
+            <FormItem>
+              <label htmlFor="AC">Criteria: </label>
+              <textarea
+                id="AC"
+                className={styles.acceptance}
+                placeholder="Enter acceptance criteria"
+                required
+                onChange={(event) => {
+                  this.handleValueChange("acceptanceCriteria")(event);
+                }}
+              />
+            </FormItem>
+            <FormItem>
+              <label htmlFor="content">Content: </label>
+              <textarea
+                id="content"
+                className={styles.content}
+                placeholder="Enter assignment content"
+                required
+                onChange={(event) => {
+                  this.handleValueChange("content")(event);
+                }}
+              />
+            </FormItem>
+            {!this.state.notNullableError ? (
+              <Button type="submit">Add New Course</Button>
+            ) : (
+              <DummyButtonBlock>Unable to Click</DummyButtonBlock>
+            )}
+            {this.state.notNullableError ? (
+              <SmallText className={"error"}>
+                {this.state.notNullableError}
+              </SmallText>
+            ) : null}
+            {this.state.publishSuccessful ? (
+              <SmallText>Assignment published successfully.</SmallText>
+            ) : null}
+          </FormLayout>
         </FullWidthLayout>
       </React.Fragment>
     );
