@@ -1,5 +1,26 @@
 @import './../../../../NavSideBar-variable';
 
-.wrapper{
-  position: relative;
+
+.filler{
+  flex: 1;
+}
+.pagination{
+  display: flex;
+  justify-content: center;
+  div{
+    width: 15px;
+    margin:10px;
+    font-size: $text-lg;
+    font-weight: $font-bold;
+    color: $white-color;
+  }
+  .number{
+    width: 30px;
+  }
+  .clickable{
+    cursor: pointer;
+    &:hover{
+      color:$theme-color;
+    }
+  }
 }

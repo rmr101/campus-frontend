@@ -124,11 +124,10 @@ export const AdminConfig = [
            title: "Course management",
            NavId: "CourseManagement",
          },
-
          {
-           icon: renderList.Classroom,
-           title: "Classroom",
-           NavId: "Classroom",
+           icon: renderList.CourseMarket,
+           title: "Course market",
+           NavId: "CourseMarket",
          },
          {
            filler: true,

@@ -1,25 +1,6 @@
 @import './../../../../../../variable';
 @import '../../../../../Button/color';
-
-.wrapper{
-  padding:10px;
-  display: flex;
-  position:relative;
-  flex-direction: column;
-}
-.container{
-  font-size: 20px;
-  font-weight: 500;
-  margin: 5px 5px;
-  color: $dark-color;
-  display:flex;
-  .heading{
-    flex:1;
-  }
-}
-
-
-.AssignmentPostWrapper {
+.postWrapper {
   
   display: flex;
   justify-content: center;
@@ -49,8 +30,8 @@
     color:$create-color;
   }
   .errorText{
-    color:$danger-color;
-  }
+  color:$danger-color;
+}
   .title{
     color: $dark-color;
     margin-bottom: 20px;
@@ -72,7 +53,7 @@
 }
 .successful{
   .control{
-    input,textarea{
+    input,textarea,select{
       border-color:$create-color;
     }
   }
@@ -82,7 +63,7 @@ textarea{
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
-.firstRow{
+.horizontalRow{
   display:flex;
   
 }
@@ -90,7 +71,7 @@ textarea{
   width:350px;
   margin-right: 30px;
 }
-.dueDate{
+.workLoad{
   height: 40px;
   color: $font-color;
 }
@@ -104,14 +85,25 @@ textarea{
   input{
     height: 40px;
   }
-  .acceptance{
-    height:100px;
-  }
-  .content{
+  .intro{
     height:150px;
   }
+  .content{
+    height:100px;
+  }
+  .outcome{
+    height:80px;
+  }
+  .displayValue{
+    font-size: $text-lg;
+    color: $light-text-color;
+    font-weight: $font-bold;
+  }
+  .subjectID{
+    margin-left: 40px;
+  }
  
-  input,textarea {
+  input,textarea,.workLoad{
     box-sizing: border-box;
     border: 2px solid #f0f0f0;
     border-radius: 5px;
@@ -134,6 +126,7 @@ textarea{
     margin-bottom: relative;
   }
 }
+
 .inactiveBlock{
   border:solid 2px $light-text-color;
   color: $light-text-color;

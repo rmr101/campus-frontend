@@ -23,6 +23,7 @@ class TeacherCourseAssignment extends React.Component {
     this.state = {
       courseAssignmentId: 0,
       assignmentList: null,
+      notNullableError: "",
       loading: true,
       acceptanceCriteria: "",
       content: "",
@@ -74,12 +75,33 @@ class TeacherCourseAssignment extends React.Component {
       );
     });
   }
+  checkNull() {
+    const {
+      courseAssignmentId,
+      assignmentList,
+      notNullableError,
+      loading,
+      dueDate,
+      publishLoading,
+      publishSuccessful,
+      ...checkProps
+    } = this.state;
+    for (let prop in checkProps) {
+      if (!checkProps[prop].trim()) {
+        this.setState({ notNullableError: "Not empty input is allowed." });
+      }
+    }
+  }
   handleValueChange(name) {
     return (event) => {
       const { value } = event.target;
-      this.setState({
-        [name]: value,
-      });
+      this.setState(
+        {
+          [name]: value,
+          notNullableError: "",
+        },
+        this.checkNull
+      );
     };
   }
   async publishAssignment() {
@@ -188,9 +210,18 @@ class TeacherCourseAssignment extends React.Component {
                   }}
                 ></textarea>
               </div>
-              <button className={styles.button} type="submit">
-                Publish
-              </button>
+              {!this.state.notNullableError ? (
+                <button className={styles.button} type="submit">
+                  Add New Course
+                </button>
+              ) : (
+                <div className={styles.inactiveBlock}>Unable to Click</div>
+              )}
+              {this.state.notNullableError ? (
+                <small className={styles.errorText}>
+                  {this.state.notNullableError}
+                </small>
+              ) : null}
               {this.state.publishSuccessful ? (
                 <small className={styles.successfulText}>
                   {" "}
