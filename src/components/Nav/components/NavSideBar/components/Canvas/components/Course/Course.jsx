@@ -1,8 +1,11 @@
 import React from "react";
 import RenderLink from "../RenderLink";
-import CanvasLoading from "../CanvasLoading";
 import getSubjectList from "./../../../../../../../../apis/getSubjectList";
 import styles from "./Course.module.scss";
+import LoaderContainer from "../../../../../../../Layout/LoaderContainer";
+import Loader from "../../../../../../../Loader";
+
+
 
 class Course extends React.Component {
   constructor(props) {
@@ -31,7 +34,9 @@ class Course extends React.Component {
     return (
       <div className={styles.wrapper}>
         {this.state.loading ? (
-          <CanvasLoading />
+          <LoaderContainer>
+            <Loader color={"white"} />
+          </LoaderContainer>
         ) : (
           <RenderLink
             RenderArray={this.state.subjectList}

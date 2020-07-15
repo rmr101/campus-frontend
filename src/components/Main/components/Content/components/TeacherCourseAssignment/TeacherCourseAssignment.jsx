@@ -164,7 +164,7 @@ class TeacherCourseAssignment extends React.Component {
           >
             <FormTitle>Publish New Assignment</FormTitle>
             {this.state.publishLoading ? (
-              <LoaderContainer>
+              <LoaderContainer background>
                 <Loader />
               </LoaderContainer>
             ) : null}

@@ -5,6 +5,7 @@ import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
 import NoContent from "../NoContent/NoContent";
+import PostCourseForm from "./PostCourseForm";
 import {
   IndexItem,
   HeaderRow,
@@ -20,6 +21,7 @@ class SubjectCourse extends React.Component {
       courseList: null,
       loading: true,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async getCourseList() {
@@ -31,6 +33,9 @@ class SubjectCourse extends React.Component {
       courseList: courseList,
       loading: false,
     });
+  }
+  handleSubmit(){
+    this.getCourseList();
   }
   componentDidUpdate() {
     if (this.state.subjectId !== this.props.id) {
@@ -69,7 +74,7 @@ class SubjectCourse extends React.Component {
       return (
         <TableLayout>
           <HeaderRow>
-            <IndexItem> No:</IndexItem>
+            <IndexItem>No:</IndexItem>
             <TableItem>Course Name:</TableItem>
             <TableItem>Course ID:</TableItem>
             <TableItem>Semester:</TableItem>
@@ -82,16 +87,21 @@ class SubjectCourse extends React.Component {
   }
 
   render() {
+    const {role,id} = this.props;
     return (
-      <FullWidthLayout>
+      <React.Fragment>
+        <FullWidthLayout>
           {this.state.loading ? <Loading /> : this.renderContent()}
-      </FullWidthLayout>
+        </FullWidthLayout>
+        {role ==="ADMIN" ? <PostCourseForm subjectId = {id} handleSubmit={this.handleSubmit}/>: null}
+      </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
+  role: state.Authentication.role,
 });
 const SubjectCourseContainer = connect(mapStateToProps)(SubjectCourse);
 export default SubjectCourseContainer;
