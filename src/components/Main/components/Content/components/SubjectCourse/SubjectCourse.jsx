@@ -4,7 +4,7 @@ import getCourseListBySubjectID from "./../../../../../../apis/getCourseListBySu
 import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
-import NoContent from "../NoContent/NoContent";
+import NoContent from "../NoContent";
 import PostCourseForm from "./PostCourseForm";
 import pagination from "../../../../../../utils/Algorithm/pagination";
 import {
@@ -35,6 +35,7 @@ class SubjectCourse extends React.Component {
   }
   async getCourseList() {
     this.setState({
+      page: 1,
       loading: true,
     });
     const { courseList } = await getCourseListBySubjectID(this.props.id);
@@ -73,14 +74,14 @@ class SubjectCourse extends React.Component {
         <RenderContentLink
           key={"SubjectCourse" + Math.random()}
           RenderObj={RenderObj}
-          toPageID={"Course"}
+          toPageID={"CourseDetail"}
         />
       );
     });
   }
   renderContent() {
      const { page, paginationArray } = this.state;
-    if (this.state.courseList.length === 0) {
+    if (paginationArray.length === 0) {
       return <NoContent text={"No courses under this subject."} />;
     } else {
       return (

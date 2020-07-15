@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './Assignment.module.scss';
 import getAssignmentDetail from "../../../../../../apis/getAssignmentDetail";
-import Loader from '../../../../../Loader';
+import Loading from '../Loading';
 import {connect} from 'react-redux';
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 import HalfWidthLayout from '../../../../../Layout/HalfWidthLayout';
 import StudentAssignmentUpload from './components/StudentAssignment';
+import {DisplayTitle,DisplaySubHeading,DisplayContent,DisplayLayout} from '../../../../../Layout/DisplayContentLayout/DisplayContentLayout';
 
 class Assignment extends React.Component {
   constructor(props) {
@@ -29,21 +29,19 @@ class Assignment extends React.Component {
   renderAssignmentDetail(){
     const {title,courseName,dueDate,acceptanceCriteria,content}=this.state.assignmentDetail
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.title}>
+      <DisplayLayout>
+        <DisplayTitle>
           {courseName} - {title}
-        </div>
-        <div className={styles.container}>
-          <div className={styles.dueDate}>Due: {dueDate} 11:59 pm </div>
-          <div className={styles.subHeading}>Acceptance Criteria: </div>
-          <p className={styles.paragraph}> {acceptanceCriteria} </p>
-          <div className={styles.subHeading}>Content: </div>
-          <p className={styles.paragraph}> {content} </p>
-        </div>
-      </div>
+        </DisplayTitle>
+        <DisplaySubHeading>Due on {dueDate} at 11:59 pm </DisplaySubHeading>
+        <DisplaySubHeading>Acceptance Criteria: </DisplaySubHeading>
+        <DisplayContent> {acceptanceCriteria} </DisplayContent>
+        <DisplaySubHeading>Content: </DisplaySubHeading>
+        <DisplayContent> {content} </DisplayContent>
+      </DisplayLayout>
     );}
   
-  renderOption(){
+  renderOptionalContent(){
     const { userRole} = this.props
     if ( userRole === "student"){
       return (
@@ -63,15 +61,9 @@ class Assignment extends React.Component {
     return (
       <React.Fragment>
         <FullWidthLayout>
-          {this.state.loading ? (
-            <div className={styles.loadingContainer}>
-              <Loader />
-            </div>
-          ) : (
-            this.renderAssignmentDetail()
-          )}
+          {this.state.loading ? <Loading /> : this.renderAssignmentDetail()}
         </FullWidthLayout>
-        {this.renderOption()}
+        {this.renderOptionalContent()}
       </React.Fragment>
     );
   }

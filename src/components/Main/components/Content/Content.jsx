@@ -35,8 +35,10 @@ const Content = ({ pageID }) => {
         return <Profile />;
       case "Assignment":
         return <Assignment />;
-      default:
+      case "CourseDetail":
         return <CourseDetail />;
+      default:
+        return <Dashboard />;
     }
   };
   return <div className={styles.wrapper}>{renderComponent()}</div>;

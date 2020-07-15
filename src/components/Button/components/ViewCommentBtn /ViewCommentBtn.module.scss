@@ -1,0 +1,10 @@
+@import './../../Button.module.scss';
+
+.viewBtn{
+  border: solid 1px $view-color;
+  color: $view-color;
+  &:hover{
+    color:$hover-color;
+    background-color: $view-color;
+  }
+}

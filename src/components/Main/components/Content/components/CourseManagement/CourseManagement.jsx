@@ -4,7 +4,7 @@ import Button from "../../../../../Button";
 import SearchCourse from "./components/SearchCourse";
 import styles from "./CourseManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";
-import NoContent from "../NoContent/NoContent";
+import NoContent from "../NoContent";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
 import {
@@ -62,6 +62,8 @@ class CourseManagement extends React.Component {
           });
         }
         break;
+        default:
+          break;
     }
   }
 

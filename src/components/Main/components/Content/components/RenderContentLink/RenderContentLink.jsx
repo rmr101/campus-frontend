@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import AddHeader from "./../../../../../../store/campus/actions/AddHeader";
+
 import {
   IndexItem,
   Row,
@@ -32,7 +33,7 @@ const renderColumn = (detail) => {
 };
 
 const RenderContentLink = ({ onClick, RenderObj, toPageID }) => {
-  let { disable, name, id, secondID,index, ...rest } = RenderObj;
+  let { disable, name, id, secondID, comment, index, ...rest } = RenderObj;
   rest = sortInRenderOrder(rest);
   return (
     <Row

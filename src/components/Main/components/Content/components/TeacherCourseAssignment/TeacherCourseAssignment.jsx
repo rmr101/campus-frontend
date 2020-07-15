@@ -9,6 +9,7 @@ import Loader from "../../../../../Loader";
 import { connect } from "react-redux";
 import LoaderContainer from "../../../../../Layout/LoaderContainer";
 import pagination from "../../../../../../utils/Algorithm/pagination";
+import NoContent from '../NoContent';
 import {
   IndexItem,
   HeaderRow,
@@ -55,6 +56,7 @@ class TeacherCourseAssignment extends React.Component {
 
   async getAssignmentList() {
     this.setState({
+      page: 1,
       loading: true,
     });
     const { assignmentList } = await getAssignmentListByCourse(this.props.id);
@@ -66,7 +68,8 @@ class TeacherCourseAssignment extends React.Component {
   }
   componentDidUpdate() {
     if (this.state.courseAssignmentId !== this.props.id) {
-      this.setState({ courseAssignmentId: this.props.id }, () =>
+      this.setState({ 
+        courseAssignmentId: this.props.id }, () =>
         this.getAssignmentList()
       );
     }
@@ -77,24 +80,36 @@ class TeacherCourseAssignment extends React.Component {
 
   renderAssignmentList() {
    const { page, paginationArray } = this.state;
-   let array = paginationArray[page - 1];
-    return array.map((obj, index) => {
-      let { title, id, dueDate } = obj;
-      let RenderObj = {
-        index: index,
-        name: title,
-        id: id,
-        secondID: this.props.id,
-        dueDate: dueDate + " 11:59 pm ",
-      };
+   if (paginationArray.length === 0) {
+     return <NoContent text={"You have not post assignment yet"} />;
+   } else {
+     let array = paginationArray[page - 1];
       return (
-        <RenderContentLink
-          key={"TeacherCourseAssignment" + Math.random()}
-          RenderObj={RenderObj}
-          toPageID={"Assignment"}
-        />
-      );
-    });
+        [...array.map((obj, index) => {
+          let { title, id, dueDate } = obj;
+          let RenderObj = {
+            index: index,
+            name: title,
+            id: id,
+            secondID: this.props.id,
+            dueDate: dueDate + " 11:59 pm ",
+          };
+          return (
+            <RenderContentLink
+              key={"TeacherCourseAssignment" + Math.random()}
+              RenderObj={RenderObj}
+              toPageID={"Assignment"}
+            />
+          );
+        }),
+          <Page
+            key={"TeacherCourseAssignment" + Math.random()}
+            currentPage={page}
+            handlePageChange={this.handlePageChange}
+            totalPage={paginationArray.length}
+          />
+        ]);
+    }
   }
   checkNull() {
     const {
@@ -155,7 +170,6 @@ class TeacherCourseAssignment extends React.Component {
   }
 
   render() {
-     const { page, paginationArray } = this.state;
     return (
       <React.Fragment>
         <FullWidthLayout>
@@ -166,11 +180,7 @@ class TeacherCourseAssignment extends React.Component {
               <TableItem>Assignment Due:</TableItem>
             </HeaderRow>
             {this.state.loading ? <Loading /> : this.renderAssignmentList()}
-            <Page
-              currentPage={page}
-              handlePageChange={this.handlePageChange}
-              totalPage={paginationArray.length}
-            />
+            
           </TableLayout>
         </FullWidthLayout>
         <FullWidthLayout>
@@ -255,7 +265,6 @@ class TeacherCourseAssignment extends React.Component {
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
-  header: state.headerHistory.title,
 });
 const TeacherCourseAssignmentContainer = connect(mapStateToProps)(
   TeacherCourseAssignment

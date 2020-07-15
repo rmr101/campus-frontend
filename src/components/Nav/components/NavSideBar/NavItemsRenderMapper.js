@@ -47,11 +47,6 @@ export const StudentConfig = [
            NavId: "Assignment",
          },
          {
-           icon: renderList.Payment,
-           title: "Payment",
-           NavId: "Payment",
-         },
-         {
            icon: renderList.CourseMarket,
            title: "Course market",
            NavId:"CourseMarket"
