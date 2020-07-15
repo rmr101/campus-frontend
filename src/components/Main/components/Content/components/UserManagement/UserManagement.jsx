@@ -4,7 +4,7 @@ import Button from "../../../../../Button";
 import SearchBar from "./SearchUser";
 import styles from "./UserManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";
-import NoContent from "../NoContent/NoContent";
+import NoContent from "../NoContent";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
 import {

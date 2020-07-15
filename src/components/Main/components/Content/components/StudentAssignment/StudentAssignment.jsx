@@ -4,10 +4,10 @@ import Loading from '../Loading';
 import { connect } from "react-redux";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import pagination from '../../../../../../utils/Algorithm/pagination';
-import NoContent from "../NoContent/NoContent";
+import NoContent from "../NoContent";
 import RenderContentLink from "../RenderContentLink";
 import {RadioItem,RadioLayout,RadioTitle} from '../../../../../Layout/RadioLayout/RadioLayout';
-
+import Button from "../../../../../Button";
 import {
   IndexItem,
   HeaderRow,
@@ -26,8 +26,8 @@ class StudentAssignment extends React.Component {
       page: 1,
       paginationArray: [],
       displayOption: "all",
-      renderArray: null,
-      assignmentList: null,
+      renderArray: [],
+      assignmentList: [],
       loading: true,
     };
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -56,7 +56,8 @@ class StudentAssignment extends React.Component {
     switch (option) {
       case "all":
         this.setState(
-          {
+          { 
+            page:1,
             renderArray: this.state.assignmentList,
             displayOption: "all",
           },
@@ -72,6 +73,7 @@ class StudentAssignment extends React.Component {
       case "notSubmitted":
         this.setState(
           {
+            page: 1,
             displayOption: "notSubmitted",
             renderArray: this.state.assignmentList.filter(
               (obj) => !obj.submitted
@@ -89,16 +91,20 @@ class StudentAssignment extends React.Component {
       case "scored":
         this.setState(
           {
+            page: 1,
             displayOption: "scored",
             renderArray: this.state.assignmentList.filter((obj) => obj.scored),
           },
           () =>
-            this.setState({
-              paginationArray: pagination(
-                this.state.renderArray,
-                ITEM_PER_PAGE
-              ),
-            })
+            this.setState(
+              {
+                paginationArray: pagination(
+                  this.state.renderArray,
+                  ITEM_PER_PAGE
+                ),
+              },
+              () => {}
+            )
         );
         break;
       default:
@@ -110,12 +116,11 @@ class StudentAssignment extends React.Component {
   }
   renderResult() {
     const { page, paginationArray } = this.state;
-    if (paginationArray[page - 1].length === 0) {
+    if (paginationArray.length === 0) {
       return <NoContent text={"You have no assignment to be done."} />;
     } else {
       let renderArray = [
         <HeaderRow key={"StudentAssignment " + Math.random()}>
-          {" "}
           <IndexItem>No:</IndexItem>
           <TableItem>Name:</TableItem>
           <TableItem>Due:</TableItem>
@@ -124,6 +129,12 @@ class StudentAssignment extends React.Component {
           <TableItem>Comment :</TableItem>
         </HeaderRow>,
         this.renderAssignmentList(paginationArray[page - 1]),
+        <Page
+          key={"StudentAssignment" + Math.random()}
+          currentPage={page}
+          handlePageChange={this.handlePageChange}
+          totalPage={paginationArray.length}
+        />
       ];
       return renderArray;
     }
@@ -138,7 +149,7 @@ class StudentAssignment extends React.Component {
         disable: scored,
         name: title,
         id: id,
-        d_comment: comment,
+        d_comment: comment ? <Button type="VIEW_COMMENT" comment={comment}/> : "No Comment Yet",
         a_dueDate: dueDate + " 11:59 pm ",
         b_submitted: submitted ? "Done" : "No Submitted",
         c_scored: scored ? score : "Not Marked yet",
@@ -155,7 +166,6 @@ class StudentAssignment extends React.Component {
   }
 
   render() {
-    const { page, paginationArray } = this.state;
     return (
       <React.Fragment>
         <FullWidthLayout>
@@ -202,11 +212,7 @@ class StudentAssignment extends React.Component {
               </RadioLayout>
               <TableLayout>
                 {this.renderResult()}
-                <Page
-                  currentPage={page}
-                  handlePageChange={this.handlePageChange}
-                  totalPage={paginationArray.length}
-                />
+                
               </TableLayout>
             </React.Fragment>
           )}

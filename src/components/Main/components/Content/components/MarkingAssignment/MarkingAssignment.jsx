@@ -4,7 +4,7 @@ import getAssignmentDetail from "../../../../../../apis/getAssignmentDetail";
 import Loading from '../Loading';
 import {connect} from 'react-redux';
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout'
-import NoContent from '../NoContent/NoContent';
+import NoContent from '../NoContent';
 import ReactS3Download from '../../../../../../utils/AWS_S3/ReactS3Download';
 import Button from "../../../../../Button";
 import {

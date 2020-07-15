@@ -6,6 +6,7 @@ import Delete from "./Delete";
 import AdminCreateTeacher from "./AdminCreateTeacher";
 import UserChangePassword from "./components/UserChangePassword/UserChangePassword";
 import TeacherMarking from './components/TeacherMarking';
+import ViewComment from "./components/ViewComment";
 class Popup extends React.Component {
   constructor(props){
     super(props);
@@ -23,6 +24,8 @@ class Popup extends React.Component {
         return <AdminCreateTeacher onClick={this.props.toggle} />;
       case "CHANGE_PASSWORD":
         return <UserChangePassword />;
+      case "VIEW_COMMENT":
+        return <ViewComment onClick={this.props.toggle} {...this.props} />;
       case "MARKING":
         return (
           <TeacherMarking
