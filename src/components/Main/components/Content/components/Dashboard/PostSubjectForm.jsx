@@ -92,7 +92,7 @@ class PostSubjectForm extends React.Component {
         >
           <FormTitle>Post New Subject</FormTitle>
           {this.state.loading ? (
-            <LoaderContainer>
+            <LoaderContainer background>
               <Loader />
             </LoaderContainer>
           ) : null}
@@ -142,9 +142,7 @@ class PostSubjectForm extends React.Component {
             />
           </FormItem>
           {!this.state.errorMessage && !this.state.notNullableError ? (
-            <Button type="submit">
-              Add New Subject
-            </Button>
+            <Button type="submit">Add New Subject</Button>
           ) : (
             <DummyButtonBlock>Unable to Click</DummyButtonBlock>
           )}

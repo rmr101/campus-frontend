@@ -1,10 +1,11 @@
 import React from 'react';
 import RenderLink from '../RenderLink';
-import CanvasLoading from '../CanvasLoading';
 import getTeachingList from "../../../../../../../../apis/getTeachingList";
 import styles from "./MarkingAssignment.module.scss";
 import NothingDisplay from '../NothingDisplay';
 import CanvasTitleWrap from '../CanvasTitleWrapper';
+import LoaderContainer from "../../../../../../../Layout/LoaderContainer";
+import Loader from "../../../../../../../Loader";
 
 //TODO: configure for this 
 class MarkingAssignment extends React.Component {
@@ -52,7 +53,13 @@ class MarkingAssignment extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        {this.state.loading ? <CanvasLoading /> : this.renderList()}
+        {this.state.loading ? (
+          <LoaderContainer>
+            <Loader color={"white"} />
+          </LoaderContainer>
+        ) : (
+          this.renderList()
+        )}
       </div>
     );
   }

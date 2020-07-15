@@ -3,6 +3,7 @@ import Loader from "../../../../../Loader";
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 import styles from "./PostCourseForm.module.scss";
 import postCourse from '../../../../../../apis/postCourse';
+import LoaderContainer from "../../../../../Layout/LoaderContainer";
 import {
   FormLayout,
   FormTitle,
@@ -12,7 +13,7 @@ import {
   DummyButtonBlock,
   SmallText,
 } from "../../../../../Layout/FormLayout/FormLayout";
-import LoaderContainer from '../../../../../Layout/LoaderContainer';
+
 
 const date = new Date();
 const year = date.getFullYear();
@@ -33,7 +34,7 @@ class PostCourseForm extends React.Component {
       learningOutcome: "",
       year,
       semester,
-      subjectId: 0,
+      subjectId: this.props.subjectId,
     };
   }
   checkNull() {
@@ -80,7 +81,10 @@ class PostCourseForm extends React.Component {
             loading: false,
             postSuccessful: true,
           },
-          () => setTimeout(() => this.setState({ postSuccessful: false }), 2000)
+          () => {
+            this.props.handleSubmit();
+            setTimeout(() => this.setState({ postSuccessful: false }), 2000);
+          }
         );
       })
       .catch(console.log);
@@ -99,7 +103,7 @@ class PostCourseForm extends React.Component {
           }}
         >
           {this.state.loading ? (
-            <LoaderContainer>
+            <LoaderContainer background>
               <Loader />
             </LoaderContainer>
           ) : null}
@@ -130,16 +134,6 @@ class PostCourseForm extends React.Component {
                 <option value={50}>50</option>
                 <option value={100}>100</option>
               </select>
-            </FormItem>
-            <FormItem>
-              {/* TODO can be deleted after implemented  */}
-              <label htmlFor="subjectId">SubjectID: </label>
-              <input
-                id="subjectId"
-                type="number"
-                required
-                onChange={(event) => this.handleValueChange("subjectId")(event)}
-              />
             </FormItem>
           </HorizontalRow>
           <HorizontalRow>

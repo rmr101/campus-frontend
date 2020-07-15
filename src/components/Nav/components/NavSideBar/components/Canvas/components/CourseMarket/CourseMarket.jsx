@@ -1,10 +1,11 @@
 import React from 'react';
 import RenderLink from '../RenderLink';
-import CanvasLoading from '../CanvasLoading';
 import getSubjectList from './../../../../../../../../apis/getSubjectList';
 import styles from "./CourseMarket.module.scss";
 import CanvasTitleWrap from '../CanvasTitleWrapper';
 import pagination from '../../../../../../../../utils/Algorithm/pagination';
+import LoaderContainer from '../../../../../../../Layout/LoaderContainer';
+import Loader from "../../../../../../../Loader";
 
 const ITEM_PER_PAGE = 7;
 
@@ -53,8 +54,9 @@ class CourseMarket extends React.Component {
     return (
       <React.Fragment>
         {this.state.loading ? (
-          <CanvasLoading />
-        ) : (
+        <LoaderContainer>
+          <Loader color={"white"} />
+        </LoaderContainer> ) : (
           <CanvasTitleWrap title={"Subjects"}>
             <RenderLink
               RenderArray={this.MapToRenderArray(paginationArray[page - 1])}

@@ -1,9 +1,9 @@
 import React from 'react';
 import HalfWidthLayout from '../../../../../Layout/HalfWidthLayout/HalfWidthLayout';
-import PostCourseForm from './PostCourseForm';
 import PostSubjectForm from './PostSubjectForm';
+import { connect } from "react-redux";
 
-const Dashboard = () => (
+const Dashboard = ({role}) => (
   <React.Fragment>
     <HalfWidthLayout title="Welcome" />
     <HalfWidthLayout title="Future features" background>
@@ -12,9 +12,13 @@ const Dashboard = () => (
 
     {/* TODO: this whole full width layout is about posting course detail as admin,
      can be moved later. remember to bring the style with you, or could just be left at the dashboard  */}
-    <PostCourseForm />
-    <PostSubjectForm />
+    {role === "ADMIN" ? <PostSubjectForm />:null}
   </React.Fragment>
 );
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  role: state.Authentication.role,
+});
+const DashboardContainer = connect(mapStateToProps)(Dashboard);
+export default DashboardContainer;
+

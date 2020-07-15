@@ -1,10 +1,12 @@
 import React from 'react';
 import RenderLink from '../RenderLink';
-import CanvasLoading from '../CanvasLoading';
 import getTeachingList from "../../../../../../../../apis/getTeachingList";
 import styles from "./TeachingCourse.module.scss";
 import NothingDisplay from '../NothingDisplay';
 import CanvasTitleWrap from '../CanvasTitleWrapper';
+import LoaderContainer from "../../../../../../../Layout/LoaderContainer";
+import Loader from "../../../../../../../Loader";
+
 
 //TODO: configure for this 
 class TeachingCourse extends React.Component {
@@ -53,10 +55,12 @@ class TeachingCourse extends React.Component {
     return (
       <div className={styles.wrapper}>
         {this.state.loading ? (
-          <CanvasLoading />
-        ) : 
+          <LoaderContainer>
+            <Loader color={"white"} />
+          </LoaderContainer>
+        ) : (
           this.renderList()
-          }
+        )}
       </div>
     );
   }
