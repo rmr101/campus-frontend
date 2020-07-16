@@ -3,7 +3,7 @@ import styles from './Canvas.module.scss';
 import CourseMarket from "./components/CourseMarket";
 import TeachingCourse from './components/TeachingCourse';
 import MarkingAssignment from './components/MarkingAssignment/MarkingAssignment';
-
+import StudentEnrollment from './components/StudentEnrollment';
 const Canvas= ({current}) => {
 const renderCanvas = (current) =>{
   switch (current) {
@@ -11,8 +11,10 @@ const renderCanvas = (current) =>{
       return <TeachingCourse />;
     case "CourseMarket":
       return <CourseMarket />;
-    case "MarkSystem" :
-      return <MarkingAssignment/>
+    case "Enrollment":
+      return <StudentEnrollment />;
+    case "MarkSystem":
+      return <MarkingAssignment />;
     // case "Setting" :
     //   return <Setting/>
     // case "Payment" :

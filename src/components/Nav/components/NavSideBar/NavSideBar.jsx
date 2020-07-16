@@ -102,6 +102,26 @@ class NavSideBar extends React.Component {
         this.props.addHeader("Profile", "UserInfo");
         this.setCanvasStatus(false);
         break;
+      case "Help":
+        this.changeActive(name);
+        this.props.addHeader("Help", "Help");
+        this.setCanvasStatus(false);
+        break;
+      case "Setting":
+        this.changeActive(name);
+        this.props.addHeader("Setting", "Setting");
+        this.setCanvasStatus(false);
+        break;
+      case "Payment":
+        this.changeActive(name);
+        this.props.addHeader("Payment", "Payment");
+        this.setCanvasStatus(false);
+        break;
+      case "Classroom":
+        this.changeActive(name);
+        this.props.addHeader("Classroom", "Classroom");
+        this.setCanvasStatus(false);
+        break;
       default:
         this.changeActive(name);
         this.clickToDisplayCanvas(name);

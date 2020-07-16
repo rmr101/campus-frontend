@@ -3,35 +3,65 @@ import {DisplayTitle,DisplaySubHeading,DisplayContent,DisplayLayout} from '../..
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 import getCourseDetail from '../../../../../../apis/getCourseDetail';
 import Loading from '../Loading';
+import StudentEnrolCourse from './StudentEnrolCourse';
 import { connect } from "react-redux";
 
 class CourseDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      studentList: [],
       courseDetail: null,
       loading: true,
+      enrolled: false,
     };
+    this.handleEnrol = this.handleEnrol.bind(this);
+  }
+  handleEnrol() {
+    this.setState({ enrolled: true });
   }
   componentDidMount() {
-    this.getCourseDetail()
+    this.getCourseDetail();
   }
   async getCourseDetail() {
-    const { course } = await getCourseDetail(this.props.id);
-    this.setState({
-      courseDetail: course,
-      loading: false,
-    });
+    const { course, studentList } = await getCourseDetail(this.props.id);
+    this.setState(
+      {
+        studentList,
+        courseDetail: course,
+        loading: false,
+      },
+      this.checkEnrollment
+    );
   }
-    
-  renderCourseDetail(){
-    const {year,assessment,learningOutcome,courseCode,workLoad,location,name,introduction,semester}=this.state.courseDetail;
-      return (
+  checkEnrollment() {
+    const { studentList } = this.state;
+    const { uuid } = this.props;
+    studentList.forEach((student) =>
+      student.uuid === uuid ? this.setState({ enrolled: true }) : null
+    );
+  }
+  renderCourseDetail() {
+    const {
+      year,
+      assessment,
+      learningOutcome,
+      courseCode,
+      workLoad,
+      location,
+      name,
+      introduction,
+      semester,
+    } = this.state.courseDetail;
+    return (
       <DisplayLayout>
         <DisplayTitle>
-          {courseCode} - {name} 
+          {courseCode} - {name}
         </DisplayTitle>
-        <DisplaySubHeading> {year} {location} </DisplaySubHeading>
+        <DisplaySubHeading>
+          {" "}
+          {year} {location}{" "}
+        </DisplaySubHeading>
         <DisplaySubHeading>Semester: </DisplaySubHeading>
         <DisplayContent> {semester} </DisplayContent>
         <DisplaySubHeading>Credit Points: </DisplaySubHeading>
@@ -47,17 +77,29 @@ class CourseDetail extends React.Component {
   }
 
   render() {
+    const { userRole, id } = this.props;
+    const { enrolled } = this.state;
     return (
-      <FullWidthLayout>
-        {this.state.loading ? <Loading /> : this.renderCourseDetail()}
-      </FullWidthLayout>
+      <React.Fragment>
+        <FullWidthLayout>
+          {this.state.loading ? <Loading /> : this.renderCourseDetail()}
+        </FullWidthLayout>
+        {userRole === "STUDENT" ? (
+          <StudentEnrolCourse
+            id={id}
+            enrolled={enrolled}
+            handleEnrol={this.handleEnrol}
+          />
+        ) : null}
+      </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
-  userRole: state.Authentication.role.toLowerCase(),
+  userRole: state.Authentication.role,
+  uuid:state.Authentication.uuid,
 });
 const CourseDetailContainer = connect(mapStateToProps)(CourseDetail);
 export default CourseDetailContainer;

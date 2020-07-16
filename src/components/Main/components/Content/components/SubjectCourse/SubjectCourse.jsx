@@ -111,7 +111,9 @@ class SubjectCourse extends React.Component {
         <FullWidthLayout>
           {this.state.loading ? <Loading /> : this.renderContent()}
         </FullWidthLayout>
-        {role ==="ADMIN" ? <PostCourseForm subjectId = {id} handleSubmit={this.handleSubmit}/>: null}
+        {role === "ADMIN" ? (
+          <PostCourseForm subjectId={id} handleSubmit={this.handleSubmit} />
+        ) : null}
       </React.Fragment>
     );
   }

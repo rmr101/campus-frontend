@@ -1,0 +1,10 @@
+@import './../../Button.module.scss';
+
+.enrolBtn{
+  border: solid 1px $enrol-color;
+  color: $enrol-color;
+  &:hover{
+    color:$hover-color;
+    background-color: $enrol-color;
+  }
+}

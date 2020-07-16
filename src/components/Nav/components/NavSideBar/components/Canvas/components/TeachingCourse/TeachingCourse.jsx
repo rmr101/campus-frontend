@@ -4,29 +4,41 @@ import getTeachingList from "../../../../../../../../apis/getTeachingList";
 import NothingDisplay from "../NothingDisplay";
 import CanvasTitleWrap from "../CanvasTitleWrapper";
 import LoaderContainer from "../../../../../../../Layout/LoaderContainer";
+import pagination from "../../../../../../../../utils/Algorithm/pagination";
 import Loader from "../../../../../../../Loader";
+import CanvasPagination from '../CanvasPagination';
 
-//TODO: configure for this
+const ITEM_PER_PAGE = 5;
 class TeachingCourse extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      teachingList: null,
+      teachingList: [],
       loading: true,
+      page: 1,
+      paginationArray: [],
     };
+  this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   async getTeachingList() {
     const resp = await getTeachingList();
-    // TODO: Protect from breaking the app
     const teachingList = resp.hasOwnProperty("courseList")
       ? resp.courseList
       : [];
-    this.setState({ teachingList: teachingList, loading: false });
+    this.setState({
+      page: 1,
+      teachingList,
+      loading: false,
+      paginationArray: pagination(teachingList, ITEM_PER_PAGE),
+    });
   }
 
   componentDidMount() {
     this.getTeachingList();
+  }
+  handlePageChange(page) {
+    this.setState({ page });
   }
 
   MapToRenderArray(array) {
@@ -38,11 +50,17 @@ class TeachingCourse extends React.Component {
     });
   }
   renderList() {
+    const { paginationArray, page } = this.state;
     return this.state.teachingList.length !== 0 ? (
       <CanvasTitleWrap title={"Your Teaching"}>
         <RenderLink
-          RenderArray={this.MapToRenderArray(this.state.teachingList)}
+          RenderArray={this.MapToRenderArray(paginationArray[page - 1])}
           toPageID={"TeacherCourseAssignment"}
+        />
+        <CanvasPagination
+          currentPage={page}
+          totalPage={paginationArray.length}
+          handlePageChange={this.handlePageChange}
         />
       </CanvasTitleWrap>
     ) : (

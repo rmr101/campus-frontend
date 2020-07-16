@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import HalfWidthLayout from '../../../../../Layout/HalfWidthLayout/HalfWidthLayout';
 import Button from "../../../../../Button";
 
-//TODO: 把名字写到redux里。
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -60,7 +59,7 @@ class Profile extends React.Component {
             ) : null}
             {/* for intro display */}
             {this.state.userInfo.hasOwnProperty("introduction") ? (
-              <HalfWidthLayout title={"Intro"} description={"Intro"} background>
+              <HalfWidthLayout title={"Introduction"} background>
                 <div className={styles.container}>
                   {this.state.userInfo.title !== null ? (
                     this.state.userInfo.introduction
@@ -70,7 +69,7 @@ class Profile extends React.Component {
                 </div>
               </HalfWidthLayout>
             ) : null}
-            <HalfWidthLayout title={"Name"} description={"Intro"} background >
+            <HalfWidthLayout title={"Name"} background >
               <div className={styles.container}>{this.state.userInfo.name}</div>
             </HalfWidthLayout>
             <HalfWidthLayout title={"Change Password"}>

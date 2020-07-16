@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 import AddHeader from "../../../../../../../../store/campus/actions/AddHeader";
 
 
-const RenderLink = ({ RenderArray, onClick, toPageID }) =>
+const RenderLink = ({ RenderArray, onClick, toPageID, titleSuffix }) =>
   RenderArray.map((obj) => (
     <div
       onClick={(event) =>{
         event.preventDefault();
-        onClick(capitalize(obj.name), toPageID, obj.id)
+        const suffix = titleSuffix ? titleSuffix : "";
+        onClick(capitalize((obj.name + " " + suffix).trim()), toPageID, obj.id);
         }
       }
       className={styles.links}

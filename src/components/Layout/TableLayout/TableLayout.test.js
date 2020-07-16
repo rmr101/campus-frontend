@@ -65,6 +65,20 @@ describe(" TableLayout ", () => {
    );
    expect(screen.getByText(TestMessage)).toBeInTheDocument();
  });
+ it("should render page number correctly", async () => {
+   const testCurrentPage = 1;
+   const testTotalPage = 10;
+   const testCurrentString = `- ${testCurrentPage} -`;
+   const testTotalString = `Total Page of ${testTotalPage}`;
+   render(
+     <Page
+       currentPage={testCurrentPage}
+       totalPage={testTotalPage}
+     />
+   );
+   expect(screen.getByText(testCurrentString)).toBeInTheDocument();
+   expect(screen.getByText(testTotalString)).toBeInTheDocument();
+ });
 
 
   it("should render corresponding page number after clicking next and prev button", async () => {
