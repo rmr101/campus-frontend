@@ -1,26 +1,13 @@
 import React from 'react';
-import {render} from '@testing-library/react';
+import {render,screen} from '@testing-library/react';
 import Header from './Header';
 
-// describe('<Header/>',()=>{
+jest.mock("../../../Button", () => jest.fn(() => `<Button/>`));
 
-//   let renderResult;
-//   const props = {
-//     title: "Dashboard",
-//   }
-//   beforeEach(()=>{
-//     renderResult = render(<Header {...props}/>);
-//   })
-
-//   it("should render title",()=>{
-//     const {getByText} = renderResult;
-//     expect(getByText(props.title)).toBeInTheDocument();
-//   })
-// });
-
-const sum = (a,b)=> a+b;
-describe('sum',()=>{
-  it("returns two",()=>{
-    expect(sum(1,1)).toBe(2);
+describe('<Header/>',()=>{
+  const testString = "Testing";
+  it("should render children for the header correctly",()=>{
+    render(<Header title={testString} />);
+    expect(screen.getByText(testString)).toBeInTheDocument();
   })
-})
+});

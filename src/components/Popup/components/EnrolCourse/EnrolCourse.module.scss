@@ -1,0 +1,33 @@
+@import '../../../Button/color';
+
+.form {
+  position: relative;
+  width:300px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  small{
+    bottom:80px;
+    position: absolute;
+    color:$create-color;
+  }
+}
+.button {
+  cursor: pointer;
+  border: none;
+  background-color: $white-color;
+  border-radius:5px;
+  border:solid 2px $confirm-color;
+  color: $confirm-color;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 10px;
+  width:200px;
+  outline: none;
+  &:hover{
+    color: $white-color;
+    background-color:$confirm-color;
+  }
+}

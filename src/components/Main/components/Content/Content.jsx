@@ -10,6 +10,7 @@ import Assignment from "./components/Assignment";
 import StudentAssignment from "./components/StudentAssignment";
 import CourseManagement from "./components/CourseManagement";
 import TeacherMarkingSystem from "./components/TeacherMarkingSystem";
+import ToBeImplement from './components/ToBeImplement';
 import MarkingAssignment from "./components/MarkingAssignment";
 
 const Content = ({ pageID }) => {
@@ -38,7 +39,7 @@ const Content = ({ pageID }) => {
       case "CourseDetail":
         return <CourseDetail />;
       default:
-        return <Dashboard />;
+        return <ToBeImplement/>;
     }
   };
   return <div className={styles.wrapper}>{renderComponent()}</div>;

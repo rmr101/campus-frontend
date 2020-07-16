@@ -1,19 +1,20 @@
 import React from 'react';
 import RenderLink from '../RenderLink';
-import getSubjectList from './../../../../../../../../apis/getSubjectList';
-import styles from "./CourseMarket.module.scss";
+import getStudentEnrollment from "../../../../../../../../apis/getStudentEnrollment";
+import styles from "./StudentEnrollment.module.scss";
 import CanvasTitleWrap from '../CanvasTitleWrapper';
 import pagination from '../../../../../../../../utils/Algorithm/pagination';
 import LoaderContainer from '../../../../../../../Layout/LoaderContainer';
 import Loader from "../../../../../../../Loader";
 import CanvasPagination from '../CanvasPagination';
-const ITEM_PER_PAGE = 7;
 
-class CourseMarket extends React.Component {
+const ITEM_PER_PAGE = 4;
+
+class StudentEnrollment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subjectList: [],
+      courseList: [],
       loading: true,
       page:1,    
       paginationArray:[]
@@ -21,21 +22,21 @@ class CourseMarket extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this);
   }
   
-  async getSubjectList() {
-    const { subjectList } = await getSubjectList();
-    this.setState(
-      { page:1,  
-        subjectList: subjectList, 
-        loading: false,
-        paginationArray:pagination(subjectList, ITEM_PER_PAGE)
-      });
+  async getCourseList() {
+    const { courseList } = await getStudentEnrollment();
+    this.setState({
+      page: 1,
+      courseList,
+      loading: false,
+      paginationArray: pagination(courseList, ITEM_PER_PAGE),
+    });
   }
   handlePageChange(page){
     this.setState({page})
   }
 
   componentDidMount() {
-    this.getSubjectList();
+    this.getCourseList();
   }
   MapToRenderArray(array) {
     return array.map((obj) => ({
@@ -53,10 +54,11 @@ class CourseMarket extends React.Component {
             <Loader color={"white"} />
           </LoaderContainer>
         ) : (
-          <CanvasTitleWrap title={"Subjects"}>
+          <CanvasTitleWrap title={"Enrollment"}>
             <RenderLink
               RenderArray={this.MapToRenderArray(paginationArray[page - 1])}
-              toPageID={"SubjectCourse"}
+              toPageID={"StudentCourse"}
+              titleSuffix={"Files"}
             />
             <div className={styles.filler}></div>
             <CanvasPagination
@@ -72,4 +74,4 @@ class CourseMarket extends React.Component {
 };
 
 
-export default CourseMarket;
+export default StudentEnrollment;

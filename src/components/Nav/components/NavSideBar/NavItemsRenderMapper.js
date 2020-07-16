@@ -49,12 +49,17 @@ export const StudentConfig = [
          {
            icon: renderList.CourseMarket,
            title: "Course market",
-           NavId:"CourseMarket"
+           NavId: "CourseMarket",
+         },
+         {
+           icon: renderList.Payment,
+           title: "Payment",
+           NavId: "Payment",
          },
          {
            icon: renderList.UserInfo,
            title: "Profile",
-           NavId:"UserInfo",
+           NavId: "UserInfo",
          },
          {
            filler: true,
@@ -62,12 +67,12 @@ export const StudentConfig = [
          {
            icon: renderList.Help,
            title: "Help",
-           NavId:"Help",
+           NavId: "Help",
          },
          {
            icon: renderList.Setting,
            title: "Setting",
-           NavId:"Setting",
+           NavId: "Setting",
          },
        ];
 
@@ -123,6 +128,11 @@ export const AdminConfig = [
            icon: renderList.CourseMarket,
            title: "Course market",
            NavId: "CourseMarket",
+         },
+         {
+           icon: renderList.Classroom,
+           title: "Classroom",
+           NavId: "Classroom",
          },
          {
            filler: true,
