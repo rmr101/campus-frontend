@@ -2,7 +2,7 @@
 
 .wrapper{
   width: 100%;
-  padding-bottom: 20px;
+  min-height: 100vh;
 }
 .header{
   position:sticky;
@@ -17,7 +17,15 @@
   box-shadow: 0px 3px 20px -10px $border-color;
   text-decoration: none;
 }
-
+.teacherBackground{
+  background-color: $teacher-background;
+}
+.studentBackground{
+  background-color: $student-background;
+}
+.adminBackground{
+  background-color: $admin-background;
+}
 .content{
   padding: 0 50px;
 }

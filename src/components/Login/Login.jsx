@@ -6,10 +6,9 @@ import storeAuthToState from "../../store/authentication/actions/storeAuthToStat
 import {login} from '../../apis/authentication';
 import Greeting from './Greeting';
 import Loader from '../Loader';
-
-// user id : admin   password: admin 
-// user id : S95778487   password: S95778487 Student. 
-// user id : T54346913   password: T54346913 Teacher.
+import Particles from "react-tsparticles";
+import ParticleStyles from "../../components/Login/components/Particle/Particle.module.scss";
+import { params } from "../../components/Login/components/Particle/params";
 
 class Login extends React.Component {
   constructor(props) {
@@ -78,6 +77,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
+        <Particles className={ParticleStyles.particle} params={{ ...params }} />
         <div className={styles.modal}>
           <Greeting />
           <form

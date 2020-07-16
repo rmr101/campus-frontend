@@ -5,7 +5,7 @@ import {TableItem,TableLayout,Row,HeaderRow,IndexItem,Page} from './TableLayout'
 describe(" TableLayout ", () => {
   const TestMessage = "Testing"
   const TestingComponent = () => <div>{TestMessage}</div>;
-  //TODO: test if the onClick pass down to the child
+
   const onClick = (i) => i + 1; 
   const props = {
     testprops: onClick.toString(),

@@ -4,12 +4,13 @@
   width: 250px;
   min-width: 250px;
   background-color: $light-dark-color;
+  position: sticky;
+  top:0;
 }
 
 .main{
-
   flex:1;
-  background-color: $light-color;
+
 }
 
 h3,h1,h2{
@@ -22,4 +23,41 @@ color:$light-dark-color;
 }
 a{
   cursor: pointer;
+}
+//mask
+.mask{
+  z-index: 5000;
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:  rgba(0, 0, 0,0.3);
+}
+
+
+//hamburger
+.hamburger{
+  position: fixed;
+  top: 50px;
+  left: 10px;
+  width: 28px;
+  height: 28px;
+  background-color: $light-dark-color;
+  border: solid 2px $light-dark-color;
+  padding:5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  z-index: 2000;
+  .line{
+    border-bottom: solid 2px $white-color;
+  }
+  &:hover{
+    cursor: pointer;
+    background-color: transparent;
+    .line{
+      border-bottom: solid 2px $light-dark-color;
+    }
+  }
 }
