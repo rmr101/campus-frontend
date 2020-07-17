@@ -181,9 +181,6 @@ class UserManagement extends React.Component {
             onClick={this.onSubmit}
             errors={this.state.errors}
           />
-          <div className={styles.createBtn}>
-            <Button type={"CREATE"} />
-          </div>
         </div>
         <div className={styles.wrapper}>{this.renderContent()}</div>
       </FullWidthLayout>
