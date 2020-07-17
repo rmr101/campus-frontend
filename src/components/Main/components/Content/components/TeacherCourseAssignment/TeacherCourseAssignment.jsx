@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./TeacherCourseAssignment.module.scss";
+import sortArrayByDueDate from '../../../../../../utils/Algorithm/sortArrayByDueDate';
 import RenderContentLink from "../RenderContentLink";
 import getAssignmentListByCourse from "../../../../../../apis/getAssignmentListByCourse";
 import teacherPublishAssignment from "../../../../../../apis/teacherPublishAssignment";
@@ -62,7 +63,10 @@ class TeacherCourseAssignment extends React.Component {
     const { assignmentList } = await getAssignmentListByCourse(this.props.id);
     this.setState({
       assignmentList: assignmentList,
-      paginationArray: pagination(assignmentList, ITEM_PER_PAGE),
+      paginationArray: pagination(
+        sortArrayByDueDate(assignmentList),
+        ITEM_PER_PAGE
+      ),
       loading: false,
     });
   }

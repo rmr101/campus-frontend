@@ -6,6 +6,7 @@ import UploadBtn from "./components/UploadBtn";
 import MarkingBtn from "./components/MarkingBtn";
 import EnrolBtn from './components/EnrolBtn';
 import ViewCommentBtn from './components/ViewCommentBtn';
+import AddTeacherToCourseBtn from "./components/AddTeacherToCourseBtn";
 //TODO: 这个肯定要重构的，直接return 一个button 就好了，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
 class Button extends React.Component {
   constructor(props) {
@@ -101,6 +102,21 @@ class Button extends React.Component {
         return <UploadBtn {...this.props} />;
       case "LOGOUT":
         return <LogOutBtn />;
+      case "ADD_TEACHER_TO_COURSE":
+        return (
+          <React.Fragment>
+            <AddTeacherToCourseBtn onClick={this.togglePop} />
+            {this.state.seen ? (
+              <Popup
+                type={"ADD_TEACHER_TO_COURSE"}
+                {...this.props}
+                toggle={() => {
+                  this.togglePop();
+                }}
+              />
+            ) : null}
+          </React.Fragment>
+        );
       case "ENROL":
         return ( <React.Fragment>
           <EnrolBtn onClick={this.togglePop} />

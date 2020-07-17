@@ -1,5 +1,6 @@
 import React from "react";
 import getStudentAssignmentList from "../../../../../../apis/getStudentAssignmentList";
+import sortArrayByDueDate from "../../../../../../utils/Algorithm/sortArrayByDueDate";
 import Loading from '../Loading';
 import { connect } from "react-redux";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
@@ -16,7 +17,7 @@ import {
   Page,
 } from "../../../../../Layout/TableLayout/TableLayout";
 
-
+//TODO: View Report 可以combine;
 const ITEM_PER_PAGE = 4;
 
 class StudentAssignment extends React.Component {
@@ -40,11 +41,13 @@ class StudentAssignment extends React.Component {
       loading: true,
     });
     const { assignmentList } = await getStudentAssignmentList();
-
+    // TODO: 之后要做排序功能，以及加一个CoureseName
     this.setState({
       renderArray: assignmentList,
       assignmentList: assignmentList,
-      paginationArray: pagination(assignmentList, ITEM_PER_PAGE),
+      paginationArray: pagination(assignmentList,
+        ITEM_PER_PAGE
+      ),
       loading: false,
     });
   }

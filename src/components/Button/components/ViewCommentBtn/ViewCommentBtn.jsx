@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from "./ViewCommentBtn.module.scss";
+import styles from "../../Button.module.scss";
 
 const ViewCommentBtn = ({ onClick }) => (
-  <button onClick={onClick} className={`${styles.btn} + ${styles.viewBtn}`}>
+  <button onClick={onClick} className={`${styles.btn} + ${styles.themeBtn}`}>
     View
   </button>
 );  

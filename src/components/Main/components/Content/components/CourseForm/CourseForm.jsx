@@ -1,9 +1,11 @@
 import React from 'react';
 import Loader from "../../../../../Loader";
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
-import styles from "./PostCourseForm.module.scss";
+import styles from "./CourseForm.module.scss";
 import postCourse from '../../../../../../apis/postCourse';
+import putCourse from "../../../../../../apis/putCourse";
 import LoaderContainer from "../../../../../Layout/LoaderContainer";
+import AddTeacherBtn from '../../../../../Button';
 import {
   FormLayout,
   FormTitle,
@@ -19,7 +21,7 @@ const date = new Date();
 const year = date.getFullYear();
 const semester = date.getMonth()<7? 1 : 2;
 
-class PostCourseForm extends React.Component {
+class CourseForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,10 +34,16 @@ class PostCourseForm extends React.Component {
       assessment: "",
       workLoad: 12.5,
       learningOutcome: "",
+      // TODO: teacherUuid:"",
       year,
       semester,
       subjectId: this.props.subjectId,
+      courseId: this.props.courseId,
     };
+    this.handleTeacherUuidChange = this.handleTeacherUuidChange.bind(this);
+  }
+  handleTeacherUuidChange(uuid){
+    // TODO:this.setState({teacherUuid:uuid})                             
   }
   checkNull() {
     const {
@@ -45,7 +53,6 @@ class PostCourseForm extends React.Component {
       workLoad,
       year,
       semester,
-      subjectId,
       ...checkProps
     } = this.state;
     for (let prop in checkProps) {
@@ -61,20 +68,36 @@ class PostCourseForm extends React.Component {
         {
           [name]: value,
           notNullableError: "",
-        },this.checkNull);
+        },
+        this.checkNull
+      );
     };
+  }
+  //TODO: new function to handle put, api may need to change later
+  sendData(postBody) {
+    const {subjectId,courseId} = this.state;
+    switch (this.props.apiMethod) {
+      case "POST":
+        return postCourse({...postBody, subjectId});
+      case "PUT":
+        return putCourse({ ...postBody, courseId });
+      default:
+        return putCourse({ ...postBody, courseId });
+    }
   }
   async postCourse() {
     const {
       loading,
       postSuccessful,
       notNullableError,
+      courseId,
+      subjectId,
       ...postBody
     } = this.state;
     this.setState({
       loading: true,
     });
-    await postCourse(postBody)
+    await this.sendData(postBody)
       .then(() => {
         this.setState(
           {
@@ -108,7 +131,7 @@ class PostCourseForm extends React.Component {
             </LoaderContainer>
           ) : null}
 
-          <FormTitle>Post New Course</FormTitle>
+          <FormTitle>{this.props.title}</FormTitle>
           <HorizontalRow>
             <FormItem>
               <label htmlFor="name">Name: </label>
@@ -134,6 +157,15 @@ class PostCourseForm extends React.Component {
                 <option value={50}>50</option>
                 <option value={100}>100</option>
               </select>
+            </FormItem>
+            <FormItem>
+              {/* TODO: add this button */}
+              <label htmlFor="AddTeacherBtn">Assign Teacher:</label>
+              <AddTeacherBtn
+                id="AddTeacherBtn"
+                type={"ADD_TEACHER_TO_COURSE"}
+                handleTeacherUuidChange={this.handleTeacherUuidChange}
+              />
             </FormItem>
           </HorizontalRow>
           <HorizontalRow>
@@ -212,4 +244,4 @@ class PostCourseForm extends React.Component {
   }
 }
 
-export default PostCourseForm;
+export default CourseForm;

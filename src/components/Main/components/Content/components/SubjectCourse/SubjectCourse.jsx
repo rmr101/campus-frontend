@@ -5,7 +5,7 @@ import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import { connect } from "react-redux";
 import NoContent from "../NoContent";
-import PostCourseForm from "./PostCourseForm";
+import CourseForm from "../CourseForm";
 import pagination from "../../../../../../utils/Algorithm/pagination";
 import {
   IndexItem,
@@ -112,7 +112,7 @@ class SubjectCourse extends React.Component {
           {this.state.loading ? <Loading /> : this.renderContent()}
         </FullWidthLayout>
         {role === "ADMIN" ? (
-          <PostCourseForm subjectId={id} handleSubmit={this.handleSubmit} />
+          <CourseForm subjectId={id} handleSubmit={this.handleSubmit} apiMethod={"POST"} title={"Post New Course"}/>
         ) : null}
       </React.Fragment>
     );

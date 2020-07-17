@@ -21,6 +21,15 @@
     cursor: pointer;
     box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.2);
   }
+
+.themeBtn{
+  border: solid 1px $theme-color;
+  color: $theme-color;
+  &:hover{
+    color:$hover-color;
+    background-color: $theme-color;
+  }
+}
   
 .deleteBtn{
   border:solid 1px $delete-color;

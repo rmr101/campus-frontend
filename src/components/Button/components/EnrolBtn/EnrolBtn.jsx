@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from "./EnrolBtn.module.scss";
+import styles from "../../Button.module.scss";
 
 export default ({ onClick }) => (
-  <button onClick={onClick} className={`${styles.btn} + ${styles.enrolBtn}`}>
+  <button onClick={onClick} className={`${styles.btn} + ${styles.themeBtn}`}>
     Enrol
   </button>
 );  

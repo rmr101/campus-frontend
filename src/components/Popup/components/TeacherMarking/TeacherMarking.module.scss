@@ -75,7 +75,7 @@ textarea{
     font-size: 14px;
     &:focus {
       outline:none;
-      border-color:  $mark-color;
+      border-color:  $theme-color;
       &::placeholder {
         color: transparent;
       }
@@ -93,8 +93,8 @@ textarea{
   border: none;
   background-color: $white-color;
   border-radius:5px;
-  border:solid 2px $mark-color;
-  color: $mark-color;
+  border:solid 2px $theme-color;
+  color: $theme-color;
   font-size: 20px;
   font-weight: 400;
   padding: 10px;
@@ -102,6 +102,6 @@ textarea{
   outline: none;
   &:hover{
     color: $white-color;
-    background-color:$mark-color;
+    background-color:$theme-color;
   }
 }
