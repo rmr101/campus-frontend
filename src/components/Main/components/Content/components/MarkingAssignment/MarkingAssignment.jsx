@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from "./MarkingAssignment.module.scss";
 import getAssignmentDetail from "../../../../../../apis/getAssignmentDetail";
+import sortArrayByScore from "../../../../../../utils/Algorithm/sortArrayByScore";
+import pagination from "../../../../../../utils/Algorithm/pagination";
 import Loading from '../Loading';
 import {connect} from 'react-redux';
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout'
@@ -13,7 +15,8 @@ import {
   HeaderRow,
   TableLayout,
   TableItem,
-  Row
+  Row,
+  Page,
 } from "../../../../../Layout/TableLayout/TableLayout";
 import {
   RadioItem,
@@ -22,18 +25,25 @@ import {
 } from "../../../../../Layout/RadioLayout/RadioLayout";
 
 
+const ITEM_PER_PAGE = 5;
+
 class MarkingAssignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
+      paginationArray: [],
       displayOption: "all",
       scoreChange: false,
       assignmentDetail: null,
       studentAssignmentList: [],
-      renderArray: [],
       loading: true,
     };
     this.handleReview = this.handleReview.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+  handlePageChange(page) {
+    this.setState({ page });
   }
   async getStudentAssignmentList() {
     const { id, courseID } = this.props;
@@ -42,9 +52,13 @@ class MarkingAssignment extends React.Component {
       courseID
     );
     this.setState({
+      page: 1,
       assignmentDetail: assignment,
-      studentAssignmentList,
-      renderArray: studentAssignmentList,
+      studentAssignmentList: sortArrayByScore(studentAssignmentList),
+      paginationArray: pagination(
+        sortArrayByScore(studentAssignmentList),
+        ITEM_PER_PAGE
+      ),
       loading: false,
     });
   }
@@ -52,20 +66,33 @@ class MarkingAssignment extends React.Component {
     switch (option) {
       case "all":
         this.setState({
-          renderArray: this.state.studentAssignmentList,
+          page: 1,
+          paginationArray: pagination(
+            this.state.studentAssignmentList,
+            ITEM_PER_PAGE
+          ),
           displayOption: "all",
         });
         break;
       case "notMarked":
         this.setState({
+          page: 1,
           displayOption: "notMarked",
-          renderArray: this.state.studentAssignmentList.filter(
+          paginationArray: pagination(this.state.studentAssignmentList.filter(
             (obj) => obj.submitted && !obj.scored
-          ),
+          ),ITEM_PER_PAGE),
         });
         break;
       default:
-        this.setState({ renderArray: this.state.studentAssignmentList });
+        this.setState({
+          page: 1,
+          paginationArray: pagination(
+            this.state.studentAssignmentList,
+            ITEM_PER_PAGE
+          ),
+          displayOption: "all",
+        });
+        break;
     }
   }
   downloadFileFromS3(key) {
@@ -110,8 +137,8 @@ class MarkingAssignment extends React.Component {
     return renderArray;
   }
   renderStudentAssignmentList() {
-    const { renderArray } = this.state;
-    if (renderArray.length === 0) {
+    const { page,paginationArray } = this.state;
+    if (paginationArray.length === 0) {
       return (
         <div className={styles.LinksWrapper}>
           <NoContent text="No assignment to be marked." />
@@ -126,7 +153,12 @@ class MarkingAssignment extends React.Component {
             <TableItem>Score:</TableItem>
             <TableItem></TableItem>
           </HeaderRow>
-          {this.renderArray(this.state.renderArray)}
+          {this.renderArray(paginationArray[page - 1])}
+          <Page
+            currentPage={page}
+            handlePageChange={this.handlePageChange}
+            totalPage={paginationArray.length}
+          />
         </TableLayout>
       );
     }

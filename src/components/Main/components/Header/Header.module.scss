@@ -6,14 +6,7 @@
   display: flex;
   justify-content: space-between;
   padding-right: 60px;
-
 }
-
-.btnWrapper{
-  display: flex;
-  justify-content: flex-end;
-}
-
 
 .title{
   display: block;
@@ -21,9 +14,14 @@
   padding:0;
   color: $dark-color;
 }
-.navigator::before{
-  content: ">";
-  color: $dark-color;
-  position: relative;
-  bottom: 2px;
+@media screen and (max-width: $phone-size){
+  .wrapper{
+    h2{
+      padding-top: 6px;
+      margin:0;
+      font-size: $text-rg;
+      align-content: center;
+    }
+    padding-right:5px;
+  }
 }

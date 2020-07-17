@@ -48,34 +48,28 @@ class Profile extends React.Component {
             {/* for title display */}
             {this.state.userInfo.hasOwnProperty("title") ? (
               <HalfWidthLayout title={"Title"} background>
-                <div className={styles.container}>
                   {this.state.userInfo.title !== null ? (
                     this.state.userInfo.title
                   ) : (
                     <span className={styles.noText}>No Title.</span>
                   )}
-                </div>
               </HalfWidthLayout>
             ) : null}
             {/* for intro display */}
             {this.state.userInfo.hasOwnProperty("introduction") ? (
               <HalfWidthLayout title={"Introduction"} background>
-                <div className={styles.container}>
                   {this.state.userInfo.title !== null ? (
                     this.state.userInfo.introduction
                   ) : (
                     <span className={styles.noText}>No Introduction.</span>
                   )}
-                </div>
               </HalfWidthLayout>
             ) : null}
             <HalfWidthLayout title={"Name"} background >
-              <div className={styles.container}>{this.state.userInfo.name}</div>
+              {this.state.userInfo.name}
             </HalfWidthLayout>
             <HalfWidthLayout title={"Change Password"}>
-              <div className={styles.BtnContainer + " " + styles.container}>
                 <Button type={"CHANGE_PASSWORD"} />
-              </div>
             </HalfWidthLayout>
           </React.Fragment>
         )}

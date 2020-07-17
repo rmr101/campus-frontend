@@ -17,7 +17,8 @@ class Assignment extends React.Component {
   }
   async getAssignment() {
     const {id,courseID} = this.props;
-    const { assignment } = await getAssignmentDetail(id, courseID);
+    const assignment = await getAssignmentDetail(id, courseID);
+    console.log(assignment);
       this.setState({
         assignmentDetail: assignment,
         loading: false,

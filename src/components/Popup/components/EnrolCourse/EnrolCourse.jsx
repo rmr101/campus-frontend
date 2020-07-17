@@ -1,8 +1,9 @@
 import React from "react";
-import styles from "./EnrolCourse.module.scss";
+
 import enrolCourse from '../../../../apis/enrolCourse';
 import LoaderContainer from '../../../Layout/LoaderContainer';
 import Loader from '../../../Loader';
+import {FormLayout,Button,SmallText} from '../../../Layout/FormLayout/FormLayout';
 // Post object would need a name
 
 class EnrolCourse extends React.Component {
@@ -37,23 +38,20 @@ class EnrolCourse extends React.Component {
 
   render() {
     return (
-      <form
-        className={styles.form}
+      <FormLayout
         onSubmit={(e) => {
           e.preventDefault();
           this.onSubmit();
         }}
       >
-        {this.state.loading?<LoaderContainer>
-          <Loader />
-        </LoaderContainer>:null}
-        {this.state.successful ? (
-          <small className={styles.successfulText}> Successful. </small>
+        {this.state.loading ? (
+          <LoaderContainer>
+            <Loader />
+          </LoaderContainer>
         ) : null}
-        <button className={styles.button} type="submit">
-          Confirm
-        </button>
-      </form>
+        {this.state.successful ? <SmallText> Successful. </SmallText> : null}
+        <Button type="submit">Confirm</Button>
+      </FormLayout>
     );
   }
 }

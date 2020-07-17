@@ -1,5 +1,6 @@
 import React from "react";
 import pagination from "../../../../../../utils/Algorithm/pagination";
+import sortArrayByDueDate from "../../../../../../utils/Algorithm/sortArrayByDueDate";
 import RenderContentLink from "../RenderContentLink";
 import getAssignmentListByCourse from "../../../../../../apis/getAssignmentListByCourse";
 import Loading from "../Loading";
@@ -40,7 +41,10 @@ class TeacherMarkingSystem extends React.Component {
     console.log(assignmentList);
     this.setState({
       assignmentList: assignmentList,
-      paginationArray: pagination(assignmentList, ITEM_PER_PAGE),
+      paginationArray: pagination(
+        sortArrayByDueDate(assignmentList),
+        ITEM_PER_PAGE
+      ),
       loading: false,
     });
   }
