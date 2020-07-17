@@ -137,13 +137,14 @@ class CourseManagement extends React.Component {
       let RenderObj = {
         index: index,
         name: name,
+        id:id,
         courseId,
       };
       return (
         <RenderContentLink
           key={"CourseManagement" + Math.random()}
           RenderObj={RenderObj}
-          toPageID={"Course"}
+          toPageID={"CourseInfo"}
         />
       );
     });
