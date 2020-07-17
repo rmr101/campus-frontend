@@ -32,7 +32,7 @@
   justify-content: space-evenly;
 }
 .display{
-    pointer-events:all;
+  pointer-events:all;
   width:30px;
   cursor: pointer;
   height:30px;
@@ -57,7 +57,7 @@
 .brown{color: $Avatar-Brown;}
 .green{color: $Avatar-Green;}
 .red{color:$Avatar-Red;}
-.grey{ color: $Avatar-Grey;}
+.grey{color: $Avatar-Grey;}
 .blue{color:$Avatar-Blue;}
 .dark{background-color: $dark-color;}
 .light{background-color: $light-dark-color;}

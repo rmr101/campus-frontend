@@ -4,6 +4,7 @@ import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 import getCourseDetail from '../../../../../../apis/getCourseDetail';
 import Loading from '../Loading';
 import StudentEnrolCourse from './StudentEnrolCourse';
+import CourseForm from '../CourseForm';
 import { connect } from "react-redux";
 
 class CourseDetail extends React.Component {
@@ -16,9 +17,13 @@ class CourseDetail extends React.Component {
       enrolled: false,
     };
     this.handleEnrol = this.handleEnrol.bind(this);
+    this.handleSubmit = this.handleSubmit(this);
   }
   handleEnrol() {
     this.setState({ enrolled: true });
+  }
+  handleSubmit(){
+    this.getCourseDetail();
   }
   componentDidMount() {
     this.getCourseDetail();
@@ -59,8 +64,7 @@ class CourseDetail extends React.Component {
           {courseCode} - {name}
         </DisplayTitle>
         <DisplaySubHeading>
-          {" "}
-          {year} {location}{" "}
+          {year} {location}
         </DisplaySubHeading>
         <DisplaySubHeading>Semester: </DisplaySubHeading>
         <DisplayContent> {semester} </DisplayContent>
@@ -89,6 +93,15 @@ class CourseDetail extends React.Component {
             id={id}
             enrolled={enrolled}
             handleEnrol={this.handleEnrol}
+          />
+        ) : null}
+        {userRole === "ADMIN" ? (
+          //TODO: this would have to be edit later for course ID
+          <CourseForm
+            courseId={id}
+            handleSubmit={this.handleSubmit}
+            apiMethod={"PUT"}
+            title={"Edit Course"}
           />
         ) : null}
       </React.Fragment>

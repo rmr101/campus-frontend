@@ -26,9 +26,7 @@ const SelectAvatar =({icon,onClick,color,background})=>{
           <div className={styles.selectionRow}>
             <div
               className={styles.display}
-              onClick={() => 
-                changeIcon("faUserTie")
-              }
+              onClick={() => changeIcon("faUserTie")}
             >
               <FontAwesomeIcon icon={faUserTie} />
             </div>
@@ -74,7 +72,7 @@ const SelectAvatar =({icon,onClick,color,background})=>{
               <FontAwesomeIcon icon={faUser} />
             </div>
             <div
-              className={`${styles.display} ${"grey"}`}
+              className={`${styles.display} ${styles.grey}`}
               onClick={() => changeColor("grey")}
             >
               <FontAwesomeIcon icon={faUser} />

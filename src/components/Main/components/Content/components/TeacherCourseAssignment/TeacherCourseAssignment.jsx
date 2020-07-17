@@ -1,10 +1,12 @@
 import React from "react";
 import styles from "./TeacherCourseAssignment.module.scss";
+import sortArrayByDueDate from '../../../../../../utils/Algorithm/sortArrayByDueDate';
 import RenderContentLink from "../RenderContentLink";
 import getAssignmentListByCourse from "../../../../../../apis/getAssignmentListByCourse";
 import teacherPublishAssignment from "../../../../../../apis/teacherPublishAssignment";
 import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
+import HalfWidthLayout from "../../../../../Layout/HalfWidthLayout";
 import Loader from "../../../../../Loader";
 import { connect } from "react-redux";
 import LoaderContainer from "../../../../../Layout/LoaderContainer";
@@ -62,7 +64,10 @@ class TeacherCourseAssignment extends React.Component {
     const { assignmentList } = await getAssignmentListByCourse(this.props.id);
     this.setState({
       assignmentList: assignmentList,
-      paginationArray: pagination(assignmentList, ITEM_PER_PAGE),
+      paginationArray: pagination(
+        sortArrayByDueDate(assignmentList),
+        ITEM_PER_PAGE
+      ),
       loading: false,
     });
   }
@@ -258,6 +263,7 @@ class TeacherCourseAssignment extends React.Component {
             ) : null}
           </FormLayout>
         </FullWidthLayout>
+        <HalfWidthLayout title={"Files Exchange Functionality Is Coming Soon..."}/>
       </React.Fragment>
     );
   }

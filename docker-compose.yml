@@ -1,0 +1,14 @@
+version: "3"
+services:
+  react-app:
+    container_name: react-app
+    build:
+      context: . 
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3010:3000"
+    volumes:
+      - ".:app"
+      - "/app/node_modules"
+    environment: 
+      - NODE_ENV=development

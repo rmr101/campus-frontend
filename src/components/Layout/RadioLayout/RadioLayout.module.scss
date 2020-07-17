@@ -72,3 +72,16 @@ $color2: $form-color;
     }
   }
 }
+@media screen and (max-width: $tablet-size){
+  .wrapper{
+    padding:10px;
+    div,label{
+      font-size: $text-sm;
+      margin:1px;
+    }
+    input{
+      margin:0;
+    }
+  }
+  
+}

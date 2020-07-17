@@ -1,6 +1,7 @@
 @import './../../../variable';
 
 .wrapper{
+  box-sizing: border-box;
   padding-bottom: 20px;
   padding-top: 10px;
   border-bottom: solid 2px $border-color;
@@ -10,4 +11,9 @@
   border-radius: 5px;
   background-color: $white-color;
   position: relative; 
+}
+@media screen and (max-width: $tablet-size){
+  .wrapper{
+    padding:5px;
+  }
 }

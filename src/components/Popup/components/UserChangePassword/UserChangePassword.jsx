@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "./UserChangePassword.module.scss";
 import changePassword from '../../../../apis/changePassword';
-import  Loader from '../../../Loader';
+import Loader from '../../../Loader';
+import {FormLayout,FormItem,Button,SmallText} from '../../../Layout/FormLayout/FormLayout'
+import LoaderContainer from "../../../Layout/LoaderContainer";
 // Post object would need a name
 
 class UserChangePassword extends React.Component {
@@ -33,7 +34,6 @@ class UserChangePassword extends React.Component {
         )
       )
       .catch((err) => {
-        //TODO:之后要特别一些
         this.setState({ incorrectPassword: true, loading: false });
         console.log(err);
       });
@@ -72,31 +72,24 @@ class UserChangePassword extends React.Component {
       });
     };
   }
-  renderFormClassName(){
-    let missMatchError = this.state.missMatchPassword ? styles.missMatch : ""
-    let incorrectPassError =  this.state.incorrectPassword ? styles.incorrect : ""
-    let successful = this.state.successful ? styles.successful + " " : "" 
-    return (styles.form + " " + missMatchError + " " + incorrectPassError + " " + successful).trim();
-  }
 
   render() {
     return (
-      <form
-        className={this.renderFormClassName()}
+      <FormLayout
+        className={this.state.successful ? "successful" : null}
         onSubmit={(e) => {
           e.preventDefault();
           this.onSubmit();
         }}
       >
         {this.state.loading ? (
-          <div className={styles.loaderContainer}>
-            <Loader color={"update"} />
-          </div>
+          <LoaderContainer >
+            <Loader />
+          </LoaderContainer>
         ) : null}
-        <div className={styles.control}>
+        <FormItem>
           <label>Current password</label>
           <input
-            className={styles.oldPass}
             type="password"
             placeholder="Enter Current Password"
             autoComplete="on"
@@ -104,11 +97,10 @@ class UserChangePassword extends React.Component {
             required
             onChange={(event) => this.handleValueChange("oldPassword")(event)}
           />
-        </div>
-        <div className={styles.control}>
-          <label className={styles.label}>New password</label>
+        </FormItem>
+        <FormItem>
+          <label>New password</label>
           <input
-            className={styles.newPass}
             type="password"
             placeholder="Enter New Password"
             maxLength={30}
@@ -116,11 +108,10 @@ class UserChangePassword extends React.Component {
             onChange={(event) => this.handleValueChange("newPassword")(event)}
             required
           />
-        </div>
-        <div className={styles.control}>
-          <label className={styles.label}>Confirm password</label>
+        </FormItem>
+        <FormItem>
+          <label>Confirm password</label>
           <input
-            className={styles.confirmPass}
             type="password"
             placeholder="Confirm New Password"
             maxLength={30}
@@ -130,22 +121,19 @@ class UserChangePassword extends React.Component {
               this.handleValueChange("confirmPassword")(event);
             }}
           />
-        </div>
+        </FormItem>
         {this.state.incorrectPassword ? (
-          <small> Incorrect password. </small>
+          <SmallText className={"error"}> Incorrect password. </SmallText>
         ) : null}
         {this.state.missMatchPassword ? (
-          <small> Confirm password miss match. </small>
+          <SmallText className={"error"}> Confirm password miss match. </SmallText>
         ) : null}
-        {this.state.successful? (
-          <small className={styles.successfulText}> Successful. </small>
+        {this.state.successful ? (
+          <SmallText> Successful. </SmallText>
         ) : null}
-        <button className={styles.button} type="submit">
-          Confirm
-        </button>
+        <Button type="submit">Confirm</Button>
         {/* TODO: will have to implement later */}
-        <div className={styles.forget}> Forget password ?</div>
-      </form>
+      </FormLayout>
     );
   }
 }
