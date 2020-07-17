@@ -1,7 +1,14 @@
 import React from "react";
-import styles from "./TeacherMarking.module.scss";
+
 import putReviewOnAssignment from '../../../../apis/putReviewOnAssignment';
 import  Loader from '../../../Loader';
+import LoaderContainer from "../../../Layout/LoaderContainer";
+import {
+  FormLayout,
+  Button,
+  SmallText,
+  FormItem
+} from "../../../Layout/FormLayout/FormLayout";
 // Post object would need a name
 
 class TeacherMarking extends React.Component {
@@ -48,29 +55,25 @@ class TeacherMarking extends React.Component {
         });
     };
   }
-  renderFormClassName() {
-    let successful = this.state.successful ? " " + styles.successful : "";
-    return (styles.form + successful).trim();
-  }
+
 
   render() {
     return (
-      <form
-        className={this.renderFormClassName()}
+      <FormLayout
+        className={this.state.successful?"successful":null}
         onSubmit={(e) => {
           e.preventDefault();
           this.onSubmit();
         }}
       >
         {this.state.loading ? (
-          <div className={styles.loaderContainer}>
+          <LoaderContainer>
             <Loader />
-          </div>
+          </LoaderContainer>
         ) : null}
-        <div className={styles.control}>
+        <FormItem>
           <label>Enter Score:</label>
           <input
-            className={styles.oldPass}
             type="number"
             placeholder="Enter score"
             required
@@ -78,27 +81,22 @@ class TeacherMarking extends React.Component {
             min={0}
             onChange={(event) => this.handleValueChange("score")(event)}
           />
-        </div>
-        <div className={styles.control}>
+        </FormItem>
+        <FormItem>
           <label htmlFor="comment">Comment: </label>
           <textarea
             id="comment"
-            className={styles.comment}
             placeholder="Enter comment for this assignment"
             required
             onChange={(event) => {
               this.handleValueChange("comment")(event);
             }}
           ></textarea>
-        </div>
+        </FormItem>
 
-        {this.state.successful ? (
-          <small className={styles.successfulText}> Successful. </small>
-        ) : null}
-        <button className={styles.button} type="submit">
-          Confirm
-        </button>
-      </form>
+        {this.state.successful ? <SmallText> Successful. </SmallText> : null}
+        <Button type="submit">Confirm</Button>
+      </FormLayout>
     );
   }
 }

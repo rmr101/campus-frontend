@@ -8,7 +8,7 @@
   position:sticky;
   top: 0;
   z-index: 10;
-  padding-left: 30px;
+  padding-left: 60px;
   display: flex;
   align-items: center;
   height:40px;
@@ -23,9 +23,13 @@
 .studentBackground{
   background-color: $student-background;
 }
+
 .adminBackground{
   background-color: $admin-background;
 }
-.content{
-  padding: 0 50px;
+
+@media screen and (max-width: $phone-size){
+  .header{
+    padding-left: 45px;
+  }
 }

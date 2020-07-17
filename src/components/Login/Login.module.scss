@@ -181,3 +181,34 @@ label {
 }
 }
 }
+
+
+@media only screen and (max-width: $phone-size) {
+.modal {
+  flex-direction: column;
+  width: 95%;
+}
+.greeting{
+  padding:20px;
+  box-sizing: border-box;
+  width:100%;
+  h3,p,h1{
+    width:100%;
+  }
+  .title{
+    margin-top:5px;
+  }
+}
+.form{
+  padding:20px;
+
+  .control{
+    width: 100%;
+    padding-bottom: 0px;
+    input{
+    box-sizing: border-box;
+    width:100%;
+  }
+}
+}
+}

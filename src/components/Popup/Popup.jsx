@@ -7,7 +7,7 @@ import AdminCreateTeacher from "./AdminCreateTeacher";
 import UserChangePassword from "./components/UserChangePassword/UserChangePassword";
 import TeacherMarking from './components/TeacherMarking';
 import EnrolCourse from './components/EnrolCourse';
-import ViewComment from "./components/ViewComment";
+import ViewReport from "./components/ViewReport";
 import AddTeacher from "./components/AddTeacher";
 class Popup extends React.Component {
   constructor(props){
@@ -34,8 +34,8 @@ class Popup extends React.Component {
             {...this.props}
           />
         );
-      case "VIEW_COMMENT":
-        return <ViewComment onClick={this.props.toggle} {...this.props} />;
+      case "VIEW_REPORT":
+        return <ViewReport onClick={this.props.toggle} {...this.props} />;
       case "MARKING":
         return (
           <TeacherMarking onClick={this.props.toggle} id={this.props.id} />

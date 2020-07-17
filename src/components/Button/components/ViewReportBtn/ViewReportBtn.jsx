@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from "../../Button.module.scss";
 
-const ViewCommentBtn = ({ onClick }) => (
+const ViewReportBtn = ({ onClick }) => (
   <button onClick={onClick} className={`${styles.btn} + ${styles.themeBtn}`}>
     View
   </button>
 );  
 
-export default ViewCommentBtn;
+export default ViewReportBtn;

@@ -88,8 +88,8 @@ class SubjectCourse extends React.Component {
         <TableLayout>
           <HeaderRow>
             <IndexItem>No:</IndexItem>
-            <TableItem>Course Name:</TableItem>
-            <TableItem>Course ID:</TableItem>
+            <TableItem>Name:</TableItem>
+            <TableItem>Code:</TableItem>
             <TableItem>Semester:</TableItem>
             <TableItem>Year:</TableItem>
           </HeaderRow>

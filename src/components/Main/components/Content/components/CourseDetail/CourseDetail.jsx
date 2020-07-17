@@ -64,8 +64,7 @@ class CourseDetail extends React.Component {
           {courseCode} - {name}
         </DisplayTitle>
         <DisplaySubHeading>
-          {" "}
-          {year} {location}{" "}
+          {year} {location}
         </DisplaySubHeading>
         <DisplaySubHeading>Semester: </DisplaySubHeading>
         <DisplayContent> {semester} </DisplayContent>

@@ -6,7 +6,7 @@ import Main from "./../Main";
 const Hamburger = ({ showNav, setShowNav }) => (
   <div className={showNav ? styles.mask : null}>
     <div
-      className={styles.hamburger}
+      className={`${styles.hamburger} ${!showNav?styles.hamburgerInactive:styles.hamburgerActive}`}
       onClick={(e) => {
         e.preventDefault();
         setShowNav(!showNav);
@@ -19,7 +19,7 @@ const Hamburger = ({ showNav, setShowNav }) => (
     {showNav ? (
       <RenderLayout>
         <div className={styles.nav}>
-          <Nav />
+          <Nav noAvatar/>
         </div>
       </RenderLayout>
     ) : null}

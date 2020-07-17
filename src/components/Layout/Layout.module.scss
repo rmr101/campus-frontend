@@ -1,16 +1,17 @@
 @import './../../variable';
 
 .nav{
-  width: 250px;
-  min-width: 250px;
+  width: $nav-bar-width;
+  min-width: $nav-bar-width;
   background-color: $light-dark-color;
   position: sticky;
   top:0;
+
 }
 
 .main{
   flex:1;
-
+  min-width: 320px;
 }
 
 h3,h1,h2{
@@ -19,7 +20,7 @@ color: $dark-color;
 }
 p{
     margin: 0;
-color:$light-dark-color;
+  color:$light-dark-color;
 }
 a{
   cursor: pointer;
@@ -37,12 +38,19 @@ a{
 
 
 //hamburger
+.hamburgerActive{
+  left:$nav-bar-width;
+  top: 0;
+}
+.hamburgerInactive{
+  left: 0px;
+  top: 0;
+}
 .hamburger{
   position: fixed;
-  top: 50px;
-  left: 10px;
+  cursor: pointer;
   width: 28px;
-  height: 28px;
+  height: 27px;
   background-color: $light-dark-color;
   border: solid 2px $light-dark-color;
   padding:5px;
@@ -53,11 +61,25 @@ a{
   .line{
     border-bottom: solid 2px $white-color;
   }
-  &:hover{
-    cursor: pointer;
-    background-color: transparent;
-    .line{
-      border-bottom: solid 2px $light-dark-color;
-    }
-  }
+  // &:hover{
+  //   
+  //   background-color: transparent;
+  //   .line{
+  //     border-bottom: solid 2px $light-dark-color;
+  //   }
+  // }
 }
+
+// Mobile UX is
+// .ripple {
+//   background-position: center;
+//   transition: background 0.5s;
+//   &:hover {
+//     background: $focus-color radial-gradient(circle, transparent 1%, $focus-color 1%) center/15000%;
+//   }
+//   &:active {
+//     background-color: $active-color;
+//     background-size: 100%;
+//     transition: background 0s;
+//   }
+// }

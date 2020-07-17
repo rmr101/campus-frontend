@@ -121,3 +121,30 @@ textarea {
     background-color: $form-color;
   }
 }
+@media only screen and (max-width: $tablet-size) {
+  .form{
+    small{
+      font-size: $text-sm;
+      font-weight: $font-light;
+    }
+  }
+}
+@media only screen and (max-width: $phone-size) {
+  .form{
+    padding:10px;
+    small{
+      bottom:55px;
+    }
+  }
+  .horizontalRow {
+    flex-direction: column;
+    margin-bottom: 0;
+    .item{
+      margin:0;
+      margin-bottom: 20px;
+        input[type="text"]{
+          width:100%;
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ import getAssignmentListByCourse from "../../../../../../apis/getAssignmentListB
 import teacherPublishAssignment from "../../../../../../apis/teacherPublishAssignment";
 import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
+import HalfWidthLayout from "../../../../../Layout/HalfWidthLayout";
 import Loader from "../../../../../Loader";
 import { connect } from "react-redux";
 import LoaderContainer from "../../../../../Layout/LoaderContainer";
@@ -262,6 +263,7 @@ class TeacherCourseAssignment extends React.Component {
             ) : null}
           </FormLayout>
         </FullWidthLayout>
+        <HalfWidthLayout title={"Files Exchange Functionality Is Coming Soon..."}/>
       </React.Fragment>
     );
   }

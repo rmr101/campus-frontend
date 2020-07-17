@@ -5,7 +5,8 @@ import LogOutBtn from "./components/LogOutBtn";
 import UploadBtn from "./components/UploadBtn";
 import MarkingBtn from "./components/MarkingBtn";
 import EnrolBtn from './components/EnrolBtn';
-import ViewCommentBtn from './components/ViewCommentBtn';
+import ChangePasswordBtn from './components/ChangePasswordBtn';
+import ViewReportBtn from "./components/ViewReportBtn";
 import AddTeacherToCourseBtn from "./components/AddTeacherToCourseBtn";
 //TODO: 这个肯定要重构的，直接return 一个button 就好了，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
 class Button extends React.Component {
@@ -87,12 +88,7 @@ class Button extends React.Component {
       case "CHANGE_PASSWORD":
         return (
           <React.Fragment>
-            <button
-              className={`${styles.btn} ${this.buttonType("CHANGE_PASSWORD")}`}
-              onClick={this.togglePop}
-            >
-              Change Password
-            </button>
+            <ChangePasswordBtn onClick={this.togglePop}/>
             {this.state.seen ? (
               <Popup type={"CHANGE_PASSWORD"} toggle={this.togglePop} />
             ) : null}
@@ -118,25 +114,27 @@ class Button extends React.Component {
           </React.Fragment>
         );
       case "ENROL":
-        return ( <React.Fragment>
-          <EnrolBtn onClick={this.togglePop} />
-          {this.state.seen ? (
-            <Popup
-              type={"ENROL"}
-              {...this.props}
-              toggle={() => {
-                this.togglePop();
-              }}
-            />
-          ) : null}
-        </React.Fragment>);
-      case "VIEW_COMMENT":
         return (
           <React.Fragment>
-            <ViewCommentBtn onClick={this.togglePop} />
+            <EnrolBtn onClick={this.togglePop} />
             {this.state.seen ? (
               <Popup
-                type={"VIEW_COMMENT"}
+                type={"ENROL"}
+                {...this.props}
+                toggle={() => {
+                  this.togglePop();
+                }}
+              />
+            ) : null}
+          </React.Fragment>
+        );
+      case "VIEW_REPORT":
+        return (
+          <React.Fragment>
+            <ViewReportBtn onClick={this.togglePop} />
+            {this.state.seen ? (
+              <Popup
+                type={"VIEW_REPORT"}
                 {...this.props}
                 toggle={() => {
                   this.togglePop();

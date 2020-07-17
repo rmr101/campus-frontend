@@ -55,13 +55,13 @@ const NavFooter = ({ userRole }) => (
   <h3> {capitalize(userRole) + " Version"}</h3>
 );
 
-const Nav = ({ userRole, userID,addName }) => {
+const Nav = ({ userRole, userID, addName, noAvatar }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <NavHeader />
       </div>
-      <NavAvatar userRole={userRole} userID={userID} />
+      {noAvatar ? null: <NavAvatar userRole={userRole} userID={userID} />}
       <UserName userRole={userRole} userID={userID} addNameToRedux={addName} />
       <div className={styles.sideBar}>
         <NavSidebar />

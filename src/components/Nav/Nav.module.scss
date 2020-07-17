@@ -4,7 +4,7 @@
   width: 100%;
   height: 100vh;
   background-color: $dark-color;
- 
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   z-index: 20;
@@ -13,10 +13,11 @@
   height:40px;
   display: flex;
   justify-content: center;
+  align-items: center;
   .loading,.name{
     color:$white-color;
-    font-size: 20px;
-    font-weight: 900;
+    font-size: $text-lg;
+    font-weight: $font-extra-bold;
   }
 }
 

@@ -56,3 +56,9 @@
     padding: 10px 30px;
   }
 
+
+@media only screen and (max-width: $phone-size) {
+  .wrapper{
+    width:80%;
+  }
+}
