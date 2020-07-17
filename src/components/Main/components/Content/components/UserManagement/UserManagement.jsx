@@ -6,24 +6,35 @@ import styles from "./UserManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";
 import NoContent from "../NoContent";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
+import pagination from "../../../../../../utils/Algorithm/pagination";
 import { connect } from "react-redux";
 import {
   IndexItem,
+  Page,
   HeaderRow,
   TableLayout,
   TableItem,
 } from "../../../../../Layout/TableLayout/TableLayout";
 
+const ITEM_PER_PAGE = 8;
+
 class UserManagement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
+      paginationArray: [],
       search: "",
       role: "student",
       nameList: [],
       errors: "",
     };
     this.onSubmit = this.onSubmit.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+
+  handlePageChange(page) {
+    this.setState({ page });
   }
 
   async getUserName(role) {
@@ -31,6 +42,9 @@ class UserManagement extends React.Component {
     const validStudentNameRegex = RegExp(/^([a-zA-Z]*)$/);
     const validTeacherIdRegex = RegExp(/^(t[0-9]*)$/);
     const validTeacherNameRegex = RegExp(/^([a-zA-Z]*)$/);
+    this.setState({
+      page: 1,
+    });
     switch (role) {
       case "student":
         if (validStudentIdRegex.test(this.state.search) === true) {
@@ -38,12 +52,14 @@ class UserManagement extends React.Component {
           console.log(nameList);
           this.setState({
             nameList: nameList,
+            paginationArray: pagination(nameList, ITEM_PER_PAGE),
           });
         } else if (validStudentNameRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("studentName", this.state.search);
           console.log(nameList);
           this.setState({
             nameList: nameList,
+            paginationArray: pagination(nameList, ITEM_PER_PAGE),
           });
         } else {
           this.setState({
@@ -57,12 +73,14 @@ class UserManagement extends React.Component {
           console.log(nameList);
           this.setState({
             nameList: nameList,
+            paginationArray: pagination(nameList, ITEM_PER_PAGE),
           });
         } else if (validTeacherNameRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("teacherName", this.state.search);
           console.log(nameList);
           this.setState({
             nameList: nameList,
+            paginationArray: pagination(nameList, ITEM_PER_PAGE),
           });
         } else {
           this.setState({
@@ -108,7 +126,8 @@ class UserManagement extends React.Component {
   };
 
   renderUserList() {
-    let array = this.state.nameList;
+    const {page,paginationArray} = this.state;
+    let array = paginationArray[page-1];
     console.log(array);
     return array.map((obj, index) => {
       let { uuid, name } = obj;
@@ -128,7 +147,8 @@ class UserManagement extends React.Component {
   }
 
   renderContent() {
-    if (this.state.nameList.length < 1) {
+    const { page, paginationArray } = this.state;
+    if (paginationArray.length === 0) {
       return <NoContent text={"There is no such user!"} />;
     } else {
       return (
@@ -139,6 +159,11 @@ class UserManagement extends React.Component {
             <TableItem>Campus ID:</TableItem>
           </HeaderRow>
           {this.renderUserList()}
+          <Page
+            currentPage={page}
+            handlePageChange={this.handlePageChange}
+            totalPage={paginationArray.length}
+          />
         </TableLayout>
       );
     }
