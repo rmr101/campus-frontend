@@ -7,3 +7,14 @@ before_install:
 
 script:
   - docker run -e CI=true campus-frontend npm run test -- --coverage
+
+deploy: 
+  provider: elasticbeanstalk
+  region: "ap-southeast-2"
+  app: "jiangren-demo"
+  env: "JiangrenDemo-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-2-782233832006"
+  bucket_path: "jiangren-react"
+  on:
+     branch: master
+  access_

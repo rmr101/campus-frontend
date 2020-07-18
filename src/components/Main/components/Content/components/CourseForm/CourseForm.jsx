@@ -53,8 +53,8 @@ class CourseForm extends React.Component {
       workLoad,
       year,
       semester,
-      courseId,
       subjectId,
+      courseId,
       ...checkProps
     } = this.state;
     for (let prop in checkProps) {
