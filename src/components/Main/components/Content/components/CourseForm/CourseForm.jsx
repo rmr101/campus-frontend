@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import Loader from "../../../../../Loader";
-import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
+import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import styles from "./CourseForm.module.scss";
-import postCourse from '../../../../../../apis/postCourse';
+import postCourse from "../../../../../../apis/postCourse";
 import putCourse from "../../../../../../apis/putCourse";
 import LoaderContainer from "../../../../../Layout/LoaderContainer";
-import AddTeacherBtn from '../../../../../Button';
+import AddTeacherBtn from "../../../../../Button";
 import {
   FormLayout,
   FormTitle,
@@ -16,10 +16,9 @@ import {
   SmallText,
 } from "../../../../../Layout/FormLayout/FormLayout";
 
-
 const date = new Date();
 const year = date.getFullYear();
-const semester = date.getMonth()<7? 1 : 2;
+const semester = date.getMonth() < 7 ? 1 : 2;
 
 class CourseForm extends React.Component {
   constructor(props) {
@@ -42,8 +41,8 @@ class CourseForm extends React.Component {
     };
     this.handleTeacherUuidChange = this.handleTeacherUuidChange.bind(this);
   }
-  handleTeacherUuidChange(uuid){
-    // TODO:this.setState({teacherUuid:uuid})                             
+  handleTeacherUuidChange(uuid) {
+    // TODO:this.setState({teacherUuid:uuid})
   }
   checkNull() {
     const {
@@ -53,6 +52,12 @@ class CourseForm extends React.Component {
       workLoad,
       year,
       semester,
+      name,
+      introduction,
+      location,
+      learningOutcome,
+      courseCode,
+      assessment,
       subjectId,
       courseId,
       ...checkProps
@@ -77,10 +82,10 @@ class CourseForm extends React.Component {
   }
   //TODO: new function to handle put, api may need to change later
   sendData(postBody) {
-    const {subjectId,courseId} = this.state;
+    const { subjectId, courseId } = this.state;
     switch (this.props.apiMethod) {
       case "POST":
-        return postCourse({...postBody, subjectId});
+        return postCourse({ ...postBody, subjectId });
       case "PUT":
         return putCourse({ ...postBody, courseId });
       default:
@@ -117,6 +122,30 @@ class CourseForm extends React.Component {
   onSubmit() {
     this.postCourse();
   }
+
+  componentDidMount() {
+    // if item exists, populate the state with proper data
+    console.log(this.props.items);
+    if (this.props.items) {
+      const {
+        name,
+        workLoad,
+        location,
+        learningOutcome,
+        assessment,
+        introduction,
+      } = this.props.items;
+      this.setState({
+        name,
+        workLoad,
+        location,
+        learningOutcome,
+        assessment,
+        introduction,
+      });
+    }
+  }
+
   render() {
     return (
       <FullWidthLayout>
@@ -140,7 +169,7 @@ class CourseForm extends React.Component {
               <input
                 id="name"
                 type="text"
-                value={this.props.name}
+                value={this.state.name === null ? "" : this.state.name}
                 placeholder="Enter name for the course"
                 maxLength={30}
                 required
@@ -152,6 +181,7 @@ class CourseForm extends React.Component {
               <select
                 onChange={(event) => this.handleValueChange("workLoad")(event)}
                 required
+                value={this.state.workLoad === null ? "" : this.state.workLoad}
                 id="workLoad"
               >
                 <option value={12.5}>12.5</option>
@@ -186,6 +216,7 @@ class CourseForm extends React.Component {
             <input
               id="location"
               type="text"
+              value={this.state.location === null ? "" : this.state.location}
               placeholder="Enter location for the course"
               maxLength={30}
               required
@@ -197,6 +228,11 @@ class CourseForm extends React.Component {
             <textarea
               id="outcome"
               className={styles.outcome}
+              value={
+                this.state.learningOutcome === null
+                  ? ""
+                  : this.state.learningOutcome
+              }
               placeholder="Enter learning outcomes"
               required
               onChange={(event) => {
@@ -209,6 +245,9 @@ class CourseForm extends React.Component {
             <textarea
               id="assessment"
               className={styles.content}
+              value={
+                this.state.assessment === null ? "" : this.state.assessment
+              }
               placeholder="Enter assessments for the course"
               required
               onChange={(event) => {
@@ -221,6 +260,9 @@ class CourseForm extends React.Component {
             <textarea
               id="Intro"
               className={styles.intro}
+              value={
+                this.state.introduction === null ? "" : this.state.introduction
+              }
               placeholder="Enter introduction for the course"
               required
               onChange={(event) => {
@@ -229,7 +271,7 @@ class CourseForm extends React.Component {
             />
           </FormItem>
           {!this.state.notNullableError ? (
-            <Button type="submit">Add New Course</Button>
+            <Button type="submit">{this.props.btn}</Button>
           ) : (
             <DummyButtonBlock>Unable to Click</DummyButtonBlock>
           )}
