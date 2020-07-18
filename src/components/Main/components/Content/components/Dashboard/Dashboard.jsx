@@ -6,10 +6,7 @@ import { connect } from "react-redux";
 const Dashboard = ({role}) => (
   <React.Fragment>
     <HalfWidthLayout title="Welcome" />
-    <HalfWidthLayout title="Future features" background>
-      To be implemented...
-    </HalfWidthLayout>
-
+    <HalfWidthLayout title="More Future Features Are Coming Soon..."/>
     {/* TODO: this whole full width layout is about posting course detail as admin,
      can be moved later. remember to bring the style with you, or could just be left at the dashboard  */}
     {role === "ADMIN" ? <PostSubjectForm />:null}
