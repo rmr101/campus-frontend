@@ -6,29 +6,43 @@ import styles from "./CourseManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";
 import NoContent from "../NoContent";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
+import pagination from "../../../../../../utils/Algorithm/pagination";
 import { connect } from "react-redux";
 import {
   IndexItem,
+  Page,
   HeaderRow,
   TableLayout,
   TableItem,
 } from "../../../../../Layout/TableLayout/TableLayout";
 
+const ITEM_PER_PAGE = 8;
+
 class CourseManagement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
+      paginationArray: [],
       search: "",
       searchBy: "Course Name",
-      courseList: null,
+      courseList: [],
       errors: "",
     };
     this.onSubmit = this.onSubmit.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+
+  handlePageChange(page) {
+    this.setState({ page });
   }
 
   async getUserName(searchBy) {
     const validCourseIdRegex = RegExp(/^([0-9]*)$/);
     const validCourseNameRegex = RegExp(/^([a-zA-Z]*)$/);
+    this.setState({
+      page: 1,
+    });
     switch (searchBy) {
       case "Course ID":
         if (validCourseIdRegex.test(this.state.search) === true) {
@@ -39,6 +53,7 @@ class CourseManagement extends React.Component {
           console.log(courseList);
           this.setState({
             courseList: courseList,
+            paginationArray: pagination(courseList, ITEM_PER_PAGE),
           });
         } else {
           this.setState({
@@ -55,6 +70,7 @@ class CourseManagement extends React.Component {
           console.log(courseList);
           this.setState({
             courseList: courseList,
+            paginationArray: pagination(courseList, ITEM_PER_PAGE),
           });
         } else {
           this.setState({
@@ -111,7 +127,8 @@ class CourseManagement extends React.Component {
   };
 
   renderCourseList() {
-    let array = this.state.courseList;
+    const {page,paginationArray} = this.state;
+    let array = paginationArray[page-1];
     console.log(array);
     return array.map((obj, index) => {
       let { id, name } = obj;
@@ -120,20 +137,22 @@ class CourseManagement extends React.Component {
       let RenderObj = {
         index: index,
         name: name,
+        id:id,
         courseId,
       };
       return (
         <RenderContentLink
           key={"CourseManagement" + Math.random()}
           RenderObj={RenderObj}
-          toPageID={"Course"}
+          toPageID={"CourseInfo"}
         />
       );
     });
   }
 
   renderContent() {
-    if (this.state.courseList === null) {
+    const { page, paginationArray } = this.state;
+    if (paginationArray.length === 0) {
       return <NoContent text={"There is no such course!"} />;
     } else {
       return (
@@ -144,6 +163,11 @@ class CourseManagement extends React.Component {
             <TableItem>Course ID:</TableItem>
           </HeaderRow>
           {this.renderCourseList()}
+          <Page
+            currentPage={page}
+            handlePageChange={this.handlePageChange}
+            totalPage={paginationArray.length}
+          />
         </TableLayout>
       );
     }
@@ -161,9 +185,6 @@ class CourseManagement extends React.Component {
             onClick={this.onSubmit}
             errors={this.state.errors}
           />
-          <div className={styles.createBtn}>
-            <Button type={"CREATE"} />
-          </div>
         </div>
         <div className={styles.wrapper}>{this.renderContent()}</div>
       </FullWidthLayout>

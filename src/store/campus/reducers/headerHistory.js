@@ -60,6 +60,8 @@ const addContent = (toPageID, id, secondID) => {
       return { pageID: "CourseDetail", id };
     case "StudentCourse":
       return { pageID: "StudentCourse", id };
+    case "CourseInfo":
+      return { pageID: "CourseInfo", id };
     default:
       return { pageID: "TO_BE_IMPLEMENT" };
   }
