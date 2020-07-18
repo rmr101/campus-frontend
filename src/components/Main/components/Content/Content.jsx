@@ -11,7 +11,6 @@ import StudentAssignment from "./components/StudentAssignment";
 import CourseManagement from "./components/CourseManagement";
 import TeacherMarkingSystem from "./components/TeacherMarkingSystem";
 import ToBeImplement from './components/ToBeImplement';
-import CourseInfo from './components/CourseInfo';
 import MarkingAssignment from "./components/MarkingAssignment";
 
 const Content = ({ pageID }) => {
@@ -39,8 +38,6 @@ const Content = ({ pageID }) => {
         return <Assignment />;
       case "CourseDetail":
         return <CourseDetail />;
-        case "CourseInfo":
-        return <CourseInfo />;
       default:
         return <ToBeImplement/>;
     }

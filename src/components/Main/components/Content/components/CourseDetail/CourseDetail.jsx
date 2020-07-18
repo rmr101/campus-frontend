@@ -15,6 +15,7 @@ class CourseDetail extends React.Component {
       courseDetail: null,
       loading: true,
       enrolled: false,
+      editableDetail:null,
     };
     this.handleEnrol = this.handleEnrol.bind(this);
     this.handleSubmit = this.handleSubmit(this);
@@ -30,11 +31,29 @@ class CourseDetail extends React.Component {
   }
   async getCourseDetail() {
     const { course, studentList } = await getCourseDetail(this.props.id);
+    const {
+      assessment,
+      learningOutcome,
+      workLoad,
+      location,
+      name,
+      introduction,
+    } = course;
+    const editableDetail = {
+      assessment,
+      learningOutcome,
+      workLoad,
+      location,
+      name,
+      introduction,
+    };
+    console.log(editableDetail);    
     this.setState(
       {
         studentList,
         courseDetail: course,
         loading: false,
+        editableDetail,
       },
       this.checkEnrollment
     );
@@ -58,6 +77,7 @@ class CourseDetail extends React.Component {
       introduction,
       semester,
     } = this.state.courseDetail;
+    
     return (
       <DisplayLayout>
         <DisplayTitle>
@@ -82,7 +102,8 @@ class CourseDetail extends React.Component {
 
   render() {
     const { userRole, id } = this.props;
-    const { enrolled } = this.state;
+    const { enrolled,editableDetail } = this.state; 
+   
     return (
       <React.Fragment>
         <FullWidthLayout>
@@ -97,12 +118,17 @@ class CourseDetail extends React.Component {
         ) : null}
         {userRole === "ADMIN" ? (
           //TODO: this would have to be edit later for course ID
-          <CourseForm
-            courseId={id}
-            handleSubmit={this.handleSubmit}
-            apiMethod={"PUT"}
-            title={"Edit Course"}
-          />
+          !this.state.loading ? (
+            <CourseForm
+              courseId={id}
+              detail={editableDetail}
+              handleSubmit={this.handleSubmit}
+              apiMethod={"PUT"}
+              title={"Edit Course"}
+            />
+          ) : (
+           null
+          )
         ) : null}
       </React.Fragment>
     );

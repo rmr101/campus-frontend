@@ -1,6 +1,5 @@
 import React from "react";
 import getUserQuery from "./../../../../../../apis/getUserQuery";
-import Button from "../../../../../Button";
 import SearchBar from "./SearchUser";
 import styles from "./UserManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";

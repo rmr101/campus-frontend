@@ -1,6 +1,5 @@
 import React from "react";
 import getCourseQuery from "./../../../../../../apis/getCourseQuery";
-import Button from "../../../../../Button";
 import SearchCourse from "./components/SearchCourse";
 import styles from "./CourseManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";
@@ -144,7 +143,7 @@ class CourseManagement extends React.Component {
         <RenderContentLink
           key={"CourseManagement" + Math.random()}
           RenderObj={RenderObj}
-          toPageID={"CourseInfo"}
+          toPageID={"CourseDetail"}
         />
       );
     });

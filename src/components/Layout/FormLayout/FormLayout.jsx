@@ -1,5 +1,9 @@
 import React from 'react';
 import styles from './FormLayout.module.scss';
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 
 export const FormTitle = ({ children }) => (
   <div className={styles.title}>
@@ -11,7 +15,12 @@ export const FormItem = ({ children }) => (
            {children}
          </div>
        );
-
+export const SearchBtn = (props) => <button {...props} className = {styles.searchBtn}><FontAwesomeIcon icon={faSearch} /></button>
+export const SearchRow = ({ children }) => (
+        <div className={styles.searchRow}>
+          { children }
+        </div>
+       );
 export const HorizontalRow = ({ children }) => (
          <div className={styles.horizontalRow}>
            {children}
@@ -39,7 +48,7 @@ export const FormLayout = ({ children, className, ...props }) => (
          </form>
        );
 
-export const SmallText = ({ children, className }) => (
-         <small className={styles[className] }>{children}</small>
+export const SmallText = ({ children, className,searchBar}) => (
+         <small className={`${styles[className]} ${searchBar?styles.searchSmall:null}`} >{children}</small>
        )
 
