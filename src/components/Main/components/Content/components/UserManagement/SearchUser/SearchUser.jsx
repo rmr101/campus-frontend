@@ -1,8 +1,11 @@
 import React from "react";
-import styles from "./SearchUser.module.scss";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import {
+  FormLayout,
+  FormItem,
+  SearchRow,
+  SearchBtn,
+  SmallText,
+} from "../../../../../../Layout/FormLayout/FormLayout";
 class SearchUser extends React.Component {
   constructor(props) {
     super(props);
@@ -19,31 +22,34 @@ class SearchUser extends React.Component {
 
 
   render() {
-    console.log(this.props.role);
-    console.log(this.props.search);
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.form}>
-          <div className={styles.innerform}>
+      <FormLayout
+        onSubmit={(e) => {
+          e.preventDefault();
+          this.props.onClick(e);
+        }}
+      >
+        <SearchRow>
+          <FormItem>
             <select value={this.props.role} onChange={this.handleRoleTemp}>
-              <option value="student">student</option>
-              <option value="teacher">teacher</option>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
             </select>
-          </div>
-          <div className={styles.innerform}>
+          </FormItem>
+          <FormItem>
             <input
               placeholder="Enter ID or Name..."
               type="text"
               value={this.props.search}
               onChange={this.handleSearchTemp}
             />
-            <span className={styles.errors}>{this.props.errors}</span>
-          </div>
-          <div onClick={this.props.onClick} className={styles.button}>
-            <FontAwesomeIcon icon={faSearch} />
-          </div>
-        </div>
-      </div>
+          </FormItem>
+          <SmallText className={"error"} searchBar>
+            {this.props.errors}
+          </SmallText>
+          <SearchBtn type="submit" />
+        </SearchRow>
+      </FormLayout>
     );
   }
 }

@@ -27,12 +27,12 @@ class CourseForm extends React.Component {
       postSuccessful: false,
       loading: false,
       notNullableError: "",
-      name: "",
-      location: "",
-      introduction: "",
-      assessment: "",
+      name: null,
+      location: null,
+      introduction: null,
+      assessment: null,
       workLoad: 12.5,
-      learningOutcome: "",
+      learningOutcome: null,
       // TODO: teacherUuid:"",
       year,
       semester,
@@ -52,18 +52,12 @@ class CourseForm extends React.Component {
       workLoad,
       year,
       semester,
-      name,
-      introduction,
-      location,
-      learningOutcome,
-      courseCode,
-      assessment,
       subjectId,
       courseId,
       ...checkProps
     } = this.state;
     for (let prop in checkProps) {
-      if (!checkProps[prop].trim()) {
+      if (!checkProps[prop] || !checkProps[prop].trim()) {
         this.setState({ notNullableError: "Not empty input is allowed." });
       }
     }
@@ -125,8 +119,7 @@ class CourseForm extends React.Component {
 
   componentDidMount() {
     // if item exists, populate the state with proper data
-    console.log(this.props.items);
-    if (this.props.items) {
+    if (this.props.hasOwnProperty("detail")) {
       const {
         name,
         workLoad,
@@ -134,7 +127,8 @@ class CourseForm extends React.Component {
         learningOutcome,
         assessment,
         introduction,
-      } = this.props.items;
+      } = this.props.detail;
+      
       this.setState({
         name,
         workLoad,
@@ -147,6 +141,14 @@ class CourseForm extends React.Component {
   }
 
   render() {
+    const {
+        name,
+        workLoad,
+        location,
+        learningOutcome,
+        assessment,
+        introduction,
+      } = this.state;
     return (
       <FullWidthLayout>
         <FormLayout
@@ -161,7 +163,6 @@ class CourseForm extends React.Component {
               <Loader />
             </LoaderContainer>
           ) : null}
-
           <FormTitle>{this.props.title}</FormTitle>
           <HorizontalRow>
             <FormItem>
@@ -169,7 +170,7 @@ class CourseForm extends React.Component {
               <input
                 id="name"
                 type="text"
-                value={this.state.name === null ? "" : this.state.name}
+                value={name === null ? "" : name}
                 placeholder="Enter name for the course"
                 maxLength={30}
                 required
@@ -181,7 +182,7 @@ class CourseForm extends React.Component {
               <select
                 onChange={(event) => this.handleValueChange("workLoad")(event)}
                 required
-                value={this.state.workLoad === null ? "" : this.state.workLoad}
+                value={workLoad === null ? "" : workLoad}
                 id="workLoad"
               >
                 <option value={12.5}>12.5</option>
@@ -216,7 +217,7 @@ class CourseForm extends React.Component {
             <input
               id="location"
               type="text"
-              value={this.state.location === null ? "" : this.state.location}
+              value={location === null ? "" : location}
               placeholder="Enter location for the course"
               maxLength={30}
               required
@@ -229,9 +230,9 @@ class CourseForm extends React.Component {
               id="outcome"
               className={styles.outcome}
               value={
-                this.state.learningOutcome === null
+                learningOutcome === null
                   ? ""
-                  : this.state.learningOutcome
+                  : learningOutcome
               }
               placeholder="Enter learning outcomes"
               required
@@ -246,7 +247,7 @@ class CourseForm extends React.Component {
               id="assessment"
               className={styles.content}
               value={
-                this.state.assessment === null ? "" : this.state.assessment
+                assessment === null ? "" : assessment
               }
               placeholder="Enter assessments for the course"
               required
@@ -261,7 +262,7 @@ class CourseForm extends React.Component {
               id="Intro"
               className={styles.intro}
               value={
-                this.state.introduction === null ? "" : this.state.introduction
+                introduction === null ? "" : introduction
               }
               placeholder="Enter introduction for the course"
               required
@@ -271,7 +272,7 @@ class CourseForm extends React.Component {
             />
           </FormItem>
           {!this.state.notNullableError ? (
-            <Button type="submit">{this.props.btn}</Button>
+            <Button type="submit">Submit</Button>
           ) : (
             <DummyButtonBlock>Unable to Click</DummyButtonBlock>
           )}
