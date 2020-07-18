@@ -53,6 +53,8 @@ class CourseForm extends React.Component {
       workLoad,
       year,
       semester,
+      courseId,
+      subjectId,
       ...checkProps
     } = this.state;
     for (let prop in checkProps) {
@@ -138,6 +140,7 @@ class CourseForm extends React.Component {
               <input
                 id="name"
                 type="text"
+                value={this.props.name}
                 placeholder="Enter name for the course"
                 maxLength={30}
                 required
