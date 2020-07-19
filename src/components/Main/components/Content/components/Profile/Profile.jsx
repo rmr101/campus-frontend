@@ -86,7 +86,7 @@ class Profile extends React.Component {
             )}
             {this.props.userRole === "admin" ? (
               <HalfWidthLayout title={"Delete User"}>
-                <Button type={"DELETE_USER"} />
+                <Button type={"DELETE_USER"} uuid={this.props.id}/>
               </HalfWidthLayout>
             ) : null}
           </React.Fragment>
