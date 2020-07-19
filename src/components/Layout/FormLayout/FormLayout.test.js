@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import styles from './FormLayout.module.scss';
 import {
   FormItem,
   FormLayout,
@@ -8,6 +9,8 @@ import {
   Button,
   DummyButtonBlock,
   FormTitle,
+  SearchRow,
+  SearchBtn,
 } from "./FormLayout";
 
 describe(" FormLayout ", () => {
@@ -32,6 +35,14 @@ describe(" FormLayout ", () => {
     );
   });
 
+
+  it("should pass all props to the SearchBtn", () => {
+    render(<SearchBtn {...props}> </SearchBtn>);
+    expect(screen.getByTestId("searchBtn").getAttribute("testprops")).toBe(
+      onClick.toString()
+    );
+  });
+
   it("should render children for each FormItem",()=>{
     render(<FormItem><TestingComponent/></FormItem>);
     expect(screen.getByText(TestMessage)).toBeInTheDocument();
@@ -43,8 +54,26 @@ describe(" FormLayout ", () => {
         <TestingComponent />
       </FormLayout>
     );
-
     expect(screen.getByText(TestMessage)).toBeInTheDocument();
+  });
+
+  it("should render children for successful class when 'success' is passed to FormLayout", () => {
+  render(
+    <FormLayout className={"success"}>
+      <TestingComponent />
+    </FormLayout>
+  );
+    expect(screen.getByTestId("form").getAttribute("class")).toBe(styles.success + " " + styles.form);
+  });
+  it("should render children for error and searchSmall class when 'error' and 'searchBar' are passed to SmallText", () => {
+    render(
+      <SmallText className={"error"} searchBar>
+        <TestingComponent />
+      </SmallText>
+    );
+    expect(screen.getByTestId("small-test").getAttribute("class")).toBe(
+      styles.error + " " +styles.searchSmall
+    );
   });
    it("should render children for each HorizontalRow", () => {
     render(
@@ -53,7 +82,17 @@ describe(" FormLayout ", () => {
       </HorizontalRow>
     );
 
-    expect(screen.getByText(TestMessage)).toBeInTheDocument();});
+    expect(screen.getByText(TestMessage)).toBeInTheDocument();
+  });
+
+    it("should render children for each SearchRow", () => {
+      render(
+        <SearchRow>
+          <TestingComponent />
+        </SearchRow>
+      );
+      expect(screen.getByText(TestMessage)).toBeInTheDocument();
+    });
   it("should render children for each FormTitle", () => {
     render(
       <FormTitle>
