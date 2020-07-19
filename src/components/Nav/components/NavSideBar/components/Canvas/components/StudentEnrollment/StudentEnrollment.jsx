@@ -2,6 +2,7 @@ import React from 'react';
 import RenderLink from '../RenderLink';
 import getStudentEnrollment from "../../../../../../../../apis/getStudentEnrollment";
 import styles from "./StudentEnrollment.module.scss";
+import NothingDisplay from "../NothingDisplay";
 import CanvasTitleWrap from '../CanvasTitleWrapper';
 import pagination from '../../../../../../../../utils/Algorithm/pagination';
 import LoaderContainer from '../../../../../../../Layout/LoaderContainer';
@@ -16,12 +17,12 @@ class StudentEnrollment extends React.Component {
     this.state = {
       courseList: [],
       loading: true,
-      page:1,    
-      paginationArray:[]
+      page: 1,
+      paginationArray: [],
     };
     this.handlePageChange = this.handlePageChange.bind(this);
   }
-  
+
   async getCourseList() {
     const { courseList } = await getStudentEnrollment();
     this.setState({
@@ -31,8 +32,8 @@ class StudentEnrollment extends React.Component {
       paginationArray: pagination(courseList, ITEM_PER_PAGE),
     });
   }
-  handlePageChange(page){
-    this.setState({page})
+  handlePageChange(page) {
+    this.setState({ page });
   }
 
   componentDidMount() {
@@ -44,9 +45,27 @@ class StudentEnrollment extends React.Component {
       id: obj.id,
     }));
   }
-
+  renderList(){
+    const { paginationArray, page } = this.state;
+    return this.state.courseList.length !== 0 ? (
+      <CanvasTitleWrap title={"Enrollment"}>
+        <RenderLink
+          RenderArray={this.MapToRenderArray(paginationArray[page - 1])}
+          toPageID={"StudentCourse"}
+          titleSuffix={"Files"}
+        />
+        <div className={styles.filler}></div>
+        <CanvasPagination
+          currentPage={page}
+          totalPage={paginationArray.length}
+          handlePageChange={this.handlePageChange}
+        />
+      </CanvasTitleWrap>
+    ) : (
+      <NothingDisplay name={"Enrol Courses"} />
+    );
+  }
   render() {
-    const {paginationArray,page} = this.state;
     return (
       <React.Fragment>
         {this.state.loading ? (
@@ -54,19 +73,7 @@ class StudentEnrollment extends React.Component {
             <Loader color={"white"} />
           </LoaderContainer>
         ) : (
-          <CanvasTitleWrap title={"Enrollment"}>
-            <RenderLink
-              RenderArray={this.MapToRenderArray(paginationArray[page - 1])}
-              toPageID={"StudentCourse"}
-              titleSuffix={"Files"}
-            />
-            <div className={styles.filler}></div>
-            <CanvasPagination
-              currentPage = {page}
-              totalPage = {paginationArray.length}
-              handlePageChange={this.handlePageChange}
-            />
-          </CanvasTitleWrap>
+          this.renderList()
         )}
       </React.Fragment>
     );
