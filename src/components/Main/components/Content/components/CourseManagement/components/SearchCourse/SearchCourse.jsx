@@ -5,6 +5,7 @@ import {
   SearchRow,
   SearchBtn,
   SmallText,
+  FormTitle,
 } from "../../../../../../../Layout/FormLayout/FormLayout";
 class SearchCourse extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class SearchCourse extends React.Component {
     return (
       <FormLayout onSubmit={e=>{e.preventDefault();
       this.props.onClick(e);}}>
+        {this.props.title?<FormTitle>{this.props.title}</FormTitle>:null}
         <SearchRow>
           <FormItem>
             <select

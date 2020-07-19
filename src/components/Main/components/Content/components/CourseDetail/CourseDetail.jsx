@@ -4,7 +4,6 @@ import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
 import getCourseDetail from '../../../../../../apis/getCourseDetail';
 import Loading from '../Loading';
 import StudentEnrolCourse from './StudentEnrolCourse';
-import SearchCourse from '../CourseManagement/components/SearchCourse';
 import CourseForm from '../CourseForm';
 import { connect } from "react-redux";
 
@@ -107,38 +106,16 @@ class CourseDetail extends React.Component {
 
     return (
       <React.Fragment>
-<<<<<<< HEAD
         <FullWidthLayout>
           {this.state.loading ? <Loading /> : this.renderCourseDetail()}
         </FullWidthLayout>
         {userRole === "STUDENT" ? (
-          <React.Fragment>
-            <FullWidthLayout>
-              <SearchCourse />
-          </FullWidthLayout>  
             <StudentEnrolCourse
               id={id}
               enrolled={enrolled}
               handleEnrol={this.handleEnrol}
             />
-          </React.Fragment>
         ) : null}
-=======
-        {userRole === "STUDENT"
-          ? ((
-              <FullWidthLayout>
-                {this.state.loading ? <Loading /> : this.renderCourseDetail()}
-              </FullWidthLayout>
-            ),
-            (
-              <StudentEnrolCourse
-                id={id}
-                enrolled={enrolled}
-                handleEnrol={this.handleEnrol}
-              />
-            ))
-          : null}
->>>>>>> master
         {userRole === "ADMIN" ? (
           //TODO: this would have to be edit later for course ID
           !this.state.loading ? (
