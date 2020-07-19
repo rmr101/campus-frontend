@@ -174,17 +174,15 @@ class UserManagement extends React.Component {
   render() {
     return (
       <FullWidthLayout>
-        <div className={styles.header}>
-          <SearchBar
-            search={this.state.search}
-            onSearchChange={this.handleSearchTemp}
-            role={this.state.role}
-            onRoleChange={this.handleRoleTemp}
-            onClick={this.onSubmit}
-            errors={this.state.errors}
-          />
-        </div>
-        <div className={styles.wrapper}>{this.renderContent()}</div>
+        <SearchBar
+          search={this.state.search}
+          onSearchChange={this.handleSearchTemp}
+          role={this.state.role}
+          onRoleChange={this.handleRoleTemp}
+          onClick={this.onSubmit}
+          errors={this.state.errors}
+        />
+        {this.renderContent()}
       </FullWidthLayout>
     );
   }

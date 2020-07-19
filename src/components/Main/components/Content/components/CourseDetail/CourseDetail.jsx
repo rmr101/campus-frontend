@@ -1,15 +1,10 @@
 import React from "react";
-import {
-  DisplayTitle,
-  DisplaySubHeading,
-  DisplayContent,
-  DisplayLayout,
-} from "../../../../../Layout/DisplayContentLayout/DisplayContentLayout";
-import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
-import getCourseDetail from "../../../../../../apis/getCourseDetail";
-import Loading from "../Loading";
-import StudentEnrolCourse from "./StudentEnrolCourse";
-import CourseForm from "../CourseForm";
+import {DisplayTitle,DisplaySubHeading,DisplayContent,DisplayLayout} from '../../../../../Layout/DisplayContentLayout/DisplayContentLayout';
+import FullWidthLayout from '../../../../../Layout/FullWidthLayout';
+import getCourseDetail from '../../../../../../apis/getCourseDetail';
+import Loading from '../Loading';
+import StudentEnrolCourse from './StudentEnrolCourse';
+import CourseForm from '../CourseForm';
 import { connect } from "react-redux";
 
 class CourseDetail extends React.Component {
@@ -111,20 +106,16 @@ class CourseDetail extends React.Component {
 
     return (
       <React.Fragment>
-        {userRole === "STUDENT"
-          ? ((
-              <FullWidthLayout>
-                {this.state.loading ? <Loading /> : this.renderCourseDetail()}
-              </FullWidthLayout>
-            ),
-            (
-              <StudentEnrolCourse
-                id={id}
-                enrolled={enrolled}
-                handleEnrol={this.handleEnrol}
-              />
-            ))
-          : null}
+        <FullWidthLayout>
+          {this.state.loading ? <Loading /> : this.renderCourseDetail()}
+        </FullWidthLayout>
+        {userRole === "STUDENT" ? (
+            <StudentEnrolCourse
+              id={id}
+              enrolled={enrolled}
+              handleEnrol={this.handleEnrol}
+            />
+        ) : null}
         {userRole === "ADMIN" ? (
           //TODO: this would have to be edit later for course ID
           !this.state.loading ? (

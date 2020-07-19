@@ -3,6 +3,7 @@ import RenderContentLink from "./../RenderContentLink";
 import getCourseListBySubjectID from "./../../../../../../apis/getCourseListBySubjectID";
 import Loading from "../Loading";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
+import CourseManagement from '../CourseManagement';
 import { connect } from "react-redux";
 import NoContent from "../NoContent";
 import CourseForm from "../CourseForm";
@@ -111,9 +112,14 @@ class SubjectCourse extends React.Component {
         <FullWidthLayout>
           {this.state.loading ? <Loading /> : this.renderContent()}
         </FullWidthLayout>
+        <CourseManagement title="Search In Course Market"/>
         {role === "ADMIN" ? (
-          <CourseForm subjectId={id} 
-          handleSubmit={this.handleSubmit} apiMethod={"POST"} title={"Post New Course"}/>
+          <CourseForm
+            subjectId={id}
+            handleSubmit={this.handleSubmit}
+            apiMethod={"POST"}
+            title={"Post New Course"}
+          />
         ) : null}
       </React.Fragment>
     );

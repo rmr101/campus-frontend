@@ -1,7 +1,6 @@
 import React from "react";
 import getCourseQuery from "./../../../../../../apis/getCourseQuery";
 import SearchCourse from "./components/SearchCourse";
-import styles from "./CourseManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";
 import NoContent from "../NoContent";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
@@ -36,7 +35,7 @@ class CourseManagement extends React.Component {
     this.setState({ page });
   }
 
-  async getUserName(searchBy) {
+  async getCourseName(searchBy) {
     const validCourseIdRegex = RegExp(/^([0-9]*)$/);
     const validCourseNameRegex = RegExp(/^([a-zA-Z]*)$/);
     this.setState({
@@ -77,8 +76,8 @@ class CourseManagement extends React.Component {
           });
         }
         break;
-        default:
-          break;
+      default:
+        break;
     }
   }
 
@@ -88,7 +87,7 @@ class CourseManagement extends React.Component {
     }
   }
   componentDidMount() {
-    this.getUserName();
+    this.getCourseName();
   }
 
   async onSubmit(e) {
@@ -99,11 +98,11 @@ class CourseManagement extends React.Component {
       });
     } else if (this.state.errors === "") {
       await (console.log(this.state.searchBy),
-      this.getUserName(this.state.searchBy));
+      this.getCourseName(this.state.searchBy));
     } else if (this.state.searchBy !== this.props.searchBy) {
       this.setState({ errors: "" });
       await (console.log(this.state.searchBy),
-      this.getUserName(this.state.searchBy));
+      this.getCourseName(this.state.searchBy));
     }
   }
 
@@ -126,17 +125,17 @@ class CourseManagement extends React.Component {
   };
 
   renderCourseList() {
-    const {page,paginationArray} = this.state;
-    let array = paginationArray[page-1];
+    const { page, paginationArray } = this.state;
+    let array = paginationArray[page - 1];
     console.log(array);
     return array.map((obj, index) => {
       let { id, name } = obj;
-      let courseId=id;
+      let courseId = id;
       console.log(obj);
       let RenderObj = {
         index: index,
         name: name,
-        id:id,
+        id: id,
         courseId,
       };
       return (
@@ -175,17 +174,16 @@ class CourseManagement extends React.Component {
   render() {
     return (
       <FullWidthLayout>
-        <div className={styles.header}>
-          <SearchCourse
-            search={this.state.search}
-            onSearchChange={this.handleSearchTemp}
-            searchBy={this.state.searchBy}
-            onSearchByChange={this.handleSearchByTemp}
-            onClick={this.onSubmit}
-            errors={this.state.errors}
-          />
-        </div>
-        <div className={styles.wrapper}>{this.renderContent()}</div>
+        <SearchCourse
+          title={this.props.title}
+          search={this.state.search}
+          onSearchChange={this.handleSearchTemp}
+          searchBy={this.state.searchBy}
+          onSearchByChange={this.handleSearchByTemp}
+          onClick={this.onSubmit}
+          errors={this.state.errors}
+        />
+        {this.renderContent()}
       </FullWidthLayout>
     );
   }
