@@ -20,7 +20,7 @@ const SelectAvatar =({icon,onClick,color,background})=>{
 
 
     return (
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} >
         <div className={styles.row}>
           <p className={styles.name}>Avatar </p>
           <div className={styles.selectionRow}>

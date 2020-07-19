@@ -11,7 +11,7 @@ const UploadBtn = ({
   onChange,
   handleConfirm,
 }) => (
-  <div className={styles.uploadContainer}>
+  <div data-testid="btn" className={styles.uploadContainer}>
     {/* hide this input  */}
     {/* TODO: add loading */}
     <input

@@ -7,7 +7,8 @@ import AddHeader from "../../../../../../../../store/campus/actions/AddHeader";
 const RenderLink = ({ RenderArray, onClick, toPageID, titleSuffix }) =>
   RenderArray.map((obj) => (
     <div
-      onClick={(event) =>{
+        data-testid="link"
+        onClick={(event) =>{
         event.preventDefault();
         const suffix = titleSuffix ? titleSuffix : "";
         onClick(capitalize((obj.name + " " + suffix).trim()), toPageID, obj.id);
