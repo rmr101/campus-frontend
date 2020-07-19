@@ -15,7 +15,6 @@ class Profile extends React.Component {
     };
   }
   async getUserInfo() {
-
     const resp = await getUserInfo(this.props.userRole, this.props.userID);
     if (this.props.userRole === "student") {
       const userInfo = resp ? resp : {name:"Loading ..."};
@@ -32,6 +31,16 @@ class Profile extends React.Component {
       });
       console.log(userInfo);
     }
+  else{
+    const resp = await getUserInfo(this.props.secondID, this.props.id);
+    const userInfo = resp ? resp : {name:"Loading ..."};
+    this.setState({
+      userInfo: userInfo,
+      loading: false,
+    });
+    console.log(userInfo);
+  }
+
 
   }
   componentDidMount() {
@@ -78,6 +87,8 @@ class Profile extends React.Component {
   }
 };
 const mapStateToProps = (state) => ({
+  id: state.headerHistory.content.id,
+  secondID:state.headerHistory.content.secondID,
   userRole: state.Authentication.role.toLowerCase(),
   userID: state.Authentication.uuid,
 });
