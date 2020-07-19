@@ -4,8 +4,10 @@ import Popup from "./../Popup";
 import LogOutBtn from "./components/LogOutBtn";
 import UploadBtn from "./components/UploadBtn";
 import MarkingBtn from "./components/MarkingBtn";
-import EnrolBtn from './components/EnrolBtn';
-import ChangePasswordBtn from './components/ChangePasswordBtn';
+import EnrolBtn from "./components/EnrolBtn";
+import ChangePasswordBtn from "./components/ChangePasswordBtn";
+import ResetPasswordBtn from "./components/ResetPasswordBtn";
+import DeleteUserBtn from "./components/DeleteUserBtn";
 import ViewReportBtn from "./components/ViewReportBtn";
 import AddTeacherToCourseBtn from "./components/AddTeacherToCourseBtn";
 //TODO: 这个肯定要重构的，直接return 一个button 就好了，PopUp 也要解耦,应该是属于popup 的功能不应该写进来。
@@ -22,6 +24,7 @@ class Button extends React.Component {
       seen: !this.state.seen,
     });
   }
+
   buttonType(type) {
     console.log(type);
     switch (type) {
@@ -34,14 +37,20 @@ class Button extends React.Component {
       case "LOGOUT":
         return styles.logOutBtn;
       // case "AdminCreateTeacher":
-        // return styles.createBtn;
+      // return styles.createBtn;
       case "CHANGE_PASSWORD":
         return styles.updateBtn;
+      case "RESET_PASSWORD":
+        return styles.updateBtn;
+      case "DELETE_USER":
+        return styles.deleteBtn;
       default:
         return styles.createBtn;
     }
   }
-  renderButton(type) {
+  renderButton(type, uuid) {
+    console.log(type);
+    console.log(uuid);
     switch (type) {
       case "DELETE":
         return (
@@ -88,9 +97,35 @@ class Button extends React.Component {
       case "CHANGE_PASSWORD":
         return (
           <React.Fragment>
-            <ChangePasswordBtn onClick={this.togglePop}/>
+            <ChangePasswordBtn onClick={this.togglePop} />
             {this.state.seen ? (
               <Popup type={"CHANGE_PASSWORD"} toggle={this.togglePop} />
+            ) : null}
+          </React.Fragment>
+        );
+      case "RESET_PASSWORD":
+        return (
+          <React.Fragment>
+            <ResetPasswordBtn onClick={this.togglePop} />
+            {this.state.seen ? (
+              <Popup
+                uuid={uuid}
+                type={"RESET_PASSWORD"}
+                toggle={this.togglePop}
+              />
+            ) : null}
+          </React.Fragment>
+        );
+      case "DELETE_USER":
+        return (
+          <React.Fragment>
+            <DeleteUserBtn onClick={this.togglePop} />
+            {this.state.seen ? (
+              <Popup
+                uuid={uuid}
+                type={"DELETE_USER"}
+                toggle={this.togglePop}
+              />
             ) : null}
           </React.Fragment>
         );
@@ -194,7 +229,9 @@ class Button extends React.Component {
   }
   render() {
     return (
-      <div className={styles.wrapper}>{this.renderButton(this.props.type)}</div>
+      <div className={styles.wrapper}>
+        {this.renderButton(this.props.type, this.props.uuid)}
+      </div>
     );
   }
 }
