@@ -11,7 +11,6 @@
   }
   }
 }
-
 .active{
   color: $dark-color;
    background-color: $light-dark-color;
@@ -35,9 +34,17 @@
   display: flex;
   align-items: center;
   h3{
+    font-size: $text-lg;
     color: $white-color;
   }
 }
 .hide{
   display: none;
+}
+@media screen and (max-width: $phone-size){
+  .title{
+    h3{
+    font-size: $text-rg;
+  }
+  }
 }

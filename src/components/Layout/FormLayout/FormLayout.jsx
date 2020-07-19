@@ -15,7 +15,15 @@ export const FormItem = ({ children }) => (
            {children}
          </div>
        );
-export const SearchBtn = (props) => <button {...props} className = {styles.searchBtn}><FontAwesomeIcon icon={faSearch} /></button>
+export const SearchBtn = (props) => (
+         <button
+           data-testid="searchBtn"
+           {...props}
+           className={styles.searchBtn}
+         >
+           <FontAwesomeIcon icon={faSearch} />
+         </button>
+       );
 export const SearchRow = ({ children }) => (
         <div className={styles.searchRow}>
           { children }
@@ -49,6 +57,6 @@ export const FormLayout = ({ children, className, ...props }) => (
        );
 
 export const SmallText = ({ children, className,searchBar}) => (
-         <small className={`${styles[className]} ${searchBar?styles.searchSmall:null}`} >{children}</small>
+         <small data-testid="small-test" className={`${styles[className]} ${searchBar?styles.searchSmall:null}`} >{children}</small>
        )
 

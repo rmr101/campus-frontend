@@ -4,9 +4,8 @@ import Loading from './Loading';
 
 describe("<Loading/>", () => {
 
-  it("should render Loading...", () => {
-    const LoadingText = "Loading...";
+  it("should render <Loading/>", () => {
     render(<Loading />);
-    expect(screen.getByText(LoadingText)).toBeInTheDocument();
+    expect(screen.getByTestId("loading")).toBeInTheDocument();
   });
 });

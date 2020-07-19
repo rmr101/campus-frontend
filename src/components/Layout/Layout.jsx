@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './Layout.module.scss';
-import Nav from './../Nav';
-import Main from "./../Main";
+import Nav from '../Nav';
+import Main from "../Main";
 
-const Hamburger = ({ showNav, setShowNav }) => (
+export const Hamburger = ({ showNav, setShowNav }) => (
   <div className={showNav ? styles.mask : null}>
     <div
+      data-testid="hamburger"
       className={`${styles.hamburger} ${!showNav?styles.hamburgerInactive:styles.hamburgerActive}`}
       onClick={(e) => {
         e.preventDefault();
@@ -18,7 +19,7 @@ const Hamburger = ({ showNav, setShowNav }) => (
     </div>
     {showNav ? (
       <RenderLayout>
-        <div className={styles.nav}>
+        <div data-testid="nav" className={styles.nav}>
           <Nav noAvatar/>
         </div>
       </RenderLayout>
@@ -26,7 +27,7 @@ const Hamburger = ({ showNav, setShowNav }) => (
   </div>
 );
 
-const RenderLayout = ({children}) => (
+export const RenderLayout = ({children}) => (
     <React.Fragment>
       {children}
       <div className={styles.main}>

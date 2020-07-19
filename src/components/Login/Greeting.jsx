@@ -19,7 +19,7 @@ const chooseGreetingMessage=()=>{
 }
 
 return (
-  <div className={styles.greeting}>
+  <div data-testid="greeting" className={styles.greeting}>
     <h3 className={styles.date}>{`${today.toUpperCase()}`}</h3>
     <h3 className={styles.date}>{`${day}, ${month.toUpperCase()}`}</h3>
     <h1 className={styles.title}>{chooseGreetingMessage()} </h1>

@@ -46,7 +46,6 @@ class NavAvatar extends React.Component {
     const {userRole, userID} = this.props
     const {avatar} = await getUserInfo(userRole, userID);
     const avatarArray = avatar?avatar.split(" "):[];
-    console.log(avatarArray);
     if(avatarArray.length !== 0){
       this.setState({
         icon: avatarArray[0],
@@ -64,6 +63,7 @@ class NavAvatar extends React.Component {
         className={`${styles.wrapper} ${avatarStyles[this.state.background]}`}
       >
         <div
+          data-testid="avatar"
           className={`${styles.avatar} ${avatarStyles[this.state.color]}`}
           onClick={this.toggleSelectionPanel}
         >
