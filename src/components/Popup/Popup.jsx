@@ -5,16 +5,18 @@ import Create from "./Create";
 import Delete from "./Delete";
 import AdminCreateTeacher from "./AdminCreateTeacher";
 import UserChangePassword from "./components/UserChangePassword/UserChangePassword";
-import TeacherMarking from './components/TeacherMarking';
-import EnrolCourse from './components/EnrolCourse';
+import TeacherMarking from "./components/TeacherMarking";
+import EnrolCourse from "./components/EnrolCourse";
 import ViewReport from "./components/ViewReport";
 import AddTeacher from "./components/AddTeacher";
+import ResetPassword from "./components/ResetPassword";
+import DeleteUser from "./components/DeleteUser";
 class Popup extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={};
+    this.state = {};
   }
-  renderPopupWindow(type){
+  renderPopupWindow(type) {
     switch (type) {
       case "UPDATE":
         return <Update onClick={this.props.toggle} />;
@@ -26,14 +28,14 @@ class Popup extends React.Component {
         return <AdminCreateTeacher onClick={this.props.toggle} />;
       case "CHANGE_PASSWORD":
         return <UserChangePassword />;
+      case "RESET_PASSWORD":
+        return <ResetPassword {...this.props} />;
+      case "DELETE_USER":
+        return <DeleteUser {...this.props} />;
       case "ADD_TEACHER_TO_COURSE":
-        return <AddTeacher onClick={this.handleTeacherUuidChange}/>;
+        return <AddTeacher onClick={this.handleTeacherUuidChange} />;
       case "ENROL":
-        return (
-          <EnrolCourse
-            {...this.props}
-          />
-        );
+        return <EnrolCourse {...this.props} />;
       case "VIEW_REPORT":
         return <ViewReport onClick={this.props.toggle} {...this.props} />;
       case "MARKING":
@@ -45,14 +47,13 @@ class Popup extends React.Component {
     }
   }
   render() {
-
     return (
       <div className={styles.mask}>
         <div className={styles.wrapper}>
-            <span className={styles.close} onClick={this.props.toggle}>
-              &times;
-            </span>
-            {this.renderPopupWindow(this.props.type)}
+          <span className={styles.close} onClick={this.props.toggle}>
+            &times;
+          </span>
+          {this.renderPopupWindow(this.props.type)}
         </div>
       </div>
     );

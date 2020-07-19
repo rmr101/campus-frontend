@@ -35,7 +35,7 @@ const addContent = (toPageID, id, secondID) => {
     case "Enrollment":
       return { pageID: "Enrollment" };
     case "UserInfo":
-      return { pageID: "UserInfo" };
+      return { pageID: "UserInfo", id, secondID };
     case "Users":
       return { pageID: "Users" };
     case "CourseManagement":

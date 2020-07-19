@@ -16,7 +16,7 @@ class CourseDetail extends React.Component {
       courseDetail: null,
       loading: true,
       enrolled: false,
-      editableDetail:null,
+      editableDetail: null,
     };
     this.handleEnrol = this.handleEnrol.bind(this);
     this.handleSubmit = this.handleSubmit(this);
@@ -24,7 +24,7 @@ class CourseDetail extends React.Component {
   handleEnrol() {
     this.setState({ enrolled: true });
   }
-  handleSubmit(){
+  handleSubmit() {
     this.getCourseDetail();
   }
   componentDidMount() {
@@ -48,7 +48,7 @@ class CourseDetail extends React.Component {
       name,
       introduction,
     };
-    console.log(editableDetail);    
+    console.log(editableDetail);
     this.setState(
       {
         studentList,
@@ -78,7 +78,7 @@ class CourseDetail extends React.Component {
       introduction,
       semester,
     } = this.state.courseDetail;
-    
+
     return (
       <DisplayLayout>
         <DisplayTitle>
@@ -103,10 +103,11 @@ class CourseDetail extends React.Component {
 
   render() {
     const { userRole, id } = this.props;
-    const { enrolled,editableDetail } = this.state; 
-   
+    const { enrolled, editableDetail } = this.state;
+
     return (
       <React.Fragment>
+<<<<<<< HEAD
         <FullWidthLayout>
           {this.state.loading ? <Loading /> : this.renderCourseDetail()}
         </FullWidthLayout>
@@ -122,6 +123,22 @@ class CourseDetail extends React.Component {
             />
           </React.Fragment>
         ) : null}
+=======
+        {userRole === "STUDENT"
+          ? ((
+              <FullWidthLayout>
+                {this.state.loading ? <Loading /> : this.renderCourseDetail()}
+              </FullWidthLayout>
+            ),
+            (
+              <StudentEnrolCourse
+                id={id}
+                enrolled={enrolled}
+                handleEnrol={this.handleEnrol}
+              />
+            ))
+          : null}
+>>>>>>> master
         {userRole === "ADMIN" ? (
           //TODO: this would have to be edit later for course ID
           !this.state.loading ? (
@@ -142,7 +159,7 @@ class CourseDetail extends React.Component {
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
   userRole: state.Authentication.role,
-  uuid:state.Authentication.uuid,
+  uuid: state.Authentication.uuid,
 });
 const CourseDetailContainer = connect(mapStateToProps)(CourseDetail);
 export default CourseDetailContainer;

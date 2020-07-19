@@ -127,11 +127,14 @@ class UserManagement extends React.Component {
   renderUserList() {
     const {page,paginationArray} = this.state;
     let array = paginationArray[page-1];
+    const {role} = this.state;
     console.log(array);
     return array.map((obj, index) => {
       let { uuid, name } = obj;
       let RenderObj = {
         index: index,
+        id:uuid,
+        secondID: role,
         uuid,
         name: name,
       };
@@ -189,6 +192,7 @@ class UserManagement extends React.Component {
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
+  secondID:state.headerHistory.content.secondID,
   header: state.headerHistory.title,
 });
 const UserManagementContainer = connect(mapStateToProps)(UserManagement);
