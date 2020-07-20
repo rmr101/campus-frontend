@@ -5,8 +5,7 @@ cache: yarn
 install:
   - yarn install
 script:
-  - yarn test -- --coverage --watchAll=false
-  - yarn build
+  - yarn test -- --coverage
 
 # deploy:
 #   provider: pages
