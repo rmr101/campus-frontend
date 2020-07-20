@@ -1,12 +1,16 @@
-sudo: required
-language: generic
-services:
-  - docker
-before_install:
-  - docker build -t campus-frontend .
-
+language: node_js
+node_js:
+  - "stable"
+cache: yarn
+install:
+  - yarn install
 script:
-  - docker run -e CI=true campus-frontend npm run test -- --coverage
+  - yarn test
+  - yarn build
 
-after_script: # Upload coverage reports 
-  - COVERALLS_REPO_TOKEN=HLC3eSl18OR4Cxd3TLJ7QQWqzux0PdUhs npm run coveralls
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on: 
+    branch: gh-pages
