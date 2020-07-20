@@ -1,15 +1,16 @@
-version: "3"
+version: "3.7"
 services:
-  react-app:
-    container_name: react-app
+  campus-frontend:
+    container_name: campus-frontend
     build:
       context: . 
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
-      - "3010:3000"
+      - "3010:80"
     volumes:
       - ".:/app"
       - "/app/node_modules"
-      stdin_open:true
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     environment: 
       - NODE_ENV=development

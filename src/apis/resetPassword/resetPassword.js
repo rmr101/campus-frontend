@@ -3,9 +3,10 @@ import { Auth } from "../../utils/CampusSever/AuthenticatedAccess";
 
 // make it empty for now
 
-const url = 'users';
+const url = 'users/';
+const passwordUrl = "/password";
 
 export default (uuid) => {
   const AuthCampusSever = Auth(CampusSever);
-  return AuthCampusSever.put(url+`/${uuid}`+ "/password");
+  return AuthCampusSever.put(`${url}${uuid}${passwordUrl}`);
 };
