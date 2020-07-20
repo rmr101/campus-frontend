@@ -2,7 +2,7 @@ import React from "react";
 import Loader from "../../../../../Loader";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
 import styles from "./PostForm.module.scss";
-import postSubject from "../../../../../../apis/postSubject";
+import postUser from "../../../../../../apis/postUser";
 import LoaderContainer from "../../../../../Layout/LoaderContainer";
 import {
   FormLayout,
@@ -14,7 +14,7 @@ import {
   SmallText,
 } from "../../../../../Layout/FormLayout/FormLayout";
 
-class PostSubjectForm extends React.Component {
+class PostNewUserForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,44 +22,52 @@ class PostSubjectForm extends React.Component {
       loading: false,
       errorMessage: "",
       notNullableError: "",
-      name: "",
-      subjectCode: "",
-      introduction: "",
+      role: " ",
+      email: "",
+      firstName: "",
+      lastName: "",
     };
   }
 
-  handleSubjectCodeChange() {
-    this.setState({ errorMessage: "" }, this.validateSubjectCode);
+  handleEmailChange() {
+    this.setState({ errorMessage: "" });
   }
-  validateSubjectCode() {
+
+  handleFirstNameChange() {
+    this.setState({ errorMessage: "" });
+    this.validateName(this.state.firstName);
+  }
+
+  handleLastNameChange() {
+    this.setState({ errorMessage: "" });
+    this.validateName(this.state.lastName);
+  }
+
+  validateEmail() {
+    const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const char = this.state.email;
+    console.log(char);
+    if (!regex.test(char)) {
+      this.setState({ errorMessage: `not a valid email.` });
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validateName(name) {
     const regex = /[A-Za-z]/;
-<<<<<<< HEAD
-    let flag ;
-=======
     let flag;
->>>>>>> master
-    this.state.subjectCode.split("").forEach((char) => {
+    name.split("").forEach((char) => {
       if (!regex.test(char) && char) {
         this.setState({ errorMessage: `${char} is not a valid character.` });
         flag = false;
-<<<<<<< HEAD
-      } else if(char){
-=======
       } else if (char) {
->>>>>>> master
         flag = true;
       }
     });
     return flag;
   }
-<<<<<<< HEAD
-  checkNull(){
-    const {  postSuccessful,loading,errorMessage,notNullableError,...checkProps} = this.state;
-    for( let prop in checkProps){
-     if(!checkProps[prop].trim()) {
-       this.setState({ notNullableError: "Not empty input is allowed." });
-=======
-  
+
   checkNull() {
     const {
       postSuccessful,
@@ -68,10 +76,10 @@ class PostSubjectForm extends React.Component {
       notNullableError,
       ...checkProps
     } = this.state;
+    console.log(checkProps);
     for (let prop in checkProps) {
       if (!checkProps[prop].trim()) {
         this.setState({ notNullableError: "Not empty input is allowed." });
->>>>>>> master
       }
     }
   }
@@ -87,19 +95,21 @@ class PostSubjectForm extends React.Component {
       );
     };
   }
-  async postSubject() {
+
+  async postUserInfo() {
     const {
       loading,
       postSuccessful,
       errorMessage,
       notNullableError,
+      role,
       ...postBody
     } = this.state;
+    console.log(role, postBody);
     this.setState({
       loading: true,
     });
-    console.log(postBody);
-    await postSubject(postBody)
+    await postUser(role, postBody)
       .then(() => {
         this.setState(
           {
@@ -111,9 +121,15 @@ class PostSubjectForm extends React.Component {
       })
       .catch(console.log);
   }
+
   onSubmit() {
-    this.postSubject();
+    console.log(this.validateEmail());
+    if (this.validateEmail() === false) {
+    } else {
+      this.postUserInfo();
+    }
   }
+
   render() {
     return (
       <FullWidthLayout>
@@ -124,59 +140,76 @@ class PostSubjectForm extends React.Component {
             this.onSubmit();
           }}
         >
-          <FormTitle>Post New Subject</FormTitle>
+          <FormTitle>Add New User</FormTitle>
           {this.state.loading ? (
             <LoaderContainer background>
               <Loader />
             </LoaderContainer>
           ) : null}
+
+          <FormItem>
+            <label htmlFor="Role">Role: </label>
+            <select
+              className={styles.role}
+              onChange={(event) => {
+                this.handleValueChange("role")(event);
+              }}
+            >
+              <option value="select">select</option>
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+            </select>
+          </FormItem>
           <HorizontalRow>
             <FormItem>
-              <label htmlFor="name">Name: </label>
+              <label htmlFor="email">Email: </label>
               <input
-                id="name"
+                id="email"
                 type="text"
-                placeholder="Enter name for the subject"
+                placeholder="Please enter the email"
                 maxLength={30}
                 required
-                onChange={(event) => this.handleValueChange("name")(event)}
+                onChange={(event) => {
+                  this.handleValueChange("email")(event);
+                  this.handleEmailChange();
+                }}
               />
             </FormItem>
             <FormItem>
               <label
-                htmlFor="subjectCode"
+                htmlFor="FirstName"
                 className={!this.state.errorMessage ? null : styles.error}
               >
-                Subject Code:{" "}
+                First Name:{" "}
               </label>
               <input
-                id="subjectCode"
+                id="FirstName"
                 type="text"
-                placeholder="Enter 3 letters subject code"
-                minLength={3}
-                maxLength={3}
+                placeholder="Please enter the FirstName"
+                maxLength={30}
                 required
                 onChange={(event) => {
-                  this.handleValueChange("subjectCode")(event);
-                  this.handleSubjectCodeChange();
+                  this.handleValueChange("firstName")(event);
+                  this.handleFirstNameChange();
+                }}
+              />
+            </FormItem>
+            <FormItem>
+              <label htmlFor="LastName">Last Name: </label>
+              <input
+                id="LastName"
+                placeholder="Please enter the LastName"
+                maxLength={30}
+                required
+                onChange={(event) => {
+                  this.handleValueChange("lastName")(event);
+                  this.handleLastNameChange();
                 }}
               />
             </FormItem>
           </HorizontalRow>
-          <FormItem>
-            <label htmlFor="Intro">Introduction: </label>
-            <textarea
-              id="Intro"
-              className={styles.intro}
-              placeholder="Enter introduction for the subject"
-              required
-              onChange={(event) => {
-                this.handleValueChange("introduction")(event);
-              }}
-            />
-          </FormItem>
           {!this.state.errorMessage && !this.state.notNullableError ? (
-            <Button type="submit">Add New Subject</Button>
+            <Button type="submit">Add New User</Button>
           ) : (
             <DummyButtonBlock>Unable to Click</DummyButtonBlock>
           )}
@@ -194,4 +227,4 @@ class PostSubjectForm extends React.Component {
   }
 }
 
-export default PostSubjectForm;
+export default PostNewUserForm;

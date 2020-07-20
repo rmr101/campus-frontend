@@ -7,5 +7,5 @@ const url = 'users';
 
 export default (uuid) => {
   const AuthCampusSever = Auth(CampusSever);
-  return AuthCampusSever.put(url+`/${uuid}`);
+  return AuthCampusSever.delete(url+`/${uuid}`);
 };

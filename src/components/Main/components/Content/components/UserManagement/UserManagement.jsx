@@ -1,7 +1,6 @@
 import React from "react";
 import getUserQuery from "./../../../../../../apis/getUserQuery";
 import SearchBar from "./SearchUser";
-import styles from "./UserManagement.module.scss";
 import RenderContentLink from "./../RenderContentLink";
 import NoContent from "../NoContent";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
@@ -14,7 +13,6 @@ import {
   TableLayout,
   TableItem,
 } from "../../../../../Layout/TableLayout/TableLayout";
-
 const ITEM_PER_PAGE = 8;
 
 class UserManagement extends React.Component {
@@ -51,15 +49,16 @@ class UserManagement extends React.Component {
           console.log(nameList);
           this.setState({
             nameList: nameList,
-            paginationArray: pagination(nameList, ITEM_PER_PAGE),
+            paginationArray: pagination(nameList.filter((name)=>{return name.active===true}), ITEM_PER_PAGE),
           });
         } else if (validStudentNameRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("studentName", this.state.search);
           console.log(nameList);
           this.setState({
             nameList: nameList,
-            paginationArray: pagination(nameList, ITEM_PER_PAGE),
+            paginationArray: pagination(nameList.filter((name)=>{return name.active===true}), ITEM_PER_PAGE),
           });
+          console.log(this.state.paginationArray);
         } else {
           this.setState({
             errors: "Please check the StudentID!",
@@ -72,15 +71,16 @@ class UserManagement extends React.Component {
           console.log(nameList);
           this.setState({
             nameList: nameList,
-            paginationArray: pagination(nameList, ITEM_PER_PAGE),
+            paginationArray: pagination(nameList.filter((name)=>{return name.active===true}), ITEM_PER_PAGE),
           });
         } else if (validTeacherNameRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("teacherName", this.state.search);
           console.log(nameList);
           this.setState({
             nameList: nameList,
-            paginationArray: pagination(nameList, ITEM_PER_PAGE),
+            paginationArray: pagination(nameList.filter((name)=>{return name.active===true}), ITEM_PER_PAGE),
           });
+          console.log(this.state.paginationArray);
         } else {
           this.setState({
             errors: "Please check the TeacherID!",
@@ -126,17 +126,18 @@ class UserManagement extends React.Component {
 
   renderUserList() {
     const {page,paginationArray} = this.state;
+    console.log(paginationArray);
     let array = paginationArray[page-1];
     const {role} = this.state;
     console.log(array);
     return array.map((obj, index) => {
-      let { uuid, name } = obj;
+      let { uuid, name,campusId} = obj;
       let RenderObj = {
         index: index,
         id:uuid,
         secondID: role,
-        uuid,
         name: name,
+        campusId
       };
       return (
         <RenderContentLink
