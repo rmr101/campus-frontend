@@ -1,0 +1,85 @@
+@import './../../variable';
+
+.nav{
+  width: $nav-bar-width;
+  min-width: $nav-bar-width;
+  background-color: $light-dark-color;
+  position: sticky;
+  top:0;
+
+}
+
+.main{
+  flex:1;
+  min-width: 320px;
+}
+
+h3,h1,h2{
+  margin: 0;
+color: $dark-color;
+}
+p{
+    margin: 0;
+  color:$light-dark-color;
+}
+a{
+  cursor: pointer;
+}
+//mask
+.mask{
+  z-index: 5000;
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:  rgba(0, 0, 0,0.3);
+}
+
+
+//hamburger
+.hamburgerActive{
+  left:$nav-bar-width;
+  top: 0;
+}
+.hamburgerInactive{
+  left: 0px;
+  top: 0;
+}
+.hamburger{
+  position: fixed;
+  cursor: pointer;
+  width: 28px;
+  height: 27px;
+  background-color: $light-dark-color;
+  border: solid 2px $light-dark-color;
+  padding:5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  z-index: 2000;
+  .line{
+    border-bottom: solid 2px $white-color;
+  }
+  // &:hover{
+  //   
+  //   background-color: transparent;
+  //   .line{
+  //     border-bottom: solid 2px $light-dark-color;
+  //   }
+  // }
+}
+
+// Mobile UX is
+// .ripple {
+//   background-position: center;
+//   transition: background 0.5s;
+//   &:hover {
+//     background: $focus-color radial-gradient(circle, transparent 1%, $focus-color 1%) center/15000%;
+//   }
+//   &:active {
+//     background-color: $active-color;
+//     background-size: 100%;
+//     transition: background 0s;
+//   }
+// }

@@ -1,0 +1,37 @@
+@import './../../../variable';
+
+.wrapper{
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+}
+.title{
+  margin:20px 0;
+  color: $dark-color;
+  font-size: $text-xlg;
+  font-weight: $font-bold;
+}
+.subHeading{ 
+  margin:10px 0;
+  color: $dark-color;
+  font-size: $text-lg;
+  font-weight: $font-bold;
+}
+.content{
+  margin-bottom:10px;
+  color: $light-dark-color;
+  font-size: $text-rg;
+}
+
+@media screen and (max-width: $phone-size){
+  .title{
+    font-size: $text-lg;
+  }
+  .content{
+  font-size: $text-sm;
+  }
+  .subHeading{ 
+    font-size: $text-rg;
+  margin:5px 0;
+}
+}

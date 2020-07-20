@@ -1,0 +1,27 @@
+@import './../../../../variable';
+
+
+.wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 60px;
+}
+
+.title{
+  display: block;
+  margin: 0;
+  padding:0;
+  color: $dark-color;
+}
+@media screen and (max-width: $phone-size){
+  .wrapper{
+    h2{
+      padding-top: 6px;
+      margin:0;
+      font-size: $text-rg;
+      align-content: center;
+    }
+    padding-right:5px;
+  }
+}

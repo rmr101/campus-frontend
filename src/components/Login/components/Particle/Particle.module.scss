@@ -1,0 +1,14 @@
+
+.particle{
+  position: fixed;
+  bottom:0;
+  top:0;
+  left:0;
+  right:0;
+}
+
+@media only screen and (max-width: 1200px) {
+    .particle{
+    display:none;
+  }
+}

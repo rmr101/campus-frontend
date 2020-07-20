@@ -1,0 +1,16 @@
+@import './../../../../NavSideBar-variable';
+
+.links{
+  cursor: pointer;
+  font-weight: 500;
+  padding-left:10px;
+  padding-top: 10px;
+  padding-bottom:5px;
+  border-bottom: 1px solid $dark-color;
+  color: $white-color;
+  text-decoration: none;
+  &:hover{
+    color:$theme-color;
+    background-color: $lighten-dark-color;
+  }
+}

@@ -1,0 +1,27 @@
+@import './NavSideBar-variable';
+
+.wrapper{
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+.sideWrapper{
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  height: 100%;
+}
+.sideWrapperNotCollapse{
+  width: 100%;
+}
+.filler{
+  flex:1;
+}
+.canvas{
+  
+  display: none;
+}
+.canvasActive{
+  background-color: $light-dark-color;
+  flex:1;
+}

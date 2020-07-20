@@ -1,0 +1,74 @@
+@import './../../../variable';
+.wrapper{
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding:30px 0;
+  border-bottom: solid 2px $border-color;
+}
+.description{
+  margin-bottom: 10px;
+}
+.detailWrapper{
+  padding-right: 30px;
+  h3{
+    margin-bottom: 5px;
+  }
+}
+.contextWrapper{
+  padding: 20px;
+  p {
+    color: $dark-color;
+  }
+}
+.heading{
+  width: 30%;
+  min-width: 200px;
+}
+.functionalComponent{
+  flex: 1;
+  padding: 10px;
+  background-color: $white-color;
+  border-radius: 5px;
+  box-shadow: 1px 1px 13px -11px rgba(0,0,0,0.75);
+}
+
+@media screen and (max-width: $tablet-size){
+  .wrapper{
+    padding:20px;
+  }
+  .functionalComponent{
+    flex: none; 
+    width: 55%; 
+  }
+  .heading{
+  width: 30%;
+  min-width: 0;
+  }
+  .detailWrapper{
+  padding-right: 0;
+  }
+}
+@media screen and (max-width: $phone-size){
+  .wrapper{
+    padding:5px;
+    flex-direction: column;
+  }
+  .detailWrapper{
+    h3{
+      font-size: $text-rg;
+    }
+  }
+  .functionalComponent{
+     width: 90%;
+     padding-left:0;
+     padding-right:0;
+  }
+  
+  .contextWrapper{
+    padding: 20px 0 ;
+  }
+  .heading{
+    width: 90%;
+  }
+}
