@@ -3,7 +3,6 @@
 This is project three from JR Academy. We are team RMR101.
 Backend of this project can be found [here](https://github.com/rmr101/campus-backend).
 
-
 ## How to interact with this app (with docker installed)
 
 1. Set up Backend and docker container for MySql image. Click [here](https://github.com/rmr101/campus-backend) for the backend application.
@@ -90,6 +89,9 @@ This project have used redux dev tool. You may run into error, don't panic! so h
 2. Or you could comment out this dependency, under `src/store/index` comment out the following line of code like this,
 ![find](readme_img/redux-dev-tool.png)
    
+## Build status
+
+[![Build Status](https://travis-ci.com/rmr101/campus-frontend.svg?branch=master)](https://travis-ci.com/rmr101/campus-frontend)
 
 #### Site Structure
 
