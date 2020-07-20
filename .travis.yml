@@ -3,18 +3,10 @@ language: generic
 services:
   - docker
 before_install:
-  - docker build -t campus-frontend -f Dockerfile.dev .
+  - docker build -t campus-frontend .
 
 script:
   - docker run -e CI=true campus-frontend npm run test -- --coverage
 
-deploy: 
-  provider: elasticbeanstalk
-  region: "ap-southeast-2"
-  app: "jiangren-demo"
-  env: "JiangrenDemo-env"
-  bucket_name: "elasticbeanstalk-ap-southeast-2-782233832006"
-  bucket_path: "jiangren-react"
-  on:
-     branch: master
-  access_
+after_script: # Upload coverage reports 
+  - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls

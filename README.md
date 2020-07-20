@@ -3,14 +3,26 @@
 This is project three from JR Academy. We are team RMR101.
 Backend of this project can be found [here](https://github.com/rmr101/campus-backend).
 
-## How to interact with this app
 
+## How to interact with this app (with docker installed)
+
+1. Set up Backend and docker container for MySql image. Click [here](https://github.com/rmr101/campus-backend) for the backend application.
+2. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
+3. Change directory into `cd campus-frontend`.
+2. Under to the root directory run `docker-compose up -d --build`.
+3. Then visit `https://localhost:3010`.
+
+
+## How to interact with this app (with no docker installed)
+ 
 1. Set up Backend and docker container for MySql image. Click [here](https://github.com/rmr101/campus-backend) for the backend application.
 2. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
 3. Change directory into `cd campus-frontend`.
 4. run `npm install` or `yarn install`
 5. `npm start` or `yarn start` , make sure you have set up the back end for this project.
 6. This project also implement Redux Dev Tool extension on chrome. If haven't installed them [please check here.](#about-redux-dev-tool-in-this-project)
+
+
 
 ## About this Campus system
 
