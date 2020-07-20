@@ -1,9 +1,5 @@
 import React from "react";
 import styles from "./Popup.module.scss";
-import Update from "./Update";
-import Create from "./Create";
-import Delete from "./Delete";
-import AdminCreateTeacher from "./AdminCreateTeacher";
 import UserChangePassword from "./components/UserChangePassword/UserChangePassword";
 import TeacherMarking from "./components/TeacherMarking";
 import EnrolCourse from "./components/EnrolCourse";
@@ -18,14 +14,6 @@ class Popup extends React.Component {
   }
   renderPopupWindow(type) {
     switch (type) {
-      case "UPDATE":
-        return <Update onClick={this.props.toggle} />;
-      case "CREATE":
-        return <Create onClick={this.props.toggle} />;
-      case "DELETE":
-        return <Delete onClick={this.props.toggle} />;
-      case "AdminCreateTeacher":
-        return <AdminCreateTeacher onClick={this.props.toggle} />;
       case "CHANGE_PASSWORD":
         return <UserChangePassword />;
       case "RESET_PASSWORD":

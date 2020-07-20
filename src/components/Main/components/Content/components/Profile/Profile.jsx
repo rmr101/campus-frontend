@@ -5,6 +5,7 @@ import Loading from "../Loading";
 import { connect } from "react-redux";
 import HalfWidthLayout from "../../../../../Layout/HalfWidthLayout/HalfWidthLayout";
 import Button from "../../../../../Button";
+import AddHeader from "../../../../../../store/campus/actions/AddHeader.js";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -86,9 +87,13 @@ class Profile extends React.Component {
             )}
             {this.props.userRole === "admin" ? (
               <HalfWidthLayout title={"Delete User"}>
-                <Button type={"DELETE_USER"} uuid={this.props.id}/>
+                <Button
+                  type={"DELETE_USER"}
+                  uuid={this.props.id}
+                  redirectToUsrManagement={this.props.redirectToUsrManagement}
+                />
               </HalfWidthLayout>
-            ) : null}
+              ) : null}
           </React.Fragment>
         )}
       </div>
@@ -101,5 +106,10 @@ const mapStateToProps = (state) => ({
   userRole: state.Authentication.role.toLowerCase(),
   userID: state.Authentication.uuid,
 });
-const ProfileContainer = connect(mapStateToProps, null)(Profile);
+
+const mapDispatchToProps = (dispatch) => ({
+  redirectToUsrManagement: () =>
+    dispatch(AddHeader("User management", "Users")),
+});
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
 export default ProfileContainer;

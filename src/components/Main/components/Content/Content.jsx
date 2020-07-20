@@ -17,6 +17,7 @@ const Content = ({ pageID }) => {
   const renderComponent = () => {
     switch (pageID) {
       case "Dashboard":
+        console.log(pageID);
         return <Dashboard />;
       case "SubjectCourse":
         return <SubjectCourse />;
