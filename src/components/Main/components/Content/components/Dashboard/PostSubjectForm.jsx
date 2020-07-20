@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "../../../../../Loader";
 import FullWidthLayout from "../../../../../Layout/FullWidthLayout";
-import styles from "./PostSubjectForm.module.scss";
+import styles from "./PostForm.module.scss";
 import postSubject from "../../../../../../apis/postSubject";
 import LoaderContainer from "../../../../../Layout/LoaderContainer";
 import {
@@ -65,6 +65,7 @@ class PostSubjectForm extends React.Component {
     this.setState({
       loading: true,
     });
+    console.log(postBody);
     await postSubject(postBody)
       .then(() => {
         this.setState(
