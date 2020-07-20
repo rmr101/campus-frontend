@@ -21,7 +21,7 @@ class PostSubjectForm extends React.Component {
       postSuccessful: false,
       loading: false,
       errorMessage: "",
-      notNullableError:"",
+      notNullableError: "",
       name: "",
       subjectCode: "",
       introduction: "",
@@ -29,25 +29,35 @@ class PostSubjectForm extends React.Component {
   }
 
   handleSubjectCodeChange() {
-    this.setState({ errorMessage: "" },this.validateSubjectCode);
+    this.setState({ errorMessage: "" }, this.validateSubjectCode);
   }
   validateSubjectCode() {
     const regex = /[A-Za-z]/;
-    const char = this.state.subjectCode.split("").pop();
+    let flag;
+    this.state.subjectCode.split("").forEach((char) => {
       if (!regex.test(char) && char) {
         this.setState({ errorMessage: `${char} is not a valid character.` });
-        return false;
-      } else if(char){
-        return true;
+        flag = false;
+      } else if (char) {
+        flag = true;
+      }
+    });
+    return flag;
+  }
+  
+  checkNull() {
+    const {
+      postSuccessful,
+      loading,
+      errorMessage,
+      notNullableError,
+      ...checkProps
+    } = this.state;
+    for (let prop in checkProps) {
+      if (!checkProps[prop].trim()) {
+        this.setState({ notNullableError: "Not empty input is allowed." });
       }
     }
-  checkNull(){
-    const {  postSuccessful,loading,errorMessage,notNullableError,...checkProps} = this.state;
-    for( let prop in checkProps){
-     if(!checkProps[prop].trim()) {
-       this.setState({ notNullableError: "Not empty input is allowed." });
-      }
-   }
   }
   handleValueChange(name) {
     return (event) => {
@@ -57,11 +67,18 @@ class PostSubjectForm extends React.Component {
           [name]: value,
           notNullableError: "",
         },
-        this.checkNull);
+        this.checkNull
+      );
     };
   }
   async postSubject() {
-    const { loading, postSuccessful,errorMessage,notNullableError, ...postBody } = this.state;
+    const {
+      loading,
+      postSuccessful,
+      errorMessage,
+      notNullableError,
+      ...postBody
+    } = this.state;
     this.setState({
       loading: true,
     });

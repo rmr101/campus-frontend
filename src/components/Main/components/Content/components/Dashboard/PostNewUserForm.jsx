@@ -35,10 +35,12 @@ class PostNewUserForm extends React.Component {
 
   handleFirstNameChange() {
     this.setState({ errorMessage: "" });
+    this.validateName(this.state.firstName);
   }
 
   handleLastNameChange() {
     this.setState({ errorMessage: "" });
+    this.validateName(this.state.lastName);
   }
 
   validateEmail() {
@@ -52,17 +54,18 @@ class PostNewUserForm extends React.Component {
       return true;
     }
   }
-
   validateName(name) {
     const regex = /[A-Za-z]/;
-    const char = name;
-    console.log(char);
-    if (!regex.test(char)) {
-      this.setState({ errorMessage: `not a valid Name` });
-      return false;
-    } else {
-      return true;
-    }
+    let flag;
+    name.split("").forEach((char) => {
+      if (!regex.test(char) && char) {
+        this.setState({ errorMessage: `${char} is not a valid character.` });
+        flag = false;
+      } else if (char) {
+        flag = true;
+      }
+    });
+    return flag;
   }
 
   checkNull() {
@@ -102,11 +105,11 @@ class PostNewUserForm extends React.Component {
       role,
       ...postBody
     } = this.state;
-    console.log(role,postBody);
+    console.log(role, postBody);
     this.setState({
       loading: true,
     });
-    await postUser(role,postBody)
+    await postUser(role, postBody)
       .then(() => {
         this.setState(
           {
@@ -120,16 +123,8 @@ class PostNewUserForm extends React.Component {
   }
 
   onSubmit() {
-    console.log(
-      this.validateEmail() &&
-        this.validateName(this.state.firstName) &&
-        this.validateName(this.state.lastName)
-    );
-    if (
-      (this.validateEmail() &&
-        this.validateName(this.state.firstName) &&
-        this.validateName(this.state.lastName)) === false
-    ) {
+    console.log(this.validateEmail());
+    if (this.validateEmail() === false) {
     } else {
       this.postUserInfo();
     }
