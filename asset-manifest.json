@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/campus-frontend/static/css/main.1eb81c1d.chunk.css",
-    "main.js": "/campus-frontend/static/js/main.393e773f.chunk.js",
-    "main.js.map": "/campus-frontend/static/js/main.393e773f.chunk.js.map",
-    "runtime-main.js": "/campus-frontend/static/js/runtime-main.4f36e4c5.js",
-    "runtime-main.js.map": "/campus-frontend/static/js/runtime-main.4f36e4c5.js.map",
-    "static/js/2.08a7d92a.chunk.js": "/campus-frontend/static/js/2.08a7d92a.chunk.js",
-    "static/js/2.08a7d92a.chunk.js.map": "/campus-frontend/static/js/2.08a7d92a.chunk.js.map",
-    "index.html": "/campus-frontend/index.html",
-    "precache-manifest.b0103cbb0c54f7ab8143b92704fcc267.js": "/campus-frontend/precache-manifest.b0103cbb0c54f7ab8143b92704fcc267.js",
-    "service-worker.js": "/campus-frontend/service-worker.js",
-    "static/css/main.1eb81c1d.chunk.css.map": "/campus-frontend/static/css/main.1eb81c1d.chunk.css.map",
-    "static/js/2.08a7d92a.chunk.js.LICENSE.txt": "/campus-frontend/static/js/2.08a7d92a.chunk.js.LICENSE.txt",
-    "static/media/logo-light.png": "/campus-frontend/static/media/logo-light.24e2fc50.png"
+    "main.css": "/static/css/main.1eb81c1d.chunk.css",
+    "main.js": "/static/js/main.61725ed6.chunk.js",
+    "main.js.map": "/static/js/main.61725ed6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1f7dbd4c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1f7dbd4c.js.map",
+    "static/js/2.9985ccdf.chunk.js": "/static/js/2.9985ccdf.chunk.js",
+    "static/js/2.9985ccdf.chunk.js.map": "/static/js/2.9985ccdf.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.878e65e6f91ce951bd4a91f492e6d74d.js": "/precache-manifest.878e65e6f91ce951bd4a91f492e6d74d.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.1eb81c1d.chunk.css.map": "/static/css/main.1eb81c1d.chunk.css.map",
+    "static/js/2.9985ccdf.chunk.js.LICENSE.txt": "/static/js/2.9985ccdf.chunk.js.LICENSE.txt",
+    "static/media/logo-light.png": "/static/media/logo-light.24e2fc50.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.4f36e4c5.js",
-    "static/js/2.08a7d92a.chunk.js",
+    "static/js/runtime-main.1f7dbd4c.js",
+    "static/js/2.9985ccdf.chunk.js",
     "static/css/main.1eb81c1d.chunk.css",
-    "static/js/main.393e773f.chunk.js"
+    "static/js/main.61725ed6.chunk.js"
   ]
 }
