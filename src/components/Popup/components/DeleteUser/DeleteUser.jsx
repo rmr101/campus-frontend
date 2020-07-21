@@ -17,7 +17,7 @@ class DeleteUserInfo extends React.Component {
 
   async DeleteUser() {
     console.log(this.props);
-    const { uuid, onSubmit } = this.props;
+    const { uuid, toggle,onSubmit } = this.props;
     this.setState({ loading: true });
     await DeleteUser(uuid)
       .then(() =>
@@ -26,7 +26,8 @@ class DeleteUserInfo extends React.Component {
             loading: false,
           },
           () => {
-            onSubmit();
+            toggle()
+            onSubmit()
           }
         )
       )

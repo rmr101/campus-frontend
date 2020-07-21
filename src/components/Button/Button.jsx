@@ -58,6 +58,7 @@ class Button extends React.Component {
                 onSubmit={this.props.redirectToUsrManagement}
                 {...this.props}
                 type={"DELETE_USER"}
+                toggle={this.togglePop}
               />
             ) : null}
           </React.Fragment>
