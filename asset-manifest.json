@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/campus-frontend/static/css/main.1eb81c1d.chunk.css",
-    "main.js": "/campus-frontend/static/js/main.3adcf6f5.chunk.js",
-    "main.js.map": "/campus-frontend/static/js/main.3adcf6f5.chunk.js.map",
+    "main.js": "/campus-frontend/static/js/main.ec2e643c.chunk.js",
+    "main.js.map": "/campus-frontend/static/js/main.ec2e643c.chunk.js.map",
     "runtime-main.js": "/campus-frontend/static/js/runtime-main.4f36e4c5.js",
     "runtime-main.js.map": "/campus-frontend/static/js/runtime-main.4f36e4c5.js.map",
     "static/js/2.08a7d92a.chunk.js": "/campus-frontend/static/js/2.08a7d92a.chunk.js",
     "static/js/2.08a7d92a.chunk.js.map": "/campus-frontend/static/js/2.08a7d92a.chunk.js.map",
     "index.html": "/campus-frontend/index.html",
-    "precache-manifest.7af94f941cd46fd927de0f59a687dc60.js": "/campus-frontend/precache-manifest.7af94f941cd46fd927de0f59a687dc60.js",
+    "precache-manifest.b8080dd7bfe80696c0c93634c0bc4d7e.js": "/campus-frontend/precache-manifest.b8080dd7bfe80696c0c93634c0bc4d7e.js",
     "service-worker.js": "/campus-frontend/service-worker.js",
     "static/css/main.1eb81c1d.chunk.css.map": "/campus-frontend/static/css/main.1eb81c1d.chunk.css.map",
     "static/js/2.08a7d92a.chunk.js.LICENSE.txt": "/campus-frontend/static/js/2.08a7d92a.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.4f36e4c5.js",
     "static/js/2.08a7d92a.chunk.js",
     "static/css/main.1eb81c1d.chunk.css",
-    "static/js/main.3adcf6f5.chunk.js"
+    "static/js/main.ec2e643c.chunk.js"
   ]
 }
