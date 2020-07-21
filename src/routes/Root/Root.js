@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, HashRouter as Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import Login from "../../components/Login";
 import User from "./../User";
@@ -7,7 +7,7 @@ import User from "./../User";
 //TODO: handling jwt expire and redirect to login. need info about expiration.
 
 export default () => (
-  <Router basename={process.env.PUBLIC_URL}>
+  <Router>
     <Switch>
       <Route path="/login" exact>
         <Login />
