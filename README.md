@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.com/rmr101/campus-frontend.svg?branch=master)](https://travis-ci.com/rmr101/campus-frontend)
+
 ## JR Academy Projects 3 - Campus system 1.0 
 
 This is project three from JR Academy. We are team RMR101.
@@ -89,10 +92,6 @@ This project have used redux dev tool. You may run into error, don't panic! so h
 2. Or you could comment out this dependency, under `src/store/index` comment out the following line of code like this,
 ![find](readme_img/redux-dev-tool.png)
    
-## Build status
-
-[![Build Status](https://travis-ci.com/rmr101/campus-frontend.svg?branch=master)](https://travis-ci.com/rmr101/campus-frontend)
-
 #### Site Structure
 
 - Student Profile:
