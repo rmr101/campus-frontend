@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/campus-frontend/static/css/main.1eb81c1d.chunk.css",
-    "main.js": "/campus-frontend/static/js/main.ec2e643c.chunk.js",
-    "main.js.map": "/campus-frontend/static/js/main.ec2e643c.chunk.js.map",
-    "runtime-main.js": "/campus-frontend/static/js/runtime-main.4f36e4c5.js",
-    "runtime-main.js.map": "/campus-frontend/static/js/runtime-main.4f36e4c5.js.map",
-    "static/js/2.08a7d92a.chunk.js": "/campus-frontend/static/js/2.08a7d92a.chunk.js",
-    "static/js/2.08a7d92a.chunk.js.map": "/campus-frontend/static/js/2.08a7d92a.chunk.js.map",
-    "index.html": "/campus-frontend/index.html",
-    "precache-manifest.b8080dd7bfe80696c0c93634c0bc4d7e.js": "/campus-frontend/precache-manifest.b8080dd7bfe80696c0c93634c0bc4d7e.js",
-    "service-worker.js": "/campus-frontend/service-worker.js",
-    "static/css/main.1eb81c1d.chunk.css.map": "/campus-frontend/static/css/main.1eb81c1d.chunk.css.map",
-    "static/js/2.08a7d92a.chunk.js.LICENSE.txt": "/campus-frontend/static/js/2.08a7d92a.chunk.js.LICENSE.txt",
-    "static/media/logo-light.png": "/campus-frontend/static/media/logo-light.24e2fc50.png"
+    "main.css": "./static/css/main.1eb81c1d.chunk.css",
+    "main.js": "./static/js/main.4d2162c7.chunk.js",
+    "main.js.map": "./static/js/main.4d2162c7.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.7e94c108.js",
+    "runtime-main.js.map": "./static/js/runtime-main.7e94c108.js.map",
+    "static/js/2.c5c5f3a6.chunk.js": "./static/js/2.c5c5f3a6.chunk.js",
+    "static/js/2.c5c5f3a6.chunk.js.map": "./static/js/2.c5c5f3a6.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.38eefaca2b4ec20e43b62a86bd4252c4.js": "./precache-manifest.38eefaca2b4ec20e43b62a86bd4252c4.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.1eb81c1d.chunk.css.map": "./static/css/main.1eb81c1d.chunk.css.map",
+    "static/js/2.c5c5f3a6.chunk.js.LICENSE.txt": "./static/js/2.c5c5f3a6.chunk.js.LICENSE.txt",
+    "static/media/logo-light.png": "./static/media/logo-light.24e2fc50.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.4f36e4c5.js",
-    "static/js/2.08a7d92a.chunk.js",
+    "static/js/runtime-main.7e94c108.js",
+    "static/js/2.c5c5f3a6.chunk.js",
     "static/css/main.1eb81c1d.chunk.css",
-    "static/js/main.ec2e643c.chunk.js"
+    "static/js/main.4d2162c7.chunk.js"
   ]
 }
