@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, HashRouter as Router, Switch } from "react-router-dom";
 
 import Login from "../../components/Login";
 import User from "./../User";
@@ -9,7 +9,7 @@ import User from "./../User";
 export default () => (
   <Router basename={process.env.PUBLIC_URL}>
     <Switch>
-      <Route path={process.env.PUBLIC_URL + "/login"} exact>
+      <Route path="/login" exact>
         <Login />
       </Route>
       <User />
