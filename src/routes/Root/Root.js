@@ -9,7 +9,7 @@ import User from "./../User";
 export default () => (
   <Router basename={process.env.PUBLIC_URL}>
     <Switch>
-      <Route path="/login" exact>
+      <Route path={process.env.PUBLIC_URL + "/login"} exact>
         <Login />
       </Route>
       <User />
