@@ -7,9 +7,9 @@ import User from "./../User";
 //TODO: handling jwt expire and redirect to login. need info about expiration.
 
 export default () => (
-  <Router basename="/">
+  <Router basename={process.env.PUBLIC_URL + '/'}>
     <Switch>
-      <Route path="/login" exact>
+      <Route path={process.env.PUBLIC_URL + "/login"} exact>
         <Login />
       </Route>
       <User />
