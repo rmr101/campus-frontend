@@ -4,10 +4,8 @@ import Authentication from './authentication/reducers/Authentication';
 import userInfo from './campus/reducers/userInfo';
 import thunk from "redux-thunk";
 
-const middleWares = compose(
-  applyMiddleware(thunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducer = combineReducers({
   headerHistory,
@@ -15,4 +13,6 @@ const reducer = combineReducers({
   userInfo,
 });
 
-export default createStore(reducer, middleWares);
+export default createStore(reducer,composeEnhancers(
+  applyMiddleware(thunk)
+));
