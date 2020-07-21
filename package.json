@@ -25,7 +25,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.1"
   },
-  "homepage": "https://rmr101.github.io",
+  "homepage": "https://rmr101.github.io/campus-frontend",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
