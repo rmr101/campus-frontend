@@ -48,7 +48,7 @@ class Assignment extends React.Component {
       return (
       <HalfWidthLayout
           title={"Upload File"}
-          description={"File must be less than 25MB and only PDF is accepted."}
+          description={"File must be less than 15MB and only PDF is accepted."}
         >
           <StudentAssignmentUpload />
       </HalfWidthLayout>)

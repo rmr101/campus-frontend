@@ -41,7 +41,7 @@ const UploadBtn = ({
       ) : null}
       {overSize ? (
         <div className={styles.warningText}>
-          X Only support file size less than 25 MB. Please uploaded again.
+          X Only support file size less than 15 MB. Please uploaded again.
         </div>
       ) : null}
       {success ? (

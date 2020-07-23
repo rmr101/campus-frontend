@@ -4,8 +4,10 @@ import { Auth } from "../../utils/CampusSever/AuthenticatedAccess";
 const studentUrl = "/students";
 const assignmentUrl = "/assignments/";
 
-export default (location,id) => {
-  const data = { attachmentUrl: location };
+export default (fileName,id) => {
+  const data = { fileName, };
   const AuthCampusSever = Auth(CampusSever);
-  return AuthCampusSever.put(`${studentUrl}${assignmentUrl}${id}`,data);
+  return AuthCampusSever.put(`${studentUrl}${assignmentUrl}${id}`,data)
+  .then(res=>res.data)
+  .catch(console.log);
 };
