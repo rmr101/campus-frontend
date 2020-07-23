@@ -2,8 +2,9 @@ import React from 'react';
 import Button from '../../../../../../../Button';
 import Loader from '../../../../../../../Loader';
 import {connect} from 'react-redux';
-import saveUrlToSever from "../../../../../../../../apis/saveUrlToSever";
-import ReactS3Client from "../../../../../../../../utils/AWS_S3/ReactS3Client";
+import getPreSignedUploadLink from "../../../../../../../../apis/AWS/getPreSignedUploadLink";
+import axios from 'axios';
+
 
 const fileSizeToMB=(size)=> (((size)/1024)/1024).toFixed(0);
 const truncateName=(name)=> {
@@ -16,7 +17,7 @@ const truncateName=(name)=> {
       fileSuffix
     : name;}
 
-const FILE_LIMIT = 25;//MB
+const FILE_LIMIT = 15;//MB
 const FILE_ACCEPT_TYPE ="application/pdf";
 
 class StudentAssignmentUpload extends React.Component {
@@ -35,19 +36,35 @@ class StudentAssignmentUpload extends React.Component {
     this.handleConfirm = this.handleConfirm.bind(this);
   }
   handleChange(e) {
-    e.target.files.length === 0? console.log("file is not included") : 
-    this.setState({
-      loaded: true,
-      success: false,
-      fileName: e.target.files[0] ? e.target.files[0].name : "",
-      fileSize: e.target.files[0] ? e.target.files[0].size : 0,
-      fileType: e.target.files[0] ? e.target.files[0].type : "application/pdf",
-      file: e.target.files[0],
-    });
+    e.target.files.length === 0
+      ? console.log("file is not included")
+      : this.setState(
+          {
+            loaded: true,
+            success: false,
+            fileName: e.target.files[0] ? e.target.files[0].name : "",
+            fileSize: e.target.files[0] ? e.target.files[0].size : 0,
+            fileType: e.target.files[0]
+              ? e.target.files[0].type
+              : "application/pdf",
+            file: e.target.files[0],
+          },
+          () => console.log(this.state.file)
+        );
   }
-  async saveUrl(location,id){
-    await saveUrlToSever(location, id)
-      .then(() =>
+  async getPreSignedUrl(id) {
+    //currently using date as object key.
+    const fileName = new Date() + ".pdf";
+ 
+    const { url } = await getPreSignedUploadLink(fileName, id);
+    console.log(url);
+    this.uploadToAWS(url);
+  }
+  async uploadToAWS(url) {
+    await axios
+      .put(url, this.state.file)
+      .then((res) => {
+        console.log(res.data);
         this.setState(
           {
             loaded: false,
@@ -55,43 +72,36 @@ class StudentAssignmentUpload extends React.Component {
             loading: false,
           },
           () => setTimeout(() => this.setState({ success: false }), 3000)
-        )
-      )
+        );
+      })
       .catch(console.log);
   }
 
   handleConfirm(e) {
     e.preventDefault();
-
     this.setState({
-      loading:true,
-    })
-
-    const newFileName = new Date();
-
-    ReactS3Client
-      .uploadFile(this.state.file, newFileName)
-      .then((data) => {
-        const {key}= data;
-        console.log(data);
-        this.saveUrl(key, this.props.id);})
-      .catch(console.log);
+      loading: true,
+    });
+    this.getPreSignedUrl(this.props.id);
   }
 
   render() {
     return (
       <React.Fragment>
-        {this.state.loading? <Loader color="upload"/> :
-        <Button
-          type={"UPLOAD"}
-          handleConfirm={this.handleConfirm}
-          onChange={this.handleChange}
-          loaded={this.state.loaded}
-          fileName={truncateName(this.state.fileName)}
-          wrongType={this.state.fileType !== FILE_ACCEPT_TYPE}
-          overSize={fileSizeToMB(this.state.fileSize) > FILE_LIMIT}
-          success={this.state.success}
-        />}
+        {this.state.loading ? (
+          <Loader color="upload" />
+        ) : (
+          <Button
+            type={"UPLOAD"}
+            handleConfirm={this.handleConfirm}
+            onChange={this.handleChange}
+            loaded={this.state.loaded}
+            fileName={truncateName(this.state.fileName)}
+            wrongType={this.state.fileType !== FILE_ACCEPT_TYPE}
+            overSize={fileSizeToMB(this.state.fileSize) > FILE_LIMIT}
+            success={this.state.success}
+          />
+        )}
       </React.Fragment>
     );
   }

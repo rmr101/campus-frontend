@@ -1,7 +1,12 @@
 
 [![Build Status](https://travis-ci.com/rmr101/campus-frontend.svg?branch=master)](https://travis-ci.com/rmr101/campus-frontend)
 
+.
+
+
 ## JR Academy Projects 3 - Campus system 1.0 
+
+The complete frontend can be visited [here](https://rmr101.github.io/campus-frontend/). However, you do need to run the backend for this website to be interactive.
 
 This is project three from JR Academy. We are team RMR101.
 Backend of this project can be found [here](https://github.com/rmr101/campus-backend).
