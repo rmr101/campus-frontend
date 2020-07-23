@@ -114,6 +114,7 @@ class CourseForm extends React.Component {
       .catch(console.log);
   }
   onSubmit() {
+    console.log(1);
     this.postCourse();
   }
 
@@ -198,7 +199,6 @@ class CourseForm extends React.Component {
               <AddTeacherBtn
                 id="AddTeacherBtn"
                 type={"ADD_TEACHER_TO_COURSE"}
-                handleTeacherUuidChange={this.handleTeacherUuidChange}
               />
             </FormItem>
           </HorizontalRow>

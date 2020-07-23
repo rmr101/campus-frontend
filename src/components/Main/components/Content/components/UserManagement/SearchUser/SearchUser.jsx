@@ -20,7 +20,6 @@ class SearchUser extends React.Component {
     this.props.onSearchChange(e.target.value);
   };
 
-
   render() {
     return (
       <FormLayout
