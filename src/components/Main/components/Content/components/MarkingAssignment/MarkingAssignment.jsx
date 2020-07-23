@@ -7,7 +7,7 @@ import Loading from '../Loading';
 import {connect} from 'react-redux';
 import FullWidthLayout from '../../../../../Layout/FullWidthLayout'
 import NoContent from '../NoContent';
-import ReactS3Download from '../../../../../../utils/AWS_S3/ReactS3Download';
+import getS3Link from "../../../../../../apis/AWS/getS3Link";
 import Button from "../../../../../Button";
 import {DisplayTitle,DisplaySubHeading,DisplayContent,DisplayLayout} from '../../../../../Layout/DisplayContentLayout/DisplayContentLayout';
 import {
@@ -95,8 +95,14 @@ class MarkingAssignment extends React.Component {
         break;
     }
   }
-  downloadFileFromS3(key) {
-    ReactS3Download(key);
+  invokeLinkClick(url){
+    let link = document.createElement("a");
+      link.href = url;
+      link.click();
+  }
+  async downloadFileFromS3(objectKey) {
+    const { url } = await getS3Link(objectKey);
+    this.invokeLinkClick(url);
   }
   componentDidUpdate() {
     if (this.state.scoreChange) {
