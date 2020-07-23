@@ -155,7 +155,7 @@ class PostNewUserForm extends React.Component {
                 this.handleValueChange("role")(event);
               }}
             >
-              <option value="select">select</option>
+              <option value="select">Select</option>
               <option value="Student">Student</option>
               <option value="Teacher">Teacher</option>
             </select>
