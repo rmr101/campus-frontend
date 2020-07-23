@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/campus-frontend/static/css/main.1eb81c1d.chunk.css",
-    "main.js": "/campus-frontend/static/js/main.c06335dc.chunk.js",
-    "main.js.map": "/campus-frontend/static/js/main.c06335dc.chunk.js.map",
+    "main.js": "/campus-frontend/static/js/main.08131b5e.chunk.js",
+    "main.js.map": "/campus-frontend/static/js/main.08131b5e.chunk.js.map",
     "runtime-main.js": "/campus-frontend/static/js/runtime-main.4f36e4c5.js",
     "runtime-main.js.map": "/campus-frontend/static/js/runtime-main.4f36e4c5.js.map",
-    "static/js/2.08a7d92a.chunk.js": "/campus-frontend/static/js/2.08a7d92a.chunk.js",
-    "static/js/2.08a7d92a.chunk.js.map": "/campus-frontend/static/js/2.08a7d92a.chunk.js.map",
+    "static/js/2.124889d6.chunk.js": "/campus-frontend/static/js/2.124889d6.chunk.js",
+    "static/js/2.124889d6.chunk.js.map": "/campus-frontend/static/js/2.124889d6.chunk.js.map",
     "index.html": "/campus-frontend/index.html",
-    "precache-manifest.46ca686e4c460b00662141dc0482a360.js": "/campus-frontend/precache-manifest.46ca686e4c460b00662141dc0482a360.js",
+    "precache-manifest.14c2f6cfc5011d3684426f94d52b7994.js": "/campus-frontend/precache-manifest.14c2f6cfc5011d3684426f94d52b7994.js",
     "service-worker.js": "/campus-frontend/service-worker.js",
     "static/css/main.1eb81c1d.chunk.css.map": "/campus-frontend/static/css/main.1eb81c1d.chunk.css.map",
-    "static/js/2.08a7d92a.chunk.js.LICENSE.txt": "/campus-frontend/static/js/2.08a7d92a.chunk.js.LICENSE.txt",
+    "static/js/2.124889d6.chunk.js.LICENSE.txt": "/campus-frontend/static/js/2.124889d6.chunk.js.LICENSE.txt",
     "static/media/logo-light.png": "/campus-frontend/static/media/logo-light.24e2fc50.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4f36e4c5.js",
-    "static/js/2.08a7d92a.chunk.js",
+    "static/js/2.124889d6.chunk.js",
     "static/css/main.1eb81c1d.chunk.css",
-    "static/js/main.c06335dc.chunk.js"
+    "static/js/main.08131b5e.chunk.js"
   ]
 }
