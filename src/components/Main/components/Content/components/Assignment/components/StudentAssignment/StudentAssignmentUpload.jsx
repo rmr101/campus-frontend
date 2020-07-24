@@ -63,8 +63,7 @@ class StudentAssignmentUpload extends React.Component {
   async uploadToAWS(url) {
     await axios
       .put(url, this.state.file)
-      .then((res) => {
-        console.log(res.data);
+      .then((res) => 
         this.setState(
           {
             loaded: false,
@@ -72,8 +71,7 @@ class StudentAssignmentUpload extends React.Component {
             loading: false,
           },
           () => setTimeout(() => this.setState({ success: false }), 3000)
-        );
-      })
+        ))
       .catch(console.log);
   }
 

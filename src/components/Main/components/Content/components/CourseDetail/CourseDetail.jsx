@@ -47,7 +47,6 @@ class CourseDetail extends React.Component {
       name,
       introduction,
     };
-    console.log(editableDetail);
     this.setState(
       {
         studentList,

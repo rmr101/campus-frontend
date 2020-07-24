@@ -1,7 +1,6 @@
 import React from 'react'
 
 const SuggestionBar = (props) => {
-  console.log(props)
   const options = props.nameList.map(r => (
     <li key={r.uuid} onClick={props.name}>
       {r.name}

@@ -23,14 +23,12 @@ class Profile extends React.Component {
         userInfo: userInfo,
         loading: false,
       });
-      console.log(userInfo);
     } else if (this.props.userRole === "teacher") {
       const userInfo = resp ? resp : { name: "Loading ..." };
       this.setState({
         userInfo: userInfo,
         loading: false,
       });
-      console.log(userInfo);
     } else {
       const resp = await getUserInfo(this.props.secondID, this.props.id);
       const userInfo = resp ? resp : { name: "Loading ..." };
@@ -38,7 +36,6 @@ class Profile extends React.Component {
         userInfo: userInfo,
         loading: false,
       });
-      console.log(userInfo);
     }
   }
   componentDidMount() {
@@ -46,7 +43,6 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log(this.props.id);
     return (
       <div className={styles.wrapper}>
         {this.state.loading ? (

@@ -11,7 +11,6 @@ const PrivateRoute = ({ children, authenticated,storeAuthToState, ...props}) => 
         () => {
         if (!authenticated) {
           console.log("I am redirecting");
-          console.log(authenticated);
           return <Redirect to={"/login"} />;
         }
         return children;

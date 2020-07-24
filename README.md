@@ -1,17 +1,73 @@
 
 [![Build Status](https://travis-ci.com/rmr101/campus-frontend.svg?branch=master)](https://travis-ci.com/rmr101/campus-frontend)
 
-.
+[Website link](https://rmr101.github.io/campus-frontend/)
+
+## Content Table
+- [About this project](#jr-academy-projects-3---campus-system-1.0)
+- [How to use the website ?](#how-to-interact-with-the-project-?)
+  - [Website access](#for-normal-interaction)
+  - [Programmatic use (with docker)](#how-to-interact-with-this-app-with-no-docker-installed)
+  - [Programmatic use (with no docker)](#how-to-interact-with-this-app-with-no-docker-installed)
+  - Programmatic use (from docker hub)
+## JR Academy Projects 3 - Campus system 1.0
+
+This is project three from JR Academy. We are team RMR101. Objective of the project is to deliver a **learning management system** for an educational purpose.
+
+**Features Summary:** 
+- Adding teacher, students, courses as admin.
+- Enrolling in various courses as student.
+- Submitting and reviewing assignments as student. (Not support feature for public access, as AWS is involved, but can be configured.)
+- Marking and creating assignment as teacher.
+- 
+**Tech stack for frontend Summary:**
+
+Websites & UI:
+- React
+- Sass (module)
+- React-redux
+- React-router
+- Axios
+
+Testing:
+- Jest & Jest-dom
+- Testing library
+
+Security:
+- Jwt
+
+Clouds:
+- AWS S3
+- AWS SDK
+
+CI/CD:
+- Travis CI
+- Github page
+
+Development:
+- Agile (Scrumn)
+- Github flow
+
+Miscellaneous:
+- Particle.js
+
+For website, [Visited here](https://rmr101.github.io/campus-frontend/). However, you do need to run the backend for this website in order to interact with it. [Quick guide to set up backend of this project.](https://github.com/rmr101/campus-backend).
 
 
-## JR Academy Projects 3 - Campus system 1.0 
+## How to interact with the project ?
 
-The complete frontend can be visited [here](https://rmr101.github.io/campus-frontend/). However, you do need to run the backend for this website to be interactive.
+### For normal interaction
 
-This is project three from JR Academy. We are team RMR101.
-Backend of this project can be found [here](https://github.com/rmr101/campus-backend).
+This website is hosted at github page, all you need is to log in as admin account.
 
-## How to interact with this app (with docker installed)
+**Username: admin**
+**Password: admin**
+
+Then you can kick off from there.
+
+How to access all feature please see here.
+
+### How to interact with this app (with docker installed)
 
 1. Set up Backend and docker container for MySql image. Click [here](https://github.com/rmr101/campus-backend) for the backend application.
 2. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
@@ -31,13 +87,6 @@ Backend of this project can be found [here](https://github.com/rmr101/campus-bac
 
 
 
-## About this Campus system
-
-**Objective:** Deliver a Learning management system which includes:
-- Adding teacher, students, courses as admin.
-- Enrolling in various courses as student.
-- Submitting and reviewing assignments as student.
-- Marking and creating assignment as teacher
 
 ## UI Deisgn 
 

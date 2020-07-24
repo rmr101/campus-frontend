@@ -46,7 +46,6 @@ class PostNewUserForm extends React.Component {
   validateEmail() {
     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const char = this.state.email;
-    console.log(char);
     if (!regex.test(char)) {
       this.setState({ errorMessage: `not a valid email.` });
       return false;

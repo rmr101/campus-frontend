@@ -48,7 +48,6 @@ class CourseManagement extends React.Component {
             "courseId",
             this.state.search
           );
-          console.log(courseList);
           this.setState({
             courseList: courseList,
             paginationArray: pagination(courseList, ITEM_PER_PAGE),
