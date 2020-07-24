@@ -49,14 +49,24 @@ class UserManagement extends React.Component {
           console.log(nameList);
           this.setState({
             nameList: nameList,
-            paginationArray: pagination(nameList.filter((name)=>{return name.active===true}), ITEM_PER_PAGE),
+            paginationArray: pagination(
+              nameList.filter((name) => {
+                return name.active === true;
+              }),
+              ITEM_PER_PAGE
+            ),
           });
         } else if (validStudentNameRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("studentName", this.state.search);
           console.log(nameList);
           this.setState({
             nameList: nameList,
-            paginationArray: pagination(nameList.filter((name)=>{return name.active===true}), ITEM_PER_PAGE),
+            paginationArray: pagination(
+              nameList.filter((name) => {
+                return name.active === true;
+              }),
+              ITEM_PER_PAGE
+            ),
           });
           console.log(this.state.paginationArray);
         } else {
@@ -71,14 +81,24 @@ class UserManagement extends React.Component {
           console.log(nameList);
           this.setState({
             nameList: nameList,
-            paginationArray: pagination(nameList.filter((name)=>{return name.active===true}), ITEM_PER_PAGE),
+            paginationArray: pagination(
+              nameList.filter((name) => {
+                return name.active === true;
+              }),
+              ITEM_PER_PAGE
+            ),
           });
         } else if (validTeacherNameRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("teacherName", this.state.search);
           console.log(nameList);
           this.setState({
             nameList: nameList,
-            paginationArray: pagination(nameList.filter((name)=>{return name.active===true}), ITEM_PER_PAGE),
+            paginationArray: pagination(
+              nameList.filter((name) => {
+                return name.active === true;
+              }),
+              ITEM_PER_PAGE
+            ),
           });
           console.log(this.state.paginationArray);
         } else {
@@ -101,8 +121,7 @@ class UserManagement extends React.Component {
       await (console.log(this.state.role), this.getUserName(this.state.role));
     } else if (this.state.role !== this.props.role) {
       this.setState({ errors: "" });
-      await (console.log(this.state.role),
-      this.getUserName(this.state.role));
+      await (console.log(this.state.role), this.getUserName(this.state.role));
     }
   }
 
@@ -125,19 +144,19 @@ class UserManagement extends React.Component {
   };
 
   renderUserList() {
-    const {page,paginationArray} = this.state;
+    const { page, paginationArray } = this.state;
     console.log(paginationArray);
-    let array = paginationArray[page-1];
-    const {role} = this.state;
+    let array = paginationArray[page - 1];
+    const { role } = this.state;
     console.log(array);
     return array.map((obj, index) => {
-      let { uuid, name,campusId} = obj;
+      let { uuid, name, campusId } = obj;
       let RenderObj = {
         index: index,
-        id:uuid,
+        id: uuid,
         secondID: role,
         name: name,
-        campusId
+        campusId,
       };
       return (
         <RenderContentLink
@@ -191,7 +210,7 @@ class UserManagement extends React.Component {
 
 const mapStateToProps = (state) => ({
   id: state.headerHistory.content.id,
-  secondID:state.headerHistory.content.secondID,
+  secondID: state.headerHistory.content.secondID,
   header: state.headerHistory.title,
 });
 const UserManagementContainer = connect(mapStateToProps)(UserManagement);
