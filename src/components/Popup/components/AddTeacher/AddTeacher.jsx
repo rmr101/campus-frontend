@@ -1,6 +1,8 @@
 import React from "react";
 import SearchTeacher from "./components/SearchTeacher";
+import SuggestionBar from "./components/SuggestionsBar";
 import getUserQuery from "../../../../apis/getUserQuery";
+import { FormItem, InFormLayout } from "../../../Layout/FormLayout/FormLayout";
 
 class AddTeacher extends React.Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class AddTeacher extends React.Component {
       search: "",
       searchBy: "Teacher Name",
       nameList: [],
+      suggestion: "",
     };
   }
 
@@ -17,6 +20,13 @@ class AddTeacher extends React.Component {
       searchBy: searchBy,
     });
     console.log(this.state.searchBy);
+  };
+
+  handleClick = (suggestion) => {
+    this.setState({
+      search: suggestion,
+    });
+    console.log(this.state.search);
   };
 
   handleSearchTemp = (search) => {
@@ -93,16 +103,26 @@ class AddTeacher extends React.Component {
 
   render() {
     return (
-      <SearchTeacher
-        title={"Find Teacher"}
-        search={this.state.search}
-        onSearchChange={this.handleSearchTemp}
-        searchBy={this.state.searchBy}
-        onSearchByChange={this.handleSearchByTemp}
-        onClick={this.onSubmit.bind(this)}
-        errors={this.state.errors}
-        nameList={this.state.nameList}
-      />
+      <InFormLayout>
+        <SearchTeacher
+          title={"Find Teacher"}
+          search={this.state.search}
+          onSearchChange={this.handleSearchTemp}
+          searchBy={this.state.searchBy}
+          onSearchByChange={this.handleSearchByTemp}
+          onClick={this.onSubmit.bind(this)}
+          errors={this.state.errors}
+          nameList={this.state.nameList}
+        />
+        <FormItem>
+          {this.state.nameList === null ? null : (
+            <SuggestionBar
+              nameList={this.state.nameList}
+              handleClick={this.handleClick}
+            />
+          )}
+        </FormItem>
+      </InFormLayout>
     );
   }
 }

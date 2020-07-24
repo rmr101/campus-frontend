@@ -70,14 +70,17 @@ class Button extends React.Component {
       case "ADD_TEACHER_TO_COURSE":
         return (
           <React.Fragment>
-            <AddTeacherToCourseBtn onClick={this.togglePop} />
+            <AddTeacherToCourseBtn
+              onClick={(e) => {
+                e.preventDefault();
+                this.togglePop();
+              }}
+            />
             {this.state.seen ? (
               <Popup
                 type={"ADD_TEACHER_TO_COURSE"}
                 {...this.props}
-                toggle={() => {
-                  this.togglePop();
-                }}
+                toggle={this.togglePop}
               />
             ) : null}
           </React.Fragment>
@@ -135,9 +138,7 @@ class Button extends React.Component {
   }
   render() {
     return (
-      <div className={styles.wrapper}>
-        {this.renderButton(this.props.type)}
-      </div>
+      <div className={styles.wrapper}>{this.renderButton(this.props.type)}</div>
     );
   }
 }

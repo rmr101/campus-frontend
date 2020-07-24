@@ -1,14 +1,11 @@
 import React from "react";
-import SuggestionBar from "./components/SuggestionsBar";
 import {
-  FormLayout,
-  HorizontalRow,
-  FormItem,
   SearchRow,
-  SearchBtn,
-  SmallText,
+  FormItem,
   FormTitle,
-} from "../../../../Layout/FormLayout/FormLayout";
+  SmallText,
+  AddBtn
+} from "../../../../../Layout/FormLayout/FormLayout";
 
 class SearchTeacher extends React.Component {
   constructor(props) {
@@ -26,7 +23,7 @@ class SearchTeacher extends React.Component {
 
   render() {
     return (
-      <FormLayout>
+      <React.Fragment>
         {this.props.title ? <FormTitle>{this.props.title}</FormTitle> : null}
         <SearchRow>
           <FormItem>
@@ -49,14 +46,9 @@ class SearchTeacher extends React.Component {
           <SmallText className={"error"} searchBar>
             {this.props.errors}
           </SmallText>
-          <SearchBtn type="submit" onClick={this.props.onClick} />
+          <AddBtn onClick={this.props.onClick} />
         </SearchRow>
-        <HorizontalRow>
-          <FormItem>
-            {this.props.nameList===null?null:<SuggestionBar nameList={this.props.nameList}/>}
-          </FormItem>
-        </HorizontalRow>
-      </FormLayout>
+      </React.Fragment>
     );
   }
 }
