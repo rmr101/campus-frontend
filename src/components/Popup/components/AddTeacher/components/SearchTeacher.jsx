@@ -1,7 +1,7 @@
 import React from "react";
 import SuggestionBar from "./components/SuggestionsBar";
 import {
-  FormLayout,
+  InFormLayout,
   HorizontalRow,
   FormItem,
   SearchRow,
@@ -26,7 +26,8 @@ class SearchTeacher extends React.Component {
 
   render() {
     return (
-      <FormLayout>
+      <InFormLayout
+      >
         {this.props.title ? <FormTitle>{this.props.title}</FormTitle> : null}
         <SearchRow>
           <FormItem>
@@ -49,14 +50,16 @@ class SearchTeacher extends React.Component {
           <SmallText className={"error"} searchBar>
             {this.props.errors}
           </SmallText>
-          <SearchBtn type="submit" onClick={this.props.onClick} />
+          <SearchBtn onClick={this.props.onClick} />
         </SearchRow>
         <HorizontalRow>
           <FormItem>
-            {this.props.nameList===null?null:<SuggestionBar nameList={this.props.nameList}/>}
+            {this.props.nameList === null ? null : (
+              <SuggestionBar nameList={this.props.nameList} />
+            )}
           </FormItem>
         </HorizontalRow>
-      </FormLayout>
+      </InFormLayout>
     );
   }
 }
