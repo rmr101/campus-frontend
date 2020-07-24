@@ -46,7 +46,10 @@ class SearchTeacher extends React.Component {
           <SmallText className={"error"} searchBar>
             {this.props.errors}
           </SmallText>
-          <AddBtn onClick={this.props.onClick} />
+          <AddBtn onClick={(e)=>{
+            e.preventDefault();
+            this.props.onClick();
+            }} />
         </SearchRow>
       </React.Fragment>
     );

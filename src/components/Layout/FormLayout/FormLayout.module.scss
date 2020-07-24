@@ -24,6 +24,7 @@ textarea {
       font-size: $text-lg;
       color: $light-text-color;
       font-weight: $font-bold;
+      margin-bottom: 5px;
     }
   }
 }
@@ -129,7 +130,14 @@ textarea {
       padding-bottom: 5px;
     }
   }
-
+.item{
+  li{
+    &:hover{
+      cursor: pointer;
+      color:$theme-color;
+    }
+  }
+}
 .inactiveBlock {
   border: solid 2px $light-text-color;
   color: $light-text-color;
@@ -177,7 +185,7 @@ textarea {
     }
     .item{
       margin-right: 0px;
-      input,select,textarea,label{
+      input,select,textarea,label,li{
         font-size: $text-sm;
       }
     }

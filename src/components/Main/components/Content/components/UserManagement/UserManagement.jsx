@@ -138,17 +138,9 @@ class UserManagement extends React.Component {
   };
 
   renderUserList() {
-<<<<<<< HEAD
     const {page,paginationArray} = this.state;
     let array = paginationArray[page-1];
     const {role} = this.state;
-=======
-    const { page, paginationArray } = this.state;
-    console.log(paginationArray);
-    let array = paginationArray[page - 1];
-    const { role } = this.state;
-    console.log(array);
->>>>>>> master
     return array.map((obj, index) => {
       let { uuid, name, campusId } = obj;
       let RenderObj = {

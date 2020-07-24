@@ -33,7 +33,8 @@ class CourseForm extends React.Component {
       assessment: null,
       workLoad: 12.5,
       learningOutcome: null,
-      // TODO: teacherUuid:"",
+      teacherName:"",
+      teacherUuid:"",
       year,
       semester,
       subjectId: this.props.subjectId,
@@ -41,8 +42,9 @@ class CourseForm extends React.Component {
     };
     this.handleTeacherUuidChange = this.handleTeacherUuidChange.bind(this);
   }
-  handleTeacherUuidChange(uuid) {
-    // TODO:this.setState({teacherUuid:uuid})
+  handleTeacherUuidChange(name,uuid) {
+    console.log(name, uuid);
+    this.setState({teacherUuid:uuid,teacherName:name})
   }
   checkNull() {
     const {
@@ -54,6 +56,8 @@ class CourseForm extends React.Component {
       semester,
       subjectId,
       courseId,
+      teacherName,
+      teacherUuid,
       ...checkProps
     } = this.state;
     for (let prop in checkProps) {
@@ -195,11 +199,24 @@ class CourseForm extends React.Component {
             </FormItem>
             <FormItem>
               {/* TODO: add this button */}
-              <label htmlFor="AddTeacherBtn">Assign Teacher:</label>
-              <AddTeacherBtn
-                id="AddTeacherBtn"
-                type={"ADD_TEACHER_TO_COURSE"}
-              />
+              <label htmlFor="AddTeacherBtn">Teacher:</label>
+              {this.state.teacherName ? (
+                <React.Fragment>
+                  <div>{this.state.teacherName}</div>
+                  <AddTeacherBtn
+                    name = {"Change"} 
+                    handleAddTeacher={this.handleTeacherUuidChange}
+                    id="AddTeacherBtn"
+                    type={"ADD_TEACHER_TO_COURSE"}
+                  />
+                </React.Fragment>
+              ) : (
+                <AddTeacherBtn
+                  handleAddTeacher={this.handleTeacherUuidChange}
+                  id="AddTeacherBtn"
+                  type={"ADD_TEACHER_TO_COURSE"}
+                />
+              )}
             </FormItem>
           </HorizontalRow>
           <HorizontalRow>
@@ -229,11 +246,7 @@ class CourseForm extends React.Component {
             <textarea
               id="outcome"
               className={styles.outcome}
-              value={
-                learningOutcome === null
-                  ? ""
-                  : learningOutcome
-              }
+              value={learningOutcome === null ? "" : learningOutcome}
               placeholder="Enter learning outcomes"
               required
               onChange={(event) => {
@@ -246,9 +259,7 @@ class CourseForm extends React.Component {
             <textarea
               id="assessment"
               className={styles.content}
-              value={
-                assessment === null ? "" : assessment
-              }
+              value={assessment === null ? "" : assessment}
               placeholder="Enter assessments for the course"
               required
               onChange={(event) => {
@@ -261,9 +272,7 @@ class CourseForm extends React.Component {
             <textarea
               id="Intro"
               className={styles.intro}
-              value={
-                introduction === null ? "" : introduction
-              }
+              value={introduction === null ? "" : introduction}
               placeholder="Enter introduction for the course"
               required
               onChange={(event) => {

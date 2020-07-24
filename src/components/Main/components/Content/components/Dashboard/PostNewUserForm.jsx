@@ -28,19 +28,18 @@ class PostNewUserForm extends React.Component {
       lastName: "",
     };
   }
-
   handleEmailChange() {
-    this.setState({ errorMessage: "" });
+    this.setState({ errorMessage: "" },()=> this.validateEmail());
   }
 
   handleFirstNameChange() {
-    this.setState({ errorMessage: "" });
-    this.validateName(this.state.firstName);
+    this.setState({ errorMessage: "" },()=>this.validateName(this.state.firstName));
+    
   }
 
   handleLastNameChange() {
-    this.setState({ errorMessage: "" });
-    this.validateName(this.state.lastName);
+    this.setState({ errorMessage: "" },()=>this.validateName(this.state.lastName));
+
   }
 
   validateEmail() {
@@ -75,7 +74,6 @@ class PostNewUserForm extends React.Component {
       notNullableError,
       ...checkProps
     } = this.state;
-    console.log(checkProps);
     for (let prop in checkProps) {
       if (!checkProps[prop].trim()) {
         this.setState({ notNullableError: "Not empty input is allowed." });

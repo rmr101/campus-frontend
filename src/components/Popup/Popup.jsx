@@ -21,7 +21,7 @@ class Popup extends React.Component {
       case "DELETE_USER":
         return <DeleteUser {...this.props} />;
       case "ADD_TEACHER_TO_COURSE":
-        return <AddTeacher {...this.props}/>;
+        return <AddTeacher {...this.props} onClick={this.props.toggle} />;
       case "ENROL":
         return <EnrolCourse {...this.props} />;
       case "VIEW_REPORT":

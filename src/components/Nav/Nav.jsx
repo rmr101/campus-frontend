@@ -41,7 +41,9 @@ class UserName extends React.Component{
           <Loading />
         ) : (
           <div className={styles.name}>
-            {this.state.name ? this.state.name : capitalize(this.props.userRole)}
+            {this.state.name
+              ? this.state.name
+              : capitalise(this.props.userRole)}
           </div>
         )}
       </div>
