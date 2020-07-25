@@ -78,7 +78,7 @@ class CourseForm extends React.Component {
       );
     };
   }
-  //TODO: new function to handle put, api may need to change later
+
   sendData(postBody) {
     const { subjectId, courseId } = this.state;
     switch (this.props.apiMethod) {
@@ -92,9 +92,10 @@ class CourseForm extends React.Component {
   }
   async postCourse() {
     const {
-      loading,
       postSuccessful,
+      loading,
       notNullableError,
+      teacherName,
       courseId,
       subjectId,
       ...postBody
@@ -132,6 +133,7 @@ class CourseForm extends React.Component {
         learningOutcome,
         assessment,
         introduction,
+        teacherName,
       } = this.props.detail;
       
       this.setState({
@@ -140,6 +142,7 @@ class CourseForm extends React.Component {
         location,
         learningOutcome,
         assessment,
+        teacherName,
         introduction,
       });
     }
@@ -147,13 +150,14 @@ class CourseForm extends React.Component {
 
   render() {
     const {
-        name,
-        workLoad,
-        location,
-        learningOutcome,
-        assessment,
-        introduction,
-      } = this.state;
+      name,
+      workLoad,
+      location,
+      learningOutcome,
+      assessment,
+      introduction,
+      teacherName,
+    } = this.state;
     return (
       <FullWidthLayout>
         <FormLayout
@@ -200,9 +204,9 @@ class CourseForm extends React.Component {
             <FormItem>
               {/* TODO: add this button */}
               <label htmlFor="AddTeacherBtn">Teacher:</label>
-              {this.state.teacherName ? (
+              {teacherName ? (
                 <React.Fragment>
-                  <div>{this.state.teacherName}</div>
+                  <div>{teacherName}</div>
                   <AddTeacherBtn
                     name = {"Change"} 
                     handleAddTeacher={this.handleTeacherUuidChange}
