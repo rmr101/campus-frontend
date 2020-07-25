@@ -38,7 +38,6 @@ class TeacherMarkingSystem extends React.Component {
       loading: true,
     });
     const { assignmentList } = await getAssignmentListByCourse(this.props.id);
-    console.log(assignmentList);
     this.setState({
       assignmentList: assignmentList,
       paginationArray: pagination(

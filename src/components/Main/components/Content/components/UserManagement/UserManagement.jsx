@@ -46,7 +46,6 @@ class UserManagement extends React.Component {
       case "student":
         if (validStudentIdRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("studentId", this.state.search);
-          console.log(nameList);
           this.setState({
             nameList: nameList,
             paginationArray: pagination(
@@ -58,7 +57,6 @@ class UserManagement extends React.Component {
           });
         } else if (validStudentNameRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("studentName", this.state.search);
-          console.log(nameList);
           this.setState({
             nameList: nameList,
             paginationArray: pagination(
@@ -90,7 +88,6 @@ class UserManagement extends React.Component {
           });
         } else if (validTeacherNameRegex.test(this.state.search) === true) {
           const nameList = await getUserQuery("teacherName", this.state.search);
-          console.log(nameList);
           this.setState({
             nameList: nameList,
             paginationArray: pagination(
@@ -100,7 +97,6 @@ class UserManagement extends React.Component {
               ITEM_PER_PAGE
             ),
           });
-          console.log(this.state.paginationArray);
         } else {
           this.setState({
             errors: "Please check the TeacherID!",
@@ -129,7 +125,6 @@ class UserManagement extends React.Component {
     this.setState({
       role: role,
     });
-    console.log(this.state.role);
   };
 
   handleSearchTemp = (search) => {
@@ -140,15 +135,12 @@ class UserManagement extends React.Component {
       errors: errors,
       search: search,
     });
-    console.log(this.state.search, this.state.errors);
   };
 
   renderUserList() {
-    const { page, paginationArray } = this.state;
-    console.log(paginationArray);
-    let array = paginationArray[page - 1];
-    const { role } = this.state;
-    console.log(array);
+    const {page,paginationArray} = this.state;
+    let array = paginationArray[page-1];
+    const {role} = this.state;
     return array.map((obj, index) => {
       let { uuid, name, campusId } = obj;
       let RenderObj = {

@@ -31,6 +31,7 @@ class CourseDetail extends React.Component {
   }
   async getCourseDetail() {
     const { course, studentList } = await getCourseDetail(this.props.id);
+    const { teacherList } = await getCourseDetail(this.props.id, "teachers");
     const {
       assessment,
       learningOutcome,
@@ -46,8 +47,8 @@ class CourseDetail extends React.Component {
       location,
       name,
       introduction,
+      teacherName:teacherList[0]?teacherList[0].name:"",
     };
-    console.log(editableDetail);
     this.setState(
       {
         studentList,
@@ -77,6 +78,7 @@ class CourseDetail extends React.Component {
       introduction,
       semester,
     } = this.state.courseDetail;
+    const teacherName = this.state.editableDetail.teacherName;
 
     return (
       <DisplayLayout>
@@ -96,6 +98,12 @@ class CourseDetail extends React.Component {
         <DisplayContent> {learningOutcome} </DisplayContent>
         <DisplaySubHeading>Assessments: </DisplaySubHeading>
         <DisplayContent> {assessment} </DisplayContent>
+        {teacherName ? (
+          <React.Fragment>
+            <DisplaySubHeading>Teacher: </DisplaySubHeading>
+            <DisplayContent> {teacherName} </DisplayContent>
+          </React.Fragment>
+        ) : null}
       </DisplayLayout>
     );
   }

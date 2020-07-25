@@ -16,7 +16,6 @@ class ResetPassword extends React.Component {
   }
 
   async resetPassword() {
-    console.log(this.props);
     const { uuid, toggle } = this.props;
     this.setState({ loading: true });
     await resetPassword(uuid)

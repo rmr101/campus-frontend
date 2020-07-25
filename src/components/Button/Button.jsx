@@ -71,6 +71,7 @@ class Button extends React.Component {
         return (
           <React.Fragment>
             <AddTeacherToCourseBtn
+              name={this.props.name}
               onClick={(e) => {
                 e.preventDefault();
                 this.togglePop();

@@ -12,24 +12,32 @@ class AddTeacher extends React.Component {
       searchBy: "Teacher Name",
       nameList: [],
       suggestion: "",
+      errors: "",
+      uuid:null,
     };
+    this.onClick = this.onClick.bind(this);
+    this.handleSearchTemp = this.handleSearchTemp.bind(this);
+    this.handleSearchByTemp = this.handleSearchByTemp.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleSearchByTemp = (searchBy) => {
+  handleSearchByTemp(searchBy){
     this.setState({
       searchBy: searchBy,
     });
     console.log(this.state.searchBy);
   };
 
-  handleClick = (suggestion) => {
+  handleClick(suggestion,uuid){
     this.setState({
       search: suggestion,
-    });
-    console.log(this.state.search);
+      uuid,
+      errors:"",
+    },()=>console.log(this.state.search,this.state.uuid));
+    
   };
 
-  handleSearchTemp = (search) => {
+  handleSearchTemp(search){
     let errors = this.state.errors;
     const validInputRegex = RegExp(/^[a-zA-Z0-9]+$/);
     errors = validInputRegex.test(search) ? "" : "Invalid Input!";
@@ -84,42 +92,33 @@ class AddTeacher extends React.Component {
     }
   }
 
-  async onSubmit(e) {
-    e.preventDefault();
-    console.log(this.state.search);
-    if (this.state.search === "") {
-      this.setState({
-        errors: "Please Input Something!",
-      });
-    } else if (this.state.errors === "") {
-      await (console.log(this.state.searchBy),
-      this.getTeacherQuery(this.state.searchBy));
-    } else if (this.state.searchBy !== this.props.searchBy) {
-      this.setState({ errors: "" });
-      await (console.log(this.state.searchBy),
-      this.getTeacherQuery(this.state.searchBy));
-    }
+  onClick() {
+    const { handleAddTeacher,onClick } = this.props;
+    const { uuid, search } = this.state;
+    handleAddTeacher(search, uuid);
+    
+    //this close the popup.
+    onClick();
   }
 
   render() {
+    const {search,searchBy,errors,nameList} = this.state;
+   
     return (
       <InFormLayout>
         <SearchTeacher
           title={"Find Teacher"}
-          search={this.state.search}
+          search={search}
           onSearchChange={this.handleSearchTemp}
-          searchBy={this.state.searchBy}
+          searchBy={searchBy}
           onSearchByChange={this.handleSearchByTemp}
-          onClick={this.onSubmit.bind(this)}
-          errors={this.state.errors}
-          nameList={this.state.nameList}
+          onClick={this.onClick}
+          errors={errors}
+          nameList={nameList}
         />
         <FormItem>
           {this.state.nameList === null ? null : (
-            <SuggestionBar
-              nameList={this.state.nameList}
-              handleClick={this.handleClick}
-            />
+            <SuggestionBar nameList={nameList} handleClick={this.handleClick} />
           )}
         </FormItem>
       </InFormLayout>

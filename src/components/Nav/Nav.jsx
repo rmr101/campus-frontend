@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import NavAvatar from './components/NavAvatar';
 import getUserInfo from "../../apis/getUserInfo";
 import AddUserInfo from '../../store/campus/actions/AddUserInfo';
-
+import capitalise from '../../utils/Algorithm/capitalise';
 const Loading = () => (
   <div className={styles.loading}>
     <div>Loading...</div>
@@ -21,7 +21,6 @@ class UserName extends React.Component{
     }
   }
   async getUserName(){
-    console.log(this.props.userRole);
     const {name} = await getUserInfo(this.props.userRole, this.props.userID);
     
     this.setState(
@@ -42,7 +41,9 @@ class UserName extends React.Component{
           <Loading />
         ) : (
           <div className={styles.name}>
-            {this.state.name ? this.state.name : capitalize(this.props.userRole)}
+            {this.state.name
+              ? this.state.name
+              : capitalise(this.props.userRole)}
           </div>
         )}
       </div>
@@ -52,7 +53,7 @@ class UserName extends React.Component{
 
 
 const NavFooter = ({ userRole }) => (
-  <h3> {capitalize(userRole) + " Version"}</h3>
+  <h3> {capitalise(userRole) + " Version"}</h3>
 );
 
 const Nav = ({ userRole, userID, addName, noAvatar }) => {
@@ -72,8 +73,6 @@ const Nav = ({ userRole, userID, addName, noAvatar }) => {
     </div>
   );
 };
-const capitalize=(name)=>(name[0].toUpperCase() + name.slice(1,name.length))
-
 
 const mapStateToProps = (state) => ({
   userRole: state.Authentication.role.toLowerCase(),

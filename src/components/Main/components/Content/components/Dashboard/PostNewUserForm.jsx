@@ -28,25 +28,23 @@ class PostNewUserForm extends React.Component {
       lastName: "",
     };
   }
-
   handleEmailChange() {
-    this.setState({ errorMessage: "" });
+    this.setState({ errorMessage: "" },()=> this.validateEmail());
   }
 
   handleFirstNameChange() {
-    this.setState({ errorMessage: "" });
-    this.validateName(this.state.firstName);
+    this.setState({ errorMessage: "" },()=>this.validateName(this.state.firstName));
+    
   }
 
   handleLastNameChange() {
-    this.setState({ errorMessage: "" });
-    this.validateName(this.state.lastName);
+    this.setState({ errorMessage: "" },()=>this.validateName(this.state.lastName));
+
   }
 
   validateEmail() {
     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const char = this.state.email;
-    console.log(char);
     if (!regex.test(char)) {
       this.setState({ errorMessage: `not a valid email.` });
       return false;
@@ -76,7 +74,6 @@ class PostNewUserForm extends React.Component {
       notNullableError,
       ...checkProps
     } = this.state;
-    console.log(checkProps);
     for (let prop in checkProps) {
       if (!checkProps[prop].trim()) {
         this.setState({ notNullableError: "Not empty input is allowed." });
