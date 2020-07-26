@@ -165,6 +165,12 @@ This project have used redux dev tool. You may run into error, don't panic! so h
 ---
 ## Future Improvement
 
+#### Tech：
 1. **Router for page navigation**
 2. **Style Component / System for better readability and maintanability**
 3. **Depoly on EC2 as docker image**
+   
+#### Feature：
+1. **Support multiple teachers teaching**
+2. **Support payment**
+3. **Support file sharing for courses**
