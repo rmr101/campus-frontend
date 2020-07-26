@@ -76,7 +76,6 @@ class PostNewUserForm extends React.Component {
       notNullableError,
       ...checkProps
     } = this.state;
-    console.log(checkProps);
     for (let prop in checkProps) {
       if (!checkProps[prop].trim()) {
         this.setState({ notNullableError: "Not empty input is allowed." });
@@ -119,7 +118,11 @@ class PostNewUserForm extends React.Component {
           () => setTimeout(() => this.setState({ postSuccessful: false }), 2000)
         );
       })
-      .catch(console.log);
+      .catch((err) => {
+        if (err.response.status === 409) {
+          this.setState({ loading: false, errorMessage: `Email has been used` });
+        }
+      });
   }
 
   onSubmit() {
