@@ -6,6 +6,7 @@ import Loading from '../Loading';
 import StudentEnrolCourse from './StudentEnrolCourse';
 import CourseForm from '../CourseForm';
 import { connect } from "react-redux";
+import AddHeader from '../../../../../../store/campus/actions/AddHeader';
 
 class CourseDetail extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class CourseDetail extends React.Component {
       editableDetail: null,
     };
     this.handleEnrol = this.handleEnrol.bind(this);
-    this.handleSubmit = this.handleSubmit(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleEnrol() {
     this.setState({ enrolled: true });
@@ -56,7 +57,8 @@ class CourseDetail extends React.Component {
         loading: false,
         editableDetail,
       },
-      this.checkEnrollment
+      ()=>{this.checkEnrollment();
+        this.props.addHeader(name,this.props.id);}
     );
   }
   checkEnrollment() {
@@ -146,5 +148,11 @@ const mapStateToProps = (state) => ({
   userRole: state.Authentication.role,
   uuid: state.Authentication.uuid,
 });
-const CourseDetailContainer = connect(mapStateToProps)(CourseDetail);
+const mapDispatchToProps = (dispatch) => ({
+  addHeader: (name, id) => dispatch(AddHeader(name, "CourseDetail", id)),
+});
+const CourseDetailContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CourseDetail);
 export default CourseDetailContainer;

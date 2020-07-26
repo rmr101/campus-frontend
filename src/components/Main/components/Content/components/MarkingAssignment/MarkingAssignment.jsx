@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from "./MarkingAssignment.module.scss";
 import getAssignmentDetail from "../../../../../../apis/getAssignmentDetail";
 import sortArrayByScore from "../../../../../../utils/Algorithm/sortArrayByScore";
 import pagination from "../../../../../../utils/Algorithm/pagination";
@@ -145,11 +144,7 @@ class MarkingAssignment extends React.Component {
   renderStudentAssignmentList() {
     const { page,paginationArray } = this.state;
     if (paginationArray.length === 0) {
-      return (
-        <div className={styles.LinksWrapper}>
-          <NoContent text="No assignment to be marked." />
-        </div>
-      );
+      return <NoContent text="No assignment to be marked." />
     } else {
       return (
         <TableLayout>

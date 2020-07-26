@@ -249,7 +249,7 @@ class TeacherCourseAssignment extends React.Component {
               />
             </FormItem>
             {!this.state.notNullableError ? (
-              <Button type="submit">Add New Course</Button>
+              <Button type="submit">Publish Assignment</Button>
             ) : (
               <DummyButtonBlock>Unable to Click</DummyButtonBlock>
             )}
