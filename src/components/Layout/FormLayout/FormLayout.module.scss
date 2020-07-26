@@ -24,7 +24,6 @@ textarea {
       font-size: $text-lg;
       color: $light-text-color;
       font-weight: $font-bold;
-      margin-bottom: 5px;
     }
   }
 }
@@ -156,8 +155,8 @@ textarea {
   border-radius: 5px;
   border: solid 2px $form-color;
   color: $form-color;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: $text-lg;
+  font-weight: $font-light;
   padding: 10px;
   width: 200px;
   outline: none;
@@ -185,9 +184,12 @@ textarea {
     }
     .item{
       margin-right: 0px;
-      input,select,textarea,label,li{
+      input,select,textarea,label,li,div{
         font-size: $text-sm;
       }
+    }
+    .btn{
+      font-size: $text-rg;
     }
   }
   .horizontalRow {

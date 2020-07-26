@@ -16,7 +16,7 @@ import {
   TableItem,
 } from "../../../../../Layout/TableLayout/TableLayout";
 
-const ITEM_PER_PAGE = 8;
+const ITEM_PER_PAGE = 5;
 
 class SubjectCourse extends React.Component {
   constructor(props) {

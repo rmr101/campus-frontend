@@ -7,6 +7,8 @@ import HalfWidthLayout from '../../../../../Layout/HalfWidthLayout';
 import StudentAssignmentUpload from './components/StudentAssignment';
 import {DisplayTitle,DisplaySubHeading,DisplayContent,DisplayLayout} from '../../../../../Layout/DisplayContentLayout/DisplayContentLayout';
 
+
+
 class Assignment extends React.Component {
   constructor(props) {
     super(props);
@@ -16,18 +18,28 @@ class Assignment extends React.Component {
     };
   }
   async getAssignment() {
-    const {id,courseID} = this.props;
-    const assignment = await getAssignmentDetail(id, courseID);
-      this.setState({
-        assignmentDetail: assignment,
-        loading: false,
-      });
+    const {id,courseID,userRole} = this.props;
+    if (userRole === "student") {
+      const assignment = await getAssignmentDetail(id, courseID);
+        this.setState({
+          assignmentDetail: assignment,
+          loading: false,
+        });
+    } else if (userRole === "teacher") {
+      const { assignment } = await getAssignmentDetail(id, courseID);
+        this.setState({
+          assignmentDetail: assignment,
+          loading: false,
+        });
+    }
+    
   }
   componentDidMount() {
     this.getAssignment();
   }
   renderAssignmentDetail(){
     const {title,courseName,dueDate,acceptanceCriteria,content}=this.state.assignmentDetail
+    console.log(dueDate);
     return (
       <DisplayLayout>
         <DisplayTitle>
@@ -40,18 +52,23 @@ class Assignment extends React.Component {
         <DisplayContent> {content} </DisplayContent>
       </DisplayLayout>
     );}
-  
+  getTodayDate(){
+    return new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').split(" ")[0]  
+  }
   renderOptionalContent(){
-    const { userRole} = this.props
-    if ( userRole === "student"){
+    const today = this.getTodayDate();
+    const {dueDate} = this.state.assignmentDetail;
+    const {userRole} = this.props
+    if (userRole === "student" && today < dueDate) {
       return (
-      <HalfWidthLayout
+        <HalfWidthLayout
           title={"Upload File"}
-          description={"File must be less than 15MB and only PDF is accepted."}
+          description={"File must be less than 15MB.\nOnly PDF is accepted."}
         >
           <StudentAssignmentUpload />
-      </HalfWidthLayout>)
-    } else{
+        </HalfWidthLayout>
+      );
+    } else {
       return null;
     }
   }
@@ -63,7 +80,7 @@ class Assignment extends React.Component {
         <FullWidthLayout>
           {this.state.loading ? <Loading /> : this.renderAssignmentDetail()}
         </FullWidthLayout>
-        {this.renderOptionalContent()}
+          {this.state.loading ? <Loading /> : this.renderOptionalContent()}
       </React.Fragment>
     );
   }
