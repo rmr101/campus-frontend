@@ -6,6 +6,7 @@ import Loading from '../Loading';
 import StudentEnrolCourse from './StudentEnrolCourse';
 import CourseForm from '../CourseForm';
 import { connect } from "react-redux";
+import AddHeader from '../../../../../../store/campus/actions/AddHeader';
 
 class CourseDetail extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class CourseDetail extends React.Component {
       editableDetail: null,
     };
     this.handleEnrol = this.handleEnrol.bind(this);
-    this.handleSubmit = this.handleSubmit(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleEnrol() {
     this.setState({ enrolled: true });
@@ -31,6 +32,7 @@ class CourseDetail extends React.Component {
   }
   async getCourseDetail() {
     const { course, studentList } = await getCourseDetail(this.props.id);
+    const { teacherList } = await getCourseDetail(this.props.id, "teachers");
     const {
       assessment,
       learningOutcome,
@@ -46,8 +48,8 @@ class CourseDetail extends React.Component {
       location,
       name,
       introduction,
+      teacherName:teacherList[0]?teacherList[0].name:"",
     };
-    console.log(editableDetail);
     this.setState(
       {
         studentList,
@@ -55,7 +57,8 @@ class CourseDetail extends React.Component {
         loading: false,
         editableDetail,
       },
-      this.checkEnrollment
+      ()=>{this.checkEnrollment();
+        this.props.addHeader(name,this.props.id);}
     );
   }
   checkEnrollment() {
@@ -77,6 +80,7 @@ class CourseDetail extends React.Component {
       introduction,
       semester,
     } = this.state.courseDetail;
+    const teacherName = this.state.editableDetail.teacherName;
 
     return (
       <DisplayLayout>
@@ -96,6 +100,12 @@ class CourseDetail extends React.Component {
         <DisplayContent> {learningOutcome} </DisplayContent>
         <DisplaySubHeading>Assessments: </DisplaySubHeading>
         <DisplayContent> {assessment} </DisplayContent>
+        {teacherName ? (
+          <React.Fragment>
+            <DisplaySubHeading>Teacher: </DisplaySubHeading>
+            <DisplayContent> {teacherName} </DisplayContent>
+          </React.Fragment>
+        ) : null}
       </DisplayLayout>
     );
   }
@@ -138,5 +148,11 @@ const mapStateToProps = (state) => ({
   userRole: state.Authentication.role,
   uuid: state.Authentication.uuid,
 });
-const CourseDetailContainer = connect(mapStateToProps)(CourseDetail);
+const mapDispatchToProps = (dispatch) => ({
+  addHeader: (name, id) => dispatch(AddHeader(name, "CourseDetail", id)),
+});
+const CourseDetailContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CourseDetail);
 export default CourseDetailContainer;

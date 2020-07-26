@@ -33,7 +33,8 @@ class CourseForm extends React.Component {
       assessment: null,
       workLoad: 12.5,
       learningOutcome: null,
-      // TODO: teacherUuid:"",
+      teacherName:"",
+      teacherUuid:"",
       year,
       semester,
       subjectId: this.props.subjectId,
@@ -41,8 +42,13 @@ class CourseForm extends React.Component {
     };
     this.handleTeacherUuidChange = this.handleTeacherUuidChange.bind(this);
   }
-  handleTeacherUuidChange(uuid) {
-    // TODO:this.setState({teacherUuid:uuid})
+  handleTeacherUuidChange(name,uuid) {
+    console.log(name, uuid);
+    this.setState({
+      teacherUuid: uuid,
+      teacherName: name,
+      notNullableError: "",
+    });
   }
   checkNull() {
     const {
@@ -54,11 +60,16 @@ class CourseForm extends React.Component {
       semester,
       subjectId,
       courseId,
+      teacherUuid,
       ...checkProps
     } = this.state;
     for (let prop in checkProps) {
       if (!checkProps[prop] || !checkProps[prop].trim()) {
-        this.setState({ notNullableError: "Not empty input is allowed." });
+        if (prop === "teacherName"){
+          this.setState({ notNullableError: "Must assign a teacher to a course." }); 
+        } else {
+          this.setState({ notNullableError: "No empty input is allowed." });
+        }
       }
     }
   }
@@ -74,23 +85,25 @@ class CourseForm extends React.Component {
       );
     };
   }
-  //TODO: new function to handle put, api may need to change later
+
   sendData(postBody) {
-    const { subjectId, courseId } = this.state;
+    const { subjectId, courseId,teacherUuid } = this.state;
     switch (this.props.apiMethod) {
       case "POST":
-        return postCourse({ ...postBody, subjectId });
+        return postCourse({ ...postBody,teacherUuid, subjectId });
       case "PUT":
         return putCourse({ ...postBody, courseId });
       default:
-        return putCourse({ ...postBody, courseId });
+        return null;
     }
   }
   async postCourse() {
     const {
-      loading,
       postSuccessful,
+      loading,
       notNullableError,
+      teacherName,
+      teacherUuid,
       courseId,
       subjectId,
       ...postBody
@@ -114,12 +127,12 @@ class CourseForm extends React.Component {
       .catch(console.log);
   }
   onSubmit() {
-    console.log(1);
     this.postCourse();
   }
 
   componentDidMount() {
     // if item exists, populate the state with proper data
+    console.log(this.props);
     if (this.props.hasOwnProperty("detail")) {
       const {
         name,
@@ -128,6 +141,7 @@ class CourseForm extends React.Component {
         learningOutcome,
         assessment,
         introduction,
+        teacherName,
       } = this.props.detail;
       
       this.setState({
@@ -136,6 +150,7 @@ class CourseForm extends React.Component {
         location,
         learningOutcome,
         assessment,
+        teacherName,
         introduction,
       });
     }
@@ -143,13 +158,14 @@ class CourseForm extends React.Component {
 
   render() {
     const {
-        name,
-        workLoad,
-        location,
-        learningOutcome,
-        assessment,
-        introduction,
-      } = this.state;
+      name,
+      workLoad,
+      location,
+      learningOutcome,
+      assessment,
+      introduction,
+      teacherName,
+    } = this.state;
     return (
       <FullWidthLayout>
         <FormLayout
@@ -193,14 +209,28 @@ class CourseForm extends React.Component {
                 <option value={100}>100</option>
               </select>
             </FormItem>
-            <FormItem>
-              {/* TODO: add this button */}
-              <label htmlFor="AddTeacherBtn">Assign Teacher:</label>
-              <AddTeacherBtn
-                id="AddTeacherBtn"
-                type={"ADD_TEACHER_TO_COURSE"}
-              />
-            </FormItem>
+            {this.props.apiMethod === "POST" ? (
+              <FormItem>
+                <label htmlFor="AddTeacherBtn">Teacher:</label>
+                {teacherName ? (
+                  <React.Fragment>
+                    <div>{teacherName}</div>
+                    <AddTeacherBtn
+                      name={"Change"}
+                      handleAddTeacher={this.handleTeacherUuidChange}
+                      id="AddTeacherBtn"
+                      type={"ADD_TEACHER_TO_COURSE"}
+                    />
+                  </React.Fragment>
+                ) : (
+                  <AddTeacherBtn
+                    handleAddTeacher={this.handleTeacherUuidChange}
+                    id="AddTeacherBtn"
+                    type={"ADD_TEACHER_TO_COURSE"}
+                  />
+                )}
+              </FormItem>
+            ) : null}
           </HorizontalRow>
           <HorizontalRow>
             <FormItem>
@@ -211,6 +241,12 @@ class CourseForm extends React.Component {
               <label> Semester: </label>
               <div>{semester}</div>
             </FormItem>
+            {this.props.apiMethod === "PUT" ? (
+              <FormItem>
+                <label>Teacher:</label>
+                <div>{teacherName}</div> 
+              </FormItem>
+                ) : null}
           </HorizontalRow>
           <FormItem>
             <label htmlFor="location">Location: </label>
@@ -229,11 +265,7 @@ class CourseForm extends React.Component {
             <textarea
               id="outcome"
               className={styles.outcome}
-              value={
-                learningOutcome === null
-                  ? ""
-                  : learningOutcome
-              }
+              value={learningOutcome === null ? "" : learningOutcome}
               placeholder="Enter learning outcomes"
               required
               onChange={(event) => {
@@ -246,9 +278,7 @@ class CourseForm extends React.Component {
             <textarea
               id="assessment"
               className={styles.content}
-              value={
-                assessment === null ? "" : assessment
-              }
+              value={assessment === null ? "" : assessment}
               placeholder="Enter assessments for the course"
               required
               onChange={(event) => {
@@ -261,9 +291,7 @@ class CourseForm extends React.Component {
             <textarea
               id="Intro"
               className={styles.intro}
-              value={
-                introduction === null ? "" : introduction
-              }
+              value={introduction === null ? "" : introduction}
               placeholder="Enter introduction for the course"
               required
               onChange={(event) => {

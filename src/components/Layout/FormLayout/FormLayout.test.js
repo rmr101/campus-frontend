@@ -11,6 +11,8 @@ import {
   FormTitle,
   SearchRow,
   SearchBtn,
+  InFormLayout,
+  AddBtn
 } from "./FormLayout";
 
 describe(" FormLayout ", () => {
@@ -28,6 +30,12 @@ describe(" FormLayout ", () => {
       onClick.toString()
     );
   });
+  it("should pass all props to the InFormLayout", () => {
+    render(<InFormLayout {...props}> </InFormLayout>);
+    expect(screen.getByTestId("inform").getAttribute("testprops")).toBe(
+      onClick.toString()
+    );
+  });
   it("should pass all props to the Button", () => {
     render(<Button {...props}> </Button>);
     expect(screen.getByTestId("btn").getAttribute("testprops")).toBe(
@@ -39,6 +47,12 @@ describe(" FormLayout ", () => {
   it("should pass all props to the SearchBtn", () => {
     render(<SearchBtn {...props}> </SearchBtn>);
     expect(screen.getByTestId("searchBtn").getAttribute("testprops")).toBe(
+      onClick.toString()
+    );
+  });
+  it("should pass all props to the SearchBtn", () => {
+    render(<AddBtn {...props}> </AddBtn>);
+    expect(screen.getByTestId("addBtn").getAttribute("testprops")).toBe(
       onClick.toString()
     );
   });
@@ -56,6 +70,15 @@ describe(" FormLayout ", () => {
     );
     expect(screen.getByText(TestMessage)).toBeInTheDocument();
   });
+  it("should render children for InFormLayout", () => {
+    render(
+      <InFormLayout>
+        <TestingComponent />
+      </InFormLayout>
+    );
+    expect(screen.getByText(TestMessage)).toBeInTheDocument();
+  });
+  
 
   it("should render children for successful class when 'success' is passed to FormLayout", () => {
   render(
@@ -64,6 +87,17 @@ describe(" FormLayout ", () => {
     </FormLayout>
   );
     expect(screen.getByTestId("form").getAttribute("class")).toBe(styles.success + " " + styles.form);
+  });
+
+  it("should render children for successful class when 'success' is passed to InFormLayout", () => {
+    render(
+      <InFormLayout className={"success"}>
+        <TestingComponent />
+      </InFormLayout>
+    );
+    expect(screen.getByTestId("inform").getAttribute("class")).toBe(
+      styles.success + " " + styles.form
+    );
   });
   it("should render children for error and searchSmall class when 'error' and 'searchBar' are passed to SmallText", () => {
     render(

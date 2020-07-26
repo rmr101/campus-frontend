@@ -129,7 +129,14 @@ textarea {
       padding-bottom: 5px;
     }
   }
-
+.item{
+  li{
+    &:hover{
+      cursor: pointer;
+      color:$theme-color;
+    }
+  }
+}
 .inactiveBlock {
   border: solid 2px $light-text-color;
   color: $light-text-color;
@@ -148,8 +155,8 @@ textarea {
   border-radius: 5px;
   border: solid 2px $form-color;
   color: $form-color;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: $text-lg;
+  font-weight: $font-light;
   padding: 10px;
   width: 200px;
   outline: none;
@@ -177,9 +184,12 @@ textarea {
     }
     .item{
       margin-right: 0px;
-      input,select,textarea,label{
+      input,select,textarea,label,li,div{
         font-size: $text-sm;
       }
+    }
+    .btn{
+      font-size: $text-rg;
     }
   }
   .horizontalRow {

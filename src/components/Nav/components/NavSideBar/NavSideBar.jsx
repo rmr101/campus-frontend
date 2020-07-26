@@ -13,7 +13,6 @@ class NavSideBar extends React.Component {
       canvasOn: false,
       current: "Dashboard",
     };
-    console.log();
     this.handleClick = this.handleClick.bind(this);
   }
   readConfig(ConfigArray) {
