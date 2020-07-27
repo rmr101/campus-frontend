@@ -44,7 +44,7 @@ class PostSubjectForm extends React.Component {
     });
     return flag;
   }
-  
+
   checkNull() {
     const {
       postSuccessful,
@@ -169,7 +169,9 @@ class PostSubjectForm extends React.Component {
           ) : null}
           {this.state.errorMessage || this.state.notNullableError ? (
             <SmallText className={"error"}>
-              {this.state.errorMessage + " " + this.state.notNullableError}
+              {this.state.errorMessage
+                ? this.state.errorMessage
+                : this.state.notNullableError}
             </SmallText>
           ) : null}
         </FormLayout>
