@@ -21,7 +21,12 @@ export const Auth = (AxiosInstance) => {
 const handleError = (err) => {
   switch(err.response.status){
     case 401:
-      console.log("I am logging out due to 401");
+      console.log("Logging out due to 401");
+      redirectToLogin();
+      return Promise.reject(err);
+      //TODO: 改密码自定义 status
+    case 403:
+      console.log("Logging out due to 403");
       redirectToLogin();
       return Promise.reject(err);
     default:

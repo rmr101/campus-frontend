@@ -74,6 +74,7 @@ textarea {
   }
   small {
     bottom: 80px;
+    width:250px;
     font-size: $text-rg;
     font-weight: $font-bold;
     position: absolute;
@@ -83,6 +84,7 @@ textarea {
     bottom: -2px;
   }
   .error {
+    width:250px;
     color: $danger-color;
   }
 }

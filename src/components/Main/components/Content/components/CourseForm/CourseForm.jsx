@@ -48,7 +48,7 @@ class CourseForm extends React.Component {
       teacherUuid: uuid,
       teacherName: name,
       notNullableError: "",
-    });
+    },this.checkNull);
   }
   checkNull() {
     const {

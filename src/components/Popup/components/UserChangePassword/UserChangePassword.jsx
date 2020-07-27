@@ -34,7 +34,11 @@ class UserChangePassword extends React.Component {
         )
       )
       .catch((err) => {
-        this.setState({ incorrectPassword: true, loading: false });
+        if (err.response.status === 400) {
+          this.setState({ incorrectPassword: true, loading: false });
+        } else{
+          // this.setState({ incorrectPassword: true, loading: false });
+        }
         console.log(err);
       });
   }
