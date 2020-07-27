@@ -29,17 +29,19 @@ class PostNewUserForm extends React.Component {
     };
   }
   handleEmailChange() {
-    this.setState({ errorMessage: "" },()=> this.validateEmail());
+    this.setState({ errorMessage: "" }, () => this.validateEmail());
   }
 
   handleFirstNameChange() {
-    this.setState({ errorMessage: "" },()=>this.validateName(this.state.firstName));
-    
+    this.setState({ errorMessage: "" }, () =>
+      this.validateName(this.state.firstName)
+    );
   }
 
   handleLastNameChange() {
-    this.setState({ errorMessage: "" },()=>this.validateName(this.state.lastName));
-
+    this.setState({ errorMessage: "" }, () =>
+      this.validateName(this.state.lastName)
+    );
   }
 
   validateEmail() {
@@ -116,7 +118,14 @@ class PostNewUserForm extends React.Component {
           () => setTimeout(() => this.setState({ postSuccessful: false }), 2000)
         );
       })
-      .catch(console.log);
+      .catch((err) => {
+        if (err.response.status === 409) {
+          this.setState({
+            loading: false,
+            errorMessage: `Email has been used`,
+          });
+        }
+      });
   }
 
   onSubmit() {
@@ -215,7 +224,9 @@ class PostNewUserForm extends React.Component {
           ) : null}
           {this.state.errorMessage || this.state.notNullableError ? (
             <SmallText className={"error"}>
-              {this.state.errorMessage + " " + this.state.notNullableError}
+              {this.state.errorMessage
+                ? this.state.errorMessage
+                : this.state.notNullableError}
             </SmallText>
           ) : null}
         </FormLayout>
