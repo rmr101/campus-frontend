@@ -6,19 +6,17 @@
 ## Content
 - [Content](#content)
 - [About JR Academy Projects 3 - Campus system 1.0](#about-jr-academy-projects-3---campus-system-10)
-- [How to interact with the project ?](#how-to-interact-with-the-project-)
+- [How to interact with the client site ?](#how-to-interact-with-the-client-site-)
 	- [For normal interaction](#for-normal-interaction)
 	- [How to interact with this app (with docker installed)](#how-to-interact-with-this-app-with-docker-installed)
 	- [How to interact with this app (with no docker installed)](#how-to-interact-with-this-app-with-no-docker-installed)
 - [UI Deisgn](#ui-deisgn)
 - [Supported features](#supported-features)
 	- [Assignment system](#assignment-system)
-- [User Management](#user-management)
-	- [CRUD Operation](#crud-operation)
+	- [User Management](#user-management)
 - [About Redux dev tool in this project](#about-redux-dev-tool-in-this-project)
 - [Future Improvement](#future-improvement)
 
----
 ## About JR Academy Projects 3 - Campus system 1.0
 
 This is project three from JR Academy. We are team RMR101. Objective of the project is to deliver a **learning management system** for an educational purpose.
@@ -46,12 +44,13 @@ Security:
 - Jwt
 
 Clouds:
-- AWS S3
-- AWS SDK
+- AWS S3 & Presigned URL
+- AWS SDK 
 
 CI/CD:
 - Travis CI
 - Github page
+- Docker
 
 Development:
 - Agile (Scrumn)
@@ -63,13 +62,15 @@ Miscellaneous:
 For website, [Visited here](https://rmr101.github.io/campus-frontend/). However, you do need to run the backend for this website in order to interact with it. [Quick guide to set up backend of this project.](https://github.com/rmr101/campus-backend).
 
 
-## How to interact with the project ?
+## How to interact with the client site ?
 
 ### For normal interaction
 
-This website is hosted at github page, all you need is to log in as admin account.
+[This website is hosted at github page](https://rmr101.github.io/campus-frontend/), all you need is to log in as admin account.
 
 **Username: admin**
+
+
 **Password: admin**
 
 Then you can kick off from there.
@@ -94,7 +95,7 @@ How to access all feature please see here.
 5. `npm start` or `yarn start` , make sure you have set up the back end for this project.
 6. This project also implement Redux Dev Tool extension on chrome. If haven't installed them [please check here.](#about-redux-dev-tool-in-this-project)
 
----
+
 ## UI Deisgn
 
 ##### Energetic Login page
@@ -111,7 +112,7 @@ How to access all feature please see here.
 
 ![find](readme_img/role-panel.png)
 
----
+
 ## Supported features
 ![find](readme_img/course-detail.png)
 
@@ -148,9 +149,9 @@ Note: student is not allowed to view assignment again after teacher has marked i
 
 ![find](readme_img/student-view-report.png)
 
-## User Management
+### User Management
 
-### CRUD Operation
+#### CRUD Operation
 
 ![find](readme_img/update-popup.png)
 
@@ -162,7 +163,7 @@ This project have used redux dev tool. You may run into error, don't panic! so h
 2. Or you could comment out this dependency, under `src/store/index` comment out the following line of code like this,
 ![find](readme_img/redux-dev-tool.png)
 
----
+
 ## Future Improvement
 
 #### Tech：
