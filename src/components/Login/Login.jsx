@@ -9,6 +9,8 @@ import Loader from '../Loader';
 import Particles from "react-tsparticles";
 import ParticleStyles from "../../components/Login/components/Particle/Particle.module.scss";
 import { params } from "../../components/Login/components/Particle/params";
+import PropTypes from "prop-types";
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -137,6 +139,9 @@ class Login extends React.Component {
   }
 }
 
+Login.propTypes = {
+  storeAuthToState:PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
     storeAuthToState:(data) => dispatch(storeAuthToState(data))

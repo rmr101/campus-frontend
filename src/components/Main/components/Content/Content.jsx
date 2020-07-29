@@ -44,4 +44,6 @@ const Content = ({ pageID }) => {
   };
   return <div className={styles.wrapper}>{renderComponent()}</div>;
 };
+
+
 export default Content;

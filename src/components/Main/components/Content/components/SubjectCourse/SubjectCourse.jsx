@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import NoContent from "../NoContent";
 import CourseForm from "../CourseForm";
 import pagination from "../../../../../../utils/Algorithm/pagination";
+import sortArrayByName from "../../../../../../utils/Algorithm/sortArrayByName";
 import {
   IndexItem,
   HeaderRow,
@@ -41,8 +42,8 @@ class SubjectCourse extends React.Component {
     });
     const { courseList } = await getCourseListBySubjectID(this.props.id);
     this.setState({
-      courseList: courseList,
-      paginationArray: pagination(courseList, ITEM_PER_PAGE),
+      courseList: sortArrayByName(courseList),
+      paginationArray: pagination(sortArrayByName(courseList), ITEM_PER_PAGE),
       loading: false,
     });
   }

@@ -2,13 +2,21 @@ import React from "react";
 import styles from "./FormLayout.module.scss";
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
 
 export const FormTitle = ({ children }) => (
   <div className={styles.title}>{children}</div>
 );
+
+FormTitle.propTypes = {
+  children: PropTypes.string.isRequired,
+};
+
+
 export const FormItem = ({ children }) => (
   <div className={styles.item}>{children}</div>
 );
+
 export const SearchBtn = (props) => (
   <button data-testid="searchBtn" {...props} className={styles.searchBtn}>
     <FontAwesomeIcon icon={faSearch} />
@@ -28,12 +36,22 @@ export const AddBtn = (props) => (
 export const SearchRow = ({ children }) => (
   <div className={styles.searchRow}>{children}</div>
 );
+
 export const HorizontalRow = ({ children }) => (
   <div className={styles.horizontalRow}>{children}</div>
 );
+
+HorizontalRow.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+};
 export const DummyButtonBlock = ({ children }) => (
   <div className={styles.inactiveBlock}>{children}</div>
 );
+
+DummyButtonBlock.propTypes = {
+  children: PropTypes.string.isRequired,
+};
+
 export const Button = ({ children, className, ...props }) => (
   <button
     className={styles.btn + " " + styles[className]}
@@ -43,6 +61,10 @@ export const Button = ({ children, className, ...props }) => (
     {children}
   </button>
 );
+Button.propTypes = {
+  children: PropTypes.string.isRequired,
+};
+
 export const FormLayout = ({ children, className, ...props }) => (
   <form
     className={styles[className] + " " + styles.form}
@@ -52,6 +74,8 @@ export const FormLayout = ({ children, className, ...props }) => (
     {children}
   </form>
 );
+
+
 
 export const InFormLayout = ({ children, className, ...props }) => (
          <div
@@ -63,6 +87,10 @@ export const InFormLayout = ({ children, className, ...props }) => (
          </div>
        );
 
+InFormLayout.propTypes = {
+  className:PropTypes.string
+};
+
 export const SmallText = ({ children, className, searchBar }) => (
   <small
     data-testid="small-test"
@@ -71,3 +99,8 @@ export const SmallText = ({ children, className, searchBar }) => (
     {children}
   </small>
 );
+
+SmallText.propTypes = {
+  children: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
