@@ -41,16 +41,12 @@ export const HorizontalRow = ({ children }) => (
   <div className={styles.horizontalRow}>{children}</div>
 );
 
-HorizontalRow.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
-};
+
 export const DummyButtonBlock = ({ children }) => (
   <div className={styles.inactiveBlock}>{children}</div>
 );
 
-DummyButtonBlock.propTypes = {
-  children: PropTypes.string.isRequired,
-};
+
 
 export const Button = ({ children, className, ...props }) => (
   <button
@@ -61,9 +57,6 @@ export const Button = ({ children, className, ...props }) => (
     {children}
   </button>
 );
-Button.propTypes = {
-  children: PropTypes.string.isRequired,
-};
 
 export const FormLayout = ({ children, className, ...props }) => (
   <form
@@ -100,7 +93,4 @@ export const SmallText = ({ children, className, searchBar }) => (
   </small>
 );
 
-SmallText.propTypes = {
-  children: PropTypes.string.isRequired,
-  className: PropTypes.string,
-};
+
