@@ -8,9 +8,6 @@ export const FormTitle = ({ children }) => (
   <div className={styles.title}>{children}</div>
 );
 
-FormTitle.propTypes = {
-  children: PropTypes.string.isRequired,
-};
 
 
 export const FormItem = ({ children }) => (
