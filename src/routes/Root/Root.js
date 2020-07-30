@@ -4,7 +4,11 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Login from "../../components/Login";
 import User from "./../User";
 
-//TODO: handling jwt expire and redirect to login. need info about expiration.
+//For docker build basename needed to be changed to <Router basename="/">
+//For github page deploy use <Router basename="/campus-frontend/">
+
+ // Uncomment this for normal build instead of github page deploy at package json.
+// "homepage": "./",
 
 export default () => (
   <Router basename="/campus-frontend/">

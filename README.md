@@ -10,6 +10,7 @@
 	- [For Normal Interaction](#for-normal-interaction)
 	- [With Docker](#with-docker)
 	- [Without Docker](#without-docker)
+	- [Using Docker hub](#using-docker-hub)
 - [UI Design](#ui-design)
 	- [Energetic Login Page](#energetic-login-page)
 	- [Avatar Profile](#avatar-profile)
@@ -80,6 +81,10 @@ For website, [Visited here](https://rmr101.github.io/campus-frontend/). However,
 
 ## How to interact with the client site
 
+ALl following options **REQUIRE** a set up of backend at **localhost:8080**.
+
+Set up Backend and docker container for MySql image. [Quick guide to set up backend of this project.](https://github.com/rmr101/campus-backend).
+
 ### For Normal Interaction
 
 [This website is hosted at github page](https://rmr101.github.io/campus-frontend/), all you need is to log in as admin account.
@@ -102,22 +107,31 @@ eg:
 
 ### With Docker
 
-1. Set up Backend and docker container for MySql image. Click [here](https://github.com/rmr101/campus-backend) for the backend application.
-2. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
-3. Change directory into `cd campus-frontend`.
-4. Under to the root directory run `docker-compose up -d --build`.
-5. Then visit `https://localhost:3010`.
+1. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
+2. Change directory into `cd campus-frontend`.
+3. Under to the root directory run `docker-compose up -d --build`.
+4. Then visit `https://localhost:3010`.
 
 
 ### Without Docker
  
-1. Set up Backend and docker container for MySql image. Click [here](https://github.com/rmr101/campus-backend) for the backend application.
-2. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
-3. Change directory into `cd campus-frontend`.
-4. run `npm install` or `yarn install`
-5. `npm start` or `yarn start` , make sure you have set up the back end for this project.
-6. This project also implement Redux Dev Tool extension on chrome. If haven't installed them [please check here.](#about-redux-dev-tool-in-this-project)
+1. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
+2. Change directory into `cd campus-frontend`.
+3. run `npm install` or `yarn install`
+4. `npm start` or `yarn start` , make sure you have set up the back end for this project.
+5. This project also implement Redux Dev Tool extension on chrome. If haven't installed them [please check here.](#about-redux-dev-tool-in-this-project)
 
+
+### Using Docker hub
+
+1. Pull the image from **docker hub** using the following command :
+   
+```bash
+$ docker pull jackytsheng/campus-frontend
+$ docker run --rm -it -d --name campus-frontend -p 3010:80/tcp campus-frontend:latest
+```
+
+[visit docker hub repo.](https://hub.docker.com/repository/docker/jackytsheng/campus-frontend)
 
 ## UI Design
 
@@ -273,13 +287,17 @@ If you haven't already installed it for your browser, you could do so at this [l
 
 ## Future Improvement
 
-#### Tech：
-1. **Router for page navigation**
-2. **Style Component / System for better readability and maintanability**
-3. **Depoly on EC2 as docker image**
-   
-#### Feature：
+#### Technology
+
+1. **Implement Router for component navigation**
+2. **Implement TS, or better managed with PropTypes, for maintainability**
+3. **Use Style Component / System for better readability and maintainability**
+4. **Deploy App on EC2 as docker image**
+5. **Improve UX by caching necessary information**
+
+#### Feature
+
 1. **Support multiple teachers teaching**
-2. **Support payment**
-3. **Support file sharing for courses**
+2. **Support payment system**
+3. **Support file sharing for all courses**
 4. **Make changing password after first login mandatory**
