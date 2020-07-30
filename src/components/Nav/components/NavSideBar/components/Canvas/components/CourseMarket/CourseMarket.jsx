@@ -1,6 +1,7 @@
 import React from 'react';
 import RenderLink from '../RenderLink';
 import getSubjectList from './../../../../../../../../apis/getSubjectList';
+import NothingDisplay from "../NothingDisplay";
 import styles from "./CourseMarket.module.scss";
 import CanvasTitleWrap from '../CanvasTitleWrapper';
 import pagination from '../../../../../../../../utils/Algorithm/pagination';
@@ -44,8 +45,27 @@ class CourseMarket extends React.Component {
     }));
   }
 
+
+  renderList() {
+      const { paginationArray, page } = this.state;
+      return this.state.subjectList.length !== 0 ? (
+        <CanvasTitleWrap title={"Subjects"}>
+          <RenderLink
+            RenderArray={this.MapToRenderArray(paginationArray[page - 1])}
+            toPageID={"SubjectCourse"}
+          />
+          <div className={styles.filler}></div>
+          <CanvasPagination
+            currentPage={page}
+            totalPage={paginationArray.length}
+            handlePageChange={this.handlePageChange}
+          />
+        </CanvasTitleWrap>
+      ) : (
+        <NothingDisplay name={"Subjects Courses"} />
+      );
+    }
   render() {
-    const {paginationArray,page} = this.state;
     return (
       <React.Fragment>
         {this.state.loading ? (
@@ -53,18 +73,7 @@ class CourseMarket extends React.Component {
             <Loader color={"white"} />
           </LoaderContainer>
         ) : (
-          <CanvasTitleWrap title={"Subjects"}>
-            <RenderLink
-              RenderArray={this.MapToRenderArray(paginationArray[page - 1])}
-              toPageID={"SubjectCourse"}
-            />
-            <div className={styles.filler}></div>
-            <CanvasPagination
-              currentPage = {page}
-              totalPage = {paginationArray.length}
-              handlePageChange={this.handlePageChange}
-            />
-          </CanvasTitleWrap>
+          this.renderList()
         )}
       </React.Fragment>
     );
