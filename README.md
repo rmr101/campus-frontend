@@ -190,6 +190,10 @@ Note: login in as admin, create student/teacher at dashboard.
 
 ![find](readme_img/user-create.png)
 
+Upon successful creation you will receive email notification.
+
+![find](readme_img/email-create.png)
+
 ##### Check for successful creation
 
 Note: Search bar supports **fuzzy searching**
@@ -272,6 +276,10 @@ Upon enrollment, student can find it at the Nav bar.
 Any user (except administration account) can change their password at the profile page.
 
 ![find](readme_img/change-password.png)
+
+Upon successfully changing password you will receive email notification.
+
+![find](readme_img/email-reset-password.png)
 
 ## About Redux Dev Tool
 This project have used redux dev tool.
