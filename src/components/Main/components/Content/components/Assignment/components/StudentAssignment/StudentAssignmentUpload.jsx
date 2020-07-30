@@ -31,6 +31,7 @@ class StudentAssignmentUpload extends React.Component {
       fileSize: 0,
       success: false,
       loading: false,
+      noSupportCredential:false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
@@ -63,7 +64,7 @@ class StudentAssignmentUpload extends React.Component {
   async uploadToAWS(url) {
     await axios
       .put(url, this.state.file)
-      .then((res) => 
+      .then(() => 
         this.setState(
           {
             loaded: false,
@@ -72,7 +73,25 @@ class StudentAssignmentUpload extends React.Component {
           },
           () => setTimeout(() => this.setState({ success: false }), 3000)
         ))
-      .catch(console.log);
+      .catch( err =>{
+        if (err.response.status === 403) {
+          this.setState(
+            {
+              loaded: false,
+              loading: false,
+              noSupportCredential: true,
+            },
+            () =>
+              setTimeout(
+                () => this.setState({ noSupportCredential: false }),
+                3000
+              )
+          );
+          console.log(err.response);
+        } else {
+          console.log(err.response);
+        }
+        });
   }
 
   handleConfirm(e) {
@@ -90,6 +109,7 @@ class StudentAssignmentUpload extends React.Component {
           <Loader color="upload" />
         ) : (
           <Button
+            noSupportCredential={this.state.noSupportCredential}
             type={"UPLOAD"}
             handleConfirm={this.handleConfirm}
             onChange={this.handleChange}

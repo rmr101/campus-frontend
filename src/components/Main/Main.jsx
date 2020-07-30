@@ -3,6 +3,7 @@ import styles from "./Main.module.scss";
 import Header from "./components/Header";
 import Content from "./components/Content";
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
 const Main = ({pageID,title,role}) => {
   const roleBackground = () =>{
@@ -35,6 +36,12 @@ const Main = ({pageID,title,role}) => {
   }
   return renderComponent();
 }
+
+Main.propTypes = {
+  pageID: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   pageID: state.headerHistory.content.pageID,

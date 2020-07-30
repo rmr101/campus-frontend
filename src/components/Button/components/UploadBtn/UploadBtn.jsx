@@ -10,6 +10,7 @@ const UploadBtn = ({
   fileName,
   onChange,
   handleConfirm,
+  noSupportCredential,
 }) => (
   <div data-testid="btn" className={styles.uploadContainer}>
     {/* hide this input  */}
@@ -46,6 +47,11 @@ const UploadBtn = ({
       ) : null}
       {success ? (
         <div className={styles.successText}>Upload Successfully.</div>
+      ) : null}
+      {noSupportCredential ? (
+        <div className={styles.warningText}>
+          X This feature requires AWS Credential, not supported for open source project.
+        </div>
       ) : null}
     </div>
   </div>

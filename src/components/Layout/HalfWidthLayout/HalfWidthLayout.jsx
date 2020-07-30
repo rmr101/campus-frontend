@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./HalfWidthLayout.module.scss";
+import PropTypes from "prop-types";
+
 
 const Detail = ({ title, description }) => {
   return (
@@ -10,16 +12,6 @@ const Detail = ({ title, description }) => {
   );
 };
 
-
-// const HalfContext = (props) => {
-//   return (
-//     <div className={styles.wrapper}>
-//       <p>{props.context}</p>
-//     </div>
-//   );
-// };
-
-//TODO: 这里以后需要refactor 一下的。
 const HalfWidthLayout = ({ title, children, description, ...rest }) => (
   <div className={styles.wrapper}>
     <div className={styles.heading}>
@@ -35,5 +27,11 @@ const HalfWidthLayout = ({ title, children, description, ...rest }) => (
     </div>
   </div>
 );
+
+HalfWidthLayout.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+};
+
 
 export default HalfWidthLayout;

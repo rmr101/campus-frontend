@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
 import Button from "../../../Button";
+import PropTypes from 'prop-types';
 
 const Header = ({
   title,
@@ -11,6 +12,9 @@ const Header = ({
     </div>
   );
 
+  Header.propTypes = {
+    title: PropTypes.string
+  }
 
 
 export default Header;
