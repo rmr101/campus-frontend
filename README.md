@@ -29,15 +29,8 @@
 ## About JR Academy Projects 3 - Campus system 1.0
 
 This is project three from JR Academy. We are team RMR101. Objective of the project is to deliver a **learning management system** for an educational purpose.
-
-**Features Summary:**
-
-- Adding teacher, students, courses as admin.
-- Enrolling in various courses as student.
-- Submitting and reviewing assignments as student. (Not support feature for public access, as AWS is involved, but can be configured.)
-- Marking and creating assignment as teacher.
   
-**Tech stack for frontend Summary:**
+**Tech stack for frontend summary:**
 
 Websites & UI:
 
@@ -81,9 +74,9 @@ For website, [Visited here](https://rmr101.github.io/campus-frontend/). However,
 
 ## How to interact with the client site
 
-ALl following options **REQUIRE** a set up of backend at **localhost:8080**.
+All following options **REQUIRE** a set up of backend at **localhost:8080**
 
-Set up Backend and docker container for MySql image. [Quick guide to set up backend of this project.](https://github.com/rmr101/campus-backend).
+Set up Backend and docker container for MySql image. [Quick guide to set up backend of this project](https://github.com/rmr101/campus-backend)
 
 ### For Normal Interaction
 
@@ -110,7 +103,7 @@ eg:
 1. Navigate to the file where you want to test this application, then on your terminal run `git clone https://github.com/rmr101/campus-frontend.git`
 2. Change directory into `cd campus-frontend`.
 3. Under to the root directory run `docker-compose up -d --build`.
-4. Then visit `https://localhost:3010`.
+4. Then visit `https://localhost:3010` on your browser.
 
 
 ### Without Docker
@@ -128,11 +121,11 @@ eg:
    
 ```bash
 $ docker pull jackytsheng/campus-frontend
-$ docker run --rm -it -d --name campus-frontend -p 3010:80/tcp campus-frontend:latest
+$ docker run --rm -it -d --name campus-frontend -p 3010:80/tcp jackytsheng/campus-frontend
 ```
-
 [visit docker hub repo.](https://hub.docker.com/repository/docker/jackytsheng/campus-frontend)
 
+2. Then visit `https://localhost:3010` on your browser.
 ## UI Design
 
 ### Energetic Login Page
@@ -293,7 +286,8 @@ If you haven't already installed it for your browser, you could do so at this [l
 2. **Implement TS, or better managed with PropTypes, for maintainability**
 3. **Use Style Component / System for better readability and maintainability**
 4. **Deploy App on EC2 as docker image**
-5. **Improve UX by caching necessary information**
+5. **Improve UX by caching necessary formation**
+6. **Improve unit test coverage**
 
 #### Feature
 

@@ -6,7 +6,7 @@ import axios from 'axios';
 
 // for EC2 demonstration purpose:
 
-export const baseURL ="http://ec2-3-25-128-75.ap-southeast-2.compute.amazonaws.com:8080";
+export const baseURL = "http://ec2-3-25-128-75.ap-southeast-2.compute.amazonaws.com:8080";
 
 const CampusSever = axios.create({
   baseURL,

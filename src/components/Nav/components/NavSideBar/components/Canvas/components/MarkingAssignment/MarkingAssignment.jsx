@@ -2,6 +2,7 @@ import React from 'react';
 import RenderLink from '../RenderLink';
 import getTeachingList from "../../../../../../../../apis/getTeachingList";
 import NothingDisplay from '../NothingDisplay';
+import styles from "./MarkingAssignment.module.scss";
 import CanvasTitleWrap from '../CanvasTitleWrapper';
 import LoaderContainer from "../../../../../../../Layout/LoaderContainer";
 import pagination from "../../../../../../../../utils/Algorithm/pagination";
@@ -23,7 +24,6 @@ class MarkingAssignment extends React.Component {
 
   async getTeachingList() {
     const resp = await getTeachingList();
-    // TODO: Protect from breaking the app
     const teachingList = resp.hasOwnProperty("courseList")
       ? resp.courseList
       : [];
@@ -58,6 +58,7 @@ class MarkingAssignment extends React.Component {
           RenderArray={this.MapToRenderArray(paginationArray[page - 1])}
           toPageID={"TeacherMarkingSystem"}
         />
+        <div className={styles.filler}></div>
         <CanvasPagination
           currentPage={page}
           totalPage={paginationArray.length}
