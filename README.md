@@ -70,13 +70,13 @@ Miscellaneous:
 
 - Particle.js
 
-For website, [Visited here](https://rmr101.github.io/campus-frontend/). However, you do need to run the backend for this website in order to interact with it. [Quick guide to set up backend of this project.](https://github.com/rmr101/campus-backend).
+For website, [Visited here](https://rmr101.github.io/campus-frontend/). However, you do need to run the backend for this website in order to interact with it. [Quick guide to set up backend of this project.](https://github.com/rmr101/campus-backend)
 
 ## How to interact with the client site
 
 All following options **REQUIRE** a set up of backend at **localhost:8080**
 
-Set up Backend and docker container for MySql image. [Quick guide to set up backend of this project](https://github.com/rmr101/campus-backend)
+Set up Backend and docker container for MySql image. [Quick guide to set up backend of this project.](https://github.com/rmr101/campus-backend)
 
 ### For Normal Interaction
 
