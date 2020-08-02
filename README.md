@@ -1,6 +1,8 @@
 
 [![Build Status](https://travis-ci.com/rmr101/campus-frontend.svg?branch=master)](https://travis-ci.com/rmr101/campus-frontend)
 
+🏆 Awarded 2nd Place. 2020 JR Fullstack Web Development Project Presentation.
+
 [Website link](https://rmr101.github.io/campus-frontend/)
 
 ## Content
