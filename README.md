@@ -161,7 +161,7 @@ $ docker run --rm -it -d --name campus-frontend -p 3010:80/tcp jackytsheng/campu
 
 ##### Upon completion, student can upload their response. File is stored in AWS S3
 
-For more technical detail about **how to upload using file to AWS S3 using presigned url**, checkout [Jacky's article here.](https://github.com/jackytsheng/github-blog/tree/master/2020/07/25/AWS%20S3%20Presigned%20Url)
+For more technical detail about **how to upload using file to AWS S3 using presigned url**, checkout [Jacky's article here.](https://blog.jiajinzheng.com/aws-s3-presigned-url-with-java-springboot/)
 
 - Support file type: .pdf
 - File size limit : Less than 15 MB.
